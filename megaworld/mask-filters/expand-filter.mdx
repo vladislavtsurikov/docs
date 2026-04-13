@@ -1,0 +1,10 @@
+---
+title: "Expand Filter"
+description: "Dilate the current mask outward in all directions"
+---
+
+Expand Filter grows (dilates) the current mask outward, making white areas larger. This is useful for padding the edges of a mask — for example, after a Textures Filter you can expand the masked area slightly so objects can also spawn just outside the painted texture boundary.
+
+## Settings
+
+- **Kernel Size** — controls how much the mask is dilated. Larger values expand the mask further. Minimum is `0.1`. Default is `1`.

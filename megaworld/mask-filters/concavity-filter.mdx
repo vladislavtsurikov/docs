@@ -1,0 +1,20 @@
+---
+title: "Concavity Filter"
+description: "Target recessed or exposed terrain features like valleys and ridges"
+---
+
+Concavity Filter detects the curvature of the terrain surface and generates a mask based on whether a point is concave (recessed, like a valley or hollow) or convex (exposed, like a ridge or hilltop). This lets you target specific landform features for spawning.
+
+## Settings
+
+- **Blend Mode** — how this filter combines with the previous mask in the stack. **Multiply** narrows the spawn area; **Add** expands it.
+
+- **Mode** — selects which type of surface to target:
+  - **Recessed** — targets concave areas (valleys, hollows, ditches).
+  - **Exposed** — targets convex areas (ridges, hilltops, edges).
+
+- **Strength** — controls the intensity of the masking effect. Higher values create a stronger, more defined mask.
+
+- **Feature Size** — specifies the scale of terrain features that influence the detection. Larger values detect broader, more gradual curvature; smaller values pick up fine surface details.
+
+- **Remap Curve** — remaps the raw concavity values before the final mask is produced. Adjust this curve to control how the detected curvature translates into mask intensity.

@@ -1,0 +1,28 @@
+---
+title: "Mask Operations Filter"
+description: "Apply mathematical operations to the current mask"
+---
+
+Mask Operations Filter applies a single mathematical operation to the current mask value at every point. Use it to fine-tune the mask produced by previous filters — for example, inverting it, clamping extreme values, or remapping the range.
+
+## Settings
+
+- **Operation** — the mathematical operation to apply:
+
+  - **Add** — adds a fixed value to every mask pixel. Brightens the mask. Use this to raise the overall spawn probability.
+    - **Value** — the amount to add.
+
+  - **Multiply** — multiplies every mask pixel by a value. Values below `1` darken the mask; values above `1` brighten it.
+    - **Value** — the multiplier.
+
+  - **Power** — raises every mask pixel to an exponent. Values greater than `1` push mid-range values darker; values less than `1` push them brighter. Useful for sharpening or softening a gradient.
+    - **Value** — the exponent.
+
+  - **Invert** — flips the mask so white becomes black and black becomes white. The strength controls how much of the inversion is blended in.
+    - **Strength Invert** — blend amount between original (`0`) and fully inverted (`1`). Default is `1`.
+
+  - **Clamp** — restricts all mask values to a defined range. Pixels outside the range are clipped to the nearest bound.
+    - **Clamp Range** — the min and max clamp values. Default is `0–1`.
+
+  - **Remap** — stretches a specific input range to fill the full 0–1 output range. Use this to amplify subtle differences in a narrow part of the mask.
+    - **Remap Range** — the input range to remap. Default is `0.4–0.6`.

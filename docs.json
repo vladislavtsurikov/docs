@@ -14,6 +14,24 @@
         "tab": "MegaWorld",
         "groups": [
           {
+            "group": "Mask Filters",
+            "pages": [
+              "megaworld/mask-filters/overview",
+              "megaworld/mask-filters/height-filter",
+              "megaworld/mask-filters/height-noise-filter",
+              "megaworld/mask-filters/slope-filter",
+              "megaworld/mask-filters/noise-filter",
+              "megaworld/mask-filters/textures-filter",
+              "megaworld/mask-filters/concavity-filter",
+              "megaworld/mask-filters/aspect-filter",
+              "megaworld/mask-filters/smooth-filter",
+              "megaworld/mask-filters/expand-filter",
+              "megaworld/mask-filters/expand-down-filter",
+              "megaworld/mask-filters/image-filter",
+              "megaworld/mask-filters/mask-operations-filter"
+            ]
+          },
+          {
             "group": "Transform Components",
             "pages": [
               "megaworld/transform-components/overview",

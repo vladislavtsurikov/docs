@@ -1,0 +1,16 @@
+---
+title: "Textures Filter"
+description: "Restrict spawning to specific terrain texture layers"
+---
+
+Textures Filter allows you to select one or more terrain texture layers and restrict spawning to areas where those textures are painted on the terrain. This makes it easy to align vegetation or props with your terrain painting — for example, spawning bushes only on grass texture, or rocks only on dirt.
+
+## Settings
+
+- **Blend Mode** — how this filter combines with the previous mask in the stack. **Multiply** narrows the spawn area; **Add** expands it. Default is Multiply.
+
+- **Terrain Texture List** — the list of terrain layers to use as a mask. Right-click and select **Update Texture** to populate the list with texture layers from the active terrain. Enable the checkboxes next to the layers you want to allow spawning on.
+
+<Note>
+  The filter samples the terrain's texture splat map. If a texture is only partially painted on a surface, the mask will reflect the blend weight — areas with more of the selected texture will have a higher mask value.
+</Note>

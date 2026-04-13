@@ -1,0 +1,28 @@
+---
+title: "Slope Filter"
+description: "Spawn within a defined terrain slope angle range"
+---
+
+Slope Filter restricts spawning to surfaces within a specific angle range. A slope of `0°` is flat ground; `90°` is a vertical cliff face. The edges of the range can be softened with a falloff gradient.
+
+## Settings
+
+- **Blend Mode** — how this filter combines with the previous mask in the stack. **Multiply** narrows the spawn area; **Add** expands it.
+
+- **Min Slope / Max Slope** — the slope angle range (in degrees, 0–90) within which spawning is allowed. Default is `0–20°`.
+
+- **Slope Falloff Type** — controls how the edges of the range blend to zero:
+  - **Add** — adds a fixed angular distance on each side of the range. The larger the value, the wider the gradient.
+  - **Hard** — sharp cutoff at the min and max slope angles.
+
+- **Slope Falloff Min Max** — when enabled, set separate falloff distances for the lower and upper edges. When disabled, a single value applies to both. Default is enabled.
+
+- **Min Add Slope Falloff** — falloff applied below Min Slope (when Slope Falloff Min Max is on). Default is `30`.
+
+- **Max Add Slope Falloff** — falloff applied above Max Slope (when Slope Falloff Min Max is on). Default is `30`.
+
+- **Add Slope Falloff** — unified falloff for both edges (when Slope Falloff Min Max is off). Default is `30`.
+
+<Tip>
+  To spawn objects only on flat ground, use Min Slope `0` and Max Slope `20–30`. To spawn only on cliffs, use Min Slope `60–70` and Max Slope `90`.
+</Tip>
