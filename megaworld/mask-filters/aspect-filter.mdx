@@ -1,0 +1,20 @@
+---
+title: "Aspect Filter"
+description: "Target terrain faces pointing in a specific cardinal or custom direction"
+---
+
+Aspect Filter generates a mask based on the horizontal direction a terrain face is pointing. This lets you target north-facing slopes, south-facing slopes, or any custom direction. It is useful for effects like snow accumulation on shaded north-facing slopes or dry vegetation on sun-facing south sides.
+
+The facing direction is controlled by a rotation angle — the filter uses the terrain surface normals to determine which parts of the terrain face that direction.
+
+## Settings
+
+- **Blend Mode** — how this filter combines with the previous mask in the stack. **Multiply** narrows the spawn area; **Add** expands it.
+
+- **Rotation** — the direction angle (in degrees) to target. `0°` targets one cardinal direction; rotating changes which direction is masked.
+
+- **Epsilon** — the kernel size used for aspect detection. Larger values smooth out the detection and pick up broader directional trends. Default is `1.0`.
+
+- **Effect Strength** — overall strength of the masking effect. Default is `1.0`.
+
+- **Remap Curve** — remaps the raw aspect values before the final mask is produced. Adjust this to control how strongly directional alignment translates into mask intensity.

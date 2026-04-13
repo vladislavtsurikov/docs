@@ -1,0 +1,19 @@
+---
+title: "Noise Filter"
+description: "Add fractal noise to break up uniform spawn patterns"
+---
+
+Noise Filter introduces fractal noise into the mask, creating natural-looking random variation across the spawn area. It is useful for breaking up overly regular placement — for example, making vegetation appear in organic clusters rather than evenly distributed.
+
+## Settings
+
+- **Blend Mode** — how this filter combines with the previous mask in the stack. **Multiply** narrows the spawn area; **Add** expands it.
+
+- **Noise Settings** — configures the noise generation:
+
+  - **Noise Type** — the noise algorithm: Perlin, Value, Billow, Ridge, or Voronoi.
+  - **Fractal Type** — the fractal layering method (e.g. FBm — Fractional Brownian Motion).
+  - **Scale** — the size of the noise pattern. Larger values create bigger, more spread-out features.
+  - **Translation** — offsets the noise pattern in X, Y, Z world space.
+  - **Rotation** — rotates the noise pattern.
+  - **Flip Scale X/Y/Z** — mirrors the noise pattern along the chosen axis.

@@ -1,0 +1,34 @@
+---
+title: "Height Noise Filter"
+description: "Height filter with noise applied to the boundaries for a natural, irregular look"
+---
+
+Height Noise Filter works like the [Height Filter](/megaworld/mask-filters/height-filter), but adds fractal noise to the edges of the height range. Instead of a smooth gradient, the boundary between spawning and no-spawning becomes irregular and organic — particularly useful for effects like realistic snow accumulation where the snow line isn't perfectly even.
+
+## Settings
+
+- **Blend Mode** — how this filter combines with the previous mask in the stack. **Multiply** narrows the spawn area; **Add** expands it.
+
+- **Min Height / Max Height** — the height range (in world units) within which spawning is allowed.
+
+- **Height Falloff Type** — controls how the edges blend to zero:
+  - **Add** — adds a fixed distance on each side of the range.
+  - **Hard** — sharp cutoff with no falloff.
+
+- **Height Falloff Min Max** — when enabled, set separate falloff distances for the lower and upper edges. When disabled, a single value applies to both.
+
+- **Min Add Height Falloff** — falloff distance below Min Height (when Height Falloff Min Max is on). Default is `30`.
+
+- **Max Add Height Falloff** — falloff distance above Max Height (when Height Falloff Min Max is on). Default is `30`.
+
+- **Add Height Falloff** — unified falloff for both edges (when Height Falloff Min Max is off). Default is `30`.
+
+- **Min Range Noise** — noise amplitude applied at the lower boundary (Min Height). Larger values make the lower edge more irregular.
+
+- **Max Range Noise** — noise amplitude applied at the upper boundary (Max Height). Larger values make the upper edge more irregular.
+
+- **Noise Settings** — configures the fractal noise used for edge irregularity (type, frequency, octaves, etc.).
+
+<Tip>
+  This filter is ideal for snow texturing — set a height range and increase Max Range Noise to make the snow line look natural and windswept.
+</Tip>

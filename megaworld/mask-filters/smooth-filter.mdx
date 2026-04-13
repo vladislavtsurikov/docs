@@ -1,0 +1,19 @@
+---
+title: "Smooth Filter"
+description: "Blur the current mask to soften hard edges between filters"
+---
+
+Smooth Filter applies a Gaussian blur to the mask, softening sharp transitions left by previous filters. It does not add or remove spawn areas on its own — it only blurs the boundaries of the existing mask, making transitions more gradual and natural.
+
+## Settings
+
+- **Blur Radius** — the size of the blur kernel. Larger values produce a wider, softer blur. Range: `0–10`. Default is `1`.
+
+- **Verticality** — controls the directional bias of the blur:
+  - `0.0` — blurs equally in all directions.
+  - `1.0` — blurs only upward (raises the mask edge upward).
+  - `-1.0` — blurs only downward (lowers the mask edge downward).
+
+<Tip>
+  Place this filter after a Height Filter or Slope Filter to soften the boundary edges of those masks before multiplying with other filters.
+</Tip>

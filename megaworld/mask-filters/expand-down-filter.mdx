@@ -1,0 +1,10 @@
+---
+title: "Expand Down Filter"
+description: "Dilate the mask downward only, respecting terrain height"
+---
+
+Expand Down Filter is similar to [Expand Filter](/megaworld/mask-filters/expand-filter), but only expands the mask in the downward direction relative to the terrain heightmap. It prevents the mask from expanding uphill, making it useful for effects that should naturally flow downward — like wet patches below a water level, or shadow zones at the base of slopes.
+
+## Settings
+
+- **Kernel Size** — controls how much the mask expands downward. Larger values push the mask further down the terrain. Minimum is `0.1`. Default is `1`.

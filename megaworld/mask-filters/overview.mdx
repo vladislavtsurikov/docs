@@ -1,0 +1,59 @@
+---
+title: "Mask Filters"
+description: "Advanced GPU-based filter stack for controlling spawn areas using blendable masks"
+---
+
+Mask Filters is an advanced system for defining where objects spawn. Each filter generates a grayscale mask over the terrain, and multiple filters can be stacked and blended together to create complex spawn rules.
+
+Mask Filters work exclusively with **Unity Terrain** and are evaluated on the GPU, making them faster and more powerful than [Simple Filters](/megaworld/simple-filters/overview) for terrain-based workflows. They support blending operations between filters (Multiply, Add) and include advanced filters like Aspect, Concavity, and Smooth that are not available in Simple Filters.
+
+## How It Works
+
+Each filter in the stack produces a mask (black = no spawn, white = spawn). Filters are applied in order:
+- The **first filter** in the stack always starts fresh (Multiply mode is applied automatically).
+- Every subsequent filter blends its result with the previous mask using the **Blend Mode** you set.
+
+**Blend Modes:**
+- **Multiply** — combines masks multiplicatively. The result can only be equal to or smaller than either input. Use this to narrow down the spawn area.
+- **Add** — combines masks additively. The result can only be equal to or larger than either input. Use this to expand or union spawn areas.
+
+## Available Filters
+
+<CardGroup cols={2}>
+  <Card title="Height Filter" href="/megaworld/mask-filters/height-filter">
+    Spawn within a defined height range with smooth falloff edges.
+  </Card>
+  <Card title="Height Noise Filter" href="/megaworld/mask-filters/height-noise-filter">
+    Height filter with noise applied to the edges for a natural, irregular look.
+  </Card>
+  <Card title="Slope Filter" href="/megaworld/mask-filters/slope-filter">
+    Spawn within a defined slope angle range.
+  </Card>
+  <Card title="Noise Filter" href="/megaworld/mask-filters/noise-filter">
+    Add fractal noise to break up uniform spawn patterns.
+  </Card>
+  <Card title="Textures Filter" href="/megaworld/mask-filters/textures-filter">
+    Restrict spawning to specific terrain texture layers.
+  </Card>
+  <Card title="Concavity Filter" href="/megaworld/mask-filters/concavity-filter">
+    Target recessed or exposed terrain features like valleys and ridges.
+  </Card>
+  <Card title="Aspect Filter" href="/megaworld/mask-filters/aspect-filter">
+    Target terrain faces pointing in a specific direction.
+  </Card>
+  <Card title="Smooth Filter" href="/megaworld/mask-filters/smooth-filter">
+    Blur the current mask to soften hard edges.
+  </Card>
+  <Card title="Expand Filter" href="/megaworld/mask-filters/expand-filter">
+    Dilate the current mask outward.
+  </Card>
+  <Card title="Expand Down Filter" href="/megaworld/mask-filters/expand-down-filter">
+    Dilate the mask downward only, respecting terrain height.
+  </Card>
+  <Card title="Image Filter" href="/megaworld/mask-filters/image-filter">
+    Use a custom texture as a mask.
+  </Card>
+  <Card title="Mask Operations Filter" href="/megaworld/mask-filters/mask-operations-filter">
+    Apply mathematical operations to the current mask (invert, clamp, remap, etc.).
+  </Card>
+</CardGroup>

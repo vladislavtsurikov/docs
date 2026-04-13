@@ -1,0 +1,26 @@
+---
+title: "Image Filter"
+description: "Use a custom texture as a spawn mask"
+---
+
+Image Filter lets you use any texture as a mask. You can sample the image in grayscale, by a specific color, or by individual color channels (R, G, B, A). This makes it possible to paint custom spawn maps in any image editor and bring them directly into MegaWorld.
+
+## Settings
+
+- **Blend Mode** — how this filter combines with the previous mask in the stack. **Multiply** narrows the spawn area; **Add** expands it.
+
+- **Image** — the texture to use as the mask.
+
+- **Filter Mode** — which part of the texture to extract as the mask:
+  - **GrayScale** — uses the overall luminance of the texture.
+  - **Color** — masks based on similarity to a chosen color.
+  - **Red Channel** — uses only the red channel.
+  - **Green Channel** — uses only the green channel.
+  - **Blue Channel** — uses only the blue channel.
+  - **Alpha Channel** — uses only the alpha channel.
+
+- **Color** — the target color for color matching mode. Default is white.
+
+- **Color Accuracy** — how strictly the color must match. Higher values require a closer match; lower values allow more variation. Default is `0.5`.
+
+- **Offset X / Offset Z** — UV offset to reposition the texture over the terrain.
