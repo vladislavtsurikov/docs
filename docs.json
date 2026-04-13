@@ -11,6 +11,30 @@
   "navigation": {
     "tabs": [
       {
+        "tab": "MegaWorld",
+        "groups": [
+          {
+            "group": "Transform Components",
+            "pages": [
+              "megaworld/transform-components/overview",
+              "megaworld/transform-components/align",
+              "megaworld/transform-components/additional-rotation",
+              "megaworld/transform-components/cliffs-align",
+              "megaworld/transform-components/cliffs-position",
+              "megaworld/transform-components/position-offset",
+              "megaworld/transform-components/rotation",
+              "megaworld/transform-components/scale",
+              "megaworld/transform-components/scale-clamp",
+              "megaworld/transform-components/scale-fitness",
+              "megaworld/transform-components/slope-position",
+              "megaworld/transform-components/slope-scale",
+              "megaworld/transform-components/snap-rotation",
+              "megaworld/transform-components/tree-rotation"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "Guides",
         "groups": [
           {

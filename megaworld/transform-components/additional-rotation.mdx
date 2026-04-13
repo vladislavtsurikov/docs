@@ -1,0 +1,16 @@
+---
+title: "Additional Rotation"
+description: "Apply a fixed Euler angle rotation offset on top of the object's existing rotation"
+---
+
+Additional Rotation multiplies the object's current rotation by a fixed Euler angle offset you specify. Unlike the Rotation component, this is not randomized — every spawned object receives exactly the same rotation adjustment.
+
+This is useful when you need to correct the default orientation of a prefab, or when you want to apply a consistent offset after other rotation components have already run.
+
+## Settings
+
+- **Rotation** — the Euler angle offset (X, Y, Z in degrees) to apply. This is multiplied with the object's existing rotation, so it compounds on top of whatever rotation was set by previous components in the stack.
+
+<Tip>
+  Place this component after Rotation or Align in the stack if you want to fine-tune the final orientation without overriding the randomization those components apply.
+</Tip>

@@ -1,0 +1,22 @@
+---
+title: "Rotation"
+description: "Randomize object rotation on any combination of X, Y, and Z axes"
+---
+
+Rotation applies a random rotation to spawned objects. You control how much randomization is applied on each axis independently, using a 0–100 scale where 100 corresponds to a full 360° range.
+
+## Settings
+
+- **Randomize Orientation X** — randomization intensity for the X axis (tilt forward/backward). Range: `0–100`. Default is `5`.
+
+- **Randomize Orientation Y** — randomization intensity for the Y axis (spin around vertical). Range: `0–100`. Default is `100`, giving full random spin.
+
+- **Randomize Orientation Z** — randomization intensity for the Z axis (tilt left/right). Range: `0–100`. Default is `5`.
+
+<Tip>
+  For most vegetation, keep X and Z values low (around 3–10) and Y at 100. This gives objects a natural random spin while keeping them mostly upright.
+</Tip>
+
+<Note>
+  The value maps linearly to degrees: a value of `100` = 360°, `50` = 180°, `10` = 36°.
+</Note>

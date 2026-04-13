@@ -1,0 +1,18 @@
+---
+title: "Scale Clamp"
+description: "Enforce minimum and maximum scale limits after all other scale components have run"
+---
+
+Scale Clamp prevents the final scale of an object from going outside a defined range. It is meant to be placed at the end of the stack, after components like Scale, Slope Scale, and Scale Fitness have already modified the object's size.
+
+Each axis (X, Y, Z) is clamped independently.
+
+## Settings
+
+- **Min Scale** — the minimum allowed scale on any axis. If any axis falls below this value it is raised to this minimum. Default is `0.5`.
+
+- **Max Scale** — the maximum allowed scale on any axis. If any axis exceeds this value it is capped at this maximum. Default is `2`.
+
+<Tip>
+  Add this component last in the stack when you have multiple scale-modifying components, to ensure the cumulative result stays within acceptable bounds.
+</Tip>

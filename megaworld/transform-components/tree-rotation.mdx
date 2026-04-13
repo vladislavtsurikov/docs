@@ -1,0 +1,18 @@
+---
+title: "Tree Rotation"
+description: "Y-axis dominant rotation for trees, with a chance of full 3D tilt"
+---
+
+Tree Rotation is designed specifically for trees and tall upright objects. It primarily randomizes rotation around the Y axis (spin) to give each tree a unique facing direction, while keeping the tree mostly vertical. Optionally, a small percentage of trees will also receive a slight X/Z tilt for added natural variation.
+
+## Settings
+
+- **Randomize Orientation Y** — how much random spin is applied around the vertical axis. Range: `0–100`, where `100` = full 360° random rotation. Default is `100`.
+
+- **Randomize Orientation XZ** — how much tilt is applied to X and Z axes when a tree is selected for full rotation. Range: `0–50`. Default is `3`.
+
+- **Success Randomize Orientation XZ** — the probability (0–100) that a given tree will receive the full 3D tilt in addition to the Y rotation. At `0`, all trees stay perfectly upright. At `100`, all trees tilt. Default is `20`.
+
+<Note>
+  At the default settings, 80% of trees only spin (Y-axis), and 20% also receive a small lean (X/Z-axis). This mimics how real trees are mostly upright but occasionally lean slightly.
+</Note>
