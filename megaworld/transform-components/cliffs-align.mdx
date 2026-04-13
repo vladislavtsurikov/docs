@@ -1,0 +1,16 @@
+---
+title: "Cliffs Align"
+description: "Rotate objects to face the cliff edge, useful for rocks with missing backside polygons"
+---
+
+Cliffs Align orients objects so they face outward from the cliff surface. This is especially useful for rocks and stones where the backside (the side embedded in the cliff) has no polygons — by rotating the object to face the correct direction, the missing geometry is hidden inside the cliff.
+
+This component reads the surface normal and calculates the horizontal facing direction automatically. There are no manual settings to configure.
+
+## Settings
+
+This component has no configurable settings. It automatically determines the correct facing direction from the surface normal at the spawn location.
+
+<Tip>
+  Combine with [Cliffs Position](/megaworld/transform-components/cliffs-position) to both orient and offset rocks correctly on cliff faces.
+</Tip>

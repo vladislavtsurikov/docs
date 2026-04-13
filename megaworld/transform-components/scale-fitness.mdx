@@ -1,0 +1,18 @@
+---
+title: "Scale Fitness"
+description: "Reduce object size when placement fitness is low"
+---
+
+Scale Fitness adjusts the object's scale based on how well the placement conditions are met (the fitness value). When fitness is perfect (`1.0`), no scale change is applied. When fitness is low (`0.0`), the full offset is added to the scale — typically making the object smaller or larger depending on your setting.
+
+## Settings
+
+- **Offset Scale** — the scale offset applied when fitness is at zero. A negative value (e.g. `-0.7`) shrinks the object at low fitness. A positive value would enlarge it. The effect interpolates linearly: at fitness `0` the full offset is applied; at fitness `1` no offset is applied. Default is `-0.7`.
+
+<Note>
+  Fitness is a value between 0 and 1 determined by spawn filters like slope, texture mask, or other viability rules. A fitness of 1 means the location is ideal; 0 means it barely qualifies.
+</Note>
+
+<Tip>
+  Use a negative Offset Scale to make objects on marginal terrain appear smaller and less prominent, reinforcing the idea that conditions there are less favorable.
+</Tip>

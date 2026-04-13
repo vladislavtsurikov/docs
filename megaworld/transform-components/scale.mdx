@@ -1,0 +1,18 @@
+---
+title: "Scale"
+description: "Apply a random scale to spawned objects, either uniformly or per axis"
+---
+
+Scale randomizes the size of objects at spawn time within a range you define. You can apply the same scale to all axes (uniform) or set different ranges for X, Y, and Z independently.
+
+## Settings
+
+- **Uniform Scale** — when enabled, a single random value is picked and applied equally to all three axes. When disabled, each axis is randomized independently. Default is enabled.
+
+- **Min Scale** — the minimum scale value. In uniform mode this is a single value (X is used). In non-uniform mode you set X, Y, and Z separately. Default is `(0.8, 0.8, 0.8)`.
+
+- **Max Scale** — the maximum scale value. In uniform mode this is a single value (X is used). In non-uniform mode you set X, Y, and Z separately. Default is `(1.2, 1.2, 1.2)`.
+
+<Tip>
+  Set Min and Max to the same value if you want every object to always spawn at a fixed size.
+</Tip>

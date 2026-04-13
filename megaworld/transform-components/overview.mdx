@@ -1,0 +1,72 @@
+---
+title: "Transform Components"
+description: "Modular components for controlling position, rotation, and scale at spawn time"
+---
+
+Transform Components let you control how objects are positioned, rotated, and scaled when they are spawned. Each component handles one specific aspect of the transform, and you can stack multiple components together — they are applied in order, one after another.
+
+You can see how this system works in this video: [Mega World \[BETA\] - Transform Components](https://www.youtube.com/watch?v=hmJsfVes9yA)
+
+## How It Works
+
+The component stack runs each active component sequentially. The output of one component becomes the input of the next, so order matters. You can enable or disable individual components without removing them.
+
+Only one instance of each component type can exist in the stack at a time.
+
+## Available Components
+
+<CardGroup cols={2}>
+  <Card title="Align" href="/megaworld/transform-components/align">
+    Blend object rotation toward the surface normal for natural terrain placement.
+  </Card>
+  <Card title="Additional Rotation" href="/megaworld/transform-components/additional-rotation">
+    Apply a fixed Euler angle rotation offset on top of existing rotation.
+  </Card>
+  <Card title="Cliffs Align" href="/megaworld/transform-components/cliffs-align">
+    Rotate objects to face the cliff edge — useful for rocks with missing backside polygons.
+  </Card>
+  <Card title="Cliffs Position" href="/megaworld/transform-components/cliffs-position">
+    Push objects away from the cliff face along the surface normal direction.
+  </Card>
+  <Card title="Position Offset" href="/megaworld/transform-components/position-offset">
+    Apply a random vertical (Y-axis) offset to the spawn position.
+  </Card>
+  <Card title="Rotation" href="/megaworld/transform-components/rotation">
+    Randomize rotation on any combination of X, Y, and Z axes.
+  </Card>
+  <Card title="Scale" href="/megaworld/transform-components/scale">
+    Apply a random scale — uniformly or independently per axis.
+  </Card>
+  <Card title="Scale Clamp" href="/megaworld/transform-components/scale-clamp">
+    Enforce minimum and maximum scale limits after other components run.
+  </Card>
+  <Card title="Scale Fitness" href="/megaworld/transform-components/scale-fitness">
+    Reduce object size when placement fitness is low.
+  </Card>
+  <Card title="Slope Position" href="/megaworld/transform-components/slope-position">
+    Sink objects lower on steeper slopes.
+  </Card>
+  <Card title="Slope Scale" href="/megaworld/transform-components/slope-scale">
+    Increase object scale on steeper slopes.
+  </Card>
+  <Card title="Snap Rotation" href="/megaworld/transform-components/snap-rotation">
+    Restrict rotation to fixed angle increments (e.g. 90°, 45°).
+  </Card>
+  <Card title="Tree Rotation" href="/megaworld/transform-components/tree-rotation">
+    Y-axis dominant rotation for trees, with occasional full 3D tilt.
+  </Card>
+</CardGroup>
+
+## Common Setups
+
+**Terrain vegetation (grass, bushes):**
+Align + Slope Position + Slope Scale + Position Offset
+
+**Cliffs and rocks:**
+Cliffs Align + Cliffs Position + Scale
+
+**Trees:**
+Tree Rotation + Scale + Slope Position
+
+**Grid / modular objects:**
+Snap Rotation + Scale Clamp

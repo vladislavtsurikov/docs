@@ -1,0 +1,16 @@
+---
+title: "Slope Position"
+description: "Sink objects lower on steeper slopes"
+---
+
+Slope Position applies a vertical offset that increases with terrain steepness. On flat ground the offset is zero. As the slope angle approaches the Max Slope value, the full Position Offset Y is applied. This helps objects look naturally embedded in steep terrain rather than floating above it.
+
+## Settings
+
+- **Max Slope** — the slope angle (in degrees) at which the maximum position offset is reached. Steeper slopes produce a larger offset; flatter slopes produce less. Range: `20–90`. Default is `90`.
+
+- **Position Offset Y** — the vertical offset (in world units) applied at maximum slope. Use a negative value to push objects downward into the terrain. Default is `-1`.
+
+<Tip>
+  Combine with [Align](/megaworld/transform-components/align) to both tilt and sink objects on slopes for the most natural-looking terrain placement.
+</Tip>

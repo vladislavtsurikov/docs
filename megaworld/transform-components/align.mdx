@@ -1,0 +1,22 @@
+---
+title: "Align"
+description: "Blend object rotation toward the surface normal for natural terrain-following placement"
+---
+
+Align rotates objects to follow the slope of the surface they are placed on. Instead of always standing perfectly upright, objects tilt to match the terrain angle — making placement look natural on hills and uneven ground.
+
+You can control how strongly the alignment is applied, and optionally randomize it within a range so objects don't all tilt identically.
+
+## Settings
+
+- **Use Normal Weight** — when enabled, the alignment is blended between the object's current rotation and the surface normal direction. When disabled, the object fully aligns to the normal with no blending.
+
+- **Min Max Range** — when enabled, the normal weight is picked randomly between a minimum and maximum value each time an object spawns. Disable this to use a single fixed weight instead.
+
+- **Min Weight to Normal** — the minimum blend amount toward the surface normal. A value of `0` means the object keeps its current rotation at the low end of the range.
+
+- **Max Weight to Normal** (shown as **Weight to Normal** when Min Max Range is off) — the maximum blend amount toward the surface normal. A value of `1` fully aligns the object to the slope. A value of `0.2` applies a subtle tilt.
+
+<Tip>
+  For grass and small plants, a Max Weight to Normal of around `0.1–0.3` gives a natural look without objects leaning too far on steep terrain.
+</Tip>

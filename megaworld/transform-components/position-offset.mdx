@@ -1,0 +1,16 @@
+---
+title: "Position Offset"
+description: "Apply a random vertical (Y-axis) offset to the spawn position"
+---
+
+Position Offset shifts the object up or down along the Y axis at spawn time. The offset is picked randomly within a range you define, so objects don't all sit at exactly the same height. This is useful for partially burying objects in the terrain or giving grass and foliage a more natural, varied look.
+
+## Settings
+
+- **Min Position Offset Y** — the minimum vertical offset in world units. Use a negative value to sink the object into the terrain. Default is `-0.15`.
+
+- **Max Position Offset Y** — the maximum vertical offset in world units. Set to `0` to ensure the object never rises above its spawn point. Default is `0`.
+
+<Tip>
+  Set both Min and Max to the same value if you want every object to always spawn at the same offset.
+</Tip>

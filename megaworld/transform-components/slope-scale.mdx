@@ -1,0 +1,16 @@
+---
+title: "Slope Scale"
+description: "Increase object scale on steeper slopes"
+---
+
+Slope Scale adds a scale offset that grows with terrain steepness. On flat ground the offset is zero. As the slope reaches the Max Slope angle, the full scale offset is added. This can make objects appear larger and more dramatic on steep cliff faces, or compensate for visual shrinkage that happens when objects tilt on slopes.
+
+## Settings
+
+- **Uniform Scale Offset** — when enabled, the same scale offset is added to all three axes. When disabled, you can set different offsets for X, Y, and Z independently. Default is enabled.
+
+- **Max Slope** — the slope angle (in degrees) at which the maximum scale offset is reached. Range: `0.1–90`. Default is `30`.
+
+- **Max Uniform Scale Offset** — the scale offset added at maximum slope, applied equally to all axes. Only shown when Uniform Scale Offset is enabled. Default is `2`.
+
+- **Max Scale Offset** — per-axis scale offsets (X, Y, Z) added at maximum slope. Only shown when Uniform Scale Offset is disabled. Default is `(2, 2, 0.5)`.
