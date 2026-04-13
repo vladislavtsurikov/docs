@@ -1,0 +1,31 @@
+---
+title: "Random Seed Settings"
+description: "Control whether a placement pass uses a fixed seed or generates a fresh one"
+---
+
+Random Seed Settings control the random seed used by supported MegaWorld generation tools.
+
+This is important when you want a result to be either reproducible or intentionally different every time.
+
+## Settings
+
+- **Generate Random Seed** tells MegaWorld to create a new random seed before the pass.
+- **Random Seed** stores the explicit seed value used when automatic generation is disabled.
+
+## Behavior
+
+- If **Generate Random Seed** is enabled, MegaWorld generates and stores a new seed.
+- If it is disabled, MegaWorld initializes the pass from the stored **Random Seed** value.
+
+## When to use it
+
+Use a fixed seed when you want:
+
+- reproducible procedural results;
+- easier debugging;
+- stable iteration while tuning filters and scatter.
+
+Use generated seeds when you want:
+
+- a fresh variation on each run;
+- quick exploration of different distributions.

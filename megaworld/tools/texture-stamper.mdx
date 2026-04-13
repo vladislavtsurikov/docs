@@ -1,0 +1,59 @@
+---
+title: "Texture Stamper"
+description: "Stamp terrain textures inside a bounded area with mask filters and optional cell-based processing"
+---
+
+Texture Stamper is a stamper tool for painting **Unity Terrain Texture** layers inside a selected area.
+
+Instead of spawning objects, it writes terrain texture data. This makes it useful for large terrain-material passes such as grass, dirt, cliffs, roadsides, or biome breakup.
+
+## Supported resource types
+
+Texture Stamper supports:
+
+- **Unity/Terrain Texture**
+
+## Core workflow
+
+1. Add a Texture Stamper to the scene.
+2. Position and scale the stamper area.
+3. Select the terrain texture prototypes you want to paint.
+4. Configure mask filters for where the texture should appear.
+5. Stamp the texture pass into the terrain.
+
+## Shared systems used by this tool
+
+Texture Stamper uses:
+
+- mask filter settings for each selected terrain texture prototype
+- **Layer Settings** for raycast and terrain targeting
+- **Stamper Tool Controller** for spawn behavior and visualization
+
+## Area features
+
+Texture Stamper uses a dedicated area type with a few texture-specific features:
+
+- **Use Mask** lets the stamper use a selected custom mask instead of a plain full-area stamp.
+- **Custom Masks** let you shape the texture pass with a chosen brush texture.
+- **Use Spawn Cells** lets the tool process the area through cells instead of one single pass.
+- **Cell Size** controls the size of those cells.
+- **Show Cells** helps visualize the cell layout.
+
+## When to use Texture Stamper
+
+Texture Stamper is best when you want:
+
+- a large terrain texture pass inside a controlled area;
+- reusable texture stamping workflows based on a scene object;
+- mask-driven texturing instead of manual terrain painting;
+- cell-based processing for large texture areas.
+
+## Notes
+
+- Texture Stamper is focused on terrain textures only, not objects.
+- The main logic comes from the mask filter stack and the selected area shape.
+- If you enable spawn cells, the tool processes the area through separate bounds instead of relying on a single full-area mask.
+
+<Tip>
+  Use Texture Stamper when you want repeatable terrain texturing. Use brush-based workflows when you want more direct hand-painted control.
+</Tip>

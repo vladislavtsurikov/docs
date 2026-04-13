@@ -1,0 +1,67 @@
+---
+title: "Terrain Spawner"
+description: "Spawn objects and terrain details inside a bounded area using filters, scatter, and prototype settings"
+---
+
+Terrain Spawner is a stamper tool for procedural placement inside a defined area. You position and scale the stamper in the scene, then MegaWorld evaluates the selected groups and fills that volume with the prototypes that pass your rules.
+
+This is one of the best tools when you want to generate a large area at once instead of painting manually.
+
+## Supported resource types
+
+Terrain Spawner supports:
+
+- **Terrain Object**
+- **Unity/GameObject**
+- **Unity/Terrain Detail**
+
+## Core workflow
+
+1. Add a Terrain Spawner to the scene.
+2. Position and scale the stamper area.
+3. Select the groups and prototypes you want to use.
+4. Configure filters, scatter, transform, overlap, and prototype-specific settings.
+5. Run the spawn pass inside the stamper bounds.
+
+## Shared systems used by this tool
+
+For **Terrain Object** and **Unity/GameObject** groups, Terrain Spawner uses:
+
+- `Random Seed Settings`
+- scatter settings
+- [Filter Settings](/megaworld/mask-filters/overview)
+- [Transform Components](/megaworld/transform-components/overview)
+- [Overlap Check Settings](/megaworld/overlap-check-settings/overview)
+- [Additional Spawn Settings](/megaworld/general-settings/additional-spawn-settings)
+
+For **Unity/Terrain Detail** groups, Terrain Spawner uses:
+
+- [Spawn Detail Settings](/megaworld/general-settings/spawn-detail-settings)
+- mask filter settings
+
+## Tool-level controls
+
+Terrain Spawner is built around these tool-level systems:
+
+- **Area Settings** define the size and position of the stamper volume.
+- **Stamper Tool Controller** controls behavior such as auto respawn, respawn delay, and visualization.
+- **Layer Settings** define which layers are used for raycasts and placement checks.
+
+## When to use Terrain Spawner
+
+Terrain Spawner is best when you want:
+
+- a one-shot generation pass over a large area;
+- a forest, rock field, or vegetation layout based on filters and scatter rules;
+- terrain detail spawning inside a selected zone;
+- a workflow where the result is tied to a scene stamper object instead of mouse painting.
+
+## Notes
+
+- Terrain Spawner evaluates each selected group separately inside the stamper bounds.
+- For object-based groups, the tool generates random seeds when needed before sampling scatter.
+- For terrain details, the workflow is more specialized and uses terrain-detail-specific settings instead of the standard success and transform stack.
+
+<Tip>
+  Start with filters and scatter first, then add transform components and overlap rules. That order makes Terrain Spawner much easier to tune.
+</Tip>

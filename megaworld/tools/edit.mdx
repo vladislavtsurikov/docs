@@ -1,0 +1,49 @@
+---
+title: "Edit"
+description: "Directly edit placed objects with action-based tools such as rotate, scale, remove, and raycast"
+---
+
+Edit is a Happy Artist tool for direct object manipulation.
+
+It is built around an action stack rather than a brush or stamper workflow, which makes it suitable for targeted edits to already placed objects.
+
+## Supported resource types
+
+Edit supports:
+
+- **Terrain Object**
+- **Unity/GameObject**
+
+## Tool-level controls
+
+Edit uses **Edit Tool Settings**.
+
+The confirmed settings include:
+
+- **Sphere Size**
+- **Max Distance**
+- an internal action stack
+
+## Available actions
+
+The current action system includes:
+
+- **Move Up/Down**
+- **Raycast**
+- **Rotate**
+- **Remove**
+- **Scale**
+
+## Interaction notes
+
+- Edit does not disable itself when Unity tools are active.
+- Press `Space` to switch between global and local transform space.
+- The selected action handles the current scene interaction.
+
+## When to use Edit
+
+Edit is best when you want:
+
+- direct targeted edits instead of broad brush operations;
+- to switch between edit actions quickly;
+- precise cleanup and object adjustment after placement.

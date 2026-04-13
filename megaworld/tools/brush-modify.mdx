@@ -1,0 +1,59 @@
+---
+title: "Brush Modify"
+description: "Modify existing objects with a brush using a transform-modification stack"
+---
+
+Brush Modify is a Happy Artist tool for changing objects that already exist in the scene.
+
+Instead of spawning or erasing, it applies transform modifications to overlapped objects as you drag the brush across them.
+
+## Supported resource types
+
+Brush Modify supports:
+
+- **Terrain Object**
+- **Unity/GameObject**
+
+## Tool-level controls
+
+Brush Modify uses:
+
+- **Brush Settings**
+- **Modify Transform Components**
+
+## Shared systems used by this tool
+
+Brush Modify also uses:
+
+- [Filter Settings](/megaworld/mask-filters/overview)
+
+## Modify Transform Components
+
+The current modify stack includes components such as:
+
+- **Position**
+- **Rotation**
+- **Along**
+- **Randomize Scale**
+- **Scale**
+- **Vegetation Rotation**
+- **Scale Clamp**
+
+## How it works
+
+- The brush overlaps existing objects.
+- The tool evaluates filter fitness and brush mask strength.
+- The modify stack applies transform changes based on stroke movement and fitness.
+- Changes are accumulated while you drag.
+
+## When to use Brush Modify
+
+Brush Modify is best when you want:
+
+- to art-direct an already spawned area;
+- to nudge, rotate, or reshape existing placement with a brush gesture;
+- to refine a procedural result instead of deleting and respawning it.
+
+<Tip>
+  Brush Modify works especially well after a large procedural pass. Generate first, then use the brush to break up repetition and add hand-crafted variation.
+</Tip>

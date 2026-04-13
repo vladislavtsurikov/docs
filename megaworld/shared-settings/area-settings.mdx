@@ -1,0 +1,45 @@
+---
+title: "Area Settings"
+description: "Control the bounds, handles, and scene-space volume used by MegaWorld stamper tools"
+---
+
+Area Settings define the scene-space bounds used by MegaWorld stamper tools.
+
+This block controls the shape, size, and visualization of the stamper volume.
+
+## Core fields
+
+The current Area Settings code includes:
+
+- **Bounds**
+- **Color Cube**
+- **Dotted**
+- **Draw Handle If Not Selected**
+- **Handle Settings Mode**
+- **Pixel Width**
+
+## What Area Settings do
+
+- store the current stamper bounds;
+- update those bounds when the stamper transform changes;
+- provide the box area used by spawning and filtering logic;
+- support scene visualization and handle drawing.
+
+## Extra utility actions
+
+The area system also supports fitting the stamper volume to:
+
+- the active terrain size
+- the world or scene bounds
+
+## Where Area Settings are used
+
+Area Settings are a core part of stamper tools such as:
+
+- [Terrain Spawner](/megaworld/tools/terrain-spawner)
+- [Texture Stamper](/megaworld/tools/texture-stamper)
+- [Gravity Spawner](/megaworld/tools/gravity-spawner)
+
+<Tip>
+  Before tuning scatter or filters on a stamper tool, confirm the area bounds first. A wrong area volume makes every downstream setting harder to read.
+</Tip>

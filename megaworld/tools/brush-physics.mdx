@@ -1,0 +1,59 @@
+---
+title: "Brush Physics"
+description: "Paint physics-simulated objects with a brush and let them settle into the scene"
+---
+
+Brush Physics is a PhysX Painter tool for interactive painting with physics simulation.
+
+Instead of placing objects directly in their final pose, it spawns them into a simulated workflow so they can settle more naturally.
+
+## Supported resource types
+
+Brush Physics supports:
+
+- **Terrain Object**
+- **Unity/GameObject**
+
+## Core workflow
+
+1. Select **Brush Physics** in the Tools panel.
+2. Choose the object prototypes you want to paint.
+3. Set brush size, spacing, and jitter behavior.
+4. Configure physics transform settings and physics effects.
+5. Paint into the scene and let the simulation settle the result.
+
+## Tool-level controls
+
+Brush Physics uses:
+
+- **Brush Physics Tool Settings**
+- **Physics Effects**
+- **Brush Settings**
+
+The code shows one explicit tool-specific control in **Brush Physics Tool Settings**:
+
+- **Position Offset Y** for spawning or simulating above the surface.
+
+## Shared systems used by this tool
+
+Brush Physics uses:
+
+- scatter settings
+- **Physics Transform Settings**
+- `Success`
+- **Physics Effects**
+
+## When to use Brush Physics
+
+Brush Physics is best when you want:
+
+- physics-based painting instead of direct placement;
+- repeated interactive strokes with a brush workflow;
+- naturally settled props, clutter, or dropped objects;
+- a less rigid result than standard brush spawning.
+
+## Notes
+
+- Brush Physics belongs to the **PhysX Painter** family.
+- It uses brush-style interaction, but the actual placement logic is physics-driven.
+- The transform system here is physics-specific rather than the standard transform component stack.

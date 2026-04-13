@@ -1,0 +1,36 @@
+---
+title: "Layer Settings"
+description: "Define which layers MegaWorld uses for raycasts and placement checks"
+---
+
+Layer Settings control which layers MegaWorld uses when it raycasts into the scene.
+
+This affects many workflows because most tools need a valid hit surface before they can place, erase, stamp, or edit anything.
+
+## Core behavior
+
+- **Paint Layers** define the layer mask used for raycasts.
+
+## Special case for terrain detail and terrain texture
+
+When the current prototype type is:
+
+- **Unity/Terrain Detail**
+- **Unity/Terrain Texture**
+
+MegaWorld uses the active Unity Terrain layer automatically.
+
+If there is no active Unity Terrain in the scene, the code warns that the terrain is missing and falls back to the stored paint layers.
+
+## Why Layer Settings matter
+
+If Layer Settings are wrong, tools can fail in ways that look unrelated:
+
+- brushes may not detect the surface;
+- stampers may not find the terrain;
+- edit tools may hit the wrong geometry;
+- precise tools may place on the wrong object.
+
+<Tip>
+  If a tool suddenly stops hitting the scene correctly, check Layer Settings before changing anything else.
+</Tip>

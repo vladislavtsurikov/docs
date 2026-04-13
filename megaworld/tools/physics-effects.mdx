@@ -1,0 +1,45 @@
+---
+title: "Physics Effects"
+description: "Apply interactive physics effects such as explosion, black hole, and upward force to scene objects"
+---
+
+Physics Effects is a PhysX Painter tool for applying interactive physics actions to existing objects.
+
+Instead of spawning new objects, it applies the currently selected effect to objects under the tool interaction.
+
+## Supported resource types
+
+Physics Effects currently supports:
+
+- **Unity/GameObject**
+
+## Tool-level controls
+
+Physics Effects uses **Physics Effects Tool Settings**.
+
+The confirmed settings are:
+
+- **Spacing**
+- an effect stack where you choose the active effect
+
+## Available effects
+
+The current code registers these effect types:
+
+- **Black Hole**
+- **Explosion**
+- **Fly Up**
+- **Simple Force**
+
+## When to use Physics Effects
+
+Physics Effects is best when you want:
+
+- to push, lift, attract, or blast objects already in the scene;
+- interactive physics testing;
+- quick scene experimentation without changing the placement setup itself.
+
+## Notes
+
+- The tool uses the selected effect from the internal effect stack.
+- It is marked with `DontCreate` in code, so treat it as a specialized workflow tool rather than a standard default tool entry.

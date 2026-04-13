@@ -1,0 +1,43 @@
+---
+title: "Terrain Detail Settings"
+description: "Current terrain detail options in MegaWorld and what changed from the older documentation"
+---
+
+The older Google Doc listed a separate **Terrain Detail Settings** section with fields such as `Noise Spread`, `Min Width`, `Max Width`, `Min Height`, `Max Height`, `Healthy Colour`, `Dry Colour`, and `Billboard`.
+
+In the current project, MegaWorld does not expose those fields as a separate settings component for terrain detail prototypes.
+
+## What MegaWorld currently manages
+
+- **Prototype type** lets you use either a mesh prefab or a texture as a terrain detail prototype.
+- **Get/Update Resources From Terrain** syncs the prototype list from the active terrain.
+- **Add Missing Resources** adds the selected detail prototypes to the active terrain.
+- **Remove All Resources** removes terrain detail resources from the active terrain.
+
+## Automatic detail mode setup
+
+When MegaWorld adds a terrain detail resource to Unity Terrain, it sets the base Unity `DetailPrototype` mode for you:
+
+- **Texture** prototypes use `GrassBillboard`.
+- **Mesh** prototypes use `Grass`.
+- Texture prototypes disable `usePrototypeMesh`.
+- Mesh prototypes enable `usePrototypeMesh`.
+
+## Fields from the old doc that are not exposed here
+
+The following fields from the older documentation are not configured by a dedicated MegaWorld settings page in the current project:
+
+- `Noise Spread`
+- `Min Width`
+- `Max Width`
+- `Min Height`
+- `Max Height`
+- `Healthy Colour`
+- `Dry Colour`
+- `Billboard`
+
+If you still need to tune those values, treat them as Unity terrain detail prototype properties rather than current MegaWorld-specific settings.
+
+<Tip>
+  If terrain detail prototypes stop syncing correctly, use **Get/Update Resources From Terrain** first. If the terrain is missing prototypes, use **Add Missing Resources**.
+</Tip>

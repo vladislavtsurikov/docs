@@ -1,0 +1,52 @@
+---
+title: "Spray Brush"
+description: "Quickly scatter objects with a lightweight brush workflow based on simple filters and simple transforms"
+---
+
+Spray Brush is a lightweight painting tool for fast object scattering in the scene.
+
+Compared with **Advanced Brush**, this tool uses a simpler setup: simple filters, simple transform settings, and overlap checks. It is useful when you want a quick manual painting workflow without the full transform component stack.
+
+## Supported resource types
+
+Spray Brush supports:
+
+- **Terrain Object**
+- **Unity/GameObject**
+
+## Core workflow
+
+1. Select **Spray Brush** in the Tools panel.
+2. Choose the object prototypes you want to spray.
+3. Set brush size and spacing.
+4. Configure simple filters, simple transform settings, success, and overlap.
+5. Paint directly in the scene.
+
+## Shared systems used by this tool
+
+Spray Brush uses:
+
+- **Brush Settings**
+- `Success`
+- **Simple Filter Settings**
+- **Simple Transform Settings**
+- [Overlap Check Settings](/megaworld/overlap-check-settings/overview)
+
+## When to use Spray Brush
+
+Spray Brush is best when you want:
+
+- a very fast manual object scattering workflow;
+- lighter setup than **Advanced Brush**;
+- direct control with fewer moving parts;
+- simple variation and overlap protection without the full advanced stack.
+
+## Notes
+
+- Spray Brush samples a point inside the brush radius instead of filling the whole brush area procedurally.
+- The tool uses `SimpleTransformComponentSettings`, not the full [Transform Components](/megaworld/transform-components/overview) stack.
+- This makes the tool quicker to set up, but also less flexible than **Advanced Brush**.
+
+<Tip>
+  Use Spray Brush when speed matters more than fine-grained control. If you need terrain details, terrain textures, or the full transform stack, switch to **Advanced Brush**.
+</Tip>

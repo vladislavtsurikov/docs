@@ -1,0 +1,67 @@
+---
+title: "Scatter system"
+description: "Generate sample positions for placement tools using reusable scatter algorithms"
+---
+
+Scatter System controls how MegaWorld generates candidate sample positions before an object is spawned.
+
+It is the stage that decides whether placement feels loose, gridded, sparse, evenly spaced, or intentionally broken up.
+
+## How the stack works
+
+Scatter uses a stack of active elements. Each active element processes the sample list in order.
+
+In practice, this means the stack can combine two kinds of behavior:
+
+- **sample generators** that create positions, such as **Random Point**, **Random Grid**, **Poisson Disc**, or **Tiles**
+- **sample modifiers** that change an already generated set, such as **Failure Rate**
+
+Because the stack runs in order, the position of each element matters.
+
+## Why order matters
+
+The most common pattern is:
+
+1. generate samples with one main scatter algorithm;
+2. optionally thin or modify the result with an extra step such as **Failure Rate**.
+
+For example:
+
+- **Random Grid** gives you a structured base distribution
+- **Failure Rate** removes part of that distribution to make it feel less uniform
+
+## Default behavior
+
+The current code creates **Random Grid** by default when a new scatter settings block is created.
+
+## Where Scatter System is used
+
+Scatter System appears in several placement tools, especially:
+
+- [Terrain Spawner](/megaworld/tools/terrain-spawner)
+- [Advanced Brush](/megaworld/tools/advanced-brush)
+- [Gravity Spawner](/megaworld/tools/gravity-spawner)
+- physics-based and object-based workflows that need reusable sample generation
+
+## Available elements
+
+<CardGroup cols={2}>
+  <Card title="Scatter Settings" href="/megaworld/scatter-system/scatter-settings">
+    Learn how the scatter stack is stored and configured.
+  </Card>
+  <Card title="Random Point" href="/megaworld/scatter-system/random-point">
+    Generate a random number of loose points inside the target area.
+  </Card>
+  <Card title="Random Grid" href="/megaworld/scatter-system/random-grid">
+    Generate a grid-based pattern with optional rotation and randomization.
+  </Card>
+  <Card title="Poisson Disc" href="/megaworld/scatter-system/poisson-disc">
+    Keep a minimum spacing between samples for a more even natural distribution.
+  </Card>
+  <Card title="Tiles" href="/megaworld/scatter-system/tiles">
+    Generate samples from tile-like cells.
+  </Card>
+  <Card title="Failure Rate" href="/megaworld/scatter-system/failure-rate">
+    Remove part of an existing sample set to make the result sparser.
+  </Card>
+</CardGroup>

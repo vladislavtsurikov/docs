@@ -1,0 +1,54 @@
+---
+title: "Simple Filter Settings"
+description: "A lightweight filter workflow for height, slope, and global fractal noise checks"
+---
+
+Simple Filter Settings are the lightweight filtering workflow used in several non-mask-based MegaWorld tools.
+
+Unlike the full mask filter stack, simple filters evaluate fitness directly from terrain or raycast data.
+
+## Available checks
+
+The current code supports:
+
+- **Height**
+- **Slope**
+- **Global Fractal Noise**
+
+## Core behavior
+
+Each enabled check returns a fitness value, and the final simple-filter fitness is the product of those values.
+
+This means:
+
+- disabling a check removes it from the calculation;
+- stronger restrictions reduce the final fitness;
+- height, slope, and noise can be combined together.
+
+## Height and slope falloff
+
+Height and slope checks support:
+
+- hard cutoff behavior
+- additive falloff behavior
+- min/max falloff variants
+
+## Noise behavior
+
+The noise part supports:
+
+- remapping
+- inversion
+- range control
+- fractal-based variation
+
+## Where Simple Filter Settings are used
+
+Simple Filter Settings are especially relevant in tools such as:
+
+- [Spray Brush](/megaworld/tools/spray-brush)
+- workflows where a full terrain mask pipeline is not needed
+
+<Tip>
+  Use Simple Filter Settings when you want lightweight filtering on top of a direct tool workflow. Use full mask filters when you need stack-based terrain masks and blend operations.
+</Tip>

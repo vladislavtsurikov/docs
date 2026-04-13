@@ -1,0 +1,25 @@
+---
+title: "Spawn Detail Settings"
+description: "Control density and variation when MegaWorld writes Unity Terrain Details"
+---
+
+Spawn Detail Settings control how strongly MegaWorld writes a terrain detail prototype into the terrain detail map.
+
+This component is used for **Unity/Terrain Detail** prototypes in tools such as **Advanced Brush** and **Terrain Spawner**.
+
+## Settings
+
+- **Use Random Opacity** randomizes the written detail strength per pixel. This helps break up uniform coverage and makes grass feel less repetitive.
+- **Density** sets the target detail strength MegaWorld writes into the detail map. Higher values produce denser grass or detail coverage.
+- **Failure Rate (%)** adds an extra chance to skip spawning on a pixel. Higher values create a sparser result.
+
+## How it works
+
+- MegaWorld evaluates the mask and filter fitness for each terrain detail pixel.
+- It converts that fitness into a target strength from `0` to **Density**.
+- If **Use Random Opacity** is enabled, MegaWorld multiplies that fitness by a random value before converting it into target strength.
+- If **Failure Rate (%)** triggers, the target strength for that pixel becomes `0`.
+
+<Tip>
+  Use **Use Random Opacity** together with a medium **Density** when you want natural grass variation. Increase **Failure Rate (%)** when you want more empty patches without changing the overall mask shape.
+</Tip>

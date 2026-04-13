@@ -1,0 +1,51 @@
+---
+title: "MegaWorld overview"
+description: "A fast scene-building ecosystem for procedural generation, manual placement, and terrain workflows"
+---
+
+MegaWorld is a multi-tool ecosystem for building scenes quickly. It combines procedural placement, terrain workflows, manual level design, and physics-based editing in one window.
+
+The current documentation focuses on the MegaWorld tools and systems that are part of your working pipeline. Shared systems such as filters, transform components, spawn settings, and overlap checks are documented separately so the same explanations do not have to be repeated inside every tool page.
+
+## What MegaWorld includes
+
+MegaWorld is organized into several workflow families:
+
+- **Stamper tools** for area-based spawning and terrain workflows such as **Terrain Spawner**, **Texture Stamper**, and **Gravity Spawner**.
+- **Brush tools** for interactive painting and erasing such as **Advanced Brush**, **Spray Brush**, and **Brush Erase**.
+- **PhysX Painter** tools for physics-driven placement and effects such as **Brush Physics**, **Precise Physics**, **Explode Physics**, and **Physics Effects**.
+- **Happy Artist** tools for hands-on editing such as **Brush Modify**, **Edit**, **Precise Place**, and **Pin**.
+
+## Shared systems
+
+Many MegaWorld tools reuse the same core systems:
+
+- [General settings](/megaworld/general-settings/spawn-detail-settings) for prototype-level spawn behavior.
+- [Mask Filters](/megaworld/mask-filters/overview) for defining where placement is allowed.
+- [Transform Components](/megaworld/transform-components/overview) for changing position, rotation, and scale at spawn time.
+- [Overlap Check Settings](/megaworld/overlap-check-settings/overview) for blocking bad placements.
+
+## Why this structure matters
+
+MegaWorld can look large at first, but most workflows follow the same pattern:
+
+1. Open the MegaWorld window.
+2. Pick the tool that matches your task.
+3. Select the resource type and prototypes you want to work with.
+4. Configure shared systems such as filters, transform settings, scatter, or overlap.
+5. Paint, stamp, erase, or edit directly in the scene.
+
+<CardGroup cols={2}>
+  <Card title="Get started" href="/megaworld/get-started">
+    Start with the first MegaWorld workflow and learn how the window is organized.
+  </Card>
+  <Card title="MegaWorld window" href="/megaworld/mega-world-window">
+    Understand the main window, the panel layout, and how the workflow is split.
+  </Card>
+  <Card title="Mask Filters" href="/megaworld/mask-filters/overview">
+    Control where objects can spawn with terrain-aware filter stacks.
+  </Card>
+  <Card title="Transform Components" href="/megaworld/transform-components/overview">
+    Control how objects rotate, offset, and scale when they spawn.
+  </Card>
+</CardGroup>

@@ -1,0 +1,29 @@
+---
+title: "Additional Spawn Settings"
+description: "Control how often a prototype wins selection during spawning"
+---
+
+The older documentation described this area as **Additional Spawn Settings**.
+
+In the current project, the same behavior is exposed through the **Success** component.
+
+## Setting
+
+- **Success (%)** controls how likely a prototype is to win selection when MegaWorld chooses between multiple active prototypes.
+
+## How it works
+
+- MegaWorld rolls a random value for each active prototype.
+- Each roll is clamped by that prototype's **Success (%)** value.
+- The prototype with the highest final value is selected for spawning.
+
+## Important behavior
+
+- If only one prototype is available, MegaWorld spawns it directly. In that case, **Success (%)** does not change the result.
+- **Success (%)** is most useful when several prototypes compete inside the same group.
+- Lower values make a prototype appear less often relative to other active prototypes.
+- A value of `100` gives the prototype its full chance to compete.
+
+<Tip>
+  Use higher **Success (%)** for your main variants and lower values for rare accent variants, debris, or special-case objects.
+</Tip>

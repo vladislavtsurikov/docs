@@ -1,0 +1,24 @@
+---
+title: "Polaris integration"
+description: "Use MegaWorld with Polaris Terrain and understand the current filter limitation"
+---
+
+You can follow the normal MegaWorld workflow with Polaris Terrain, but there is one important limitation in the original documentation.
+
+## Recommended approach
+
+Follow the same general setup you would use in the regular getting started workflow, but use **Simple Filters** for the filtering stage.
+
+## Important limitation
+
+The original MegaWorld documentation notes that **Mask Filter** support for Polaris may be limited or may not be available in the same way as on Unity Terrain.
+
+Because of that, when you work with Polaris:
+
+- prefer **Simple Filters** first;
+- validate the result directly in the scene;
+- avoid assuming that every terrain-based mask workflow from Unity Terrain behaves the same way.
+
+<Tip>
+  If a setup works on Unity Terrain but behaves differently on Polaris, check the filter type first. The safest first troubleshooting step is to switch the workflow back to **Simple Filters**.
+</Tip>

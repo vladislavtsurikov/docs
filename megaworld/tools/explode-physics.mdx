@@ -1,0 +1,51 @@
+---
+title: "Explode Physics"
+description: "Burst-spawn physics objects from a point or radius and let the explosion spread them"
+---
+
+Explode Physics is a PhysX Painter tool for burst-style physics spawning.
+
+It creates multiple instances and throws them outward, which makes it useful for explosive scattering, debris effects, and dynamic distribution from a target point.
+
+## Supported resource types
+
+Explode Physics supports:
+
+- **Unity/GameObject**
+- **Terrain Object**
+
+## Tool-level controls
+
+Explode Physics uses **Explode Physics Tool Settings**.
+
+The current tool settings include:
+
+- **Force**
+- **Instances Max**
+- **Instances Min**
+- **Position Offset Y**
+- **Size**
+- **Spacing**
+- **Spawn From One Point**
+
+## Core behavior
+
+Depending on the current settings, the tool can:
+
+- emit instances from one point;
+- emit them inside a sphere-sized area;
+- control how many instances are created;
+- control how strongly they are pushed by the explosion.
+
+## When to use Explode Physics
+
+Explode Physics is best when you want:
+
+- a burst of scattered props or debris;
+- explosive-looking object distribution;
+- quick dynamic variation that would be tedious to place by hand.
+
+## Notes
+
+- The scene view visual changes depending on whether **Spawn From One Point** is enabled.
+- This tool is about dynamic emission and force, not careful placement precision.

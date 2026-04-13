@@ -1,0 +1,36 @@
+---
+title: "Random Grid"
+description: "Generate samples from a grid layout with optional rotation and random offset"
+---
+
+Random Grid is the default scatter element in MegaWorld.
+
+It builds a grid across the target area, then optionally rotates and randomizes the sample positions. This makes it useful for controlled placement that still needs some natural variation.
+
+## Settings
+
+- **Failure Rate** controls how many grid candidates fail before they become real samples.
+- **Grid Angle** rotates the grid layout.
+- **Grid Step** controls spacing between grid cells.
+- **Randomisation Type** controls how the sample is offset from the grid cell.
+- **Vastness** controls how wide the random offset can spread.
+
+## Randomisation types
+
+- **None** keeps samples on the raw grid.
+- **Square** offsets samples inside a square area around the grid point.
+- **Sphere** offsets samples inside a radial-style area around the grid point.
+
+## When to use Random Grid
+
+Random Grid is best when you want:
+
+- controlled spacing;
+- repeatable large-area placement;
+- a balance between order and randomness;
+- a strong base pattern that can be softened with randomization or `Failure Rate`.
+
+## Notes
+
+- Random Grid is a good default because it is predictable and easy to tune.
+- If the result looks too artificial, add randomization or combine it with [Failure Rate](/megaworld/scatter-system/failure-rate).

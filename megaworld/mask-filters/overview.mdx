@@ -5,7 +5,13 @@ description: "Advanced GPU-based filter stack for controlling spawn areas using 
 
 Mask Filters is an advanced system for defining where objects spawn. Each filter generates a grayscale mask over the terrain, and multiple filters can be stacked and blended together to create complex spawn rules.
 
-Mask Filters work exclusively with **Unity Terrain** and are evaluated on the GPU, making them faster and more powerful than [Simple Filters](/megaworld/simple-filters/overview) for terrain-based workflows. They support blending operations between filters (Multiply, Add) and include advanced filters like Aspect, Concavity, and Smooth that are not available in Simple Filters.
+Mask Filters work exclusively with **Unity Terrain** and are evaluated on the GPU, making them faster and more powerful than simple filters for terrain-based workflows. They support blending operations between filters (Multiply, Add) and include advanced filters like Aspect, Concavity, and Smooth that are not available in simple filters.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '560px' }}
+  src="/images/megaworld/mask-filters/mask-filters-panel.png"
+  alt="Mask Filters panel in MegaWorld."
+/>
 
 ## How It Works
 
@@ -16,6 +22,41 @@ Each filter in the stack produces a mask (black = no spawn, white = spawn). Filt
 **Blend Modes:**
 - **Multiply** — combines masks multiplicatively. The result can only be equal to or smaller than either input. Use this to narrow down the spawn area.
 - **Add** — combines masks additively. The result can only be equal to or larger than either input. Use this to expand or union spawn areas.
+
+## Simple filters vs mask filters
+
+Filter Settings are split into two workflows:
+
+- **Simple Filters** are lighter and work with any mesh, not only Unity Terrain.
+- **Mask Filters** are terrain-focused, GPU-evaluated, and support blendable mask operations for more advanced control.
+
+### Simple Filters
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '580px' }}
+  src="/images/megaworld/mask-filters/simple-filters-panel.png"
+  alt="Simple Filters panel in MegaWorld."
+/>
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '720px', marginTop: '1rem' }}
+  src="/images/megaworld/mask-filters/simple-filters-visualization.png"
+  alt="Simple Filters visualization in MegaWorld."
+/>
+
+### Mask Filters
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '560px' }}
+  src="/images/megaworld/mask-filters/mask-filters-panel.png"
+  alt="Mask Filters stack in MegaWorld."
+/>
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '720px', marginTop: '1rem' }}
+  src="/images/megaworld/mask-filters/mask-filters-visualization.png"
+  alt="Mask Filters visualization in MegaWorld."
+/>
 
 ## Available Filters
 

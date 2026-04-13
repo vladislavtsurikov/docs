@@ -1,0 +1,40 @@
+---
+title: "Scatter Settings"
+description: "Configure the scatter stack that generates sample positions for MegaWorld placement tools"
+---
+
+Scatter Settings is the container for the scatter stack used by supported MegaWorld tools.
+
+It does not define one placement pattern by itself. Instead, it holds a stack of scatter elements, and each active element runs in order.
+
+## What it contains
+
+Scatter Settings stores:
+
+- the **Scatter Stack**
+- the active scatter elements inside that stack
+
+## Default element
+
+When the settings block is first created, MegaWorld adds **Random Grid** by default.
+
+## Recommended stack patterns
+
+Common useful setups include:
+
+- **Random Grid** only for clean controlled spacing
+- **Random Grid + Failure Rate** for structured placement with intentional gaps
+- **Poisson Disc** for more even natural spacing
+- **Random Point** for loose unstructured scattering
+
+## Preferences
+
+The scatter system also has a preference-level setting:
+
+- **Scatter / Max Checks**
+
+This preference affects systems such as **Random Point**, which can use a check-count limit from preferences.
+
+<Tip>
+  Start with one generator first. Add a second scatter element only when you know what extra behavior you want to layer on top.
+</Tip>

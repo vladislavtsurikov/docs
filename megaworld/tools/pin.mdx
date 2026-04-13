@@ -1,0 +1,58 @@
+---
+title: "Pin"
+description: "Place and shape an object interactively by dragging out its rotation and scale from a pinned point"
+---
+
+Pin is a Happy Artist tool for interactive anchored placement.
+
+You click to pin the object to a surface point, then drag to define its rotation and scale before releasing.
+
+## Supported resource types
+
+Pin supports:
+
+- **Terrain Object**
+- **Unity/GameObject**
+
+## Tool-level controls
+
+Pin uses **Pin Tool Settings**.
+
+The confirmed settings include:
+
+- **Offset**
+- **Rotation Transform Mode**
+- **From Direction**
+- **Weight To Normal**
+- **Snap Rotation Value**
+- **Fixed Rotation Value**
+- **Scale Transform Mode**
+- **Fixed Scale Value**
+- **Snap Scale Value**
+
+## How it works
+
+1. Click on a valid surface point.
+2. MegaWorld creates a temporary preview object.
+3. Drag to define direction and size.
+4. Release to confirm the placed result.
+
+Rotation and scale can work in:
+
+- **Free**
+- **Snap**
+- **Fixed**
+
+## When to use Pin
+
+Pin is best when you want:
+
+- a very tactile placement workflow;
+- anchored objects that need manual orientation from a surface point;
+- quick manual scale and rotation shaping in one interaction.
+
+## Notes
+
+- Press `F` while hovering a valid hit point to frame the camera on that point.
+- The tool uses surface orientation data to build the local placement frame.
+- If the drag is too small, the preview object can be discarded instead of committed.

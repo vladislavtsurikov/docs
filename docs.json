@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "MegaWorld Documentation",
   "colors": {
     "primary": "#16A34A",
     "light": "#07C983",
@@ -13,6 +13,81 @@
       {
         "tab": "MegaWorld",
         "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "megaworld/overview",
+              "megaworld/get-started"
+            ]
+          },
+          {
+            "group": "Window And Workflow",
+            "pages": [
+              "megaworld/mega-world-window",
+              "megaworld/tools-panel",
+              "megaworld/selection-panel",
+              "megaworld/settings-panel",
+              "megaworld/hotkeys"
+            ]
+          },
+          {
+            "group": "Tools",
+            "pages": [
+              "megaworld/tools/terrain-spawner",
+              "megaworld/tools/texture-stamper",
+              "megaworld/tools/advanced-brush",
+              "megaworld/tools/spray-brush",
+              "megaworld/tools/brush-erase",
+              "megaworld/tools/gravity-spawner",
+              "megaworld/tools/brush-physics",
+              "megaworld/tools/precise-physics",
+              "megaworld/tools/explode-physics",
+              "megaworld/tools/physics-effects",
+              "megaworld/tools/brush-modify",
+              "megaworld/tools/edit",
+              "megaworld/tools/precise-place",
+              "megaworld/tools/pin"
+            ]
+          },
+          {
+            "group": "General Settings",
+            "pages": [
+              "megaworld/general-settings/spawn-detail-settings",
+              "megaworld/general-settings/terrain-detail-settings",
+              "megaworld/general-settings/additional-spawn-settings"
+            ]
+          },
+          {
+            "group": "Shared Settings",
+            "pages": [
+              "megaworld/shared-settings/brush-settings",
+              "megaworld/shared-settings/layer-settings",
+              "megaworld/shared-settings/area-settings",
+              "megaworld/shared-settings/random-seed-settings",
+              "megaworld/shared-settings/success",
+              "megaworld/shared-settings/simple-transform-settings",
+              "megaworld/shared-settings/physics-transform-settings",
+              "megaworld/shared-settings/simple-filter-settings"
+            ]
+          },
+          {
+            "group": "Scatter System",
+            "pages": [
+              "megaworld/scatter-system/overview",
+              "megaworld/scatter-system/scatter-settings",
+              "megaworld/scatter-system/random-point",
+              "megaworld/scatter-system/random-grid",
+              "megaworld/scatter-system/poisson-disc",
+              "megaworld/scatter-system/tiles",
+              "megaworld/scatter-system/failure-rate"
+            ]
+          },
+          {
+            "group": "Placement And Overlap",
+            "pages": [
+              "megaworld/overlap-check-settings/overview"
+            ]
+          },
           {
             "group": "Mask Filters",
             "pages": [
@@ -49,62 +124,11 @@
               "megaworld/transform-components/snap-rotation",
               "megaworld/transform-components/tree-rotation"
             ]
-          }
-        ]
-      },
-      {
-        "tab": "Guides",
-        "groups": [
-          {
-            "group": "Getting started",
-            "pages": [
-              "index",
-              "quickstart",
-              "development"
-            ]
           },
           {
-            "group": "Customization",
+            "group": "Integrations",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
-            ]
-          },
-          {
-            "group": "Writing content",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "API reference",
-        "groups": [
-          {
-            "group": "API documentation",
-            "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Endpoint examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "megaworld/polaris-integration"
             ]
           }
         ]
@@ -113,14 +137,9 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
+          "anchor": "Original Google Doc",
+          "href": "https://docs.google.com/document/d/1o_wtpxailmEGdtEwp5BGIyV8SXklvlJQp9vY2YoTBx4/edit",
           "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
         }
       ]
     }
@@ -132,33 +151,31 @@
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "label": "Discord",
+        "href": "https://discord.com"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Source doc",
+      "href": "https://docs.google.com/document/d/1o_wtpxailmEGdtEwp5BGIyV8SXklvlJQp9vY2YoTBx4/edit"
     }
   },
   "contextual": {
     "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "github": "https://github.com"
     }
   }
 }

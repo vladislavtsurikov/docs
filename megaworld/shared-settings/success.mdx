@@ -1,0 +1,31 @@
+---
+title: "Success"
+description: "Control how strongly a prototype competes during random prototype selection"
+---
+
+`Success` controls how likely a prototype is to win when MegaWorld chooses between multiple active prototypes.
+
+This is the current component behind the older wording sometimes described as additional spawn weighting.
+
+## Setting
+
+- **Success (%)** sets the prototype’s selection strength.
+
+## Behavior
+
+- Higher values make the prototype more competitive.
+- Lower values make it appear less often relative to other active prototypes.
+- A value of `100` gives it full weight.
+
+## Where it is used
+
+This setting appears in many object-based tools, including:
+
+- [Terrain Spawner](/megaworld/tools/terrain-spawner)
+- [Advanced Brush](/megaworld/tools/advanced-brush)
+- [Gravity Spawner](/megaworld/tools/gravity-spawner)
+- [Precise Place](/megaworld/tools/precise-place)
+
+<Tip>
+  Use `Success` to control prototype frequency before touching scatter density. It is often the cleanest way to balance variants within one group.
+</Tip>

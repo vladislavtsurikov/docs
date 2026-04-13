@@ -1,0 +1,45 @@
+---
+title: "Selection panel"
+description: "Choose types, prototypes, and resource kinds for the current MegaWorld tool"
+---
+
+The Selection panel controls what the active tool works with.
+
+In most workflows, this is where you choose the resource type and the specific prototypes that will be painted, stamped, modified, or erased.
+
+## Main concepts
+
+- **Type** is a reusable collection stored in the project. You can use types to organize similar prototypes, such as pines, rocks, or small trees.
+- **Prototype** is the actual resource that MegaWorld uses in the scene.
+
+## Common resource types
+
+Depending on the tool, MegaWorld can work with:
+
+- **Unity/GameObject**
+- **Unity/Terrain Detail**
+- **Unity/Terrain Texture**
+- **Terrain Object** in workflows that expose terrain-object placement
+
+## What you can do here
+
+- Add prototypes to the current selection.
+- Reorder types and prototypes.
+- Copy and paste settings between selected items.
+- Disable a prototype without removing it.
+- Delete selected items from the selection set.
+
+## Why ordering matters
+
+In many MegaWorld workflows, order is not just visual. It can affect:
+
+- which prototype wins selection more often;
+- how you review and organize variations;
+- how quickly you can tune groups of similar assets.
+
+## Recommended workflow
+
+1. Create or choose a type for the category you want to work on.
+2. Add the prototypes you want in that type.
+3. Disable weak variants instead of deleting them immediately.
+4. Tune shared systems such as filters, transform components, and overlap checks on the selected prototypes.

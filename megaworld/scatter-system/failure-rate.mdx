@@ -1,0 +1,33 @@
+---
+title: "Failure Rate"
+description: "Remove a percentage of existing scatter samples to make the result sparser"
+---
+
+Failure Rate is a scatter modifier, not a primary sample generator.
+
+Instead of creating new samples, it removes a percentage of the samples that were already generated earlier in the scatter stack.
+
+## Setting
+
+- **Value** is the percentage of samples to remove.
+
+## Best position in the stack
+
+Failure Rate works best after a generator such as:
+
+- [Random Grid](/megaworld/scatter-system/random-grid)
+- [Random Point](/megaworld/scatter-system/random-point)
+- [Poisson Disc](/megaworld/scatter-system/poisson-disc)
+
+## When to use Failure Rate
+
+Failure Rate is best when you want:
+
+- to break up a distribution without changing the generator itself;
+- to make a grid feel less perfect;
+- to reduce density while keeping the overall pattern.
+
+## Notes
+
+- Because it removes existing samples, it makes the most sense near the end of the scatter stack.
+- If used alone, it has no useful effect because there are no earlier samples to remove.

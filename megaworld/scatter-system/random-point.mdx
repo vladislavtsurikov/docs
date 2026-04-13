@@ -1,0 +1,27 @@
+---
+title: "Random Point"
+description: "Generate a random number of loose sample points inside the target area"
+---
+
+Random Point is the loosest scatter mode in the current set.
+
+It picks random points inside the target area without trying to enforce a pattern like a grid or minimum-distance spacing.
+
+## Settings
+
+- **Checks** controls how many random sample attempts the tool performs.
+
+The code uses a min/max style check range and also respects the scatter preference limit for maximum checks.
+
+## When to use Random Point
+
+Random Point is best when you want:
+
+- a quick unstructured scatter;
+- a more chaotic result than a grid;
+- sample generation that does not try to preserve even spacing.
+
+## Notes
+
+- Random Point does not guarantee spacing between results.
+- If you need more even distribution, use [Poisson Disc](/megaworld/scatter-system/poisson-disc) instead.

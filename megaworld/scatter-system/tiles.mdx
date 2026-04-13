@@ -1,0 +1,25 @@
+---
+title: "Tiles"
+description: "Generate samples from tile-like cells using a configurable cell size"
+---
+
+Tiles generates samples from a tile-style layout.
+
+Instead of thinking in loose points or a probabilistic grid, this mode treats the area more like a set of cells and places samples from those cells.
+
+## Setting
+
+- **Size** controls the tile size.
+
+## When to use Tiles
+
+Tiles is best when you want:
+
+- tile-like regular distribution;
+- cell-driven sampling behavior;
+- a more explicit discrete layout than Random Point or Poisson Disc.
+
+## Notes
+
+- Tiles is the most cell-oriented scatter mode in the current set.
+- If the result feels too rigid, switch to [Random Grid](/megaworld/scatter-system/random-grid) with randomization instead.

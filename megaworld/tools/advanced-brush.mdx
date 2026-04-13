@@ -1,0 +1,76 @@
+---
+title: "Advanced Brush"
+description: "Paint objects, terrain details, and terrain textures directly in the scene with shared MegaWorld systems"
+---
+
+Advanced Brush is the main interactive painting tool in MegaWorld. It lets you paint directly in the scene view while still using the same shared systems that power the procedural tools.
+
+This makes it a strong bridge between manual art direction and rule-based placement.
+
+## Supported resource types
+
+Advanced Brush supports:
+
+- **Terrain Object**
+- **Unity/GameObject**
+- **Unity/Terrain Detail**
+- **Unity/Terrain Texture**
+
+## Core workflow
+
+1. Select **Advanced Brush** in the Tools panel.
+2. Choose the resource type and the prototypes you want to paint.
+3. Set brush size, spacing, and jitter behavior.
+4. Configure filters, transforms, overlap, or terrain-detail settings depending on the resource type.
+5. Paint directly in the scene.
+
+## Tool-level controls
+
+Advanced Brush has two main tool-level settings blocks:
+
+- **Advanced Brush Tool Settings**
+- **Brush Settings**
+
+## Advanced Brush Tool Settings
+
+- **Texture Target Strength** controls how strongly terrain textures are painted.
+- **Enable Failure Rate On Mouse Drag** lets the drag workflow use an additional failure chance while painting continuously.
+- **Failure Rate On Mouse Drag** controls that extra failure chance.
+
+## Shared systems used by this tool
+
+For **Terrain Object** and **Unity/GameObject** groups, Advanced Brush uses:
+
+- scatter settings
+- [Filter Settings](/megaworld/mask-filters/overview)
+- [Transform Components](/megaworld/transform-components/overview)
+- [Overlap Check Settings](/megaworld/overlap-check-settings/overview)
+- [Additional Spawn Settings](/megaworld/general-settings/additional-spawn-settings)
+
+For **Unity/Terrain Detail** groups, Advanced Brush uses:
+
+- [Spawn Detail Settings](/megaworld/general-settings/spawn-detail-settings)
+- mask filter settings
+
+For **Unity/Terrain Texture** groups, Advanced Brush uses:
+
+- mask filter settings
+- **Texture Target Strength**
+
+## When to use Advanced Brush
+
+Advanced Brush is best when you want:
+
+- direct scene-view painting with more control than a one-click stamper pass;
+- the same filters and transform logic as the procedural tools, but with manual control over placement;
+- a mixed workflow where you art-direct the placement and still keep system-driven variation.
+
+## Notes
+
+- Brush spacing is adjusted while dragging so dense object painting does not collapse into over-sampling.
+- Different resource types expose different settings even inside the same brush workflow.
+- For terrain textures, Advanced Brush paints target strength instead of spawning objects.
+
+<Tip>
+  Advanced Brush is a great default tool when you want the result to feel hand-placed but still benefit from filters, transforms, and other MegaWorld systems.
+</Tip>

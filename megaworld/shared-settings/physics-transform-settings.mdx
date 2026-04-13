@@ -1,0 +1,32 @@
+---
+title: "Physics Transform Settings"
+description: "A transform stack used by physics-based MegaWorld tools before simulation begins"
+---
+
+Physics Transform Settings provide the transform stack used by physics-based MegaWorld tools.
+
+The tool applies this stack before the simulation takes over, so it controls the initial state of the spawned body.
+
+## Default components
+
+The current code creates these components by default:
+
+- **Position Offset**
+- **Rotation**
+- **Scale**
+
+## Where it is used
+
+Physics Transform Settings are used by tools such as:
+
+- [Gravity Spawner](/megaworld/tools/gravity-spawner)
+- [Brush Physics](/megaworld/tools/brush-physics)
+- [Precise Physics](/megaworld/tools/precise-physics)
+
+## Why it matters
+
+Even in a physics workflow, the initial transform still matters:
+
+- it changes where the object starts;
+- it changes the initial rotation before the simulation reacts;
+- it changes the size that enters the simulation.
