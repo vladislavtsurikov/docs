@@ -1,0 +1,60 @@
+---
+title: "Unity/Terrain Texture"
+description: "Paint terrain texture layers on Unity Terrain using MegaWorld's filter and stamping tools"
+---
+
+**Unity/Terrain Texture** is MegaWorld's resource kind for Unity Terrain texture layers. It lets you paint or stamp terrain texture data using the full mask filter stack.
+
+## What it places
+
+Terrain texture weight data on a Unity Terrain. Each prototype corresponds to one **TerrainLayer** asset registered in the terrain. MegaWorld writes into the terrain's alphamap to control which texture appears where and how strongly.
+
+## Prototype settings
+
+Each Unity/Terrain Texture prototype holds a single **Terrain Layer** reference — a Unity `TerrainLayer` asset that defines the texture's visual properties:
+
+| Property | Description |
+|---|---|
+| Diffuse Texture | The main albedo texture for this layer |
+| Normal Map | Optional normal map texture |
+| Tile Size | How the texture tiles across the terrain |
+| Tile Offset | Offset for the tiling pattern |
+| Smoothness | Surface smoothness |
+| Metallic | Metallic intensity |
+| Specular | Specular color |
+
+These properties are part of the Unity TerrainLayer asset and can be edited through MegaWorld's prototype inspector.
+
+## Syncing with terrain
+
+Unity/Terrain Texture prototypes must match the terrain layers registered in the Unity Terrain asset. MegaWorld provides sync buttons:
+
+- **Get/Update Resources From Terrain** — reads all terrain layers from the terrain and updates the MegaWorld list
+- **Add Missing Resources** — adds only layers that are not yet in the list
+- **Remove All Resources** — clears all texture prototypes from the list (with warning)
+
+If a terrain layer is missing or the list does not match the terrain, MegaWorld shows a sync error on the affected prototype.
+
+## Supported shared systems
+
+Unity/Terrain Texture prototypes use:
+
+- [Mask Filters](/megaworld/mask-filters/overview) — control where the texture is painted based on height, slope, noise, and other rules
+- [Terrain Detail Settings](/megaworld/general-settings/terrain-detail-settings) — control opacity and texture-specific painting behavior
+
+Scatter, transform components, and overlap checks are not used for this type. Distribution is handled through the mask filter stack and the stamper or brush area.
+
+## Tools that support this type
+
+- [Texture Stamper](/megaworld/tools/texture-stamper)
+- [Advanced Brush](/megaworld/tools/advanced-brush)
+- [Spray Brush](/megaworld/tools/spray-brush)
+- [Brush Erase](/megaworld/tools/brush-erase)
+
+<Note>
+  A Unity Terrain must be present in the scene. The TerrainLayer assets must be registered in the terrain before MegaWorld can use them.
+</Note>
+
+<Tip>
+  Use Get/Update Resources From Terrain after adding new terrain layers to your Unity Terrain asset to keep the MegaWorld list in sync.
+</Tip>

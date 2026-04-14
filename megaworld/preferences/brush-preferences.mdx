@@ -1,0 +1,35 @@
+---
+title: "Brush preferences"
+description: "Set the global brush-size limit used by brush-based MegaWorld workflows"
+---
+
+Brush Preferences define the global upper limit for brush size in MegaWorld.
+
+<Warning>
+  This is an advanced user setting. In most cases the default value works fine.
+</Warning>
+
+## Settings
+
+### Max Brush Size
+
+**Default:** `200`  
+**Minimum:** `0.5`
+
+Sets the largest brush size allowed in any brush-based MegaWorld tool. The brush size slider in individual tools cannot exceed this value.
+
+If you work on a very large terrain and need brushes bigger than 200 units, raise this limit here. There is no per-tool override — this is the global ceiling.
+
+## Effect on Brush Settings
+
+The **Brush Size** slider in [Brush Settings](/megaworld/shared-settings/brush-settings) is capped by this preference. If your brush feels stuck at a limit that is smaller than your scene requires, this is the setting to change.
+
+## Where it applies
+
+This limit applies to all brush-based tools:
+
+- [Advanced Brush](/megaworld/tools/advanced-brush)
+- [Spray Brush](/megaworld/tools/spray-brush)
+- [Brush Erase](/megaworld/tools/brush-erase)
+- [Brush Physics](/megaworld/tools/brush-physics)
+- [Brush Modify](/megaworld/tools/brush-modify)

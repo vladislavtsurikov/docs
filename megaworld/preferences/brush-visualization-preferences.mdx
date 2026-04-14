@@ -1,0 +1,35 @@
+---
+title: "Brush visualization preferences"
+description: "Adjust how brush handles look in the MegaWorld scene view"
+---
+
+Brush Visualization Preferences control how MegaWorld draws brush handles in the scene view.
+
+<Warning>
+  This is an advanced user setting. These settings only affect appearance, not brush behavior.
+</Warning>
+
+## Settings
+
+### Circle Color
+
+**Default:** a medium blue — RGB `(0.2, 0.5, 0.7)`
+
+The color of the brush circle drawn in the scene view. Change this if the default color blends into your terrain or skybox.
+
+### Circle Pixel Width
+
+**Default:** `5`  
+**Range:** `1–5`
+
+The stroke thickness of the brush circle outline in screen pixels. Use a higher value if the circle is hard to see on high-resolution monitors or against busy terrain.
+
+### Draw Solid Disc
+
+**Default:** `true`
+
+When enabled, MegaWorld fills the brush area with a semi-transparent disc in addition to the circle outline. Disable this if you prefer a clean outline only, or if the filled area makes it harder to see the terrain underneath.
+
+## Effect on Brush Settings
+
+These preferences affect only how the brush looks. The actual brush size, spacing, and mask are controlled in [Brush Settings](/megaworld/shared-settings/brush-settings).

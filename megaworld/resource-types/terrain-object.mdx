@@ -1,0 +1,63 @@
+---
+title: "Terrain Object"
+description: "Place objects through MegaWorld's custom renderer for optimized large-scale scenes"
+---
+
+**Terrain Object** is MegaWorld's resource kind for prefabs that are managed through a custom object renderer instead of the standard Unity scene hierarchy. It uses the same prefab asset as Unity/GameObject but routes rendering through the Terrain Object renderer system.
+
+## What it places
+
+Any Unity prefab, rendered via the **Terrain Object** renderer. Objects placed as Terrain Objects are not visible as individual GameObjects in the Unity hierarchy the same way as regular scene objects — they are managed by the renderer system for performance.
+
+## Prototype settings
+
+Each Terrain Object prototype wraps a single **Prefab** reference, the same as Unity/GameObject. MegaWorld additionally stores a renderer-side prototype reference used by the Terrain Object renderer.
+
+To add a Terrain Object prototype:
+
+1. Create or select a Type of kind **Terrain Object**.
+2. Drag your prefab into the prototype list.
+3. MegaWorld registers the prototype with the renderer and assigns it a unique ID.
+
+<Note>
+  A Terrain Object renderer must be present in the scene for this resource kind to function.
+</Note>
+
+## Supported shared systems
+
+Terrain Object prototypes use the same full component stack as Unity/GameObject:
+
+- [Mask Filters](/megaworld/mask-filters/overview)
+- [Transform Components](/megaworld/transform-components/overview)
+- [Overlap Check Settings](/megaworld/overlap-check-settings/overview)
+- [Scatter Settings](/megaworld/scatter-system/scatter-settings)
+- [Success](/megaworld/shared-settings/success)
+
+## Tools that support this type
+
+- [Terrain Spawner](/megaworld/tools/terrain-spawner)
+- [Advanced Brush](/megaworld/tools/advanced-brush)
+- [Spray Brush](/megaworld/tools/spray-brush)
+- [Brush Erase](/megaworld/tools/brush-erase)
+- [Brush Modify](/megaworld/tools/brush-modify)
+- [Edit](/megaworld/tools/edit)
+- [Precise Place](/megaworld/tools/precise-place)
+- [Pin](/megaworld/tools/pin)
+- [Gravity Spawner](/megaworld/tools/gravity-spawner)
+- [Brush Physics](/megaworld/tools/brush-physics)
+- [Precise Physics](/megaworld/tools/precise-physics)
+- [Explode Physics](/megaworld/tools/explode-physics)
+- [Physics Effects](/megaworld/tools/physics-effects)
+
+## Unity/GameObject vs Terrain Object
+
+| | Unity/GameObject | Terrain Object |
+|---|---|---|
+| Prefab asset | Any prefab | Any prefab |
+| Scene hierarchy | Standard GameObjects | Managed by renderer |
+| Rendering | Standard Unity rendering | Custom renderer |
+| Requires renderer component | No | Yes |
+
+<Tip>
+  Use Terrain Object when you are working with the Polaris terrain system or when the Terrain Object renderer is part of your project setup.
+</Tip>

@@ -1,0 +1,43 @@
+---
+title: "Preferences"
+description: "Configure advanced MegaWorld preference settings that affect visualization, raycasts, brushes, scatter, and overlap search"
+---
+
+MegaWorld exposes a set of editor preferences that control low-level behavior across all tools.
+
+Open them in Unity from `Edit > Preferences > Mega World`.
+
+<Warning>
+  These settings are intended for advanced users. In most cases you do not need to change anything here. Start with tool settings and prototype settings first, and only reach for preferences when something needs to change globally across the entire editor.
+</Warning>
+
+## What belongs here
+
+Preferences cover editor-level controls that apply globally across all tools:
+
+- brush size limit and brush-handle appearance
+- simple-filter and mask-filter visualization
+- raycast type, distance, and offset
+- scatter-system check limit
+- overlap-search sensitivity
+
+## When to change preferences
+
+Use preferences when the same issue appears across multiple tools. For example:
+
+- the maximum brush size is too small for your scene scale
+- scene-view visualization handles are too large, too small, or the wrong color
+- raycasts miss the terrain because the offset or distance needs adjusting
+- scatter or overlap search needs a higher global limit
+
+## Preference pages
+
+| Page | What it controls |
+|---|---|
+| [Brush Preferences](/megaworld/preferences/brush-preferences) | Max brush size limit |
+| [Brush Visualization Preferences](/megaworld/preferences/brush-visualization-preferences) | Brush circle color and thickness in the scene view |
+| [Simple Filter Visualization Preferences](/megaworld/preferences/simple-filter-visualization-preferences) | Handle shape, color, and resolution for simple filter previews |
+| [Mask Filter Visualization Preferences](/megaworld/preferences/mask-filter-visualization-preferences) | Color space and alpha mode for mask filter previews |
+| [Overlap Check Preferences](/megaworld/preferences/overlap-check-preferences) | Overlap search sensitivity multiplier |
+| [Raycast Preferences](/megaworld/preferences/raycast-preferences) | Raycast type, max distance, and vertical offset |
+| [Scatter Preferences](/megaworld/preferences/scatter-preferences) | Max scatter check count |

@@ -1,0 +1,43 @@
+---
+title: "Raycast preferences"
+description: "Configure the global raycast mode, max distance, and offset used by MegaWorld"
+---
+
+Raycast Preferences control how MegaWorld projects work onto scene surfaces.
+
+<Warning>
+  This is an advanced user setting. In most cases the defaults work correctly without any changes.
+</Warning>
+
+## Settings
+
+### Raycast Type
+
+**Default:** `Unity Raycast`
+
+Switches between two raycast backends:
+
+- **Unity Raycast** — uses Unity's built-in `Physics.Raycast`. Works in all standard Unity projects.
+- **Custom Raycast** — uses an alternative implementation. Use this only if you have specific requirements that Unity's raycast does not meet.
+
+### Max Ray Distance
+
+**Default:** `6500`
+
+The maximum distance MegaWorld tests along a ray when looking for a surface. Increase this for very large scenes where the terrain or ground is far from the raycast origin.
+
+### Offset
+
+**Default:** `500`
+
+A vertical offset added above the spawn point before the raycast starts. MegaWorld fires the ray downward from `spawn position + offset` to find the actual surface below.
+
+The default of 500 is intentionally large so that raycasts reliably hit the terrain from above in most scene layouts. Lower this value if you need to spawn objects inside buildings, caves, or enclosed geometry — in those cases a large offset would cause the ray to start outside the structure and miss the interior surfaces.
+
+## Effect on other systems
+
+Raycast preferences affect all tools and systems that perform surface projection, including:
+
+- all brush-based tools during scene-view painting
+- [Overlap Check Settings](/megaworld/overlap-check-settings/overview) collision phase
+- stamper tools during spawn evaluation

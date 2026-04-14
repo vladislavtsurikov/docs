@@ -35,12 +35,12 @@ Use this preview when you tune box bounds, sphere spacing, trunk and viability z
   alt="Overlap Check Settings visualization in MegaWorld."
 />
 
-To make this visualization work, open Preferences and enable **Visualize Overlap Check Settings**.
+To make this visualization work in the current project, enable **Overlap Check** and then **Visualize Overlap Check Settings** inside the [Precise Place](/megaworld/tools/precise-place) tool. This toggle is not stored in global MegaWorld preferences.
 
 <img
   style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '520px', marginTop: '1rem' }}
   src="/images/megaworld/overlap-check-settings/visualization-preferences.png"
-  alt="Preference that enables Overlap Check Settings visualization in MegaWorld."
+  alt="Precise Place toggle that enables Overlap Check Settings visualization in MegaWorld."
 />
 
 ## Bounds check
@@ -145,6 +145,13 @@ Use **Collision Check** to block placement inside existing scene geometry. Unlik
 - **Collision Check** enables collision-based spawn rejection.
 - **Multiply Bounds Size** scales the collision box before the check runs.
 - **Check Collision Layers** chooses which layers MegaWorld tests against.
+
+## Preferences
+
+Global overlap-search behavior is controlled separately in:
+
+- [Overlap Check Preferences](/megaworld/preferences/overlap-check-preferences)
+- [Raycast Preferences](/megaworld/preferences/raycast-preferences)
 
 ## Common setups
 

@@ -1,0 +1,56 @@
+---
+title: "Unity/GameObject"
+description: "Place standard Unity prefabs using the full MegaWorld placement stack"
+---
+
+**Unity/GameObject** is MegaWorld's resource kind for standard Unity prefabs. It gives you access to the full placement stack: filters, transform components, overlap checks, scatter, and spawn settings.
+
+## What it places
+
+Any Unity prefab. The prefab is instantiated as a regular scene GameObject, parented to a container object that MegaWorld manages per scene.
+
+## Prototype settings
+
+Each Unity/GameObject prototype wraps a single **Prefab** reference. MegaWorld reads the prefab's bounding box at setup time and uses it for overlap checks and placement logic.
+
+To add a Unity/GameObject prototype:
+
+1. Create or select a Type of kind **Unity/GameObject**.
+2. Drag your prefab into the prototype list.
+3. MegaWorld registers the prototype and assigns it a unique ID.
+
+## Supported shared systems
+
+Unity/GameObject prototypes use the full MegaWorld component stack:
+
+- [Mask Filters](/megaworld/mask-filters/overview) — control where objects are placed based on height, slope, noise, and other rules
+- [Transform Components](/megaworld/transform-components/overview) — control rotation, scale, alignment, and position offset per prototype
+- [Overlap Check Settings](/megaworld/overlap-check-settings/overview) — prevent objects from overlapping each other or other objects
+- [Scatter Settings](/megaworld/scatter-system/scatter-settings) — control how points are distributed in the placement area
+- [Success](/megaworld/shared-settings/success) — additional spawn conditions after placement evaluation
+
+## Tools that support this type
+
+- [Terrain Spawner](/megaworld/tools/terrain-spawner)
+- [Advanced Brush](/megaworld/tools/advanced-brush)
+- [Spray Brush](/megaworld/tools/spray-brush)
+- [Brush Erase](/megaworld/tools/brush-erase)
+- [Brush Modify](/megaworld/tools/brush-modify)
+- [Edit](/megaworld/tools/edit)
+- [Precise Place](/megaworld/tools/precise-place)
+- [Pin](/megaworld/tools/pin)
+- [Gravity Spawner](/megaworld/tools/gravity-spawner)
+- [Brush Physics](/megaworld/tools/brush-physics)
+- [Precise Physics](/megaworld/tools/precise-physics)
+- [Explode Physics](/megaworld/tools/explode-physics)
+- [Physics Effects](/megaworld/tools/physics-effects)
+
+## Notes
+
+- Objects placed as Unity/GameObject are regular scene GameObjects. They are visible in the hierarchy and saved with the scene.
+- MegaWorld groups placed objects under a container per scene to keep the hierarchy organized.
+- If a prototype is set to inactive, it is skipped during placement but stays in the list.
+
+<Tip>
+  Use Unity/GameObject when you need standard Unity objects with full physics, scripts, or lighting baked into the placed prefabs.
+</Tip>

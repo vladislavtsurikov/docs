@@ -1,0 +1,64 @@
+---
+title: "Unity/Terrain Detail"
+description: "Paint grass and mesh details on Unity Terrain using MegaWorld's detail placement tools"
+---
+
+**Unity/Terrain Detail** is MegaWorld's resource kind for Unity Terrain detail prototypes — the grass, flowers, and small mesh objects that Unity Terrain renders as dense ground cover.
+
+## What it places
+
+Detail instances on a Unity Terrain. These are rendered by Unity's built-in terrain detail system and appear as dense grass or mesh-based ground cover depending on the detail type.
+
+Each Unity/Terrain Detail prototype corresponds to one entry in the terrain's detail prototype list.
+
+## Detail types
+
+Unity Terrain supports two kinds of detail rendering:
+
+- **Texture** — renders as a grass billboard using a `Texture2D` asset
+- **Mesh** — renders as a mesh using a `GameObject` prefab
+
+When you add a Unity/Terrain Detail prototype in MegaWorld, the editor shows which kind it is and which asset it uses.
+
+## Syncing with terrain
+
+Unity/Terrain Detail prototypes must match the detail prototypes already registered in the Unity Terrain asset. MegaWorld provides buttons in the prototype inspector to synchronize:
+
+- **Get/Update Resources From Terrain** — reads all detail prototypes from the terrain and adds any that are missing from the MegaWorld list
+- **Add Missing Resources** — adds only the missing entries without removing existing ones
+- **Remove All Resources** — removes all detail prototypes from the MegaWorld list (with warning)
+
+If the list is out of sync with the terrain, MegaWorld shows a sync error on the affected prototype.
+
+## Prototype settings
+
+Each Unity/Terrain Detail prototype holds:
+
+- **Terrain Proto Id** — the index of this detail in the terrain's detail prototype array
+- **Prefab Type** — whether this detail is a Mesh or a Texture-based detail
+- **Prefab** — the mesh GameObject (for Mesh type)
+- **Detail Texture** — the billboard texture (for Texture type)
+
+## Supported shared systems
+
+Unity/Terrain Detail prototypes use a subset of the MegaWorld stack:
+
+- [Mask Filters](/megaworld/mask-filters/overview) — control where details are painted based on height, slope, noise, and other rules
+- [Spawn Detail Settings](/megaworld/general-settings/spawn-detail-settings) — control density, opacity, and detail-specific painting behavior
+
+Transform components, scatter, and overlap checks are not available for this type. Density and distribution are handled through Unity's detail rendering system.
+
+## Tools that support this type
+
+- [Terrain Spawner](/megaworld/tools/terrain-spawner)
+- [Advanced Brush](/megaworld/tools/advanced-brush)
+- [Spray Brush](/megaworld/tools/spray-brush)
+- [Brush Erase](/megaworld/tools/brush-erase)
+
+<Note>
+  A Unity Terrain must be present in the scene. The detail prototypes must be set up in the terrain asset before MegaWorld can use them.
+</Note>
+
+<Tip>
+  Use Get/Update Resources From Terrain after adding new detail types to your Unity Terrain asset to keep the MegaWorld list in sync.
+</Tip>

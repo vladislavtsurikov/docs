@@ -33,6 +33,7 @@
           {
             "group": "Tools",
             "pages": [
+              "megaworld/tools/overview",
               "megaworld/tools/terrain-spawner",
               "megaworld/tools/texture-stamper",
               "megaworld/tools/advanced-brush",
@@ -52,6 +53,7 @@
           {
             "group": "General Settings",
             "pages": [
+              "megaworld/general-settings/overview",
               "megaworld/general-settings/spawn-detail-settings",
               "megaworld/general-settings/terrain-detail-settings",
               "megaworld/general-settings/additional-spawn-settings"
@@ -60,6 +62,7 @@
           {
             "group": "Shared Settings",
             "pages": [
+              "megaworld/shared-settings/overview",
               "megaworld/shared-settings/brush-settings",
               "megaworld/shared-settings/layer-settings",
               "megaworld/shared-settings/area-settings",
@@ -68,6 +71,19 @@
               "megaworld/shared-settings/simple-transform-settings",
               "megaworld/shared-settings/physics-transform-settings",
               "megaworld/shared-settings/simple-filter-settings"
+            ]
+          },
+          {
+            "group": "Preferences",
+            "pages": [
+              "megaworld/preferences/overview",
+              "megaworld/preferences/brush-preferences",
+              "megaworld/preferences/brush-visualization-preferences",
+              "megaworld/preferences/simple-filter-visualization-preferences",
+              "megaworld/preferences/mask-filter-visualization-preferences",
+              "megaworld/preferences/overlap-check-preferences",
+              "megaworld/preferences/raycast-preferences",
+              "megaworld/preferences/scatter-preferences"
             ]
           },
           {
@@ -123,6 +139,16 @@
               "megaworld/transform-components/slope-scale",
               "megaworld/transform-components/snap-rotation",
               "megaworld/transform-components/tree-rotation"
+            ]
+          },
+          {
+            "group": "Resource Types",
+            "pages": [
+              "megaworld/resource-types/overview",
+              "megaworld/resource-types/unity-gameobject",
+              "megaworld/resource-types/terrain-object",
+              "megaworld/resource-types/unity-terrain-detail",
+              "megaworld/resource-types/unity-terrain-texture"
             ]
           },
           {

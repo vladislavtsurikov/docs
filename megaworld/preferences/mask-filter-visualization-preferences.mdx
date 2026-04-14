@@ -1,0 +1,59 @@
+---
+title: "Mask filter visualization preferences"
+description: "Control how mask-filter previews are colorized and blended in the MegaWorld scene view"
+---
+
+Mask Filter Visualization Preferences define how MegaWorld displays mask-filter output in the scene view.
+
+<Warning>
+  This is an advanced user setting. The defaults work well in most projects.
+</Warning>
+
+## Settings
+
+### Color Space
+
+**Default:** `Colorful`
+
+Controls the color palette used for the mask filter preview:
+
+- **Colorful** — uses a multi-color gradient that maps mask values across a wide color range. Good for seeing variations at a glance.
+- **Heightmap** — uses a grayscale or height-based gradient. Useful when you want to read mask strength as a height-like intensity.
+- **Custom Color** — uses a single base **Color** that you define. Unlocks **Enable Stripe** and **Alpha Visualisation Type**.
+
+### Color
+
+Visible only when **Color Space** is `Custom Color`.
+
+The base color used for the mask preview when custom-color mode is active.
+
+**Default:** RGB `(128, 171, 78)` — a medium green.
+
+### Alpha Visualisation Type
+
+**Default:** `None`  
+Visible only when **Color Space** is `Custom Color`.
+
+Controls how the preview transparency is derived:
+
+- **None** — uses the fixed **Custom Alpha** value
+- **Default** — derives alpha from the mask value itself
+- **BrushFilter** — derives alpha from the brush filter output
+
+### Custom Alpha
+
+**Default:** `0.3`  
+Visible only when **Alpha Visualisation Type** is `None`.
+
+The fixed opacity for the mask filter preview. `0` is fully transparent, `1` is fully opaque.
+
+### Enable Stripe
+
+**Default:** `true`  
+Visible only when **Color Space** is `Custom Color`.
+
+Overlays a stripe pattern on top of the preview. This can help distinguish the mask preview from terrain colors in busy scenes.
+
+## Effect on Mask Filters
+
+These preferences affect only the visual preview drawn in the scene view by [Mask Filters](/megaworld/mask-filters/overview). They do not change filter evaluation or placement results.

@@ -7,6 +7,110 @@ Terrain Spawner is a stamper tool for procedural placement inside a defined area
 
 This is one of the best tools when you want to generate a large area at once instead of painting manually.
 
+## Features
+
+### Spawn large terrain objects in one click
+
+Terrain Spawner fills the entire stamper area in a single pass. For very large terrains, enable **Use Spawn Cells** so the area is processed cell by cell instead of all at once. This avoids long freezes and prevents Unity from crashing on extremely large areas.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/tools/terrain-spawner/spawn-cells-overview.png"
+  alt="Terrain Spawner spawn cells area overview."
+/>
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px', marginTop: '1rem' }}
+  src="/images/megaworld/tools/terrain-spawner/spawn-cells-result.png"
+  alt="Terrain Spawner spawn result across large terrain."
+/>
+
+### Optimized visualization for large terrains
+
+Enable **Enable Visualization** in the Stamper Tool Controller to preview mask filter output directly in the scene view. Visualization quality and style can be adjusted globally in [Preferences](/megaworld/preferences/overview).
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/tools/terrain-spawner/visualization-scene.png"
+  alt="Terrain Spawner visualization in the scene view."
+/>
+
+### Spawn support for all resource types
+
+Terrain Spawner works with every MegaWorld resource kind in a single tool:
+
+- **Terrain Object** and **Unity/GameObject** — procedural object placement with the full shared stack
+- **Unity/Terrain Detail** — grass and mesh detail density passes
+- **Unity/Terrain Texture** — terrain texture painting via mask filters
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/tools/terrain-spawner/resource-types.png"
+  alt="Terrain Spawner resource types selection."
+/>
+
+### Shared settings across tools
+
+Types in MegaWorld are reusable presets. The same Type you configure in Terrain Spawner can be dragged directly into Advanced Brush and used immediately. This means you can build and tune a preset in the stamper using Auto Respawn, then hand-paint with the same rules in the brush — no duplication needed.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/tools/terrain-spawner/types-preset-reuse.png"
+  alt="MegaWorld Types shared between Terrain Spawner and Advanced Brush."
+/>
+
+### Auto Respawn
+
+When **Enable Auto Spawn** is on, Terrain Spawner automatically removes and re-spawns the current pass every time you change a setting. Use this during setup to get instant feedback, especially for terrain texture passes which run on the GPU and can be applied quickly even at large scales. Set **Delay Auto Spawn** to control the respawn delay in seconds.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/tools/terrain-spawner/auto-respawn.gif"
+  alt="Terrain Spawner Auto Respawn updating the result live as settings change."
+/>
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px', marginTop: '1rem' }}
+  src="/images/megaworld/tools/terrain-spawner/auto-respawn-settings.png"
+  alt="Terrain Spawner Auto Respawn settings in the inspector."
+/>
+
+### Works on Unity Terrain and terrain mesh
+
+Terrain Spawner works on both Unity Terrain and polygon terrain meshes such as [Polaris](/megaworld/polaris-integration). For mesh terrain, switch to **Simple Filter** instead of Mask Filters — Simple Filter supports height, slope, and noise placement rules on any surface.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/tools/terrain-spawner/mesh-terrain-polaris.png"
+  alt="Terrain Spawner working with Polaris mesh terrain."
+/>
+
+### Cell support
+
+Placed objects are stored in spatial cells. This enables [Overlap Check Settings](/megaworld/overlap-check-settings/overview), and makes tools like [Brush Erase](/megaworld/tools/brush-erase) and [Edit](/megaworld/tools/edit) aware of exactly where each object was placed.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/tools/terrain-spawner/cell-support.png"
+  alt="Terrain Spawner cell support overview."
+/>
+
+### Overlap Check Settings visualization
+
+MegaWorld can draw Overlap Check shapes directly in the scene view. To enable the preview, turn on **Visualize Overlap Check Settings** inside [Precise Place](/megaworld/tools/precise-place).
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/tools/terrain-spawner/overlap-check-visualization.gif"
+  alt="Overlap Check Settings visualization in Terrain Spawner."
+/>
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px', marginTop: '1rem' }}
+  src="/images/megaworld/tools/terrain-spawner/overlap-check-enable.png"
+  alt="Enable Overlap Check visualization setting."
+/>
+
 ## Supported resource types
 
 Terrain Spawner supports:

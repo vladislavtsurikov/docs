@@ -1,0 +1,29 @@
+---
+title: "Scatter preferences"
+description: "Set the global scatter-system check limit used by scatter elements such as Random Point"
+---
+
+Scatter Preferences expose one global setting that controls how many attempts the scatter system is allowed to make when searching for a valid placement position.
+
+<Warning>
+  This is an advanced user setting. The default value works well in most setups.
+</Warning>
+
+## Settings
+
+### Max Checks
+
+**Default:** `100`  
+**Minimum:** `1`
+
+The maximum number of position checks the scatter system performs per spawn attempt for elements that use a rejection-sampling approach.
+
+Scatter elements such as [Random Point](/megaworld/scatter-system/random-point) work by sampling random positions and testing each one against your filters and placement rules. If a candidate position fails, the element tries again — up to this limit. When the limit is reached, that particular placement attempt is abandoned.
+
+**Raising this value** gives the scatter system more attempts per spawn, which helps when filters are very restrictive and valid positions are rare. It also increases the time spent per spawn pass.
+
+**Lowering this value** keeps the editor faster but may leave more gaps in areas where the rules are difficult to satisfy.
+
+## Effect on Scatter Settings
+
+This preference affects systems such as [Random Point](/megaworld/scatter-system/random-point) within the [Scatter Settings](/megaworld/scatter-system/scatter-settings) stack. [Random Grid](/megaworld/scatter-system/random-grid) and [Tiles](/megaworld/scatter-system/tiles) use deterministic layouts and are not affected by this limit.

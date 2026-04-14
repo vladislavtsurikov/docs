@@ -7,6 +7,24 @@ Brush Modify is a Happy Artist tool for changing objects that already exist in t
 
 Instead of spawning or erasing, it applies transform modifications to overlapped objects as you drag the brush across them.
 
+## Features
+
+### Filter mask support
+
+Brush Modify uses the same [Mask Filters](/megaworld/mask-filters/overview) as other MegaWorld tools. Add height, slope, or noise filters to restrict which objects get modified as you paint. Objects outside the filter range are ignored by the brush — only objects that pass the filter are affected by the transform stack.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/tools/brush-modify/filter-mask-support.png"
+  alt="Brush Modify filter mask settings."
+/>
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px', marginTop: '1rem' }}
+  src="/images/megaworld/tools/brush-modify/filter-mask-area.png"
+  alt="Brush Modify filter mask controlling which objects are affected."
+/>
+
 ## Supported resource types
 
 Brush Modify supports:
