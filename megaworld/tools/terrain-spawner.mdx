@@ -7,6 +7,10 @@ Terrain Spawner is a stamper tool for procedural placement inside a defined area
 
 This is one of the best tools when you want to generate a large area at once instead of painting manually.
 
+<Info>
+  New to Terrain Spawner? Follow the step-by-step [Terrain Spawner — Getting Started](/megaworld/getting-started/terrain-spawner) tutorial first.
+</Info>
+
 ## Features
 
 ### Spawn large terrain objects in one click
@@ -119,20 +123,12 @@ Terrain Spawner supports:
 - **Unity/GameObject**
 - **Unity/Terrain Detail**
 
-## Core workflow
-
-1. Add a Terrain Spawner to the scene.
-2. Position and scale the stamper area.
-3. Select the groups and prototypes you want to use.
-4. Configure filters, scatter, transform, overlap, and prototype-specific settings.
-5. Run the spawn pass inside the stamper bounds.
-
 ## Shared systems used by this tool
 
 For **Terrain Object** and **Unity/GameObject** groups, Terrain Spawner uses:
 
-- `Random Seed Settings`
-- scatter settings
+- [Random Seed Settings](/megaworld/shared-settings/random-seed-settings)
+- [Scatter Settings](/megaworld/scatter-system/scatter-settings)
 - [Filter Settings](/megaworld/mask-filters/overview)
 - [Transform Components](/megaworld/transform-components/overview)
 - [Overlap Check Settings](/megaworld/overlap-check-settings/overview)
