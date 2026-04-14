@@ -160,15 +160,8 @@
         ]
       }
     ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Original Google Doc",
-          "href": "https://docs.google.com/document/d/1o_wtpxailmEGdtEwp5BGIyV8SXklvlJQp9vY2YoTBx4/edit",
-          "icon": "book-open-cover"
-        }
-      ]
-    }
+    "global": {}
+
   },
   "logo": {
     "light": "/logo/light.svg",
@@ -178,14 +171,9 @@
     "links": [
       {
         "label": "Discord",
-        "href": "https://discord.com"
+        "href": "https://discord.gg/fVAmyXs8GH"
       }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Source doc",
-      "href": "https://docs.google.com/document/d/1o_wtpxailmEGdtEwp5BGIyV8SXklvlJQp9vY2YoTBx4/edit"
-    }
+    ]
   },
   "contextual": {
     "options": [
