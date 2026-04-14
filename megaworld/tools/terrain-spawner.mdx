@@ -145,11 +145,37 @@ For **Unity/Terrain Detail** groups, Terrain Spawner uses:
 
 ## Tool-level controls
 
-Terrain Spawner is built around these tool-level systems:
+### Area Settings
 
-- **Area Settings** define the size and position of the stamper volume.
-- **Stamper Tool Controller** controls behavior such as auto respawn, respawn delay, and visualization.
-- **Layer Settings** define which layers are used for raycasts and placement checks.
+Area Settings define the size and position of the stamper volume in the scene. Key controls:
+
+- **Fit To Terrain Size** — resizes the area to cover the entire Unity Terrain in one click.
+- **Use Spawn Cells** — splits the area into a grid of cells that are spawned independently. Recommended for very large terrains to avoid freezes or crashes.
+- **Handle Settings** — control how the area box is drawn in the scene view (color, line width, dotted lines, visibility when deselected).
+
+See the full [Area Settings](/megaworld/shared-settings/area-settings) reference for all options.
+
+### Stamper Tool Controller
+
+The Stamper Tool Controller is the main action and mode panel for the Terrain Spawner.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/tools/terrain-spawner/stamper-tool-controller.png"
+  alt="Stamper Tool Controller settings."
+/>
+
+**Enable Visualization** — shows the Mask Filter output directly in the scene view. Lets you see exactly which areas pass your height, slope, and noise filters before spawning. Visualization appearance is configured in [Preferences](/megaworld/preferences/overview).
+
+**Enable Auto Spawn** — automatically removes and re-spawns the current pass every time you change a setting. This gives you instant live feedback while tuning filters and scatter rules. See [Auto Respawn](#auto-respawn) feature for details.
+
+- **Delay Auto Spawn** — how many seconds to wait after a setting change before triggering the automatic respawn. Increase this if your area is large and you don't want a respawn on every small adjustment.
+
+**Respawn** — removes all currently spawned instances from this stamper and runs a fresh spawn pass. Use this to regenerate the result after making manual changes.
+
+**Spawn** — adds a new spawn pass on top of whatever is already in the scene. Each click of Spawn adds more instances without clearing the previous result.
+
+**Unspawn Selected Prototypes** — removes only the instances that belong to the currently selected prototypes, leaving everything else untouched. Useful for clearing a specific resource type (e.g., only the grass layer) without redoing the whole stamper.
 
 ## When to use Terrain Spawner
 

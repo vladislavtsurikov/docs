@@ -1,45 +1,82 @@
 ---
 title: "Area Settings"
-description: "Control the bounds, handles, and scene-space volume used by MegaWorld stamper tools"
+description: "Control the spawn bounds, spawn cells, and scene handle display for stamper tools."
 ---
 
-Area Settings define the scene-space bounds used by MegaWorld stamper tools.
+Area Settings define the scene-space volume used by stamper tools — [Terrain Spawner](/megaworld/tools/terrain-spawner), [Texture Stamper](/megaworld/tools/texture-stamper), and [Gravity Spawner](/megaworld/tools/gravity-spawner). The area determines where spawning happens. You can move, resize, and configure it directly in the scene view.
 
-This block controls the shape, size, and visualization of the stamper volume.
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/shared-settings/area-settings/area-overview.png"
+  alt="Area Settings overview in the scene view."
+/>
 
-## Core fields
+---
 
-The current Area Settings code includes:
+## Area controls
 
-- **Bounds**
-- **Color Cube**
-- **Dotted**
-- **Draw Handle If Not Selected**
-- **Handle Settings Mode**
-- **Pixel Width**
+**Fit To Terrain Size** — resizes the area to exactly match the bounds of your Unity Terrain (or multiple terrains). Use this as a first step when you want to cover the whole terrain in one spawn pass.
 
-## What Area Settings do
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/shared-settings/area-settings/fit-to-terrain.png"
+  alt="Fit To Terrain Size button and result."
+/>
 
-- store the current stamper bounds;
-- update those bounds when the stamper transform changes;
-- provide the box area used by spawning and filtering logic;
-- support scene visualization and handle drawing.
+---
 
-## Extra utility actions
+## Spawn Cells
 
-The area system also supports fitting the stamper volume to:
+**Use Spawn Cells** — divides the stamper area into a grid of cells, each spawned independently. This is the recommended approach for very large terrains because it prevents long freezes and avoids Unity crashes that can occur when trying to process a huge area in a single pass.
 
-- the active terrain size
-- the world or scene bounds
+<Warning>
+  When **Use Spawn Cells** is enabled, **Auto Spawn** is not available. Disable spawn cells if you need the live-feedback workflow.
+</Warning>
 
-## Where Area Settings are used
+When enabled, three additional options appear:
 
-Area Settings are a core part of stamper tools such as:
+- **Refresh Cells** — recreates the cell grid. Run this after resizing the area or changing Cell Size.
+- **Cell Size** — the side length of each cell in meters. Smaller cells use less memory per pass but increase the number of spawn operations.
+- **Show Cells** — draws the cell grid in the scene view so you can verify the coverage.
 
-- [Terrain Spawner](/megaworld/tools/terrain-spawner)
-- [Texture Stamper](/megaworld/tools/texture-stamper)
-- [Gravity Spawner](/megaworld/tools/gravity-spawner)
+---
+
+## Handle Settings
+
+Handle Settings control how the stamper area box is drawn in the scene view.
+
+**Handle Settings Mode** — switches between display modes for the area box.
+
+**Color Cube** — the color of the area box wireframe.
+
+**Pixel Width** — the line thickness of the area box in pixels.
+
+**Dotted** — draws the area box edges as dashed segments instead of solid lines.
+
+**Draw Handle If Not Selected** — when enabled, the area box and visualization remain visible even when the stamper GameObject is not selected in the Hierarchy. This is useful when you want to compare two stampers side by side, or monitor visualization output without keeping the Inspector focused on the stamper.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/shared-settings/area-settings/handle-settings.png"
+  alt="Handle Settings for the area display."
+/>
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px', marginTop: '1rem' }}
+  src="/images/megaworld/shared-settings/area-settings/draw-handle-if-not-selected.png"
+  alt="Both stampers showing visualization with Draw Handle If Not Selected enabled."
+/>
+
+In the screenshot above, neither stamper is selected, but both area boxes and their visualizations are still visible because **Draw Handle If Not Selected** is active.
+
+---
+
+## Tips
 
 <Tip>
-  Before tuning scatter or filters on a stamper tool, confirm the area bounds first. A wrong area volume makes every downstream setting harder to read.
+  Set **Fit To Terrain Size** first, then enable **Use Spawn Cells** with a reasonable Cell Size before running a large spawn. This gives you predictable, crash-free generation over the whole terrain.
+</Tip>
+
+<Tip>
+  Use **Draw Handle If Not Selected** together with **Enable Visualization** on the Stamper Tool Controller to monitor filter coverage while adjusting settings in other components or windows.
 </Tip>
