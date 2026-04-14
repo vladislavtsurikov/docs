@@ -47,15 +47,53 @@ Brush Modify also uses:
 
 ## Modify Transform Components
 
-The current modify stack includes components such as:
+Click **+** in the Modify Transform section to add components to the stack. Components can be reordered and removed. Each component is applied in order to every overlapping object that passes the filter.
 
-- **Position**
-- **Rotation**
-- **Along**
-- **Randomize Scale**
-- **Scale**
-- **Vegetation Rotation**
-- **Scale Clamp**
+### Position
+
+Offsets the object's position while painting.
+
+- **Strength** — direction and magnitude of the position offset applied per stroke.
+- **Strength Randomize** — how much randomness is added to the strength. `0` = no randomness, `100` = fully random offset strength.
+
+### Vegetation Rotation
+
+Tilts objects like trees — useful for adding natural lean and variation to vegetation.
+
+- **Strength Y** — how much the object rotates around the Y axis.
+- **Strength Rotation XY** — how quickly the effect is applied.
+- **Rotation XZ** — the lean strength along Y and X axes. `1` = fully fallen tree, `0` = no lean.
+
+### Along
+
+Rotates objects along the Y axis in the direction of the brush stroke. Objects gradually orient themselves to the direction you are painting.
+
+### Rotation
+
+Applies rotation to the object's transform.
+
+- **Strength** — how fast the rotation is applied.
+- **Random Rotation (X, Y, Z)** — applies random rotation on the chosen axes.
+- **Randomize (X, Y, Z)** — the randomness strength per axis.
+- **Rotation (X, Y, Z)** — whether the rotation is applied in the positive or negative direction on each axis.
+
+### Randomize Scale
+
+Randomly reassigns the object's scale within a defined range on each stroke.
+
+- **Uniform Scale** — applies the same scale value across all three axes.
+- **Min / Max Scale** — the range within which the random scale is chosen.
+
+### Scale
+
+Incrementally scales the object up or down while painting.
+
+- **Strength** — whether the scale increases (positive) or decreases (negative).
+- **Strength Randomize** — the randomness added to the scale strength per stroke.
+
+### Scale Clamp
+
+Prevents the scale from going below or above defined limits, regardless of how many times the brush passes over an object.
 
 ## How it works
 
@@ -71,6 +109,12 @@ Brush Modify is best when you want:
 - to art-direct an already spawned area;
 - to nudge, rotate, or reshape existing placement with a brush gesture;
 - to refine a procedural result instead of deleting and respawning it.
+
+## Hotkeys
+
+| Shortcut | Action |
+|---|---|
+| `LShift + Scroll` | Resize brush |
 
 <Tip>
   Brush Modify works especially well after a large procedural pass. Generate first, then use the brush to break up repetition and add hand-crafted variation.

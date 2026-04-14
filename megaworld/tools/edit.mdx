@@ -42,29 +42,50 @@ Edit supports:
 
 ## Tool-level controls
 
-Edit uses **Edit Tool Settings**.
+Edit uses **Edit Tool Settings** with the following fields:
 
-The confirmed settings include:
-
-- **Sphere Size**
-- **Max Distance**
-- an internal action stack
+- **Sphere Size** — the radius around the raycast hit point within which objects are detected and made eligible for editing.
+- **Max Distance** — the maximum distance from the camera at which objects can be selected for modification.
+- **Ground Layers** — the layers that the raycast hits to detect ground and locate objects around the impact point.
+- **Mouse Rotation Sensitivity** — how strongly mouse movement translates into transform changes in Mouse Modify mode.
+- **Transform Space** — switches between local and global transform space for all actions.
+- **Raycast Position Offset** — adds a Y-axis offset to the raycast position result, useful for correcting ground-level alignment.
 
 ## Available actions
 
-The current action system includes:
+| Action | What it does |
+|---|---|
+| **Move Up / Down** | Shifts the object along its local Y axis |
+| **Raycast** | Snaps the object down onto the terrain surface using a raycast |
+| **Rotate** | Rotates the object |
+| **Scale** | Scales the object |
+| **Remove** | Deletes the object from the scene |
 
-- **Move Up/Down**
-- **Raycast**
-- **Rotate**
-- **Remove**
-- **Scale**
+## Hotkeys
 
-## Interaction notes
+Hotkeys differ depending on whether **Unity Handles** or **Mouse Modify** mode is active.
 
-- Edit does not disable itself when Unity tools are active.
-- Press `Space` to switch between global and local transform space.
-- The selected action handles the current scene interaction.
+### Mouse Modify mode
+
+| Shortcut | Action |
+|---|---|
+| `W` | Position |
+| `Q` | Move Along Direction |
+| `Ctrl + LShift` | Raycast position |
+| `E` | Rotation |
+| `Space` | Toggle transform space (global / local) |
+| `R` | Scale |
+| `T` | Remove |
+
+### Unity Handles mode
+
+| Shortcut | Action |
+|---|---|
+| `W` | Position |
+| `E` | Rotation |
+| `R` | Scale |
+| `T` | Remove |
+| `Space` | Toggle transform space (global / local) |
 
 ## When to use Edit
 
