@@ -1,0 +1,58 @@
+---
+title: "Advanced Brush — Getting Started"
+description: "Paint GameObjects interactively in the scene view using the Advanced Brush."
+---
+
+<Info>
+  Before starting this tutorial, read:
+  - [Working with Data](/megaworld/getting-started/working-with-data) — Groups, Resource Types, and Prototypes
+  - [Working with MegaWorld Window](/megaworld/getting-started/megaworld-window) — how to navigate the window
+</Info>
+
+The **Advanced Brush** is an Editor Window tool for painting GameObjects and terrain objects interactively in the scene view. Unlike the Terrain Spawner which fills an area in one click, the Advanced Brush lets you direct exactly where objects appear by dragging the brush across the scene. It supports spherical spawning, realistic scatter, slope alignment, and overlap checks — making it the most fully-featured placement brush in MegaWorld.
+
+---
+
+## Step 1 — Open the MegaWorld Window and select Advanced Brush
+
+Press **Alt + Z** to open the MegaWorld Window. In the **Tools Panel**, click the **+** button and choose **Advanced Brush**, or click an existing Advanced Brush instance.
+
+---
+
+## Step 2 — Add a Type and prototypes
+
+In the **Selection Panel**, click **Add Type**. Inside the Type, click **Add Resource** and choose **Unity/GameObject**. Drag your Prefabs (trees, rocks, props) into the prototype list.
+
+<Tip>
+  Add several Prefabs to the same Type. The Advanced Brush randomly picks among them while you paint, which naturally breaks up repetition.
+</Tip>
+
+---
+
+## Step 3 — Configure brush settings
+
+In the **Settings Panel**, adjust:
+
+- **Brush Size** — controls the radius of the painted area.
+- **Brush Strength / Density** — controls how many objects spawn per brush stroke.
+- **Scatter Settings** — choose between Random Point, Grid, or Poisson Disc distribution.
+
+Optionally add [Mask Filters](/megaworld/mask-filters/overview) to restrict painting to specific heights, slopes, or terrain textures.
+
+---
+
+## Step 4 — Paint in the scene view
+
+Move your cursor into the **Scene View**. A circular brush preview shows the spawn area. Click and drag to paint objects.
+
+Hold **Ctrl** while painting to erase objects in the brush area.
+
+---
+
+## What's next
+
+- Enable **Spherical Spawn** in the brush settings to paint on vertical or curved surfaces.
+- Add **Transform Components** (rotation, scale variation) for more organic-looking results.
+- Use [Brush Modify](/megaworld/getting-started/brush-modify) to tweak already-painted objects without removing them.
+- Use [Brush Erase](/megaworld/getting-started/brush-erase) for selective cleanup.
+- Read the full [Advanced Brush](/megaworld/tools/advanced-brush) reference documentation.

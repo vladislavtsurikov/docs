@@ -1,0 +1,73 @@
+---
+title: "Working with Data"
+description: "Understand the two tool types, and learn how Groups, Resource Types, and Prototypes work in MegaWorld."
+---
+
+Before using any MegaWorld tool it helps to understand two things: how tools are categorised, and how MegaWorld stores and organises the data it uses to spawn objects.
+
+---
+
+## Two types of tools
+
+MegaWorld tools fall into two categories depending on how you add them to your project.
+
+### MonoBehavior tools
+
+**Terrain Spawner**, **Texture Stamper**, and **Gravity Spawner** are MonoBehavior components. You add them directly to a GameObject in your scene — either via the Unity menu or by using `Add Component` in the Inspector.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '640px' }}
+  src="/images/megaworld/getting-started/tool-types-menu.png"
+  alt="Unity menu showing MegaWorld MonoBehavior tools: Add Gravity Spawner, Add Terrain Spawner, Add Texture Stamper."
+/>
+
+Each spawner you add to the scene is a self-contained object. You can have several in the same scene, each with its own settings and data.
+
+### Editor Window tools
+
+**Advanced Brush**, **Spray Brush**, **Brush Erase**, **Brush Modify**, **Edit**, **Precise Place**, **Pin**, and all physics tools are Editor Window tools. They live inside the **MegaWorld Window** and operate through the scene view using brush or click interactions.
+
+<Info>
+  Editor Window tools require the MegaWorld Window to be open. See [Working with MegaWorld Window](/megaworld/getting-started/megaworld-window) before using any of these tools.
+</Info>
+
+---
+
+## Groups, Resource Types, and Prototypes
+
+All MegaWorld tools share the same data system. Understanding it once makes every tool easier to use.
+
+### Group
+
+A **Group** is a ScriptableObject asset stored in your project. It holds the configuration for what gets spawned and how. Groups are reusable — you can assign the same Group to multiple tools or areas without duplicating settings.
+
+<Tip>
+  You can drag a Group from the Project window onto another spawner's area field to reuse it instantly.
+</Tip>
+
+### Resource Type
+
+Inside a Group you choose a **Resource Type**. This determines the kind of object MegaWorld will place:
+
+| Resource Type | What it places |
+|---|---|
+| **Unity/GameObject** | Prefab instances in the scene hierarchy |
+| **Terrain Object** | Objects integrated with Unity's terrain system |
+| **Unity/Terrain Detail** | Grass and detail meshes on Unity Terrain |
+| **Unity/Terrain Texture** | Terrain texture layers painted onto Unity Terrain |
+
+### Prototype
+
+A **Prototype** is the actual asset assigned inside a Group — for example, a specific tree Prefab, a TerrainLayer asset, or a detail mesh. Each Group can hold multiple prototypes. During spawning, MegaWorld picks from them according to the configured weights and settings.
+
+---
+
+## The core workflow
+
+Every MegaWorld tool follows the same data setup steps:
+
+1. **Create a Group** — in the MegaWorld Window or directly on the spawner component.
+2. **Choose a Resource Type** — decide what kind of object you want to place.
+3. **Add Prototypes** — drag your Prefabs, TerrainLayers, or meshes into the Group.
+4. **Configure settings** — set scatter density, transforms, filters.
+5. **Use a tool** — stamp, paint, spawn, or place using the active tool.

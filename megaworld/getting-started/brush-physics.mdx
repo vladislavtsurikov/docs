@@ -1,0 +1,48 @@
+---
+title: "Brush Physics — Getting Started"
+description: "Apply physics simulation to already-placed objects using a brush."
+---
+
+<Info>
+  Before starting this tutorial, read:
+  - [Working with Data](/megaworld/getting-started/working-with-data) — Groups, Resource Types, and Prototypes
+  - [Working with MegaWorld Window](/megaworld/getting-started/megaworld-window) — how to navigate the window
+</Info>
+
+The **Brush Physics** tool runs a local physics simulation on objects that are already placed in your scene. Paint over an area and the selected objects get temporarily given physics rigidbodies, fall or settle under gravity and collisions, and are then frozen in their new positions. This is useful for naturally settling objects that were placed procedurally but look too uniform.
+
+---
+
+## Step 1 — Open the MegaWorld Window and select Brush Physics
+
+Press **Alt + Z** to open the MegaWorld Window. In the **Tools Panel**, click the **+** button and choose **Brush Physics**.
+
+---
+
+## Step 2 — Select which prototypes to simulate
+
+In the **Selection Panel**, choose the Types and prototypes you want the physics brush to affect.
+
+<Tip>
+  Make sure your Prefabs have Collider components. Physics settling requires colliders to interact with the terrain and other objects.
+</Tip>
+
+---
+
+## Step 3 — Set brush size
+
+In the **Settings Panel**, set the **Brush Size** to control how wide the physics area is. Configure the simulation duration and any additional physics settings.
+
+---
+
+## Step 4 — Paint in the scene view
+
+Move your cursor into the **Scene View** and drag the brush over the area you want to settle. The tool runs the simulation and freezes objects once it completes.
+
+---
+
+## What's next
+
+- Use [Precise Physics](/megaworld/getting-started/precise-physics) for more controlled simulation on individual objects.
+- Use [Explode Physics](/megaworld/getting-started/explode-physics) to scatter objects outward with a physics impulse.
+- Read the full [Brush Physics](/megaworld/tools/brush-physics) reference documentation.

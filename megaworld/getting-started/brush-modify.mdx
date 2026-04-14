@@ -1,0 +1,59 @@
+---
+title: "Brush Modify — Getting Started"
+description: "Nudge, rotate, and reshape already-placed objects using a brush."
+---
+
+<Info>
+  Before starting this tutorial, read:
+  - [Working with Data](/megaworld/getting-started/working-with-data) — Groups, Resource Types, and Prototypes
+  - [Working with MegaWorld Window](/megaworld/getting-started/megaworld-window) — how to navigate the window
+</Info>
+
+The **Brush Modify** tool adjusts the transform properties of objects that are already in your scene. Instead of adding or removing objects, it applies position, rotation, and scale changes as you drag the brush across them. Use it to break up repetition in a procedural pass or to add hand-crafted variation to existing placement.
+
+---
+
+## Step 1 — Open the MegaWorld Window and select Brush Modify
+
+Press **Alt + Z** to open the MegaWorld Window. In the **Tools Panel**, click the **+** button and choose **Brush Modify**.
+
+---
+
+## Step 2 — Select which prototypes to modify
+
+In the **Selection Panel**, choose the Types and prototypes you want the brush to affect. Objects not in the selection are ignored by the brush.
+
+---
+
+## Step 3 — Configure the Modify Transform Stack
+
+In the **Settings Panel**, enable the transform components you want to apply:
+
+- **Position** — shift objects up, down, or laterally.
+- **Rotation** — randomly rotate objects around one or more axes.
+- **Scale** — increase or decrease object scale.
+- **Randomize Scale** — add random scale variation on each stroke.
+
+---
+
+## Step 4 — Optionally add filters
+
+Add [Mask Filters](/megaworld/mask-filters/overview) to restrict which objects get modified. For example, use a **Slope Filter** to only modify objects on flat ground and leave cliff-placed objects untouched.
+
+---
+
+## Step 5 — Paint in the scene view
+
+Move your cursor into the **Scene View** and drag the brush over existing objects. The modify stack is applied to all objects within the brush radius that pass the filter.
+
+<Tip>
+  Brush Modify works best after a large procedural spawn pass. Generate the base layer with Terrain Spawner first, then use Brush Modify to add hand-directed variation.
+</Tip>
+
+---
+
+## What's next
+
+- Use [Edit](/megaworld/getting-started/edit) for precise single-object adjustments.
+- Use [Brush Erase](/megaworld/getting-started/brush-erase) to remove objects from over-populated areas.
+- Read the full [Brush Modify](/megaworld/tools/brush-modify) reference documentation.

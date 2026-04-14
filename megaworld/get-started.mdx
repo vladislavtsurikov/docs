@@ -1,150 +1,73 @@
 ---
 title: "Get Started"
-description: "Spawn your first GameObjects in the scene using MegaWorld's Terrain Spawner in just a few steps."
+description: "Choose your first MegaWorld tutorial based on the tool you want to use."
 ---
 
-This guide walks you through setting up a basic vegetation spawn using the **Terrain Spawner** tool and the **Unity/GameObject** resource type. By the end you will have a working spawner that places trees across your terrain with a single click.
+MegaWorld is a multi-tool ecosystem. The Getting Started series is structured in layers — start with the foundation pages, then jump to the tutorial for the specific tool you want to use.
 
-## Before you begin
+## Foundation (read first)
 
-You need:
+<CardGroup cols={2}>
+  <Card title="Working with Data" icon="database" href="/megaworld/getting-started/working-with-data">
+    Understand the two tool types, and learn how Groups, Resource Types, and Prototypes work.
+  </Card>
+  <Card title="Working with MegaWorld Window" icon="window" href="/megaworld/getting-started/megaworld-window">
+    Learn how to navigate the Tools Panel, Selection Panel, and Settings Panel.
+  </Card>
+</CardGroup>
 
-- A Unity project with MegaWorld installed.
-- A terrain in your scene. Any Unity Terrain with textures applied will work.
+## MonoBehavior tools
 
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
-  src="/images/megaworld/get-started/terrain-with-textures.jpg"
-  alt="A terrain with textures ready for spawning."
-/>
+These tools are added to GameObjects in your scene. They only require the **Working with Data** foundation.
 
----
+<CardGroup cols={3}>
+  <Card title="Terrain Spawner" icon="tree" href="/megaworld/getting-started/terrain-spawner">
+    Spawn GameObjects across a terrain area with a single click.
+  </Card>
+  <Card title="Texture Stamper" icon="paintbrush" href="/megaworld/getting-started/texture-stamper">
+    Paint terrain textures driven by height, slope, and noise filters.
+  </Card>
+  <Card title="Gravity Spawner" icon="arrow-down" href="/megaworld/getting-started/gravity-spawner">
+    Spawn objects and let physics settle them naturally on the terrain.
+  </Card>
+</CardGroup>
 
-## Step 1 — Create a Terrain Spawner
+## Editor Window tools
 
-Open the **MegaWorld Window** (`Window > MegaWorld > MegaWorld Window`), then press the **+** button in the Tools Panel and choose **Terrain Spawner**.
+These tools work inside the MegaWorld Window. They require both foundation pages.
 
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
-  src="/images/megaworld/get-started/create-terrain-spawner.png"
-  alt="Creating a Terrain Spawner from the Tools Panel."
-/>
-
-A new **Terrain Spawner** object appears in your Hierarchy. You can create several spawners and switch between them — each one holds its own layer stack and settings.
-
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
-  src="/images/megaworld/get-started/multiple-spawners.png"
-  alt="Multiple Terrain Spawners in the Hierarchy."
-/>
-
----
-
-## Step 2 — Add a Type
-
-Select the Terrain Spawner in the Hierarchy. In the **MegaWorld Window**, click **Add Type** to create a new resource type.
-
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
-  src="/images/megaworld/get-started/create-type.png"
-  alt="Adding a new type to the Terrain Spawner."
-/>
-
-A **Type** preset asset is created in your project. You can find it by clicking **Reveal in Project** in the Type header.
-
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
-  src="/images/megaworld/get-started/type-preset-in-project.png"
-  alt="Type preset revealed in the Project window."
-/>
-
-Rename the type to something descriptive — for example, **Small Trees**.
-
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
-  src="/images/megaworld/get-started/rename-type.png"
-  alt="Renaming the type to Small Trees."
-/>
-
----
-
-## Step 3 — Add GameObjects to the Type
-
-Inside the Type, click **Add Resource** and choose **Unity/GameObject** as the resource type. Then drag your tree Prefabs into the prototype list.
-
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
-  src="/images/megaworld/get-started/add-prefabs-to-type.png"
-  alt="Adding tree prefabs as Unity/GameObject resources."
-/>
-
-Your Small Trees type is now ready with a set of prefabs to spawn.
-
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
-  src="/images/megaworld/get-started/small-trees-type.png"
-  alt="Small Trees type with prefabs assigned."
-/>
-
-<Tip>
-  You can add multiple prefabs to the same type. MegaWorld picks among them randomly during spawning, which helps break up visual repetition.
-</Tip>
-
----
-
-## Step 4 — Apply a Layer Template (optional)
-
-If you want a quick starting point for your layer settings, open the **Layer** dropdown and click **Apply Template**. Choose **Big Trees** or another preset that matches your use case.
-
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
-  src="/images/megaworld/get-started/apply-template.png"
-  alt="Applying a layer template."
-/>
-
----
-
-## Step 5 — Configure the Layer Settings
-
-Expand the layer settings to adjust scatter density, transform randomization, and filter masks. At minimum, make sure the **Spawn Count** and **Scale** ranges look appropriate for your prefabs.
-
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
-  src="/images/megaworld/get-started/layer-settings.png"
-  alt="Layer settings with density and transform options."
-/>
-
----
-
-## Step 6 — Spawn
-
-Select the Terrain Spawner in the Hierarchy. In the **Area Settings** section of the MegaWorld Window, set the spawn area size, then click **Spawn**.
-
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
-  src="/images/megaworld/get-started/spawner-area-spawn-button.png"
-  alt="Terrain Spawner area and Spawn button."
-/>
-
-MegaWorld places GameObjects across your terrain according to the layer stack.
-
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
-  src="/images/megaworld/get-started/forest-result.png"
-  alt="Result after spawning — trees distributed across the terrain."
-/>
-
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px', marginTop: '1rem' }}
-  src="/images/megaworld/get-started/forest-result-2.png"
-  alt="Another view of the spawned forest."
-/>
-
----
-
-## What's next
-
-- Add more Types and layers to mix vegetation types in the same spawner.
-- Use [Mask Filters](/megaworld/mask-filters/overview) to restrict spawning by height, slope, or texture.
-- Switch to the [Advanced Brush](/megaworld/tools/advanced-brush) tool to paint vegetation interactively.
-- Use [Brush Modify](/megaworld/tools/brush-modify) to art-direct already spawned objects.
+<CardGroup cols={3}>
+  <Card title="Advanced Brush" icon="brush" href="/megaworld/getting-started/advanced-brush">
+    Paint GameObjects interactively in the scene view.
+  </Card>
+  <Card title="Spray Brush" icon="spray-can" href="/megaworld/getting-started/spray-brush">
+    Rapidly spray objects across an area.
+  </Card>
+  <Card title="Brush Erase" icon="eraser" href="/megaworld/getting-started/brush-erase">
+    Remove spawned objects with a brush.
+  </Card>
+  <Card title="Brush Modify" icon="sliders" href="/megaworld/getting-started/brush-modify">
+    Nudge, rotate, and reshape existing placed objects.
+  </Card>
+  <Card title="Edit" icon="pencil" href="/megaworld/getting-started/edit">
+    Move, rotate, scale, or remove individual objects.
+  </Card>
+  <Card title="Precise Place" icon="crosshairs" href="/megaworld/getting-started/precise-place">
+    Place individual objects one at a time with exact control.
+  </Card>
+  <Card title="Pin" icon="thumbtack" href="/megaworld/getting-started/pin">
+    Lock objects to protect them from brush operations.
+  </Card>
+  <Card title="Brush Physics" icon="atom" href="/megaworld/getting-started/brush-physics">
+    Settle objects onto surfaces using a physics brush.
+  </Card>
+  <Card title="Precise Physics" icon="bullseye" href="/megaworld/getting-started/precise-physics">
+    Run targeted physics simulation on selected objects.
+  </Card>
+  <Card title="Explode Physics" icon="explosion" href="/megaworld/getting-started/explode-physics">
+    Scatter objects with a radial physics impulse.
+  </Card>
+  <Card title="Physics Effects" icon="bolt" href="/megaworld/getting-started/physics-effects">
+    Apply ongoing physics forces to objects in the scene.
+  </Card>
+</CardGroup>

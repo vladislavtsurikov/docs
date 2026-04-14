@@ -1,0 +1,52 @@
+---
+title: "Explode Physics — Getting Started"
+description: "Scatter objects outward using a physics explosion impulse."
+---
+
+<Info>
+  Before starting this tutorial, read:
+  - [Working with Data](/megaworld/getting-started/working-with-data) — Groups, Resource Types, and Prototypes
+  - [Working with MegaWorld Window](/megaworld/getting-started/megaworld-window) — how to navigate the window
+</Info>
+
+**Explode Physics** applies a radial outward impulse to existing objects in your scene, scattering them using physics simulation. This creates a natural, chaotic distribution that is difficult to achieve with procedural scatter alone — useful for rubble fields, fallen debris, scattered items, or any layout where objects should appear randomly thrown or scattered by an impact.
+
+---
+
+## Step 1 — Open the MegaWorld Window and select Explode Physics
+
+Press **Alt + Z** to open the MegaWorld Window. In the **Tools Panel**, click the **+** button and choose **Explode Physics**.
+
+---
+
+## Step 2 — Select which prototypes to explode
+
+In the **Selection Panel**, choose the Types and prototypes you want to affect.
+
+<Tip>
+  Prefabs need Collider and Rigidbody components (or MegaWorld will add temporary ones) for the impulse to work correctly.
+</Tip>
+
+---
+
+## Step 3 — Configure the explosion
+
+In the **Settings Panel**, configure:
+
+- **Explosion Radius** — how far the impulse reaches.
+- **Explosion Force** — the strength of the outward push.
+- Additional physics parameters that control how objects come to rest after the explosion.
+
+---
+
+## Step 4 — Trigger the explosion in the scene view
+
+Click in the **Scene View** at the explosion origin point. All selected prototype objects within the radius receive the impulse and scatter outward, then settle under gravity.
+
+---
+
+## What's next
+
+- Use [Brush Physics](/megaworld/getting-started/brush-physics) to settle the scattered objects smoothly onto the terrain.
+- Use [Brush Erase](/megaworld/getting-started/brush-erase) to remove stray objects that landed in unwanted places.
+- Read the full [Explode Physics](/megaworld/tools/explode-physics) reference documentation.

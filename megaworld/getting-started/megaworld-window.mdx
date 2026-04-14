@@ -1,0 +1,93 @@
+---
+title: "Working with MegaWorld Window"
+description: "Learn how to navigate the MegaWorld Window and set up your first tool workflow."
+---
+
+<Info>
+  Before reading this page, make sure you understand [Working with Data](/megaworld/getting-started/working-with-data) — Groups, Resource Types, and Prototypes.
+</Info>
+
+The **MegaWorld Window** is the main hub for all Editor Window tools. It is divided into three panels that guide you from tool selection to scene interaction.
+
+---
+
+## Opening the window
+
+Open the window from the Unity menu:
+
+```
+Window > Vladislav Tsurikov > Mega World > Window
+```
+
+Or use the shortcut **Alt + Z**.
+
+For a split layout where each panel floats independently, use **Alt + X** (or `Window > Vladislav Tsurikov > Mega World > Separate Windows`).
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/window-workflow/main-window-layout.png"
+  alt="MegaWorld main window layout."
+/>
+
+---
+
+## The three panels
+
+### 1. Tools Panel
+
+The Tools Panel is on the left. It shows all your active tools.
+
+- Click a tool to make it active.
+- Use the **+** button to add a new tool instance.
+- Right-click a tool to delete or reorder it.
+
+See [Tools Panel](/megaworld/tools-panel) for the full reference.
+
+### 2. Selection Panel
+
+The Selection Panel is in the middle. This is where you choose **what** the active tool works with.
+
+- **Types** are reusable collections of prototypes, saved as assets in your project.
+- **Prototypes** are the actual resources (Prefabs, TerrainLayers, etc.) inside a Type.
+
+Steps:
+1. Click **Add Type** to create a new Type for this tool.
+2. Inside the Type, click **Add Resource** and choose a Resource Type (Unity/GameObject, Terrain Object, etc.).
+3. Drag your assets (Prefabs, TerrainLayers) into the prototype list.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '524px' }}
+  src="/images/megaworld/window-workflow/selection-panel.png"
+  alt="MegaWorld Selection panel."
+/>
+
+See [Selection Panel](/megaworld/selection-panel) for the full reference.
+
+### 3. Settings Panel
+
+The Settings Panel is on the right. It shows the settings for the currently selected tool and the selected prototype.
+
+Settings are split into two levels:
+
+- **Tool-level settings** — apply to the whole tool (brush size, area, scatter settings, etc.).
+- **Prototype-level settings** — apply only to the selected prototype (transform components, filters, overlap check, etc.).
+
+See [Settings Panel](/megaworld/settings-panel) for the full reference.
+
+---
+
+## Typical workflow
+
+```
+Open Window → Select Tool → Add Type → Add Prototypes → Configure Settings → Paint / Stamp in Scene
+```
+
+1. Open the MegaWorld Window (**Alt + Z**).
+2. In the **Tools Panel**, select or add the tool you want to use.
+3. In the **Selection Panel**, add a Type and populate it with prototypes.
+4. In the **Settings Panel**, adjust brush size, filters, and transform settings.
+5. Click or drag in the **Scene View** to place, paint, or modify objects.
+
+<Tip>
+  You can keep multiple tool instances in the Tools Panel and switch between them instantly — settings are saved per tool instance.
+</Tip>

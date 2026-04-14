@@ -1,0 +1,54 @@
+---
+title: "Texture Stamper — Getting Started"
+description: "Paint terrain textures across an area using the Texture Stamper."
+---
+
+<Info>
+  Before starting this tutorial, read [Working with Data](/megaworld/getting-started/working-with-data) to understand Groups, Resource Types, and Prototypes.
+</Info>
+
+The **Texture Stamper** is a MonoBehavior tool that paints terrain texture layers onto a Unity Terrain over a defined area. Instead of painting by hand with a brush, it stamps a whole area at once — useful for large-scale texture distribution driven by slope, height, and noise filters.
+
+---
+
+## Step 1 — Add a Texture Stamper to your scene
+
+Go to `GameObject > MegaWorld > Add Texture Stamper`, or select a GameObject and use `Add Component > MegaWorld > Texture Stamper`.
+
+A **Texture Stamper** component appears on the selected GameObject in your Hierarchy.
+
+---
+
+## Step 2 — Add a Type with Terrain Texture prototypes
+
+Select the Texture Stamper in the Hierarchy. In the **MegaWorld Window**, click **Add Type**.
+
+Inside the Type, click **Add Resource** and choose **Unity/Terrain Texture** as the resource type. Then drag your **TerrainLayer** assets from the Project window into the prototype list.
+
+<Tip>
+  TerrainLayer assets are created in the Project window via `Create > TerrainLayer`. Each one holds a texture, normal map, and tiling settings.
+</Tip>
+
+---
+
+## Step 3 — Configure filters (optional)
+
+In the Settings Panel, add [Mask Filters](/megaworld/mask-filters/overview) to drive where each texture appears. Common setups:
+
+- **Slope filter** — paint rock textures on steep slopes, grass on flat ground.
+- **Height filter** — snow at high altitudes, mud at low elevations.
+- **Noise filter** — add organic variation to texture boundaries.
+
+---
+
+## Step 4 — Stamp
+
+Set the stamper area to cover your terrain, then click **Spawn** in the Area Settings. The Texture Stamper paints all active terrain texture prototypes onto the terrain according to the configured filters.
+
+---
+
+## What's next
+
+- Add multiple texture Types to layer different materials across the terrain.
+- Combine Texture Stamper results with [Terrain Spawner](/megaworld/getting-started/terrain-spawner) vegetation passes.
+- Read the full [Texture Stamper](/megaworld/tools/texture-stamper) reference documentation.

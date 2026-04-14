@@ -1,0 +1,155 @@
+---
+title: "Terrain Spawner — Getting Started"
+description: "Spawn your first GameObjects across a terrain using the Terrain Spawner in just a few steps."
+---
+
+<Info>
+  Before starting this tutorial, read [Working with Data](/megaworld/getting-started/working-with-data) to understand Groups, Resource Types, and Prototypes.
+</Info>
+
+This guide walks you through setting up a basic vegetation spawn using the **Terrain Spawner** tool and the **Unity/GameObject** resource type. By the end you will have a working spawner that places trees across your terrain with a single click.
+
+## Before you begin
+
+You need:
+
+- A Unity project with MegaWorld installed.
+- A terrain in your scene. Any Unity Terrain with textures applied will work.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/get-started/terrain-with-textures.jpg"
+  alt="A terrain with textures ready for spawning."
+/>
+
+---
+
+## Step 1 — Create a Terrain Spawner
+
+Add a Terrain Spawner to your scene via `GameObject > MegaWorld > Add Terrain Spawner`, or select a GameObject and use `Add Component > MegaWorld > Terrain Spawner`.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/get-started/create-terrain-spawner.png"
+  alt="Creating a Terrain Spawner from the Tools Panel."
+/>
+
+A new **Terrain Spawner** object appears in your Hierarchy. You can create several spawners and switch between them — each one holds its own layer stack and settings.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/get-started/multiple-spawners.png"
+  alt="Multiple Terrain Spawners in the Hierarchy."
+/>
+
+---
+
+## Step 2 — Add a Type
+
+Select the Terrain Spawner in the Hierarchy. In the **MegaWorld Window**, click **Add Type** to create a new resource type.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/get-started/create-type.png"
+  alt="Adding a new type to the Terrain Spawner."
+/>
+
+A **Type** preset asset is created in your project. You can find it by clicking **Reveal in Project** in the Type header.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/get-started/type-preset-in-project.png"
+  alt="Type preset revealed in the Project window."
+/>
+
+Rename the type to something descriptive — for example, **Small Trees**.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/get-started/rename-type.png"
+  alt="Renaming the type to Small Trees."
+/>
+
+---
+
+## Step 3 — Add GameObjects to the Type
+
+Inside the Type, click **Add Resource** and choose **Unity/GameObject** as the resource type. Then drag your tree Prefabs into the prototype list.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/get-started/add-prefabs-to-type.png"
+  alt="Adding tree prefabs as Unity/GameObject resources."
+/>
+
+Your Small Trees type is now ready with a set of prefabs to spawn.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/get-started/small-trees-type.png"
+  alt="Small Trees type with prefabs assigned."
+/>
+
+<Tip>
+  You can add multiple prefabs to the same type. MegaWorld picks among them randomly during spawning, which helps break up visual repetition.
+</Tip>
+
+---
+
+## Step 4 — Apply a Layer Template (optional)
+
+If you want a quick starting point for your layer settings, open the **Layer** dropdown and click **Apply Template**. Choose **Big Trees** or another preset that matches your use case.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/get-started/apply-template.png"
+  alt="Applying a layer template."
+/>
+
+---
+
+## Step 5 — Configure the Layer Settings
+
+Expand the layer settings to adjust scatter density, transform randomization, and filter masks. At minimum, make sure the **Spawn Count** and **Scale** ranges look appropriate for your prefabs.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/get-started/layer-settings.png"
+  alt="Layer settings with density and transform options."
+/>
+
+---
+
+## Step 6 — Spawn
+
+Select the Terrain Spawner in the Hierarchy. In the **Area Settings** section of the MegaWorld Window, set the spawn area size, then click **Spawn**.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/get-started/spawner-area-spawn-button.png"
+  alt="Terrain Spawner area and Spawn button."
+/>
+
+MegaWorld places GameObjects across your terrain according to the layer stack.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/get-started/forest-result.png"
+  alt="Result after spawning — trees distributed across the terrain."
+/>
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px', marginTop: '1rem' }}
+  src="/images/megaworld/get-started/forest-result-2.png"
+  alt="Another view of the spawned forest."
+/>
+
+---
+
+## What's next
+
+- Add more Types and layers to mix vegetation types in the same spawner.
+- Use [Mask Filters](/megaworld/mask-filters/overview) to restrict spawning by height, slope, or texture.
+- Switch to the [Advanced Brush](/megaworld/getting-started/advanced-brush) tool to paint vegetation interactively.
+- Use [Brush Modify](/megaworld/getting-started/brush-modify) to art-direct already spawned objects.
+- Read the full [Terrain Spawner](/megaworld/tools/terrain-spawner) reference documentation.

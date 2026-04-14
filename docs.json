@@ -21,6 +21,27 @@
             ]
           },
           {
+            "group": "Getting Started",
+            "pages": [
+              "megaworld/getting-started/working-with-data",
+              "megaworld/getting-started/megaworld-window",
+              "megaworld/getting-started/terrain-spawner",
+              "megaworld/getting-started/texture-stamper",
+              "megaworld/getting-started/gravity-spawner",
+              "megaworld/getting-started/advanced-brush",
+              "megaworld/getting-started/spray-brush",
+              "megaworld/getting-started/brush-erase",
+              "megaworld/getting-started/brush-physics",
+              "megaworld/getting-started/precise-physics",
+              "megaworld/getting-started/explode-physics",
+              "megaworld/getting-started/physics-effects",
+              "megaworld/getting-started/brush-modify",
+              "megaworld/getting-started/edit",
+              "megaworld/getting-started/precise-place",
+              "megaworld/getting-started/pin"
+            ]
+          },
+          {
             "group": "Window And Workflow",
             "pages": [
               "megaworld/mega-world-window",

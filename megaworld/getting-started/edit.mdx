@@ -1,0 +1,57 @@
+---
+title: "Edit — Getting Started"
+description: "Directly move, rotate, scale, and remove individual placed objects in the scene."
+---
+
+<Info>
+  Before starting this tutorial, read:
+  - [Working with Data](/megaworld/getting-started/working-with-data) — Groups, Resource Types, and Prototypes
+  - [Working with MegaWorld Window](/megaworld/getting-started/megaworld-window) — how to navigate the window
+</Info>
+
+The **Edit** tool gives you direct, object-by-object control over placed objects in the scene. Unlike the brush-based tools that affect everything in a radius, Edit targets individual objects and lets you move, rotate, scale, or remove them with precise intent — either using Unity's standard transform gizmos or with hotkey-driven mouse actions.
+
+---
+
+## Step 1 — Open the MegaWorld Window and select Edit
+
+Press **Alt + Z** to open the MegaWorld Window. In the **Tools Panel**, click the **+** button and choose **Edit**.
+
+---
+
+## Step 2 — Select which prototypes Edit can interact with
+
+In the **Selection Panel**, choose the Types and prototypes you want Edit to be able to interact with. Objects outside the selection are not affected.
+
+---
+
+## Step 3 — Choose an action
+
+In the **Settings Panel**, choose the active action:
+
+| Action | What it does |
+|---|---|
+| **Move Up / Down** | Shift the object along its local Y axis |
+| **Rotate** | Rotate the object |
+| **Scale** | Scale the object |
+| **Raycast** | Snap the object down onto the terrain surface |
+| **Remove** | Delete the object from the scene |
+
+---
+
+## Step 4 — Interact in the scene view
+
+Click an object in the **Scene View** to select it and apply the active action.
+
+- **Unity Handles mode**: use the standard Unity move/rotate/scale gizmos.
+- **Mouse Modify mode**: hold a hotkey and drag the mouse to apply changes directly — no gizmo clicking needed.
+
+Press **Space** to toggle between global and local transform space.
+
+---
+
+## What's next
+
+- Use [Brush Modify](/megaworld/getting-started/brush-modify) to apply transform changes to groups of objects at once.
+- Use [Brush Erase](/megaworld/getting-started/brush-erase) for area-based removal.
+- Read the full [Edit](/megaworld/tools/edit) reference documentation.

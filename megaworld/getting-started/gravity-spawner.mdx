@@ -1,0 +1,52 @@
+---
+title: "Gravity Spawner — Getting Started"
+description: "Spawn objects with physics-driven gravity settling using the Gravity Spawner."
+---
+
+<Info>
+  Before starting this tutorial, read [Working with Data](/megaworld/getting-started/working-with-data) to understand Groups, Resource Types, and Prototypes.
+</Info>
+
+The **Gravity Spawner** is a MonoBehavior tool that spawns GameObjects and then runs a physics simulation so they fall and settle naturally on the terrain surface. This is useful for rocks, debris, fallen leaves, or any prop that should feel physically placed rather than procedurally stamped.
+
+---
+
+## Step 1 — Add a Gravity Spawner to your scene
+
+Go to `GameObject > MegaWorld > Add Gravity Spawner`, or select a GameObject and use `Add Component > MegaWorld > Gravity Spawner`.
+
+A **Gravity Spawner** component appears on the selected GameObject in your Hierarchy.
+
+---
+
+## Step 2 — Add a Type with GameObject prototypes
+
+Select the Gravity Spawner in the Hierarchy. In the **MegaWorld Window**, click **Add Type**.
+
+Inside the Type, click **Add Resource** and choose **Unity/GameObject** as the resource type. Then drag your Prefabs (rocks, debris props, etc.) into the prototype list.
+
+<Tip>
+  The Prefabs you use here should have a Collider component so physics settling works correctly. Without a Collider the objects will fall through surfaces.
+</Tip>
+
+---
+
+## Step 3 — Configure the spawn area and scatter
+
+In the Settings Panel, set the **Area** to cover the region you want to populate. Adjust the **Scatter Settings** to control density — how many objects are dropped per spawn pass.
+
+---
+
+## Step 4 — Run the physics simulation
+
+Click **Spawn** in the Area Settings. MegaWorld spawns the objects and then runs a short physics simulation, letting gravity pull them down until they settle on colliders in your scene.
+
+After settling, the simulation stops and the objects are frozen in place.
+
+---
+
+## What's next
+
+- Use [Mask Filters](/megaworld/mask-filters/overview) to restrict spawning to specific slopes or heights.
+- Combine with [Terrain Spawner](/megaworld/getting-started/terrain-spawner) to mix gravity-settled debris with procedural vegetation.
+- Read the full [Gravity Spawner](/megaworld/tools/gravity-spawner) reference documentation.
