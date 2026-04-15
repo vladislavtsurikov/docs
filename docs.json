@@ -162,7 +162,8 @@
                 "pages": [
                   "megaworld/shared-settings/simple-transform-settings",
                   "megaworld/shared-settings/physics-transform-settings",
-                  "megaworld/shared-settings/physics-effects-settings"
+                  "megaworld/shared-settings/physics-effects-settings",
+                  "megaworld/shared-settings/stamper-tool-controller"
                 ]
               },
               {
