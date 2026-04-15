@@ -28,16 +28,6 @@
             ]
           },
           {
-            "group": "Window And Workflow",
-            "pages": [
-              "megaworld/mega-world-window",
-              "megaworld/tools-panel",
-              "megaworld/selection-panel",
-              "megaworld/settings-panel",
-              "megaworld/hotkeys"
-            ]
-          },
-          {
             "group": "Tools",
             "pages": [
               "megaworld/tools/overview",
