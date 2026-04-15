@@ -136,27 +136,41 @@
             ]
           },
           {
-            "group": "General Settings",
-            "pages": [
-              "megaworld/general-settings/overview",
-              "megaworld/general-settings/spawn-detail-settings",
-              "megaworld/general-settings/terrain-detail-settings",
-              "megaworld/general-settings/additional-spawn-settings"
-            ]
-          },
-          {
             "group": "Shared Settings",
             "pages": [
               "megaworld/shared-settings/overview",
-              "megaworld/shared-settings/brush-settings",
-              "megaworld/shared-settings/layer-settings",
-              "megaworld/shared-settings/area-settings",
-              "megaworld/shared-settings/random-seed-settings",
-              "megaworld/shared-settings/success",
-              "megaworld/shared-settings/simple-transform-settings",
-              "megaworld/shared-settings/physics-transform-settings",
-              "megaworld/shared-settings/simple-filter-settings",
-              "megaworld/overlap-check-settings/overview"
+              {
+                "group": "Spawn",
+                "pages": [
+                  "megaworld/general-settings/spawn-detail-settings",
+                  "megaworld/general-settings/terrain-detail-settings",
+                  "megaworld/general-settings/additional-spawn-settings",
+                  "megaworld/shared-settings/random-seed-settings",
+                  "megaworld/shared-settings/success"
+                ]
+              },
+              {
+                "group": "Area",
+                "pages": [
+                  "megaworld/shared-settings/area-settings",
+                  "megaworld/shared-settings/layer-settings",
+                  "megaworld/shared-settings/brush-settings"
+                ]
+              },
+              {
+                "group": "Transform",
+                "pages": [
+                  "megaworld/shared-settings/simple-transform-settings",
+                  "megaworld/shared-settings/physics-transform-settings"
+                ]
+              },
+              {
+                "group": "Filters & Overlap",
+                "pages": [
+                  "megaworld/shared-settings/simple-filter-settings",
+                  "megaworld/overlap-check-settings/overview"
+                ]
+              }
             ]
           },
           {
