@@ -314,7 +314,9 @@
   },
   "logo": {
     "light": "/logo/logo.png",
-    "dark": "/logo/logo.png"
+    "dark": "/logo/logo.png",
+    "width": 180,
+    "height": 60
   },
   "navbar": {
     "links": [
