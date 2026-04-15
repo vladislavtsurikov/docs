@@ -24,111 +24,90 @@
           {
             "group": "Getting Started",
             "pages": [
-              "megaworld/getting-started/working-with-data",
-              "megaworld/getting-started/megaworld-window"
+              {
+                "group": "Foundation",
+                "pages": [
+                  "megaworld/getting-started/working-with-data",
+                  "megaworld/getting-started/megaworld-window"
+                ]
+              },
+              {
+                "group": "Stamper Tools",
+                "pages": [
+                  "megaworld/getting-started/terrain-spawner",
+                  "megaworld/getting-started/texture-stamper",
+                  "megaworld/getting-started/gravity-spawner"
+                ]
+              },
+              {
+                "group": "Brush Tools",
+                "pages": [
+                  "megaworld/getting-started/advanced-brush",
+                  "megaworld/getting-started/spray-brush",
+                  "megaworld/getting-started/brush-erase"
+                ]
+              },
+              {
+                "group": "Physics Tools",
+                "pages": [
+                  "megaworld/getting-started/brush-physics",
+                  "megaworld/getting-started/precise-physics",
+                  "megaworld/getting-started/explode-physics",
+                  "megaworld/getting-started/physics-effects"
+                ]
+              },
+              {
+                "group": "Artist Tools",
+                "pages": [
+                  "megaworld/getting-started/brush-modify",
+                  "megaworld/getting-started/edit",
+                  "megaworld/getting-started/precise-place",
+                  "megaworld/getting-started/pin"
+                ]
+              }
             ]
           },
           {
             "group": "Tools",
             "pages": [
-              {
-                "group": "Terrain Spawner",
-                "pages": [
-                  "megaworld/getting-started/terrain-spawner",
-                  "megaworld/tools/terrain-spawner"
-                ]
-              },
-              {
-                "group": "Texture Stamper",
-                "pages": [
-                  "megaworld/getting-started/texture-stamper",
-                  "megaworld/tools/texture-stamper"
-                ]
-              },
+              "megaworld/tools/terrain-spawner",
+              "megaworld/tools/texture-stamper",
               {
                 "group": "Advanced Brush",
                 "pages": [
-                  "megaworld/getting-started/advanced-brush",
-                  "megaworld/tools/advanced-brush"
+                  "megaworld/tools/advanced-brush",
+                  "megaworld/tools/advanced-brush-hotkeys"
                 ]
               },
-              {
-                "group": "Spray Brush",
-                "pages": [
-                  "megaworld/getting-started/spray-brush",
-                  "megaworld/tools/spray-brush"
-                ]
-              },
-              {
-                "group": "Brush Erase",
-                "pages": [
-                  "megaworld/getting-started/brush-erase",
-                  "megaworld/tools/brush-erase"
-                ]
-              },
-              {
-                "group": "Gravity Spawner",
-                "pages": [
-                  "megaworld/getting-started/gravity-spawner",
-                  "megaworld/tools/gravity-spawner"
-                ]
-              },
-              {
-                "group": "Brush Physics",
-                "pages": [
-                  "megaworld/getting-started/brush-physics",
-                  "megaworld/tools/brush-physics"
-                ]
-              },
-              {
-                "group": "Precise Physics",
-                "pages": [
-                  "megaworld/getting-started/precise-physics",
-                  "megaworld/tools/precise-physics"
-                ]
-              },
-              {
-                "group": "Explode Physics",
-                "pages": [
-                  "megaworld/getting-started/explode-physics",
-                  "megaworld/tools/explode-physics"
-                ]
-              },
-              {
-                "group": "Physics Effects",
-                "pages": [
-                  "megaworld/getting-started/physics-effects",
-                  "megaworld/tools/physics-effects"
-                ]
-              },
+              "megaworld/tools/spray-brush",
+              "megaworld/tools/brush-erase",
+              "megaworld/tools/gravity-spawner",
+              "megaworld/tools/brush-physics",
+              "megaworld/tools/precise-physics",
+              "megaworld/tools/explode-physics",
+              "megaworld/tools/physics-effects",
               {
                 "group": "Brush Modify",
                 "pages": [
-                  "megaworld/getting-started/brush-modify",
-                  "megaworld/tools/brush-modify"
+                  "megaworld/tools/brush-modify",
+                  "megaworld/tools/brush-modify-hotkeys"
                 ]
               },
               {
                 "group": "Edit",
                 "pages": [
-                  "megaworld/getting-started/edit",
-                  "megaworld/tools/edit"
+                  "megaworld/tools/edit",
+                  "megaworld/tools/edit-hotkeys"
                 ]
               },
               {
                 "group": "Precise Place",
                 "pages": [
-                  "megaworld/getting-started/precise-place",
-                  "megaworld/tools/precise-place"
+                  "megaworld/tools/precise-place",
+                  "megaworld/tools/precise-place-hotkeys"
                 ]
               },
-              {
-                "group": "Pin",
-                "pages": [
-                  "megaworld/getting-started/pin",
-                  "megaworld/tools/pin"
-                ]
-              }
+              "megaworld/tools/pin"
             ]
           },
           {

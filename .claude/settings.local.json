@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(powershell.exe -ExecutionPolicy Bypass -Command \"New-Item -ItemType Directory -Force -Path 'C:\\\\Users\\\\Vlad\\\\Documents\\\\GitHub\\\\docs\\\\megaworld\\\\getting-started' | Out-Null; Write-Host 'Directory created'\")",
+      "mcp__4cd8330c-0930-4fe7-b679-a3caf0d8d033__read_file_content",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -File \"C:\\\\Temp\\\\find-images.ps1\")",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -Command \"Get-ChildItem 'C:\\\\Temp\\\\stamper-out' -Recurse -Filter '*.html' | Select-Object FullName\")",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -File \"C:\\\\Temp\\\\copy-area-images.ps1\")",
+      "Bash(sed 's/\"name\":\"//')",
+      "Bash(sed 's/\"$//')"
+    ]
+  }
+}
