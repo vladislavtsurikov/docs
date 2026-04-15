@@ -172,11 +172,16 @@
             "pages": [
               "megaworld/scatter-system/overview",
               "megaworld/scatter-system/scatter-settings",
-              "megaworld/scatter-system/random-point",
-              "megaworld/scatter-system/random-grid",
-              "megaworld/scatter-system/poisson-disc",
-              "megaworld/scatter-system/tiles",
-              "megaworld/scatter-system/failure-rate"
+              "megaworld/scatter-system/failure-rate",
+              {
+                "group": "Scatter Types",
+                "pages": [
+                  "megaworld/scatter-system/random-point",
+                  "megaworld/scatter-system/random-grid",
+                  "megaworld/scatter-system/poisson-disc",
+                  "megaworld/scatter-system/tiles"
+                ]
+              }
             ]
           },
           {
@@ -189,37 +194,62 @@
             "group": "Mask Filters",
             "pages": [
               "megaworld/mask-filters/overview",
-              "megaworld/mask-filters/height-filter",
-              "megaworld/mask-filters/height-noise-filter",
-              "megaworld/mask-filters/slope-filter",
-              "megaworld/mask-filters/noise-filter",
-              "megaworld/mask-filters/textures-filter",
-              "megaworld/mask-filters/concavity-filter",
-              "megaworld/mask-filters/aspect-filter",
-              "megaworld/mask-filters/smooth-filter",
-              "megaworld/mask-filters/expand-filter",
-              "megaworld/mask-filters/expand-down-filter",
-              "megaworld/mask-filters/image-filter",
-              "megaworld/mask-filters/mask-operations-filter"
+              {
+                "group": "Terrain",
+                "pages": [
+                  "megaworld/mask-filters/height-filter",
+                  "megaworld/mask-filters/height-noise-filter",
+                  "megaworld/mask-filters/slope-filter",
+                  "megaworld/mask-filters/aspect-filter",
+                  "megaworld/mask-filters/concavity-filter",
+                  "megaworld/mask-filters/textures-filter"
+                ]
+              },
+              {
+                "group": "Procedural",
+                "pages": [
+                  "megaworld/mask-filters/noise-filter",
+                  "megaworld/mask-filters/image-filter"
+                ]
+              },
+              {
+                "group": "Operators",
+                "pages": [
+                  "megaworld/mask-filters/smooth-filter",
+                  "megaworld/mask-filters/expand-filter",
+                  "megaworld/mask-filters/expand-down-filter",
+                  "megaworld/mask-filters/mask-operations-filter"
+                ]
+              }
             ]
           },
           {
             "group": "Transform Components",
             "pages": [
               "megaworld/transform-components/overview",
-              "megaworld/transform-components/align",
-              "megaworld/transform-components/additional-rotation",
-              "megaworld/transform-components/cliffs-align",
-              "megaworld/transform-components/cliffs-position",
-              "megaworld/transform-components/position-offset",
-              "megaworld/transform-components/rotation",
-              "megaworld/transform-components/scale",
-              "megaworld/transform-components/scale-clamp",
-              "megaworld/transform-components/scale-fitness",
-              "megaworld/transform-components/slope-position",
-              "megaworld/transform-components/slope-scale",
-              "megaworld/transform-components/snap-rotation",
-              "megaworld/transform-components/tree-rotation"
+              {
+                "group": "Simple",
+                "pages": [
+                  "megaworld/transform-components/align",
+                  "megaworld/transform-components/position-offset",
+                  "megaworld/transform-components/rotation",
+                  "megaworld/transform-components/scale"
+                ]
+              },
+              {
+                "group": "Advanced",
+                "pages": [
+                  "megaworld/transform-components/additional-rotation",
+                  "megaworld/transform-components/cliffs-align",
+                  "megaworld/transform-components/cliffs-position",
+                  "megaworld/transform-components/scale-clamp",
+                  "megaworld/transform-components/scale-fitness",
+                  "megaworld/transform-components/slope-position",
+                  "megaworld/transform-components/slope-scale",
+                  "megaworld/transform-components/snap-rotation",
+                  "megaworld/transform-components/tree-rotation"
+                ]
+              }
             ]
           },
           {
