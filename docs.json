@@ -17,6 +17,7 @@
             "group": "Overview",
             "pages": [
               "megaworld/overview",
+              "megaworld/tools/overview",
               "megaworld/get-started"
             ]
           },
@@ -30,7 +31,6 @@
           {
             "group": "Tools",
             "pages": [
-              "megaworld/tools/overview",
               {
                 "group": "Terrain Spawner",
                 "pages": [
