@@ -309,8 +309,15 @@
         ]
       }
     ],
-    "global": {}
-
+    "global": {
+      "anchors": [
+        {
+          "name": "Discord",
+          "icon": "discord",
+          "url": "https://discord.gg/fVAmyXs8GH"
+        }
+      ]
+    }
   },
   "logo": {
     "light": "/logo/light.svg",
@@ -323,6 +330,9 @@
         "href": "https://discord.gg/fVAmyXs8GH"
       }
     ]
+  },
+  "feedback": {
+    "thumbsRating": true
   },
   "contextual": {
     "options": [
@@ -338,7 +348,8 @@
   },
   "footer": {
     "socials": {
-      "github": "https://github.com"
+      "discord": "https://discord.gg/fVAmyXs8GH",
+      "github": "https://github.com/vladislavtsurikov"
     }
   }
 }
