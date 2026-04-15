@@ -1,6 +1,6 @@
 ---
 title: "Precise Place — Getting Started"
-description: "Place individual GameObjects precisely with full control over position, rotation, and scale."
+description: "Place individual objects with a live cursor-following preview and mouse-driven transform controls."
 ---
 
 <Info>
@@ -9,7 +9,7 @@ description: "Place individual GameObjects precisely with full control over posi
   - [Working with MegaWorld Window](/megaworld/getting-started/megaworld-window) — how to navigate the window
 </Info>
 
-**Precise Place** is an Editor Window tool for placing individual objects one at a time with exact control. Unlike brush tools that scatter many objects at once, Precise Place lets you click a specific point in the scene and place a single prototype there — with optional snapping, raycast alignment, and transform offsets. Use it for hero props, focal objects, or any placement where position matters precisely.
+**Precise Place** lets you place one object at a time. A preview object follows your cursor in the scene view. Click to place it, or drag to place a sequence of objects along a stroke. Use Precise Place for hero props, path accents, or any placement where exact position matters.
 
 ---
 
@@ -19,31 +19,52 @@ Press **Alt + Z** to open the MegaWorld Window. In the **Tools Panel**, click th
 
 ---
 
-## Step 2 — Add a Type and prototype
+## Step 2 — Add a Group and prototype
 
-In the **Selection Panel**, click **Add Type**. Add a **Unity/GameObject** resource and drag your Prefab into the prototype list.
+In the **Selection Panel**, click **Add Type**. Inside the Group, click **Add Resource** and choose **Unity/GameObject**. Drag your Prefab into the prototype list.
 
-To switch which object gets placed, simply select a different prototype in the Selection Panel.
+To switch which object gets placed, select a different prototype in the Selection Panel.
 
 ---
 
 ## Step 3 — Configure placement settings
 
-In the **Settings Panel**, adjust:
+In the **Settings Panel**, check the **Precise Place Tool Settings** block:
 
-- **Raycast** settings to control how the object aligns to the surface under the cursor.
-- **Transform Components** (rotation, scale offset) for fine-tuned placement defaults.
+- Set **Spacing** to control how far apart objects land when you drag across the scene.
+- Enable **Use Transform Components** if you want rotation or scale variation applied automatically.
+- Enable **Overlap Check** if you want the tool to reject placements that would overlap existing objects.
 
 ---
 
-## Step 4 — Click to place in the scene view
+## Step 4 — Place objects in the scene view
 
-Move your cursor into the **Scene View**. A preview of the object follows the cursor. Click to place it at that exact position, aligned to the surface.
+Move your cursor into the **Scene View**. A preview of the object appears at the cursor's surface position.
+
+- **Click** to place the object and move on.
+- **Click and drag** to place a sequence of objects along the stroke.
+
+---
+
+## Step 5 — Adjust the preview object before placing
+
+While the preview is active, hold hotkeys to modify the object before confirming:
+
+| Shortcut | Action |
+|---|---|
+| `Q + drag` | Move the object up or down |
+| `LShift + drag` | Rotate around Y |
+| `LShift + X + drag` | Rotate around X |
+| `LShift + Z + drag` | Rotate around Z |
+| `LCtrl + LShift + drag` | Uniform scale |
+| `Tab` | Reset transform to the original Prefab values |
+
+See the full list in [Precise Place Hotkeys](/megaworld/tools/precise-place-hotkeys).
 
 ---
 
 ## What's next
 
 - Use [Edit](/megaworld/getting-started/edit) to adjust individual objects after placing them.
-- Use [Pin](/megaworld/getting-started/pin) to lock specific objects in place and protect them from brush operations.
+- Use [Pin](/megaworld/getting-started/pin) for a one-gesture placement where you set rotation and scale in a single drag.
 - Read the full [Precise Place](/megaworld/tools/precise-place) reference documentation.

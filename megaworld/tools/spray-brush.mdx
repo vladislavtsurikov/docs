@@ -1,11 +1,11 @@
 ---
 title: "Spray Brush"
-description: "Quickly scatter objects with a lightweight brush workflow based on simple filters and simple transforms"
+description: "Paint objects into the scene with a brush that places one object per stroke at a random offset within the brush radius"
 ---
 
-Spray Brush is a lightweight painting tool for fast object scattering in the scene.
+Spray Brush is a painting tool that places objects in the scene view as you click or drag. On each stroke tick, it picks a random point inside the brush radius and attempts to place one object there. Placement is filtered by a Simple Filter (height, slope, fractal noise) and blocked by overlap checks.
 
-Compared with **Advanced Brush**, this tool uses a simpler setup: simple filters, simple transform settings, and overlap checks. It is useful when you want a quick manual painting workflow without the full transform component stack.
+Unlike Advanced Brush, Spray Brush places one object per tick rather than filling a scatter pattern, and it uses `SimpleTransformComponentSettings` instead of the full Transform Components stack.
 
 <Info>
   New to Spray Brush? Follow the step-by-step [Spray Brush — Getting Started](/megaworld/getting-started/spray-brush) tutorial first.
@@ -18,31 +18,41 @@ Spray Brush supports:
 - [Terrain Object](/megaworld/resource-types/terrain-object)
 - [Unity/GameObject](/megaworld/resource-types/unity-gameobject)
 
-## Shared systems used by this tool
+## How placement works
 
-Spray Brush uses:
+On each stroke tick the tool:
 
-- [Brush Settings](/megaworld/shared-settings/brush-settings)
-- [Success](/megaworld/shared-settings/success)
-- [Simple Filter Settings](/megaworld/shared-settings/simple-filter-settings)
-- [Simple Transform Settings](/megaworld/shared-settings/simple-transform-settings)
-- [Overlap Check Settings](/megaworld/overlap-check-settings/overview)
+1. Picks a random point on the unit sphere projected onto the surface plane, multiplied by the brush radius. This gives a random offset from the brush center.
+2. Raycasts down to the surface at that offset point.
+3. Evaluates the **Simple Filter** at that hit point. If fitness is zero, the attempt is skipped.
+4. Selects a prototype from the active prototypes in the group using the weighted success values.
+5. Applies `SimpleTransformComponentSettings` to the instance.
+6. Runs the overlap check. If the instance overlaps an existing object, placement is skipped.
+7. If all checks pass, the object is placed and registered for undo.
+
+## Tool-level settings
+
+### Brush Settings
+
+- **Brush Size** — diameter of the brush area in world units. Default: `100`. Use **Shift + Scroll Wheel** in the scene view to adjust.
+- **Spacing** — minimum cursor travel distance before the tool fires another placement attempt during a drag. Default: `30`.
+
+## Group-level settings
+
+- **Simple Filter Settings** — restricts placement by height, slope, and fractal noise. All enabled checks must pass for a placement to occur.
+
+## Per-prototype settings
+
+- **Success** — weighted probability that this prototype is selected when the tool picks from the active prototypes. Prototypes with higher success values are chosen more often.
+- **Overlap Check Settings** — defines the overlap test applied before the object is placed. If the candidate instance overlaps an existing object, placement is cancelled.
+- **Simple Transform Component Settings** — the transform stack applied to each instance before placement. Provides basic position, rotation, and scale randomization.
 
 ## When to use Spray Brush
 
-Spray Brush is best when you want:
-
-- a very fast manual object scattering workflow;
-- lighter setup than **Advanced Brush**;
-- direct control with fewer moving parts;
-- simple variation and overlap protection without the full advanced stack.
-
-## Notes
-
-- Spray Brush samples a point inside the brush radius instead of filling the whole brush area procedurally.
-- The tool uses `SimpleTransformComponentSettings`, not the full [Transform Components](/megaworld/transform-components/overview) stack.
-- This makes the tool quicker to set up, but also less flexible than **Advanced Brush**.
+- Fast manual scatter of objects over an area without configuring a full procedural system.
+- Placing one object type at a time with lightweight setup.
+- Situations where you want direct brush control with simple filters and no full transform stack.
 
 <Note>
-  Use Spray Brush when speed matters more than fine-grained control. If you need terrain details, terrain textures, or the full transform stack, switch to **Advanced Brush**.
+  Spray Brush places one object per stroke tick at a random offset within the radius. If you need deterministic scatter patterns, multiple objects per tick, terrain details, or terrain textures, use **Advanced Brush** instead.
 </Note>

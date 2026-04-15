@@ -1,6 +1,6 @@
 ---
 title: "Physics Effects — Getting Started"
-description: "Apply ongoing physics effects to objects in the scene."
+description: "Apply physics forces to existing GameObjects in the scene by painting over them."
 ---
 
 <Info>
@@ -9,36 +9,63 @@ description: "Apply ongoing physics effects to objects in the scene."
   - [Working with MegaWorld Window](/megaworld/getting-started/megaworld-window) — how to navigate the window
 </Info>
 
-**Physics Effects** is an Editor Window tool that applies continuous or configurable physics forces to objects that are already placed in your scene. Unlike the settle-based tools (Brush Physics, Precise Physics), Physics Effects is used to push, slide, or move objects using forces — useful for interactive environment dressing or controlled repositioning using physics.
+**Physics Effects** is a PhysX Painter tool that applies a physics force to GameObjects that are already in the scene. It does not spawn new objects. Each click or drag fires the active effect, which finds all GameObjects within a sphere around the cursor that belong to a selected prototype, then pushes, pulls, or lifts them using their rigidbodies.
 
 ---
 
 ## Step 1 — Open the MegaWorld Window and select Physics Effects
 
-Press **Alt + Z** to open the MegaWorld Window. In the **Tools Panel**, click the **+** button and choose **Physics Effects**.
+Press **Alt + Z** to open the MegaWorld Window. In the **Tools Panel**, click the **+** button and choose **PhysX Painter → Physics Effects**.
 
 ---
 
-## Step 2 — Select which prototypes to affect
+## Step 2 — Set up your Group with the objects you want to affect
 
-In the **Selection Panel**, choose the Types and prototypes you want to apply physics effects to.
+In the **Selection Panel**, click **Add Group**. Add **Unity/GameObject** resources and add the Prefabs that match the objects already placed in your scene.
 
----
-
-## Step 3 — Configure the effect
-
-In the **Settings Panel**, set the force type, direction, and magnitude of the physics effect.
+<Note>
+  Physics Effects only affects objects whose prototype is currently selected in the active group. Objects in the scene that do not match any selected prototype are ignored.
+</Note>
 
 ---
 
-## Step 4 — Apply in the scene view
+## Step 3 — Select and configure an effect
 
-Click or drag in the **Scene View** to apply the physics effect to objects within the active area.
+In the **Settings Panel**, you will see the effect stack. Each effect type is listed — click one to select it as the active effect.
+
+Configure the shared settings for the selected effect:
+
+- **Position Offset Y** — the vertical offset of the effect center above the surface hit point. Controls where the overlap sphere is centered. Range: –20 to 20. Default: `0`.
+- **Size** — the diameter of the sphere used to find affected objects. Default: `10`.
+
+Then configure the effect-specific settings:
+
+- **Explosion** — set **Force** (0–500, default `50`) to control the strength of the radial blast.
+- **Black Hole** — set **Force** (0–500, default `50`) to control how strongly objects are pulled toward the center.
+- **Fly Up** — set **Force** (0–200, default `30`) to control how strongly objects are pushed upward.
+- **Simple Force** — set **Angle** (0–360, default `0`) to aim the force direction in the XZ plane, and **Force** (0–500, default `1`) for the magnitude.
+
+---
+
+## Step 4 — Apply the effect in the scene view
+
+Move your cursor into the **Scene View**. A colored sphere shows the active effect area. Click or drag to apply the effect — all matching GameObjects within the sphere receive the force immediately.
+
+- **Explosion** sphere is red
+- **Black Hole** sphere is black
+- **Fly Up** sphere is blue with an upward arrow
+- **Simple Force** sphere is green with a direction line
+
+---
+
+## Step 5 — Undo if needed
+
+Press **Ctrl + Z** to undo. Each mouse release creates one undo record.
 
 ---
 
 ## What's next
 
-- Use [Explode Physics](/megaworld/getting-started/explode-physics) for a one-shot radial scatter.
-- Use [Brush Physics](/megaworld/getting-started/brush-physics) to settle objects after applying effects.
+- Use [Explode Physics](/megaworld/getting-started/explode-physics) to scatter new objects with an outward burst.
+- Use [Brush Physics](/megaworld/getting-started/brush-physics) to drop new objects onto the scene with physics settling.
 - Read the full [Physics Effects](/megaworld/tools/physics-effects) reference documentation.

@@ -1,11 +1,11 @@
 ---
 title: "Precise Physics"
-description: "Place physics-simulated objects more deliberately, one interaction at a time"
+description: "Spawn a single physics-simulated object at the exact cursor point and let it fall onto the surface"
 ---
 
-Precise Physics is a PhysX Painter tool for more deliberate physics-based placement.
+Precise Physics is a PhysX Painter tool that places one object per click or spacing interval at the cursor position, raises it above the surface by a fixed offset, then drops it using physics simulation.
 
-Where **Brush Physics** is optimized for brush-style repeated strokes, **Precise Physics** is closer to targeted placement with spacing and an explicit placement point.
+Unlike Brush Physics, which scatters many objects across a brush area using the Scatter system, Precise Physics places exactly one object per interaction with no scatter distribution — you control the exact placement point.
 
 <Info>
   New to Precise Physics? Follow the step-by-step [Precise Physics — Getting Started](/megaworld/getting-started/precise-physics) tutorial first.
@@ -18,36 +18,45 @@ Precise Physics supports:
 - [Terrain Object](/megaworld/resource-types/terrain-object)
 - [Unity/GameObject](/megaworld/resource-types/unity-gameobject)
 
-## Tool-level controls
+## How it works
 
-Precise Physics uses:
+1. You click or drag in the scene view. The tool casts a ray downward at the cursor position.
+2. A random prototype is selected from the active group based on Success weights.
+3. The prototype is instantiated at the ray hit point offset upward by **Position Offset Y**.
+4. Physics simulation starts immediately in acceleration mode. The object falls, collides with the terrain and other colliders, and is frozen when physics settles.
+5. The **Physics Effects** force is applied to the spawned rigidbody at spawn time.
+6. The scene view shows a small sphere handle above the hit point to indicate where the object will spawn.
 
-- **Precise Physics Tool**
-- **Physics Effects**
+## Tool-level settings
 
-The confirmed tool settings are:
+### Precise Physics Tool Settings
 
-- [Spacing](/megaworld/shared-settings/spacing) — minimum distance between consecutive placements.
-- [Position Offset Y](/megaworld/shared-settings/position-offset) — shifts the spawn point above the surface before physics simulation begins.
+- **Spacing** — the minimum cursor travel distance (in world units) before a new placement fires while dragging. Default: `5`. Minimum: `0.5`. Lower values place objects more densely when you drag; higher values space them further apart.
+- **Position Offset Y** — how far above the surface hit point the object is spawned before falling. Default: `30`. Adjust this based on the size of your objects and how much fall height you want.
 
-## Shared systems used by this tool
+### Physics Effects
 
-Precise Physics uses:
+Controls the initial impulse applied to each spawned object. See [Physics Effects Settings](/megaworld/shared-settings/physics-effects-settings) for all fields.
 
-- [Physics Transform Settings](/megaworld/shared-settings/physics-transform-settings)
-- [Success](/megaworld/shared-settings/success)
-- **Physics Effects**
+## Prototype-level settings
+
+Each prototype in the group has:
+
+- [Success](/megaworld/shared-settings/success) — controls the probability that a given prototype is selected.
+- [Physics Transform Settings](/megaworld/shared-settings/physics-transform-settings) — transform components applied before the object enters physics simulation.
 
 ## When to use Precise Physics
 
-Precise Physics is best when you want:
+Precise Physics is best when you want to:
 
-- more intentional physics placement than a broad brush stroke;
-- to place objects one action at a time with a clear preview point;
-- physics-based settling without switching to a large-area stamper workflow.
+- place a single object at a deliberate point and let physics determine its final resting pose;
+- add individual props one at a time in a targeted location;
+- use physics settling for exact placements rather than broad scatter strokes.
 
 ## Notes
 
-- Precise Physics is part of the **PhysX Painter** family.
-- The scene view shows a direct placement marker instead of a brush volume.
-- The selected prototype is chosen from the active group, then placed through the physics workflow.
+- The tool belongs to the **PhysX Painter** family.
+- No Scatter system is involved — one object is placed per interaction.
+- The physics simulator uses **acceleration physics mode** and **ObjectTimeDisablePhysicsMode**.
+- Undo is registered after mouse release.
+- The scene view marker is a colored sphere handle offset above the cursor hit point by the current **Position Offset Y** value.

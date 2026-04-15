@@ -1,41 +1,15 @@
 ---
 title: "Edit"
-description: "Directly edit placed objects with action-based tools such as rotate, scale, remove, and raycast"
+description: "Select individual placed objects in the scene and modify them with action-based mouse controls"
 ---
 
-Edit is a Happy Artist tool for direct object manipulation.
+Edit is a Happy Artist tool for direct object-by-object manipulation.
 
-It is built around an action stack rather than a brush or stamper workflow, which makes it suitable for targeted edits to already placed objects.
+You choose an action (move, rotate, scale, raycast, or remove), then click handle buttons that appear over nearby objects in the scene view. The tool works without a brush or stamp area — it affects one object per click.
 
 <Info>
   New to Edit? Follow the step-by-step [Edit — Getting Started](/megaworld/getting-started/edit) tutorial first.
 </Info>
-
-## Features
-
-### Unity Handles
-
-Edit supports standard Unity transform gizmos (position, rotation, scale). Switch to Unity Handles mode when you need precise control using the familiar Unity viewport workflow.
-
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
-  src="/images/megaworld/tools/edit/unity-handles.png"
-  alt="Edit Tool Unity Handles mode in the scene view."
-/>
-
-### Mouse Modify
-
-Edit also supports a direct mouse-driven modification mode. In Mouse Modify mode you can move, rotate, scale, and raycast-align objects by holding hotkeys and dragging the mouse — without clicking through separate gizmo handles. This is faster for iterative adjustments.
-
-### Remove
-
-Edit can delete individual placed objects directly in the scene view. This lets you clean up placement without switching tools or using the hierarchy.
-
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
-  src="/images/megaworld/tools/edit/remove-action.gif"
-  alt="Edit Tool removing placed objects in the scene view."
-/>
 
 ## Supported resource types
 
@@ -44,31 +18,68 @@ Edit supports:
 - [Terrain Object](/megaworld/resource-types/terrain-object)
 - [Unity/GameObject](/megaworld/resource-types/unity-gameobject)
 
+## How it works
+
+1. Move the cursor over the scene view. Edit raycasts from the cursor against all colliders and finds every eligible object within **Sphere Size** of the hit point and within **Max Distance** of the scene camera.
+2. A handle button appears at each eligible object's position. The button color reflects the active action (grey for most actions, red for Remove).
+3. Click a handle button to apply the active action to that object.
+4. For actions that use mouse movement (Move Up/Down, Rotate, Scale), keep the mouse button held and drag horizontally after clicking to apply the change. Release the mouse to confirm.
+
 ## Tool-level controls
 
 Edit uses **Edit Tool Settings** with the following fields:
 
-- **Sphere Size** — the radius around the raycast hit point within which objects are detected and made eligible for editing.
-- **Max Distance** — the maximum distance from the camera at which objects can be selected for modification.
-- **Ground Layers** — the layers that the raycast hits to detect ground and locate objects around the impact point.
-- **Mouse Rotation Sensitivity** — how strongly mouse movement translates into transform changes in Mouse Modify mode.
-- **Transform Space** — switches between local and global transform space for all actions.
-- **Raycast Position Offset** — adds a Y-axis offset to the raycast position result, useful for correcting ground-level alignment.
+- **Sphere Size** — the diameter around the cursor's raycast hit point within which objects are detected and shown as handle buttons. Default is `40`.
+- **Max Distance** — objects farther than this from the scene camera are not shown as handle buttons. Default is `200`.
 
 ## Available actions
 
-| Action | What it does |
-|---|---|
-| **Move Up / Down** | Shifts the object along its local Y axis |
-| **Raycast** | Snaps the object down onto the terrain surface using a raycast |
-| **Rotate** | Rotates the object |
-| **Scale** | Scales the object |
-| **Remove** | Deletes the object from the scene |
+Actions are displayed as tabs at the top of the Settings Panel. Press the shortcut key or click the tab to switch the active action.
+
+| Action | Shortcut | What it does |
+|---|---|---|
+| **Move Up/Down** | `Q` | Moves the object along the world Y axis. Hold and drag horizontally to change height. |
+| **Raycast** | `W` | Moves the object to the surface hit by a raycast from the cursor. |
+| **Rotate** | `E` | Rotates the object around the Y axis (global or local). Hold and drag horizontally. |
+| **Scale** | `R` | Scales the object uniformly. Hold and drag horizontally. |
+| **Remove** | `T` | Deletes the object from the scene. |
+
+Press `Space` to toggle transform space between global and local (applies to Rotate).
+
+## Action settings
+
+Each action has its own settings panel when selected.
+
+### Move Up/Down
+
+- **Mouse Sensitivity** — controls how strongly horizontal mouse movement translates into vertical displacement. Adjustable within the allowed range.
+
+### Raycast
+
+- **Raycast Position Offset** — adds a Y-axis offset to the final position after the raycast lands. Default is `0`.
+- **Ground Layers** — the layer mask that the raycast tests against. Default is `Default` layer only.
+
+### Rotate
+
+- **Mouse Sensitivity** — controls how strongly horizontal mouse movement translates into rotation.
+- **Transform Space** — switches between global and local rotation axis. Also toggled by `Space`.
+- **Enable Snap Rotate** — when enabled, rotation snaps to the nearest **Snap Rotate** value. Default is `false`.
+- **Snap Rotate** — the snap increment in degrees. Default is `15`. Only available when **Enable Snap Rotate** is on.
+
+### Scale
+
+- **Mouse Sensitivity** — controls how strongly horizontal mouse movement translates into scale change.
+- **Enable Snap Scale** — when enabled, scale snaps to the nearest **Snap Scale** value. Default is `false`.
+- **Snap Scale** — the snap increment. Default is `1`. Only available when **Enable Snap Scale** is on.
+
+### Remove
+
+No settings. Clicking an object's handle button deletes it immediately.
 
 ## When to use Edit
 
 Edit is best when you want:
 
-- direct targeted edits instead of broad brush operations;
-- to switch between edit actions quickly;
-- precise cleanup and object adjustment after placement.
+- targeted adjustments to individual placed objects without affecting others;
+- quick removal of specific objects;
+- precise rotation or scale corrections after a brush pass.

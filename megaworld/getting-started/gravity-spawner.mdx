@@ -7,46 +7,67 @@ description: "Spawn objects with physics-driven gravity settling using the Gravi
   Before starting this tutorial, read [Working with Data](/megaworld/getting-started/working-with-data) to understand Groups, Resource Types, and Prototypes.
 </Info>
 
-The **Gravity Spawner** is a MonoBehavior tool that spawns GameObjects and then runs a physics simulation so they fall and settle naturally on the terrain surface. This is useful for rocks, debris, fallen leaves, or any prop that should feel physically placed rather than procedurally stamped.
+**Gravity Spawner** is a MonoBehaviour stamper tool that places objects by spawning them above the target surface and running a physics simulation. Each object falls under gravity, settles where it lands, and is then frozen in place. This is useful for rocks, debris, fallen props, or any object that should feel physically placed rather than directly stamped.
 
 ---
 
 ## Step 1 — Add a Gravity Spawner to your scene
 
-Go to `GameObject > MegaWorld > Add Gravity Spawner`, or select a GameObject and use `Add Component > MegaWorld > Gravity Spawner`.
+Go to `GameObject > MegaWorld > Add Gravity Spawner`.
 
-A **Gravity Spawner** component appears on the selected GameObject in your Hierarchy.
+A **Gravity Spawner** component is added to a new GameObject in your Hierarchy. Its Transform scale defaults to `(500, 500, 500)`, which sets the initial stamper area size.
 
 ---
 
-## Step 2 — Add a Type with GameObject prototypes
+## Step 2 — Add a Group with prototypes
 
-Select the Gravity Spawner in the Hierarchy. In the **MegaWorld Window**, click **Add Type**.
+Select the Gravity Spawner in the Hierarchy. In the **MegaWorld Window**, click **Add Type** to create a new Group.
 
-Inside the Type, click **Add Resource** and choose **Unity/GameObject** as the resource type. Then drag your Prefabs (rocks, debris props, etc.) into the prototype list.
+Inside the Group, click **Add Resource** and choose **Unity/GameObject** or **Terrain Object** as the resource type. Drag your Prefabs into the prototype list.
 
 <Note>
-  The Prefabs you use here should have a Collider component so physics settling works correctly. Without a Collider the objects will fall through surfaces.
+  Prefabs used with Gravity Spawner must have Collider components. Without a Collider, objects fall through surfaces during the physics simulation.
 </Note>
 
 ---
 
-## Step 3 — Configure the spawn area and scatter
+## Step 3 — Configure scatter and filters
 
-In the Settings Panel, set the **Area** to cover the region you want to populate. Adjust the **Scatter Settings** to control density — how many objects are dropped per spawn pass.
+In the Group settings, configure **Scatter Settings** to control how densely positions are sampled across the area.
+
+Optionally, add [Mask Filters](/megaworld/mask-filters/overview) to restrict spawning to specific slopes, heights, or terrain textures. Gravity Spawner uses filter fitness both before spawning (to decide whether to spawn at a sample point) and after settling (to decide whether to keep the object at its final position).
 
 ---
 
-## Step 4 — Run the physics simulation
+## Step 4 — Configure physics force (optional)
 
-Click **Spawn** in the Area Settings. MegaWorld spawns the objects and then runs a short physics simulation, letting gravity pull them down until they settle on colliders in your scene.
+In the **Physics Effects Settings** section of the inspector, adjust the force applied to each spawned object:
 
-After settling, the simulation stops and the objects are frozen in place.
+- **Force Range** and **Min / Max Force** — controls how hard each object is launched.
+- **Random Strength** — controls whether force is directed mostly downward (`0`) or in a random horizontal direction (`100`).
+
+At default values (`Min Force: 10`, `Max Force: 40`, `Random Strength: 50`), objects receive a light push in a random direction, which adds variation to where they come to rest.
+
+---
+
+## Step 5 — Configure the physics transform settings (optional)
+
+In the prototype settings, **Physics Transform Settings** applies transform adjustments (position offset, rotation, scale randomization) to each object before the physics simulation starts. Adjust these if you want random rotations or scale variation before objects drop.
+
+---
+
+## Step 6 — Spawn
+
+In the **Stamper Tool Controller** section, click **Spawn**.
+
+Gravity Spawner samples positions inside the area, creates each object 30 units above its hit point, applies force, and then waits for the physics simulation to complete. The inspector shows how many simulated bodies are still active. When all bodies have settled, the pass is complete.
+
+Objects that land outside the stamper bounds, or whose final position fails the filter check, are automatically destroyed.
 
 ---
 
 ## What's next
 
-- Use [Mask Filters](/megaworld/mask-filters/overview) to restrict spawning to specific slopes or heights.
-- Combine with [Terrain Spawner](/megaworld/getting-started/terrain-spawner) to mix gravity-settled debris with procedural vegetation.
-- Read the full [Gravity Spawner](/megaworld/tools/gravity-spawner) reference documentation.
+- Use [Mask Filters](/megaworld/mask-filters/overview) to concentrate spawning on slopes or specific terrain zones.
+- Combine with [Terrain Spawner](/megaworld/getting-started/terrain-spawner) to mix physics-settled debris with procedural vegetation.
+- Read the full [Gravity Spawner](/megaworld/tools/gravity-spawner) reference for details on all settings.

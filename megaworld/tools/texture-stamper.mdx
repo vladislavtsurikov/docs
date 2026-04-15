@@ -1,11 +1,9 @@
 ---
 title: "Texture Stamper"
-description: "Stamp terrain textures inside a bounded area with mask filters and optional cell-based processing"
+description: "Paint Unity Terrain texture layers inside a bounded area with mask filters and optional cell-based processing"
 ---
 
-Texture Stamper is a stamper tool for painting **Unity Terrain Texture** layers inside a selected area.
-
-Instead of spawning objects, it writes terrain texture data. This makes it useful for large terrain-material passes such as grass, dirt, cliffs, roadsides, or biome breakup.
+Texture Stamper is a MonoBehaviour stamper tool that paints **Unity Terrain Texture** layers onto terrain inside a defined area. It does not spawn objects. Instead, it reads filter fitness for each prototype and writes terrain alphamap data.
 
 <Info>
   New to Texture Stamper? Follow the step-by-step [Texture Stamper — Getting Started](/megaworld/getting-started/texture-stamper) tutorial first.
@@ -17,33 +15,79 @@ Texture Stamper supports:
 
 - [Unity/Terrain Texture](/megaworld/resource-types/unity-terrain-texture)
 
-## Shared systems used by this tool
+## How it works
 
-Texture Stamper uses:
+When you click **Spawn**, Texture Stamper processes each active Group in order:
 
-- mask filter settings for each selected terrain texture prototype
-- **Layer Settings** for raycast and terrain targeting
-- **Stamper Tool Controller** for spawn behavior and visualization
+1. Casts a ray downward from the stamper's position to find the surface.
+2. Builds the box area from the result.
+3. For each prototype in the Group, evaluates the Mask Filter at each point in the area and writes terrain alphamap values proportional to the fitness result.
+
+The tool does not use Scatter Settings. It operates directly on the terrain alphamap at full resolution across the stamper bounds.
+
+### Spawn Cells mode
+
+For large terrains, enable **Use Spawn Cells** in the Area Settings. The tool divides the stamper bounds into a grid of cells and processes each one in sequence. This avoids long freezes that can occur when stamping very large areas in a single pass.
+
+When Spawn Cells is enabled:
+- Auto Respawn is not available.
+- Use the **Spawn** and **Refresh** buttons in the Stamper Tool Controller instead.
+- Clicking **Refresh Cells** regenerates the cell grid from the current area bounds and cell size.
 
 ## Area Settings
 
-See [Area Settings](/megaworld/shared-settings/area-settings) for position, size, spawn cells, and handle configuration.
+The Texture Stamper uses a specialized area component (`TextureStamperArea`) that extends the standard Area with texture-specific options.
+
+| Setting | Description | Default |
+|---|---|---|
+| **Fit To Terrain Size** | Button. Resizes the stamper bounds to match the active terrain's size. | — |
+| **Use Spawn Cells** | Divides the area into a grid of cells and processes each cell separately. Recommended when the terrain is larger than 4 km × 4 km. | `false` |
+| **Cell Size** | Width and depth of each spawn cell in meters. Only shown when **Use Spawn Cells** is enabled. | `1000` |
+| **Show Cells** | Draws each cell as a wire cube in the Scene View. Only shown when **Use Spawn Cells** is enabled. | `true` |
+| **Use Mask** | Applies a custom 2D texture mask to modulate the spawn area. Only available when **Use Spawn Cells** is disabled. | `false` |
+| **Mask** | A texture picker showing available masks. Drag Texture2D assets into the panel or right-click to load Polaris brushes. Only shown when **Use Mask** is enabled. | — |
+
+## Stamper Tool Controller settings
+
+The Texture Stamper has its own Stamper Tool Controller with these fields:
+
+| Setting | Description | Default |
+|---|---|---|
+| **Visualisation** | When enabled, shows the Mask Filter output as a colored overlay in the Scene View for the currently selected Group. | `true` |
+| **Auto Respawn** | When enabled, automatically removes the current texture pass and re-runs spawn whenever a setting changes. Not available when **Use Spawn Cells** is on. | `false` |
+| **Delay Auto Spawn** | Time in seconds to wait after a setting change before triggering auto respawn. Range: 0–3. | `0.1` |
+
+### Spawn buttons
+
+| Button | Condition | Behavior |
+|---|---|---|
+| **Spawn** | Auto Respawn off, not spawning | Runs the texture stamp pass over the full area. |
+| **Respawn** | Auto Respawn on, or no prototype selected | Removes the current pass and re-runs spawn. |
+| **Cancel** | Currently spawning | Cancels the in-progress spawn. |
+| **Spawn** (cells) | Use Spawn Cells on, not spawning | Generates cells if none exist, then processes each cell. |
+| **Refresh** (cells) | Use Spawn Cells on, no prototype selected | Clears the current pass, regenerates cells if needed, and re-runs spawn. |
+
+## Per-prototype settings
+
+Each Terrain Texture prototype has:
+
+- [Mask Filters](/megaworld/mask-filters/overview) — determines where the texture is painted and at what strength.
+
+## Shared components
+
+- [Stamper Tool Controller](/megaworld/shared-settings/stamper-tool-controller) — general stamper behavior.
+- [Layer Settings](/megaworld/shared-settings/layer-settings) — specifies which layers are used for raycasts.
 
 ## When to use Texture Stamper
 
 Texture Stamper is best when you want:
 
-- a large terrain texture pass inside a controlled area;
-- reusable texture stamping workflows based on a scene object;
-- mask-driven texturing instead of manual terrain painting;
-- cell-based processing for large texture areas.
+- a terrain texture pass driven by height, slope, or noise filters across a large area;
+- repeatable texturing tied to a scene stamper object rather than manual brush painting;
+- cell-based processing for terrain larger than 4 km × 4 km.
 
 ## Notes
 
-- Texture Stamper is focused on terrain textures only, not objects.
-- The main logic comes from the mask filter stack and the selected area shape.
-- If you enable spawn cells, the tool processes the area through separate bounds instead of relying on a single full-area mask.
-
-<Note>
-  Use Texture Stamper when you want repeatable terrain texturing. Use brush-based workflows when you want more direct hand-painted control.
-</Note>
+- Texture Stamper only works on Unity Terrain. It writes to the terrain's alphamap data directly.
+- The **Use Mask** option is mutually exclusive with **Use Spawn Cells**. When cells are on, the area mask is ignored and `Texture2D.whiteTexture` is used (full coverage).
+- When visualization is on and exactly one Group is selected, the Scene View shows the Mask Filter output as an overlay over the stamper area.

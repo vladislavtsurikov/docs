@@ -1,11 +1,9 @@
 ---
 title: "Explode Physics"
-description: "Burst-spawn physics objects from a point or radius and let the explosion spread them"
+description: "Spawn a burst of physics objects at the cursor point and propel them outward or in random directions"
 ---
 
-Explode Physics is a PhysX Painter tool for burst-style physics spawning.
-
-It creates multiple instances and throws them outward, which makes it useful for explosive scattering, debris effects, and dynamic distribution from a target point.
+Explode Physics is a PhysX Painter tool that spawns multiple objects in a single interaction and immediately applies an outward or randomized physics force to each one. The objects scatter, collide with the environment, and settle under gravity.
 
 <Info>
   New to Explode Physics? Follow the step-by-step [Explode Physics — Getting Started](/megaworld/getting-started/explode-physics) tutorial first.
@@ -18,37 +16,45 @@ Explode Physics supports:
 - [Unity/GameObject](/megaworld/resource-types/unity-gameobject)
 - [Terrain Object](/megaworld/resource-types/terrain-object)
 
-## Tool-level controls
+## How it works
 
-Explode Physics uses **Explode Physics Tool Settings**.
+1. You click or drag in the scene view. The tool casts a ray downward to find the surface point.
+2. A random count between **Instances Min** and **Instances Max** is chosen.
+3. For each instance:
+   - A random prototype is selected from the active group.
+   - The center spawn point is offset above the surface by **Position Offset Y**.
+   - If **Spawn From One Point** is off, the individual instance position is offset by a random vector inside a sphere of radius `Size / 2` around the center. If it is on, every instance spawns at the exact center point.
+   - The object is instantiated and physics simulation begins immediately.
+   - If **Spawn From One Point** is off, a force is applied in the direction from the center point to the instance position, scaled by **Force**. If it is on, a force is applied in a random direction instead (Force is not used in that case).
+4. After all instances are spawned, physics runs until all simulated bodies settle.
 
-The current tool settings include:
+## Tool-level settings
 
-- **Force** — the strength of the explosion impulse applied to each spawned instance.
-- **Instances Min** / **Instances Max** — the range of how many instances are spawned per interaction. MegaWorld picks a random count within this range.
-- [Position Offset Y](/megaworld/shared-settings/position-offset) — shifts the spawn point above the surface before the explosion force is applied.
-- **Size** — the radius of the spawn area when **Spawn From One Point** is disabled.
-- [Spacing](/megaworld/shared-settings/spacing) — minimum distance between consecutive interactions.
-- **Spawn From One Point** — when enabled, all instances emit from a single point instead of being distributed across the spawn area.
+### Explode Physics Tool Settings
 
-## Core behavior
+- **Position Offset Y** — how far above the surface hit point the center of the explosion is placed. Default: `15`.
+- **Spacing** — minimum cursor travel distance before a new burst fires while dragging. Default: `20`. Minimum: `0.5`.
+- **Instances** — a min/max range slider controlling how many objects are spawned per interaction. Range: 2–200. Default min: `25`, default max: `50`.
+- **Spawn From One Point** — when enabled, all objects spawn at the center point and each receives a random-direction force. When disabled, objects are distributed within a sphere and pushed outward from the center. Default: `false`.
+- **Size** — the diameter of the spawn sphere when **Spawn From One Point** is off. Shown as a slider from 10 to 300. Default: `10`. Only visible when **Spawn From One Point** is off.
+- **Force** — the magnitude of the outward force applied to each instance when **Spawn From One Point** is off. Slider from 0 to 100. Default: `20`. Only visible when **Spawn From One Point** is off.
 
-Depending on the current settings, the tool can:
+## Scene view visualization
 
-- emit instances from one point;
-- emit them inside a sphere-sized area;
-- control how many instances are created;
-- control how strongly they are pushed by the explosion.
+- When **Spawn From One Point** is off: a sphere handle is drawn at the offset center point, and a dotted line connects the surface hit to the center. The sphere diameter matches **Size**.
+- When **Spawn From One Point** is on: a small button handle is drawn at the center point only.
 
 ## When to use Explode Physics
 
-Explode Physics is best when you want:
+Explode Physics is best when you want to:
 
-- a burst of scattered props or debris;
-- explosive-looking object distribution;
-- quick dynamic variation that would be tedious to place by hand.
+- create a burst of scattered debris or props from a single impact point;
+- quickly fill an area with randomly distributed objects in one or a few clicks;
+- achieve chaotic or explosive-looking object distributions that would be slow to place manually.
 
 ## Notes
 
-- The scene view visual changes depending on whether **Spawn From One Point** is enabled.
-- This tool is about dynamic emission and force, not careful placement precision.
+- The tool belongs to the **PhysX Painter** family.
+- No Scatter or Success system is used — each object is picked randomly from all selected prototypes, and all instances in a burst are spawned unconditionally.
+- The physics simulator uses **acceleration physics mode** and **ObjectTimeDisablePhysicsMode**.
+- Undo is registered after mouse release, so a full drag stroke is undone in one step.

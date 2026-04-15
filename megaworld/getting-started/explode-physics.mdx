@@ -1,6 +1,6 @@
 ---
 title: "Explode Physics — Getting Started"
-description: "Scatter objects outward using a physics explosion impulse."
+description: "Spawn a burst of physics objects from a point and propel them outward using a physics force."
 ---
 
 <Info>
@@ -9,44 +9,53 @@ description: "Scatter objects outward using a physics explosion impulse."
   - [Working with MegaWorld Window](/megaworld/getting-started/megaworld-window) — how to navigate the window
 </Info>
 
-**Explode Physics** applies a radial outward impulse to existing objects in your scene, scattering them using physics simulation. This creates a natural, chaotic distribution that is difficult to achieve with procedural scatter alone — useful for rubble fields, fallen debris, scattered items, or any layout where objects should appear randomly thrown or scattered by an impact.
+**Explode Physics** spawns multiple new objects in a single click, distributes them across a sphere (or concentrates them at one point), and immediately pushes them outward using a physics force. The objects then collide with the environment and settle under gravity. Use this tool to create debris piles, scattered props, or any layout that should look like objects were thrown or blasted from a point.
 
 ---
 
 ## Step 1 — Open the MegaWorld Window and select Explode Physics
 
-Press **Alt + Z** to open the MegaWorld Window. In the **Tools Panel**, click the **+** button and choose **Explode Physics**.
+Press **Alt + Z** to open the MegaWorld Window. In the **Tools Panel**, click the **+** button and choose **PhysX Painter → Explode Physics**.
 
 ---
 
-## Step 2 — Select which prototypes to explode
+## Step 2 — Add a Group and prototypes
 
-In the **Selection Panel**, choose the Types and prototypes you want to affect.
+In the **Selection Panel**, click **Add Group**. Inside the group, add **Unity/GameObject** or **Terrain Object** resources and add your Prefabs.
 
 <Note>
-  Prefabs need Collider and Rigidbody components (or MegaWorld will add temporary ones) for the impulse to work correctly.
+  Your Prefabs need Collider components. The physics simulator creates temporary Rigidbodies for each instance during simulation.
 </Note>
 
 ---
 
-## Step 3 — Configure the explosion
+## Step 3 — Configure the explosion settings
 
 In the **Settings Panel**, configure:
 
-- **Explosion Radius** — how far the impulse reaches.
-- **Explosion Force** — the strength of the outward push.
-- Additional physics parameters that control how objects come to rest after the explosion.
+- **Position Offset Y** — the height above the surface at which the burst center is placed. Default: `15`.
+- **Instances** — the min/max range for how many objects are created per click. Default: 25–50. Adjust for a smaller or larger burst.
+- **Spawn From One Point** — when off (default), objects are spread randomly inside a sphere and pushed outward. When on, all objects spawn at the center and receive a random-direction force.
+- **Size** — the diameter of the spawn sphere when **Spawn From One Point** is off. Default: `10`. Visible only when **Spawn From One Point** is off.
+- **Force** — the strength of the outward push. Default: `20`. Visible only when **Spawn From One Point** is off.
+- **Spacing** — minimum cursor movement before a new burst fires while dragging. Default: `20`.
 
 ---
 
-## Step 4 — Trigger the explosion in the scene view
+## Step 4 — Click in the scene view to trigger the burst
 
-Click in the **Scene View** at the explosion origin point. All selected prototype objects within the radius receive the impulse and scatter outward, then settle under gravity.
+Move your cursor into the **Scene View**. A sphere handle shows the spawn area and offset center point. Click to trigger the burst — a random number of objects between **Instances Min** and **Instances Max** spawn and are pushed outward, then fall and settle.
+
+---
+
+## Step 5 — Undo if needed
+
+Press **Ctrl + Z** to undo. The full burst from one mouse click or drag is undone in one step.
 
 ---
 
 ## What's next
 
-- Use [Brush Physics](/megaworld/getting-started/brush-physics) to settle the scattered objects smoothly onto the terrain.
-- Use [Brush Erase](/megaworld/getting-started/brush-erase) to remove stray objects that landed in unwanted places.
+- Use [Brush Physics](/megaworld/getting-started/brush-physics) to scatter objects more gradually across a larger area.
+- Use [Brush Erase](/megaworld/getting-started/brush-erase) to remove objects that landed in unwanted places.
 - Read the full [Explode Physics](/megaworld/tools/explode-physics) reference documentation.

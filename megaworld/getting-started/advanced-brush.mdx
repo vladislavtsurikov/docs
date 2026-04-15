@@ -1,6 +1,6 @@
 ---
 title: "Advanced Brush — Getting Started"
-description: "Paint GameObjects interactively in the scene view using the Advanced Brush."
+description: "Paint objects, terrain details, and terrain textures directly in the scene view using the Advanced Brush."
 ---
 
 <Info>
@@ -9,7 +9,7 @@ description: "Paint GameObjects interactively in the scene view using the Advanc
   - [Working with MegaWorld Window](/megaworld/getting-started/megaworld-window) — how to navigate the window
 </Info>
 
-The **Advanced Brush** is an Editor Window tool for painting GameObjects and terrain objects interactively in the scene view. Unlike the Terrain Spawner which fills an area in one click, the Advanced Brush lets you direct exactly where objects appear by dragging the brush across the scene. It supports spherical spawning, realistic scatter, slope alignment, and overlap checks — making it the most fully-featured placement brush in MegaWorld.
+The **Advanced Brush** lets you paint objects directly in the scene view. Unlike the Terrain Spawner which fills an area in one pass, the Advanced Brush lets you direct exactly where objects appear by clicking and dragging across the scene. It supports all four MegaWorld resource types and runs the same filter, scatter, transform, and overlap-check systems as the procedural tools.
 
 ---
 
@@ -19,12 +19,12 @@ Press **Alt + Z** to open the MegaWorld Window. In the **Tools Panel**, click th
 
 ---
 
-## Step 2 — Add a Type and prototypes
+## Step 2 — Add a Group and prototypes
 
-In the **Selection Panel**, click **Add Type**. Inside the Type, click **Add Resource** and choose **Unity/GameObject**. Drag your Prefabs (trees, rocks, props) into the prototype list.
+In the **Selection Panel**, click **Add Type**. Inside the Group, click **Add Resource** and choose **Unity/GameObject**. Drag your Prefabs (trees, rocks, props) into the prototype list.
 
 <Note>
-  Add several Prefabs to the same Type. The Advanced Brush randomly picks among them while you paint, which naturally breaks up repetition.
+  Add several Prefabs to the same Group. Advanced Brush randomly picks among them while you paint, which naturally breaks up visual repetition.
 </Note>
 
 ---
@@ -34,25 +34,27 @@ In the **Selection Panel**, click **Add Type**. Inside the Type, click **Add Res
 In the **Settings Panel**, adjust:
 
 - **Brush Size** — controls the radius of the painted area.
-- **Brush Strength / Density** — controls how many objects spawn per brush stroke.
-- **Scatter Settings** — choose between Random Point, Grid, or Poisson Disc distribution.
+- **Spacing** — controls how far the cursor must move before another spawn point fires during a drag stroke.
+- **Scatter Settings** — choose how spawn points are distributed inside the brush area (random, grid, Poisson disc, and others).
 
 Optionally add [Mask Filters](/megaworld/mask-filters/overview) to restrict painting to specific heights, slopes, or terrain textures.
+
+Add [Transform Components](/megaworld/transform-components/overview) for rotation and scale variation on each placed object.
 
 ---
 
 ## Step 4 — Paint in the scene view
 
-Move your cursor into the **Scene View**. A circular brush preview shows the spawn area. Click and drag to paint objects.
+Move your cursor into the **Scene View**. A circular brush preview shows the area that will be affected.
 
-Hold **Ctrl** while painting to erase objects in the brush area.
+- **Click** to paint once at the cursor position.
+- **Click and drag** to paint continuously across the scene.
 
 ---
 
 ## What's next
 
-- Enable **Spherical Spawn** in the brush settings to paint on vertical or curved surfaces.
-- Add **Transform Components** (rotation, scale variation) for more organic-looking results.
-- Use [Brush Modify](/megaworld/getting-started/brush-modify) to tweak already-painted objects without removing them.
-- Use [Brush Erase](/megaworld/getting-started/brush-erase) for selective cleanup.
+- Enable **Spherical** mode in [Brush Settings](/megaworld/shared-settings/brush-settings) to paint on vertical or curved surfaces.
+- Use [Brush Modify](/megaworld/getting-started/brush-modify) to adjust already-painted objects without removing them.
+- Use [Brush Erase](/megaworld/getting-started/brush-erase) to remove painted objects.
 - Read the full [Advanced Brush](/megaworld/tools/advanced-brush) reference documentation.

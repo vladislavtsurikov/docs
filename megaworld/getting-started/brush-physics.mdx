@@ -1,6 +1,6 @@
 ---
 title: "Brush Physics — Getting Started"
-description: "Apply physics simulation to already-placed objects using a brush."
+description: "Spawn physics-simulated objects with a brush and let them fall and settle onto the scene."
 ---
 
 <Info>
@@ -9,40 +9,51 @@ description: "Apply physics simulation to already-placed objects using a brush."
   - [Working with MegaWorld Window](/megaworld/getting-started/megaworld-window) — how to navigate the window
 </Info>
 
-The **Brush Physics** tool runs a local physics simulation on objects that are already placed in your scene. Paint over an area and the selected objects get temporarily given physics rigidbodies, fall or settle under gravity and collisions, and are then frozen in their new positions. This is useful for naturally settling objects that were placed procedurally but look too uniform.
+**Brush Physics** is a PhysX Painter tool that spawns new objects above the surface and drops them using physics simulation. Each brush stroke uses the Scatter system to distribute sample points within the brush area, instantiates a prototype at each valid point raised by **Position Offset Y**, then lets physics run until the objects settle. This is different from the standard Advanced Brush: objects land where physics puts them, not where the scatter point is.
 
 ---
 
 ## Step 1 — Open the MegaWorld Window and select Brush Physics
 
-Press **Alt + Z** to open the MegaWorld Window. In the **Tools Panel**, click the **+** button and choose **Brush Physics**.
+Press **Alt + Z** to open the MegaWorld Window. In the **Tools Panel**, click the **+** button and choose **PhysX Painter → Brush Physics**.
 
 ---
 
-## Step 2 — Select which prototypes to simulate
+## Step 2 — Add a Group and prototypes
 
-In the **Selection Panel**, choose the Types and prototypes you want the physics brush to affect.
+In the **Selection Panel**, click **Add Group**. Inside the group, click **Add Resource** and choose **Unity/GameObject** or **Terrain Object**. Add the Prefabs you want to spawn.
 
 <Note>
-  Make sure your Prefabs have Collider components. Physics settling requires colliders to interact with the terrain and other objects.
+  Your Prefabs need Collider components so that the physics simulation can detect collisions with the terrain and other objects. Without colliders, objects will fall through the surface.
 </Note>
 
 ---
 
-## Step 3 — Set brush size
+## Step 3 — Configure the tool settings
 
-In the **Settings Panel**, set the **Brush Size** to control how wide the physics area is. Configure the simulation duration and any additional physics settings.
+In the **Settings Panel**, set:
+
+- **Brush Size** — the radius of the brush area where objects can land.
+- **Position Offset Y** — the height above the surface at which each object spawns before falling. The default is `30`. Increase this for a longer drop; decrease it if objects are landing with too much energy.
+- **Spacing** — the minimum brush movement before a new stroke fires.
+- **Physics Effects** — the initial impulse applied to each object at spawn. Leave the force low (or zero) for a simple vertical drop.
 
 ---
 
 ## Step 4 — Paint in the scene view
 
-Move your cursor into the **Scene View** and drag the brush over the area you want to settle. The tool runs the simulation and freezes objects once it completes.
+Move your cursor into the **Scene View**. A brush preview shows the area. Click and drag to paint — objects spawn above the brush area and fall onto the surface. They collide with the terrain and each other and freeze once physics settles.
+
+---
+
+## Step 5 — Undo if needed
+
+Press **Ctrl + Z** to undo. A full drag stroke is undone in one step after you release the mouse.
 
 ---
 
 ## What's next
 
-- Use [Precise Physics](/megaworld/getting-started/precise-physics) for more controlled simulation on individual objects.
-- Use [Explode Physics](/megaworld/getting-started/explode-physics) to scatter objects outward with a physics impulse.
+- Use [Precise Physics](/megaworld/getting-started/precise-physics) to drop individual objects at a specific point.
+- Use [Explode Physics](/megaworld/getting-started/explode-physics) to burst-spawn a group of objects with an outward force.
 - Read the full [Brush Physics](/megaworld/tools/brush-physics) reference documentation.

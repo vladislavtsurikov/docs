@@ -1,11 +1,11 @@
 ---
 title: "Brush Erase"
-description: "Erase objects and terrain details with a brush using filter-based and per-prototype erase control"
+description: "Remove placed objects and terrain details with a brush, using filter-based and per-prototype erase probability"
 ---
 
-Brush Erase is the erasing counterpart to the painting workflows. It lets you remove placed objects or terrain details directly in the scene with a brush.
+Brush Erase removes placed objects and terrain details directly in the scene view. You click or drag to define an erase area, and the tool removes objects within that area based on brush mask strength, filter fitness, Erase Strength, and each prototype's per-prototype erase probability.
 
-Instead of erasing everything uniformly, the tool combines brush strength, filter fitness, mask influence, and per-prototype erase success.
+The tool does not delete everything it touches. Each candidate object passes through a probability check before it is removed, which lets you erase softly or selectively.
 
 <Info>
   New to Brush Erase? Follow the step-by-step [Brush Erase — Getting Started](/megaworld/getting-started/brush-erase) tutorial first.
@@ -19,49 +19,58 @@ Brush Erase supports:
 - [Unity/GameObject](/megaworld/resource-types/unity-gameobject)
 - [Unity/Terrain Detail](/megaworld/resource-types/unity-terrain-detail)
 
-## Tool-level controls
+## Tool-level settings
 
-Brush Erase uses:
+### Brush Erase Tool Settings
 
-- **Brush Erase Tool Settings**
-- **Brush Settings**
+**Erase Strength** — scales the overall probability that any given object is erased. Range: `0` to `1`. Default: `1`.
 
-The main tool-specific control is:
+At `1`, fitness and brush mask are the only limiting factors. At lower values, fewer objects pass the erase check even when fitness and mask are high.
 
-- **Erase Strength** which scales how strongly the erase pass removes data.
+### Brush Settings
 
-## Shared systems used by this tool
+Controls the brush used to define the erase area.
 
-For **Terrain Object** and **Unity/GameObject** groups, Brush Erase uses:
+- **Brush Size** — diameter of the erase area in world units. Default: `100`. Use **Shift + Scroll Wheel** in the scene view to adjust.
+- **Spacing** — minimum distance the cursor must move before the tool re-fires during a drag. Default: `30`.
 
-- [Filter Settings](/megaworld/mask-filters/overview)
-- `Additional Erase Settings` on each prototype
+## Group-level settings
 
-For **Unity/Terrain Detail** groups, Brush Erase uses:
+### For Terrain Object and Unity/GameObject groups
 
-- mask filter settings
-- `Additional Erase Settings` on each prototype
+- [Filter Settings](/megaworld/mask-filters/overview) — controls which objects pass the filter. Supports both Simple Filter and Mask Filter modes.
+
+### For Unity/Terrain Detail groups
+
+- Mask Filter settings — applied as a mask texture over the erase area to modulate detail density reduction.
+
+## Per-prototype settings
+
+Each prototype has an **Additional Erase Settings** section with one field:
+
+**Success of Erase (%)** — the probability, in percent, that an object is erased once it has already passed the fitness and brush mask check. Range: `0` to `100`. Default: `100`.
+
+At `100`, every object that passes the main check is erased. At lower values, the tool skips some objects randomly, leaving them in place.
 
 ## How erase is evaluated
 
-Brush Erase does not simply delete everything under the brush. It combines:
+For each object inside the brush area, the tool computes a combined probability value:
 
-- the current brush mask;
-- filter fitness or mask-filter result;
-- **Erase Strength**;
-- the per-prototype erase success value.
+```
+fitness × brush_mask_alpha × Erase Strength
+```
 
-This makes it possible to erase softly, selectively, or with variation.
+A random value from `0` to `1` is compared against this combined value. If the random value is less than the combined value, the object moves to the second check — the per-prototype **Success of Erase (%)** — which applies another random probability. Only objects that pass both checks are removed.
+
+For **Terrain Detail**, the same logic applies per detail cell, but erasure reduces the detail density value rather than deleting a discrete object.
 
 ## When to use Brush Erase
 
-Brush Erase is best when you want:
-
-- to clean up unwanted placements manually;
-- to thin out dense areas without deleting everything;
-- to erase terrain details with mask-aware behavior;
-- an erasing workflow that still respects MegaWorld’s filtering logic.
+- Cleaning up unwanted placements after a procedural spawn pass.
+- Cutting paths or clearings through vegetation.
+- Thinning dense areas without removing everything.
+- Erasing terrain details with mask-aware, graduated density reduction.
 
 <Note>
-  If erasing feels too aggressive, reduce **Erase Strength** first. If only certain prototypes should survive more often, lower their per-prototype erase success instead of changing the whole tool.
+  If the brush removes too much at once, reduce **Erase Strength** first. If you want specific prototypes to survive more often, lower their **Success of Erase (%)** rather than changing the whole tool.
 </Note>

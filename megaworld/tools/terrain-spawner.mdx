@@ -3,117 +3,11 @@ title: "Terrain Spawner"
 description: "Spawn objects and terrain details inside a bounded area using filters, scatter, and prototype settings"
 ---
 
-Terrain Spawner is a stamper tool for procedural placement inside a defined area. You position and scale the stamper in the scene, then MegaWorld evaluates the selected groups and fills that volume with the prototypes that pass your rules.
-
-This is one of the best tools when you want to generate a large area at once instead of painting manually.
+Terrain Spawner is a MonoBehaviour stamper tool for procedural placement inside a defined area. You position and scale the stamper in the scene, then MegaWorld evaluates each active Group and fills the area with prototypes that pass your filters.
 
 <Info>
   New to Terrain Spawner? Follow the step-by-step [Terrain Spawner — Getting Started](/megaworld/getting-started/terrain-spawner) tutorial first.
 </Info>
-
-## Features
-
-### Spawn large terrain objects in one click
-
-Terrain Spawner fills the entire stamper area in a single pass. For very large terrains, enable **Use Spawn Cells** so the area is processed cell by cell instead of all at once. This avoids long freezes and prevents Unity from crashing on extremely large areas.
-
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
-  src="/images/megaworld/tools/terrain-spawner/spawn-cells-overview.png"
-  alt="Terrain Spawner spawn cells area overview."
-/>
-
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px', marginTop: '1rem' }}
-  src="/images/megaworld/tools/terrain-spawner/spawn-cells-result.png"
-  alt="Terrain Spawner spawn result across large terrain."
-/>
-
-### Optimized visualization for large terrains
-
-Enable **Enable Visualization** in the Stamper Tool Controller to preview mask filter output directly in the scene view. Visualization quality and style can be adjusted globally in [Preferences](/megaworld/preferences/overview).
-
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
-  src="/images/megaworld/tools/terrain-spawner/visualization-scene.png"
-  alt="Terrain Spawner visualization in the scene view."
-/>
-
-### Spawn support for all resource types
-
-Terrain Spawner works with every MegaWorld resource kind in a single tool:
-
-- [Terrain Object](/megaworld/resource-types/terrain-object) and **Unity/GameObject** — procedural object placement with the full shared stack
-- [Unity/Terrain Detail](/megaworld/resource-types/unity-terrain-detail) — grass and mesh detail density passes
-- [Unity/Terrain Texture](/megaworld/resource-types/unity-terrain-texture) — terrain texture painting via mask filters
-
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
-  src="/images/megaworld/tools/terrain-spawner/resource-types.png"
-  alt="Terrain Spawner resource types selection."
-/>
-
-### Shared settings across tools
-
-Types in MegaWorld are reusable presets. The same Type you configure in Terrain Spawner can be dragged directly into Advanced Brush and used immediately. This means you can build and tune a preset in the stamper using Auto Respawn, then hand-paint with the same rules in the brush — no duplication needed.
-
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
-  src="/images/megaworld/tools/terrain-spawner/types-preset-reuse.png"
-  alt="MegaWorld Types shared between Terrain Spawner and Advanced Brush."
-/>
-
-### Auto Respawn
-
-When **Enable Auto Spawn** is on, Terrain Spawner automatically removes and re-spawns the current pass every time you change a setting. Use this during setup to get instant feedback, especially for terrain texture passes which run on the GPU and can be applied quickly even at large scales. Set **Delay Auto Spawn** to control the respawn delay in seconds.
-
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
-  src="/images/megaworld/tools/terrain-spawner/auto-respawn.gif"
-  alt="Terrain Spawner Auto Respawn updating the result live as settings change."
-/>
-
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px', marginTop: '1rem' }}
-  src="/images/megaworld/tools/terrain-spawner/auto-respawn-settings.png"
-  alt="Terrain Spawner Auto Respawn settings in the inspector."
-/>
-
-### Works on Unity Terrain and terrain mesh
-
-Terrain Spawner works on both Unity Terrain and polygon terrain meshes such as [Polaris](/megaworld/polaris-integration). For mesh terrain, switch to **Simple Filter** instead of Mask Filters — Simple Filter supports height, slope, and noise placement rules on any surface.
-
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
-  src="/images/megaworld/tools/terrain-spawner/mesh-terrain-polaris.png"
-  alt="Terrain Spawner working with Polaris mesh terrain."
-/>
-
-### Cell support
-
-Placed objects are stored in spatial cells. This enables [Overlap Check Settings](/megaworld/overlap-check-settings/overview), and makes tools like [Brush Erase](/megaworld/tools/brush-erase) and [Edit](/megaworld/tools/edit) aware of exactly where each object was placed.
-
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
-  src="/images/megaworld/tools/terrain-spawner/cell-support.png"
-  alt="Terrain Spawner cell support overview."
-/>
-
-### Overlap Check Settings visualization
-
-MegaWorld can draw Overlap Check shapes directly in the scene view. To enable the preview, turn on **Visualize Overlap Check Settings** inside [Precise Place](/megaworld/tools/precise-place).
-
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
-  src="/images/megaworld/tools/terrain-spawner/overlap-check-visualization.gif"
-  alt="Overlap Check Settings visualization in Terrain Spawner."
-/>
-
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px', marginTop: '1rem' }}
-  src="/images/megaworld/tools/terrain-spawner/overlap-check-enable.png"
-  alt="Enable Overlap Check visualization setting."
-/>
 
 ## Supported resource types
 
@@ -123,31 +17,85 @@ Terrain Spawner supports:
 - [Unity/GameObject](/megaworld/resource-types/unity-gameobject)
 - [Unity/Terrain Detail](/megaworld/resource-types/unity-terrain-detail)
 
-## Shared systems used by this tool
+## How it works
 
-For **Terrain Object** and **Unity/GameObject** groups, Terrain Spawner uses:
+When you click **Spawn**, Terrain Spawner processes each active Group in order:
+
+1. Casts a ray downward from the stamper's position to find the surface.
+2. Builds the box area from the result.
+3. Depending on the Group's resource type, runs the appropriate spawn routine for that area.
+
+### Unity/GameObject and Terrain Object groups
+
+For object-based groups, the spawner:
+
+1. Generates a random seed if needed.
+2. Runs the scatter system over the box area to produce sample positions.
+3. For each sample, casts a ray downward to find the surface hit point.
+4. Selects a random prototype weighted by Success Settings.
+5. Evaluates filter fitness (Mask Filter or Simple Filter) at the hit point.
+6. Discards the sample with probability `1 − fitness`. Samples with `fitness = 0` are always skipped.
+7. Calls the shared spawn routine which applies [Transform Components](/megaworld/transform-components/overview) and [Overlap Check Settings](/megaworld/overlap-check-settings/overview).
+
+### Unity/Terrain Detail groups
+
+For terrain detail groups, the spawner iterates over every active Unity Terrain that intersects the stamper bounds. For each terrain and each active detail prototype, it:
+
+1. Converts the box area into detail-map coordinates.
+2. Reads the existing detail layer.
+3. For each detail cell in the area, evaluates the Mask Filter fitness.
+4. Computes a target density:
+   - If **Use Random Opacity** is enabled: multiplies fitness by a random value before scaling to the density range.
+   - Otherwise: scales fitness directly to the density range.
+5. Applies a random failure check using **Failure Rate**.
+6. Writes the result back to the terrain detail layer.
+
+<Note>
+  For Terrain Detail, Terrain Spawner requires that the terrain's detail prototypes are already configured in Unity's Terrain Inspector. If no detail prototypes exist on the terrain, the spawner logs a warning and skips that terrain.
+</Note>
+
+## Shared systems
+
+### Per-group settings (Terrain Object and Unity/GameObject)
 
 - [Random Seed Settings](/megaworld/shared-settings/random-seed-settings)
 - [Scatter Settings](/megaworld/scatter-system/scatter-settings)
 - [Filter Settings](/megaworld/mask-filters/overview)
-- [Transform Components](/megaworld/transform-components/overview)
+
+### Per-prototype settings (Terrain Object and Unity/GameObject)
+
+- Success Settings
 - [Overlap Check Settings](/megaworld/overlap-check-settings/overview)
-- [Additional Spawn Settings](/megaworld/general-settings/additional-spawn-settings)
+- [Transform Components](/megaworld/transform-components/overview)
 
-For **Unity/Terrain Detail** groups, Terrain Spawner uses:
+### Per-prototype settings (Unity/Terrain Detail)
 
-- [Spawn Detail Settings](/megaworld/general-settings/spawn-detail-settings)
-- mask filter settings
+- **Spawn Detail Settings** — see below
+- [Mask Filters](/megaworld/mask-filters/overview)
 
-## Tool-level controls
+### Tool-level components
 
-### Area Settings
+- [Area Settings](/megaworld/shared-settings/area-settings) — defines the stamper volume and bounds.
+- [Stamper Tool Controller](/megaworld/shared-settings/stamper-tool-controller) — controls visualization and auto respawn.
+- [Layer Settings](/megaworld/shared-settings/layer-settings) — specifies which physics layers are used for raycasts.
 
-See [Area Settings](/megaworld/shared-settings/area-settings) for position, size, spawn cells, and handle configuration.
+## Spawn Detail Settings
 
-### Stamper Tool Controller
+These fields exist on each Terrain Detail prototype and control how detail density is written to the terrain.
 
-See [Stamper Tool Controller](/megaworld/shared-settings/stamper-tool-controller) for visualization, auto respawn, and spawn action settings.
+| Setting | Description | Default |
+|---|---|---|
+| **Density** | Maximum number of detail objects per detail cell. Corresponds to Unity's detail layer density value. | `5` |
+| **Use Random Opacity** | When enabled, multiplies the filter fitness by a random value before mapping to density. This adds variation so not every cell at the same fitness gets the same count. | `true` |
+| **Failure Rate** | Percentage chance (0–100) that a cell is set to zero density regardless of fitness. Adds sparse gaps to the detail distribution. | `0` |
+
+## Auto Respawn behavior
+
+When **Auto Respawn** is on in the Stamper Tool Controller:
+
+- Changing any Group setting triggers a full respawn of that Group after the configured delay.
+- Changing a **Terrain Detail** prototype setting triggers a respawn of only that specific detail prototype on the terrain, not the entire Group.
+- Changing a non-detail prototype setting triggers a full Group respawn.
 
 ## When to use Terrain Spawner
 
@@ -155,15 +103,12 @@ Terrain Spawner is best when you want:
 
 - a one-shot generation pass over a large area;
 - a forest, rock field, or vegetation layout based on filters and scatter rules;
-- terrain detail spawning inside a selected zone;
-- a workflow where the result is tied to a scene stamper object instead of mouse painting.
+- terrain detail density passes (grass, mesh details) inside a selected zone;
+- a workflow where the result is tied to a scene object rather than painted manually.
 
 ## Notes
 
-- Terrain Spawner evaluates each selected group separately inside the stamper bounds.
-- For object-based groups, the tool generates random seeds when needed before sampling scatter.
-- For terrain details, the workflow is more specialized and uses terrain-detail-specific settings instead of the standard success and transform stack.
-
-<Note>
-  Start with filters and scatter first, then add transform components and overlap rules. That order makes Terrain Spawner much easier to tune.
-</Note>
+- Terrain Spawner does not support Unity/Terrain Texture. Use [Texture Stamper](/megaworld/tools/texture-stamper) for terrain texture passes.
+- For object-based groups, the scatter system generates a random seed before each pass when **Random Seed** is set to auto-generate.
+- For very large areas with Terrain Detail groups, consider splitting the stamper area or using multiple spawners to keep the operation manageable.
+- Types (Groups) configured in Terrain Spawner are reusable assets. The same Group can be added to Advanced Brush and used for manual painting with the same filter and scatter rules.

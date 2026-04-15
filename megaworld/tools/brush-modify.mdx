@@ -1,33 +1,15 @@
 ---
 title: "Brush Modify"
-description: "Modify existing objects with a brush using a transform-modification stack"
+description: "Modify the transform of existing objects with a brush using a stack of transform components"
 ---
 
-Brush Modify is a Happy Artist tool for changing objects that already exist in the scene.
+Brush Modify applies transform changes to objects that already exist in the scene. As you drag the brush, it overlaps existing objects, evaluates filter fitness and brush mask strength, and runs each active component in the Modify Transform Components stack against every overlapping object.
 
-Instead of spawning or erasing, it applies transform modifications to overlapped objects as you drag the brush across them.
+The tool does not spawn or remove objects. It only modifies position, rotation, and scale of objects already present.
 
 <Info>
   New to Brush Modify? Follow the step-by-step [Brush Modify — Getting Started](/megaworld/getting-started/brush-modify) tutorial first.
 </Info>
-
-## Features
-
-### Filter mask support
-
-Brush Modify uses the same [Mask Filters](/megaworld/mask-filters/overview) as other MegaWorld tools. Add height, slope, or noise filters to restrict which objects get modified as you paint. Objects outside the filter range are ignored by the brush — only objects that pass the filter are affected by the transform stack.
-
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
-  src="/images/megaworld/tools/brush-modify/filter-mask-support.png"
-  alt="Brush Modify filter mask settings."
-/>
-
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px', marginTop: '1rem' }}
-  src="/images/megaworld/tools/brush-modify/filter-mask-area.png"
-  alt="Brush Modify filter mask controlling which objects are affected."
-/>
 
 ## Supported resource types
 
@@ -36,84 +18,91 @@ Brush Modify supports:
 - [Terrain Object](/megaworld/resource-types/terrain-object)
 - [Unity/GameObject](/megaworld/resource-types/unity-gameobject)
 
-## Tool-level controls
+## Tool-level settings
 
-Brush Modify uses:
+### Brush Settings
 
-- **Brush Settings**
-- **Modify Transform Components**
+- **Brush Size** — diameter of the brush area in world units. Default: `100`. Use **Shift + Scroll Wheel** in the scene view to adjust.
 
-## Shared systems used by this tool
+### Modify Transform Components
 
-Brush Modify also uses:
+A stack of components applied in order to every object that passes the filter and falls within the brush area. Click **+** to add a component. Components can be reordered and toggled active/inactive.
 
-- [Filter Settings](/megaworld/mask-filters/overview)
+The default stack contains one component: **Randomize Scale**.
 
-## Modify Transform Components
+Each component receives `fitness`, `moveLenght` (mouse delta magnitude per frame), and `strokeDirection` as inputs. These drive how much effect is applied per frame.
 
-Click **+** in the Modify Transform section to add components to the stack. Components can be reordered and removed. Each component is applied in order to every overlapping object that passes the filter.
+## Group-level settings
+
+- [Filter Settings](/megaworld/mask-filters/overview) — evaluates fitness for each overlapping object. Supports both Simple Filter and Mask Filter modes. Objects with zero fitness are not modified. Fitness also scales how strongly each component acts.
+
+## Modify Transform Components reference
 
 ### Position
 
-Offsets the object's position while painting.
+Moves objects along the Y axis while you drag.
 
-- **Strength** — direction and magnitude of the position offset applied per stroke.
-- **Strength Randomize** — how much randomness is added to the strength. `0` = no randomness, `100` = fully random offset strength.
-
-### Vegetation Rotation
-
-Tilts objects like trees — useful for adding natural lean and variation to vegetation.
-
-- **Strength Y** — how much the object rotates around the Y axis.
-- **Strength Rotation XY** — how quickly the effect is applied.
-- **Rotation XZ** — the lean strength along Y and X axes. `1` = fully fallen tree, `0` = no lean.
-
-### Along
-
-Rotates objects along the Y axis in the direction of the brush stroke. Objects gradually orient themselves to the direction you are painting.
+- **Strength** — direction and magnitude of the Y offset. Positive values move objects up; negative values move them down. Range: `-1` to `1`. Default: `-0.1`.
+- **Y Strength Randomize** — how much a per-object random value reduces the applied strength. At `0`, all objects move equally. At `100`, the offset is fully randomized per object. Range: `0` to `100`. Default: `100`.
 
 ### Rotation
 
-Applies rotation to the object's transform.
+Rotates objects on each frame while you drag.
 
-- **Strength** — how fast the rotation is applied.
-- **Random Rotation (X, Y, Z)** — applies random rotation on the chosen axes.
-- **Randomize (X, Y, Z)** — the randomness strength per axis.
-- **Rotation (X, Y, Z)** — whether the rotation is applied in the positive or negative direction on each axis.
+- **Strength** — how fast rotation accumulates. Range: `0` to `10`. Default: `3`.
+- **Random Rotation X / Y / Z** — toggle per axis. When enabled for an axis, the rotation on that axis is driven by a per-object random vector (set once on first contact). When disabled, a fixed direction value is used instead.
+  - When **Random Rotation** is on: **Randomize X / Y / Z** — scales the random rotation vector component on that axis. Range: `0` to `1`. Default: `1`.
+  - When **Random Rotation** is off: **Rotation X / Y / Z** — the fixed rotation direction on that axis. Range: `-1` to `1`. Default: `1`.
+
+### Vegetation Rotation
+
+Tilts and spins objects in a way suited to trees and other upright vegetation.
+
+- **Strength Y** — controls how much the object spins around the Y axis per frame. Range: `0` to `20`. Default: `7`.
+- **Strength XY** — blends between the current rotation and the target tilt. At `0` there is no tilt. At `100` the object fully reaches the target lean angle. Range: `0` to `100`. Default: `10`.
+- **Rotation XZ** — the lean angle in degrees (applied equally to X and Z). At `0` the object stands upright. Larger values tilt the object further. Range: `0` to `20`. Default: `3`.
+
+### Along
+
+Rotates objects around the world Y axis to face perpendicular to the stroke direction. The strength of the alignment scales with the mouse move speed — faster strokes align objects more strongly.
+
+No configurable fields.
 
 ### Randomize Scale
 
-Randomly reassigns the object's scale within a defined range on each stroke.
+Randomly reassigns the object's scale on each frame it is touched. The new scale is interpolated toward a random value within the range, weighted by fitness.
 
-- **Uniform Scale** — applies the same scale value across all three axes.
-- **Min / Max Scale** — the range within which the random scale is chosen.
+- **Uniform Scale** — when enabled, the same random value is applied to all three axes. When disabled, each axis gets its own random value. Default: `true`.
+- **Scale** (min/max slider) — the range for the random scale. Default min: `(0.8, 0.8, 0.8)`. Default max: `(1.2, 1.2, 1.2)`.
 
 ### Scale
 
-Incrementally scales the object up or down while painting.
+Incrementally adds or subtracts from the object's scale on each frame while you drag.
 
-- **Strength** — whether the scale increases (positive) or decreases (negative).
-- **Strength Randomize** — the randomness added to the scale strength per stroke.
+- **Strength** — the direction and size of the scale change. Positive values grow the object; negative values shrink it. Range: `-1` to `1`. Default: `0.3`.
+- **Strength Randomize** — how much a per-object random value reduces the applied scale change. At `0`, all objects scale equally. At `100`, the change is fully randomized per object. Range: `0` to `100`. Default: `100`.
 
 ### Scale Clamp
 
-Prevents the scale from going below or above defined limits, regardless of how many times the brush passes over an object.
+Clamps scale to a min/max range after all other components have run. Use this to prevent the **Scale** or **Randomize Scale** components from pushing objects outside acceptable bounds.
+
+- **Scale Clamp** (min/max slider) — the allowed scale range. Objects with scale outside this range are clamped toward the limit, blended by fitness. Default min: `0.5`. Default max: `2`.
 
 ## How it works
 
-- The brush overlaps existing objects.
-- The tool evaluates filter fitness and brush mask strength.
-- The modify stack applies transform changes based on stroke movement and fitness.
-- Changes are accumulated while you drag.
+1. On each drag frame, the tool overlaps all objects inside the brush area.
+2. For each overlapping object, it evaluates filter fitness and brush mask alpha, multiplied together.
+3. The combined fitness and the mouse delta magnitude are passed to every active component in the stack.
+4. Each component modifies the instance transform. Changes accumulate each frame you hold the brush over the object.
+5. When you release the mouse, the per-object random values (used by Position, Rotation, Scale) are reset on next contact.
 
 ## When to use Brush Modify
 
-Brush Modify is best when you want:
-
-- to art-direct an already spawned area;
-- to nudge, rotate, or reshape existing placement with a brush gesture;
-- to refine a procedural result instead of deleting and respawning it.
+- Art-directing an area after a procedural spawn pass.
+- Breaking up repetitive scale or rotation in existing placement.
+- Nudging vegetation tilt or Y offset without rerunning a spawn.
+- Applying scale limits after incrementally scaling with the Scale component.
 
 <Note>
-  Brush Modify works especially well after a large procedural pass. Generate first, then use the brush to break up repetition and add hand-crafted variation.
+  Brush Modify works especially well after a large procedural pass. Generate the base layer first, then use the brush to add hand-directed variation and break up repetition.
 </Note>

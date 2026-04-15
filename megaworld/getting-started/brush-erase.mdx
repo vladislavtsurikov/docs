@@ -1,6 +1,6 @@
 ---
 title: "Brush Erase — Getting Started"
-description: "Remove spawned GameObjects from the scene using a brush."
+description: "Remove placed objects and terrain details from the scene using a brush."
 ---
 
 <Info>
@@ -9,7 +9,7 @@ description: "Remove spawned GameObjects from the scene using a brush."
   - [Working with MegaWorld Window](/megaworld/getting-started/megaworld-window) — how to navigate the window
 </Info>
 
-The **Brush Erase** tool removes already-placed objects from the scene using a circular brush. It is the dedicated cleanup tool for any MegaWorld placement pass — use it to clear specific areas, cut paths through vegetation, or remove unwanted objects that survived a procedural spawn.
+The **Brush Erase** tool removes already-placed objects and terrain details from the scene using a brush. It does not erase uniformly — each object passes through a probability check based on brush mask alpha, filter fitness, Erase Strength, and a per-prototype success value. This lets you erase softly or leave some objects in place by chance.
 
 ---
 
@@ -19,25 +19,38 @@ Press **Alt + Z** to open the MegaWorld Window. In the **Tools Panel**, click th
 
 ---
 
-## Step 2 — Select which prototypes to erase
+## Step 2 — Select the prototypes you want to erase
 
-In the **Selection Panel**, choose the Types and prototypes you want to erase. Only the selected prototypes will be removed — others are left untouched.
-
-<Note>
-  Disable a prototype in the Selection Panel to temporarily protect it from erasure without removing it from the list.
-</Note>
+In the **Selection Panel**, select the group and enable the prototypes you want to remove. Only selected and active prototypes are affected. Uncheck a prototype to protect it from erasure without removing it from the list.
 
 ---
 
-## Step 3 — Set brush size and strength
+## Step 3 — Adjust brush size and erase strength
 
-In the **Settings Panel**, adjust the **Brush Size** to control how wide the erase area is. A larger brush clears more at once; a smaller brush is better for detailed cleanup.
+In the **Settings Panel**:
+
+- Set **Brush Size** to control the erase diameter. You can also hold **Shift** and scroll the mouse wheel in the Scene View.
+- Set **Erase Strength** (range `0` to `1`) to control the overall erase probability. At `1`, objects are erased based on filter fitness and brush mask alone. Lower values reduce how many objects are removed on each pass.
 
 ---
 
-## Step 4 — Erase in the scene view
+## Step 4 — Optionally restrict erasure with filters
 
-Move your cursor into the **Scene View** and click or drag to erase all selected prototypes within the brush radius.
+In the group's **Filter Settings**, you can enable **Simple Filter** or **Mask Filter** to limit which objects are eligible for erasure. For example, a slope filter restricts erasure to objects on slopes within a defined angle range — objects on other terrain are skipped.
+
+For **Terrain Detail** groups, the Mask Filter modulates detail density reduction across the brush area rather than filtering discrete objects.
+
+---
+
+## Step 5 — Optionally adjust per-prototype erase probability
+
+Each prototype has an **Additional Erase Settings** section with a **Success of Erase (%)** field. At `100` (the default), every object that passes the main check is erased. Lower this value to leave some objects in place randomly on each pass.
+
+---
+
+## Step 6 — Erase in the Scene View
+
+Move your cursor into the **Scene View** and click or drag to erase. The tool fires on mouse down and continues as you drag, respecting the brush **Spacing** setting.
 
 ---
 

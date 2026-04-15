@@ -1,6 +1,6 @@
 ---
 title: "Precise Physics — Getting Started"
-description: "Run a precise physics simulation on selected objects one at a time."
+description: "Spawn a single physics-simulated object at the exact cursor point and let it fall onto the surface."
 ---
 
 <Info>
@@ -9,36 +9,52 @@ description: "Run a precise physics simulation on selected objects one at a time
   - [Working with MegaWorld Window](/megaworld/getting-started/megaworld-window) — how to navigate the window
 </Info>
 
-**Precise Physics** is an Editor Window tool that runs a targeted physics simulation on individual or small groups of objects. Where [Brush Physics](/megaworld/getting-started/brush-physics) affects everything in a brush radius, Precise Physics gives you finer control over which objects are simulated and how the simulation runs — useful for settling specific props that look out of place without disturbing the rest of the scene.
+**Precise Physics** is a PhysX Painter tool that places exactly one object per click at the cursor position. The object spawns above the surface, falls, and settles using physics simulation. Unlike [Brush Physics](/megaworld/getting-started/brush-physics), there is no scatter distribution — you control the exact drop point with each click or drag.
 
 ---
 
 ## Step 1 — Open the MegaWorld Window and select Precise Physics
 
-Press **Alt + Z** to open the MegaWorld Window. In the **Tools Panel**, click the **+** button and choose **Precise Physics**.
+Press **Alt + Z** to open the MegaWorld Window. In the **Tools Panel**, click the **+** button and choose **PhysX Painter → Precise Physics**.
 
 ---
 
-## Step 2 — Select which prototypes to simulate
+## Step 2 — Add a Group and prototypes
 
-In the **Selection Panel**, choose the Types and prototypes you want to affect.
+In the **Selection Panel**, click **Add Group**. Inside the group, add **Unity/GameObject** or **Terrain Object** resources and add your Prefabs.
 
----
-
-## Step 3 — Configure simulation settings
-
-In the **Settings Panel**, adjust the physics parameters — simulation duration, gravity scale, and any damping settings that control how objects come to rest.
+<Note>
+  Your Prefabs need Collider components so the physics simulation can detect the terrain surface. Without colliders the object falls through.
+</Note>
 
 ---
 
-## Step 4 — Interact in the scene view
+## Step 3 — Configure the tool settings
 
-Click on objects in the **Scene View** to select them for simulation. Run the simulation and the selected objects settle onto the terrain and surrounding colliders.
+In the **Settings Panel**, set:
+
+- **Position Offset Y** — the height above the surface at which the object spawns. Default is `30`. The scene view shows a sphere handle at this height above your cursor to indicate the spawn point.
+- **Spacing** — how far you must move the cursor while dragging before another object is placed. Default is `5`.
+- **Physics Effects** — an optional initial impulse applied to the object at spawn. Leave force low for a clean vertical drop.
+
+---
+
+## Step 4 — Click in the scene view to place objects
+
+Move your cursor into the **Scene View**. You will see a small sphere marker above the cursor showing where the object will spawn. Click to place — the object falls from that point and settles on the surface.
+
+Drag to continue placing objects along your cursor path, one per **Spacing** interval.
+
+---
+
+## Step 5 — Undo if needed
+
+Press **Ctrl + Z** to undo. Each mouse release creates one undo record.
 
 ---
 
 ## What's next
 
-- Use [Brush Physics](/megaworld/getting-started/brush-physics) for broad-area settling.
-- Use [Explode Physics](/megaworld/getting-started/explode-physics) to scatter objects with an impulse force.
+- Use [Brush Physics](/megaworld/getting-started/brush-physics) to scatter many objects across a brush area at once.
+- Use [Explode Physics](/megaworld/getting-started/explode-physics) to burst-spawn multiple objects from one point.
 - Read the full [Precise Physics](/megaworld/tools/precise-physics) reference documentation.

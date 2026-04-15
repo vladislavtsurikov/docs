@@ -1,11 +1,11 @@
 ---
 title: "Precise Place"
-description: "Place one object at a time with live preview, overlap checks, mouse actions, and per-prototype offsets"
+description: "Place one object at a time with a live cursor-following preview, mouse action controls, and per-prototype offsets"
 ---
 
 Precise Place is a Happy Artist tool for intentional manual placement.
 
-It gives you a live preview object, lets you drag and reposition before confirming, and supports extra mouse-action tools for rotation, scale, and directional movement.
+A preview object follows the cursor in the scene view. Click to place it, or drag to reposition along a stroke. While the preview is active, hold hotkeys to rotate, scale, or offset its position without leaving the tool.
 
 <Info>
   New to Precise Place? Follow the step-by-step [Precise Place — Getting Started](/megaworld/getting-started/precise-place) tutorial first.
@@ -18,54 +18,89 @@ Precise Place supports:
 - [Terrain Object](/megaworld/resource-types/terrain-object)
 - [Unity/GameObject](/megaworld/resource-types/unity-gameobject)
 
+## How it works
+
+1. Move the cursor over the scene view. Precise Place raycasts to the surface and immediately places a preview object there.
+2. **Click** to confirm placement at the current cursor position.
+3. **Click and drag** to continue placing objects along the stroke. New placements fire according to the **Spacing** setting — the next object appears once the cursor has moved at least **Spacing** units from the last placement point.
+4. While the preview object is active, use the mouse action hotkeys to rotate, scale, or offset it before confirming.
+5. Press **Tab** to reset the preview object's transform back to the original Prefab values.
+
 ## Tool-level controls
 
 Precise Place uses **Precise Place Tool Settings**.
 
-The confirmed settings include:
+### General
 
-- [Spacing](/megaworld/shared-settings/spacing) — minimum distance between consecutive placements. Default is `5`.
-- **Random Select Prototype** — picks a random prototype from the active group on each placement instead of using the selected one. Enabled by default.
-- **Remember Past Transform** — when enabled, the next placement reuses the transform (position, rotation, scale) from the previous one as a starting point.
-- **Use Transform Components** — applies the [Transform Components](/megaworld/transform-components/overview) stack to each placed object. Enabled by default.
-- **Overlap Check** — enables overlap rejection using [Overlap Check Settings](/megaworld/overlap-check-settings/overview).
-- **Visualize Overlap Check Settings** — draws the overlap shapes in the scene view.
-- **Enable Snap Move** — enables grid-snapping during drag repositioning.
-- **Snap Move** — the grid step size for each axis (X, Y, Z) used when Snap Move is enabled. Default is `(2.5, 2.5, 2.5)`.
-- **Align** — aligns the placed object to the surface normal.
-- **Weight To Normal** — blends between world-up and surface normal for the alignment. At `1` the object fully aligns to the surface normal.
-- **Along Stroke** — rotates the object to face the direction of the stroke.
+- **Remember Past Transform** — when enabled, the next preview object starts with the transform (position, rotation, scale) from the previous placement. Default is `true`.
+
+### Mouse Drag Settings
+
+- **Spacing** — minimum distance in world units between consecutive placements during a drag stroke. Default is `5`. Minimum allowed value is `0.5`.
+- **Random Select Prototype** — when enabled, each new placement picks a random prototype from the active group instead of always using the selected one. Default is `true`.
+
+### Prototype Toggle Settings
+
+- **Use Transform Components** — when enabled, applies the [Transform Components](/megaworld/transform-components/overview) stack to each placed object. Default is `true`.
+- **Overlap Check** — when enabled, rejects placements that overlap existing objects, using per-prototype [Overlap Check Settings](/megaworld/overlap-check-settings/overview). Default is `false`.
+- **Visualize Overlap Check Settings** — draws the overlap check shapes in the scene view. Only available when **Overlap Check** is enabled. Default is `false`.
+
+### Move Action
+
+These settings control how the preview object moves when you hold `Q` and drag horizontally.
+
+- **Align** — when enabled, the placed object aligns to the surface normal at the placement point. Default is `false`.
+- **Weight To Normal** — when **Align** is enabled, blends the object's up direction between world up and the surface normal. At `1` the object fully follows the surface normal; at `0` it uses world up. Default is `1`.
+- **Along Stroke** — when enabled, rotates the object to face the direction of the drag stroke. Default is `false`.
 
 ## Prototype-level controls
 
-Precise Place also has a per-prototype block:
+Each prototype has a **Precise Place Settings** block with:
 
-- **Precise Place Settings** — contains [Position Offset](/megaworld/shared-settings/position-offset) for shifting each prototype's placement point individually.
+- **Position Offset** — shifts the object's Y position after it lands on the surface. Default is `0`.
+
+Depending on the tool-level toggles, prototypes also show:
+
+- [Success](/megaworld/shared-settings/success) — controls per-prototype spawn probability.
+- [Overlap Check Settings](/megaworld/overlap-check-settings/overview) — when **Overlap Check** is enabled.
+- [Transform Components](/megaworld/transform-components/overview) — when **Use Transform Components** is enabled.
 
 ## Mouse actions
 
-The current mouse-action stack includes:
+While a preview object is active, these hotkeys modify its transform in real time.
 
-- **Move Along Direction**
-- **Rotation**
-- **Scale**
+### Move Along Direction
 
-## Shared systems used by this tool
+Hold `Q` and drag horizontally to move the object along a direction.
 
-Precise Place uses:
+- **Mouse Sensitivity** — controls how strongly horizontal mouse movement translates into displacement.
+- **Move Along Axis** — `Y` moves the object straight up/down; `Surface Normal` moves along the blended direction between world up and the surface normal.
+- **Weight To Normal** — blends between world up and surface normal when **Move Along Axis** is `Surface Normal`. At `1` the object moves along the surface normal.
 
-- `Success`
-- [Transform Components](/megaworld/transform-components/overview)
-- [Overlap Check Settings](/megaworld/overlap-check-settings/overview)
+### Rotation
+
+Hold a rotation shortcut and drag to rotate the object.
+
+- **Mouse Sensitivity** — controls how strongly mouse movement translates into rotation.
+- **Way Rotate Y** — when rotating around Y (`LShift`), choose `Offset` to rotate by dragging horizontally, or `Direction` to rotate the object to face the cursor position.
+- **Transform Space** — switches between global and local rotation axis for the Y-axis rotation. Only available when **Way Rotate Y** is `Offset`.
+- **Enable Snap Rotate** — when enabled, rotation snaps to the nearest **Snap Rotate** increment. Default is `false`.
+- **Snap Rotate** — the snap increment in degrees. Default is `15`.
+
+### Scale
+
+Hold a scale shortcut and drag horizontally to scale the object.
+
+- **Mouse Sensitivity** — controls how strongly horizontal mouse movement translates into scale change.
+- **Enable Snap Scale** — when enabled, scale snaps to the nearest **Snap Scale** increment. Default is `false`.
+- **Snap Scale** — the snap increment. Default is `1`.
+
+For the full list of mouse action shortcuts, see [Precise Place Hotkeys](/megaworld/tools/precise-place-hotkeys).
 
 ## When to use Precise Place
 
 Precise Place is best when you want:
 
-- careful one-by-one placement with a preview object;
-- manual control with optional transform and overlap assistance;
-- more precision than a brush workflow, but more convenience than placing prefabs completely by hand.
-
-<Note>
-  Use Precise Place when final art direction matters. It is especially useful for hero props, hand-authored paths, edge placements, and scene accents.
-</Note>
+- careful one-at-a-time placement with a live preview;
+- manual control over each object's position, rotation, and scale before confirming;
+- a placement workflow faster than hand-placing prefabs, but more deliberate than a brush.

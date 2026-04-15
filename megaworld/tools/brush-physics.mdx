@@ -1,11 +1,11 @@
 ---
 title: "Brush Physics"
-description: "Paint physics-simulated objects with a brush and let them settle into the scene"
+description: "Spawn physics-simulated objects with a brush — they fall from above the surface and settle under gravity"
 ---
 
-Brush Physics is a PhysX Painter tool for interactive painting with physics simulation.
+Brush Physics is a PhysX Painter tool that spawns instances of the selected prototypes above the surface and lets them fall and settle using physics simulation.
 
-Instead of placing objects directly in their final pose, it spawns them into a simulated workflow so they can settle more naturally.
+Each click or drag stroke scatters objects according to your Scatter settings, spawns them at a raised height above the hit point, then runs the physics simulator until they come to rest.
 
 <Info>
   New to Brush Physics? Follow the step-by-step [Brush Physics — Getting Started](/megaworld/getting-started/brush-physics) tutorial first.
@@ -18,38 +18,51 @@ Brush Physics supports:
 - [Terrain Object](/megaworld/resource-types/terrain-object)
 - [Unity/GameObject](/megaworld/resource-types/unity-gameobject)
 
-## Tool-level controls
+## How it works
 
-Brush Physics uses:
+1. You click or drag in the scene view. The tool casts a ray downward at each point where the mouse moves.
+2. For each hit, the Scatter system generates sample positions within the brush area.
+3. Each sample is raycasted downward. On a valid hit, a random prototype is selected based on Success weights.
+4. The prototype is instantiated at the hit point offset upward by **Position Offset Y**, then dropped. Physics simulation runs immediately with acceleration mode enabled.
+5. When physics settles (or the per-object time limit is reached), the object is frozen in place.
+6. The **Physics Effects** force is applied to each spawned rigidbody at the moment of instantiation, which can give objects an initial push.
 
-- **Brush Physics Tool Settings**
-- **Physics Effects**
-- **Brush Settings**
+## Tool-level settings
 
-The code shows one explicit tool-specific control in **Brush Physics Tool Settings**:
+### Brush Physics Tool Settings
 
-- [Position Offset Y](/megaworld/shared-settings/position-offset) — shifts the spawn point above the surface before physics simulation begins.
+- **Position Offset Y** — how far above the surface hit point the object is spawned before falling. Default: `30`. Increase this to give objects more fall distance; decrease it if objects are landing with too much velocity.
 
-## Shared systems used by this tool
+### Physics Effects
 
-Brush Physics uses:
+Controls the initial impulse applied to each spawned object at the moment of spawn. See [Physics Effects Settings](/megaworld/shared-settings/physics-effects-settings) for all fields.
 
-- [Scatter Settings](/megaworld/scatter-system/scatter-settings)
-- [Physics Transform Settings](/megaworld/shared-settings/physics-transform-settings)
-- [Success](/megaworld/shared-settings/success)
-- **Physics Effects**
+### Brush Settings
+
+Controls the brush shape, size, and spacing between strokes. See [Brush Settings](/megaworld/shared-settings/brush-settings).
+
+## Prototype-level settings
+
+Each prototype in the group has:
+
+- [Success](/megaworld/shared-settings/success) — controls the probability that a given prototype is chosen and that a specific sample point results in a placement.
+- [Physics Transform Settings](/megaworld/shared-settings/physics-transform-settings) — transform components (rotation, scale) applied before the object is handed off to the physics simulator.
+
+## Group-level settings
+
+- [Spacing](/megaworld/shared-settings/spacing) — the minimum cursor travel distance before a new stroke fires. Shared via the Brush Settings.
+- Scatter Settings — controls how sample points are distributed within the brush area (random, grid, Poisson disc).
 
 ## When to use Brush Physics
 
-Brush Physics is best when you want:
+Brush Physics is best when you want to:
 
-- physics-based painting instead of direct placement;
-- repeated interactive strokes with a brush workflow;
-- naturally settled props, clutter, or dropped objects;
-- a less rigid result than standard brush spawning.
+- fill an area with objects that settle naturally onto uneven terrain;
+- create piles, debris fields, or loose scatter that looks physically plausible;
+- paint quickly across a large surface and let physics do the positioning work.
 
 ## Notes
 
-- Brush Physics belongs to the **PhysX Painter** family.
-- It uses brush-style interaction, but the actual placement logic is physics-driven.
-- The transform system here is physics-specific rather than the standard transform component stack.
+- The tool belongs to the **PhysX Painter** family.
+- Undo is registered after you release the mouse button, so a full drag stroke is undone in one step.
+- The physics simulator uses **acceleration physics mode** and **ObjectTimeDisablePhysicsMode**, which means each object is simulated for a time limit rather than globally.

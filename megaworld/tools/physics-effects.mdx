@@ -1,11 +1,9 @@
 ---
 title: "Physics Effects"
-description: "Apply interactive physics effects such as explosion, black hole, and upward force to scene objects"
+description: "Apply a physics force effect to existing GameObjects in the scene by painting over them"
 ---
 
-Physics Effects is a PhysX Painter tool for applying interactive physics actions to existing objects.
-
-Instead of spawning new objects, it applies the currently selected effect to objects under the tool interaction.
+Physics Effects is a PhysX Painter tool that applies a selected force effect to GameObjects already present in the scene. It does not spawn new objects — it finds existing GameObjects within a sphere around the cursor, temporarily makes them physics-simulated, and applies the active effect's force to their rigidbodies.
 
 <Info>
   New to Physics Effects? Follow the step-by-step [Physics Effects — Getting Started](/megaworld/getting-started/physics-effects) tutorial first.
@@ -13,37 +11,89 @@ Instead of spawning new objects, it applies the currently selected effect to obj
 
 ## Supported resource types
 
-Physics Effects currently supports:
+Physics Effects supports:
 
 - [Unity/GameObject](/megaworld/resource-types/unity-gameobject)
 
-## Tool-level controls
+## How it works
 
-Physics Effects uses **Physics Effects Tool Settings**.
+1. You click or drag in the scene view. The tool fires a ray downward to find the surface point.
+2. The active effect runs `Physics.OverlapSphere` centered at the surface point offset by the effect's **Position Offset Y**, using a radius of `Size / 2`.
+3. For each collider found in the overlap, the tool gets the prefab root GameObject and checks whether it belongs to a selected prototype.
+4. If the object is within range and its prototype is selected, the tool retrieves or creates a `SimulatedBody` for it and calls the effect's `ApplyEffect` method on its rigidbody.
+5. After processing all overlapping objects, the physics simulator is set to **GlobalTimeDisablePhysicsMode** (non-acceleration mode) so the objects simulate for a shared global time limit.
 
-The confirmed settings are:
+## Tool-level settings
 
-- **Spacing**
-- an effect stack where you choose the active effect
+### Physics Effects Tool Settings
+
+- **Spacing** — minimum cursor travel distance before the effect fires again while dragging. Default: `5`. Minimum: `0.5`.
+- **Effect stack** — a list of effects. You select one effect at a time as the active one. The tool runs only the selected effect on each interaction.
 
 ## Available effects
 
-The current code registers these effect types:
+Each effect has two shared settings drawn by the base editor, plus its own specific settings:
 
-- **Black Hole**
-- **Explosion**
-- **Fly Up**
-- **Simple Force**
+**Shared settings (all effects):**
+
+- **Position Offset Y** — vertical offset of the effect center above the surface hit point. Range: –20 to 20. Default: `0`. This shifts where the overlap sphere is centered.
+- **Size** — diameter of the overlap sphere used to find affected objects. Range: 0 to 100. Default: `10`.
+
+---
+
+### Explosion
+
+Applies `Rigidbody.AddExplosionForce` from the effect center point. Objects within range are pushed outward in all directions, with upward lift (Unity's built-in explosion uplift factor of `4.0` is used).
+
+- **Force** — explosion force magnitude. Range: 0 to 500. Default: `50`.
+
+The scene view sphere is red. Opacity scales with Force relative to the maximum.
+
+---
+
+### Black Hole
+
+Applies a directional force pulling each affected object toward the effect center. Force is applied proportional to distance (closer objects receive proportionally more pull).
+
+- **Force** — pull force magnitude. Range: 0 to 500. Default: `50`.
+
+The scene view sphere is black.
+
+---
+
+### Fly Up
+
+Applies a straight upward force (`Vector3.up`) to each affected object.
+
+- **Force** — upward force magnitude. Range: 0 to 200. Default: `30`.
+
+The scene view sphere is blue with an upward arrow indicating direction.
+
+---
+
+### Simple Force
+
+Applies a horizontal force in a direction controlled by a compass angle. The force direction is computed from the angle in the XZ plane (angle 0 points along +Z, angle 90 points along +X).
+
+- **Angle** — direction of the force in degrees, measured in the XZ plane. Range: 0 to 360. Default: `0`.
+- **Force** — force magnitude. Range: 0 to 500. Default: `1`.
+
+The scene view sphere is green with a line showing the force direction.
+
+---
 
 ## When to use Physics Effects
 
-Physics Effects is best when you want:
+Physics Effects is best when you want to:
 
-- to push, lift, attract, or blast objects already in the scene;
-- interactive physics testing;
-- quick scene experimentation without changing the placement setup itself.
+- move, push, lift, or attract GameObjects that are already placed in the scene;
+- experiment with physics forces on existing objects without resetting their placement;
+- create interactive physics effects for environment dressing or testing.
 
 ## Notes
 
-- The tool uses the selected effect from the internal effect stack.
-- It is marked with `DontCreate` in code, so treat it as a specialized workflow tool rather than a standard default tool entry.
+- The tool belongs to the **PhysX Painter** family.
+- Only **Unity/GameObject** prototypes are supported — Terrain Objects are not affected.
+- The tool only affects objects whose prototype is currently selected in the active group.
+- This tool uses **GlobalTimeDisablePhysicsMode** (not per-object time), which means all affected objects simulate together for a shared duration after each interaction.
+- The effect runs on the selected effect only — all other effects in the stack are ignored.

@@ -7,48 +7,77 @@ description: "Paint terrain textures across an area using the Texture Stamper."
   Before starting this tutorial, read [Working with Data](/megaworld/getting-started/working-with-data) to understand Groups, Resource Types, and Prototypes.
 </Info>
 
-The **Texture Stamper** is a MonoBehavior tool that paints terrain texture layers onto a Unity Terrain over a defined area. Instead of painting by hand with a brush, it stamps a whole area at once — useful for large-scale texture distribution driven by slope, height, and noise filters.
+**Texture Stamper** is a MonoBehaviour stamper tool that paints Unity Terrain texture layers across a defined area. Instead of painting manually with a brush, it evaluates Mask Filters for each texture prototype and writes alphamap data to the terrain at once.
 
 ---
 
 ## Step 1 — Add a Texture Stamper to your scene
 
-Go to `GameObject > MegaWorld > Add Texture Stamper`, or select a GameObject and use `Add Component > MegaWorld > Texture Stamper`.
+Go to `GameObject > MegaWorld > Add Texture Stamper`.
 
-A **Texture Stamper** component appears on the selected GameObject in your Hierarchy.
+A **Texture Stamper** component is added to a new GameObject in your Hierarchy. Its Transform scale defaults to `(150, 150, 150)`, which sets the initial stamper area size.
 
 ---
 
-## Step 2 — Add a Type with Terrain Texture prototypes
+## Step 2 — Add a Group with Terrain Texture prototypes
 
-Select the Texture Stamper in the Hierarchy. In the **MegaWorld Window**, click **Add Type**.
+Select the Texture Stamper in the Hierarchy. In the **MegaWorld Window**, click **Add Type** to create a new Group.
 
-Inside the Type, click **Add Resource** and choose **Unity/Terrain Texture** as the resource type. Then drag your **TerrainLayer** assets from the Project window into the prototype list.
+Inside the Group, click **Add Resource** and choose **Unity/Terrain Texture** as the resource type. Drag your **TerrainLayer** assets from the Project window into the prototype list.
 
 <Note>
-  TerrainLayer assets are created in the Project window via `Create > TerrainLayer`. Each one holds a texture, normal map, and tiling settings.
+  TerrainLayer assets are created in the Project window via `Create > TerrainLayer`. Each TerrainLayer holds a texture, normal map, and tiling settings. The terrain must already have the TerrainLayer assigned to it before Texture Stamper can paint it.
 </Note>
 
 ---
 
-## Step 3 — Configure filters (optional)
+## Step 3 — Configure Mask Filters
 
-In the Settings Panel, add [Mask Filters](/megaworld/mask-filters/overview) to drive where each texture appears. Common setups:
+Select a prototype and expand its **Mask Filters** settings. Mask Filters determine where and how strongly each texture is painted. Common setups:
 
-- **Slope filter** — paint rock textures on steep slopes, grass on flat ground.
-- **Height filter** — snow at high altitudes, mud at low elevations.
+- **Slope filter** — paint rock textures on steep slopes and grass on flat ground.
+- **Height filter** — snow at high elevations, mud at low elevations.
 - **Noise filter** — add organic variation to texture boundaries.
+
+If you do not add any filters, the texture is painted uniformly across the full stamper area at full strength.
 
 ---
 
-## Step 4 — Stamp
+## Step 4 — Set the area size
 
-Set the stamper area to cover your terrain, then click **Spawn** in the Area Settings. The Texture Stamper paints all active terrain texture prototypes onto the terrain according to the configured filters.
+The stamper area is controlled by the Transform scale of the Texture Stamper GameObject. Scale it in the Scene View to cover the terrain region you want to paint. You can also click **Fit To Terrain Size** in the Area Settings section to match the active terrain's dimensions exactly.
+
+---
+
+## Step 5 — Stamp
+
+In the **Stamper Tool Controller** section, click **Spawn**. The Texture Stamper evaluates each active prototype's Mask Filters and writes the results to the terrain alphamap.
+
+To preview the filter output before stamping, enable **Visualisation** in the Stamper Tool Controller. When a single Group is selected, the Scene View shows the filter coverage as an overlay.
+
+---
+
+## Step 6 — (Optional) Enable Auto Respawn
+
+Turn on **Auto Respawn** in the Stamper Tool Controller to automatically re-run the texture pass every time you change a filter setting. Use **Delay Auto Spawn** (range: 0–3 seconds) to add a short wait before each respawn triggers, so it does not run on every keystroke.
+
+Auto Respawn is not available when **Use Spawn Cells** is enabled.
+
+---
+
+## Step 7 — (Optional) Use Spawn Cells for large terrains
+
+If your terrain is larger than approximately 4 km × 4 km, enable **Use Spawn Cells** in the Area Settings. This divides the stamper bounds into a grid of smaller cells and processes each one separately, which prevents long freezes.
+
+1. Enable **Use Spawn Cells**.
+2. Set **Cell Size** (default: 1000 meters).
+3. Click **Refresh Cells** to generate the cell grid.
+4. Click **Spawn** to process all cells in sequence.
 
 ---
 
 ## What's next
 
-- Add multiple texture Types to layer different materials across the terrain.
+- Add multiple Groups to layer different textures across the same terrain area.
 - Combine Texture Stamper results with [Terrain Spawner](/megaworld/getting-started/terrain-spawner) vegetation passes.
-- Read the full [Texture Stamper](/megaworld/tools/texture-stamper) reference documentation.
+- Read the full [Texture Stamper](/megaworld/tools/texture-stamper) reference for all settings.
