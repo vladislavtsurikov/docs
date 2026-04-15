@@ -1,6 +1,6 @@
 ---
 title: "Pin — Getting Started"
-description: "Pin specific objects to protect them from brush and spawner operations."
+description: "Place and interactively rotate and scale objects in one drag gesture using the Pin tool."
 ---
 
 <Info>
@@ -9,32 +9,58 @@ description: "Pin specific objects to protect them from brush and spawner operat
   - [Working with MegaWorld Window](/megaworld/getting-started/megaworld-window) — how to navigate the window
 </Info>
 
-**Pin** is an Editor Window tool that marks specific placed objects so they are protected from being modified or erased by other MegaWorld tools. Use Pin to lock hero objects, manually placed focal props, or any object you don't want accidentally overwritten during a broad brush or spawn pass.
+**Pin** places objects by anchoring them to a surface point and letting you shape their rotation and scale with a single drag gesture. Click to pin, drag to rotate and scale, release to confirm.
 
 ---
 
 ## Step 1 — Open the MegaWorld Window and select Pin
 
-Press **Alt + Z** to open the MegaWorld Window. In the **Tools Panel**, click the **+** button and choose **Pin**.
+Press **Alt + Z** to open the MegaWorld Window. In the **Tools Panel**, click the **+** button and choose **Pin** from the Happy Artist group.
 
 ---
 
-## Step 2 — Select which prototypes can be pinned
+## Step 2 — Set up your Group and prototypes
 
-In the **Selection Panel**, choose the Types and prototypes you want to work with.
+In the **Selection Panel**, create or select a Group and add the prototypes you want to place. Pin picks a random prototype from the selected ones each time you click.
 
 ---
 
-## Step 3 — Pin objects in the scene view
+## Step 3 — Click to pin an object
 
-Click objects in the **Scene View** to pin them. Pinned objects are marked and will be skipped by brush operations (Brush Erase, Brush Modify, Brush Physics, etc.) that respect the pin flag.
+Click on a surface in the **Scene View**. MegaWorld places a preview object at the hit point. The object starts at scale `(0, 0, 0)` and is ready for you to shape it.
 
-To unpin an object, click it again with the Pin tool active.
+---
+
+## Step 4 — Drag to rotate and scale
+
+While holding the mouse button:
+
+- **Move the mouse in a circle** around the click point to rotate the object.
+- **Drag the mouse away** from the click point to scale the object up.
+- **Drag toward the click point** to scale it back down.
+
+The further from the click point you drag, the larger the object becomes.
+
+---
+
+## Step 5 — Release to confirm
+
+Release the mouse button to commit the placement. If you release without dragging (cursor stayed within 5 pixels of the click point), the object is discarded.
+
+---
+
+## Step 6 — Adjust Transform Mode
+
+Open **Pin Tool Settings** in the inspector to control how rotation and scale respond to the drag:
+
+- Set **Rotation → Transform Mode** to **Snap** and adjust **Rotation Angle** to snap rotation to fixed degree increments (for example, every 30 degrees).
+- Set **Scale → Transform Mode** to **Snap** and adjust **Snap Scale Value** to snap the scale to fixed increments.
+- Set either mode to **Fixed** to lock rotation or scale to a specific value regardless of drag.
 
 ---
 
 ## What's next
 
-- Use [Precise Place](/megaworld/getting-started/precise-place) to place the hero objects you then want to pin.
-- Use [Edit](/megaworld/getting-started/edit) to fine-tune a pinned object's transform before locking it in.
+- Use [Precise Place](/megaworld/getting-started/precise-place) when you need one-by-one placement with a live preview and explicit transform controls.
+- Use [Edit](/megaworld/getting-started/edit) to fine-tune a placed object's transform after placement.
 - Read the full [Pin](/megaworld/tools/pin) reference documentation.

@@ -1,11 +1,11 @@
 ---
 title: "Pin"
-description: "Place and shape an object interactively by dragging out its rotation and scale from a pinned point"
+description: "Place and interactively shape an object's rotation and scale by dragging from a pinned surface point"
 ---
 
 Pin is a Happy Artist tool for interactive anchored placement.
 
-You click to pin the object to a surface point, then drag to define its rotation and scale before releasing.
+You click to pin an object to a surface point, then drag to define its rotation and scale in a single gesture before releasing to confirm.
 
 <Info>
   New to Pin? Follow the step-by-step [Pin — Getting Started](/megaworld/getting-started/pin) tutorial first.
@@ -18,45 +18,50 @@ Pin supports:
 - [Terrain Object](/megaworld/resource-types/terrain-object)
 - [Unity/GameObject](/megaworld/resource-types/unity-gameobject)
 
-## Tool-level controls
-
-Pin uses **Pin Tool Settings**.
-
-The confirmed settings include:
-
-- **Offset**
-- **Rotation Transform Mode**
-- **From Direction**
-- **Weight To Normal**
-- **Snap Rotation Value**
-- **Fixed Rotation Value**
-- **Scale Transform Mode**
-- **Fixed Scale Value**
-- **Snap Scale Value**
-
 ## How it works
 
-1. Click on a valid surface point.
-2. MegaWorld creates a temporary preview object.
-3. Drag to define direction and size.
-4. Release to confirm the placed result.
+1. **Click** on a valid surface point. MegaWorld places a preview object at that point with scale `(0, 0, 0)` and calculates a local orientation frame from the surface normal.
+2. **Drag** the mouse. The distance from the click point to the cursor controls scale. The angle between the forward direction and the cursor direction controls rotation.
+3. **Release** to confirm. If the cursor moved fewer than 5 pixels from the original click point, the object is discarded instead of committed.
 
-Rotation and scale can work in:
+Rotation and scale each have their own **Transform Mode** that controls how they respond to the drag.
 
-- **Free**
-- **Snap**
-- **Fixed**
+## Tool-level controls
+
+### Position
+
+- **Offset** — shifts the object's Y position after it is placed on the surface. Default is `0`.
+
+### Rotation
+
+- **Transform Mode** — controls how rotation is calculated during drag:
+  - **Free** — rotation continuously follows the cursor direction around the placement axis. The object rotates smoothly as you move the mouse.
+  - **Snap** — rotation snaps to the nearest multiple of **Rotation Angle** as you drag. Default is `30` degrees.
+  - **Fixed** — the object is placed at a fixed rotation defined by **Rotation** (Vector3 Euler angles). Dragging does not change rotation.
+
+- **Up** — determines which axis is used as the local "up" direction for the orientation frame. Available when Transform Mode is not **Fixed**.
+  - **Surface Normal** — the up axis follows the surface normal at the hit point.
+  - **X / Y / Z** — locks the up axis to the corresponding world axis.
+
+- **Weight To Normal** — blends the up direction between world up and the surface normal. Available when **Up** is set to **Surface Normal**. At `1` the object fully follows the surface normal. At `0` it uses world up. Default is `1`.
+
+### Scale
+
+- **Transform Mode** — controls how scale is calculated during drag:
+  - **Free** — scale grows proportionally as you drag away from the click point. Scale is derived from the distance to the cursor on the placement plane, normalized to the object's bounds.
+  - **Snap** — scale snaps to the nearest multiple of **Snap Scale Value** as you drag. Default is `0.3`.
+  - **Fixed** — the object keeps a fixed scale defined by **Scale** (Vector3). The drag distance is ignored.
 
 ## When to use Pin
 
 Pin is best when you want:
 
-- a very tactile placement workflow;
-- anchored objects that need manual orientation from a surface point;
-- quick manual scale and rotation shaping in one interaction.
+- a tactile one-gesture placement workflow where you set rotation and scale in the same action;
+- objects that need to be oriented relative to the surface they land on;
+- quick manual variation without opening transform fields.
 
 ## Notes
 
-- Press `F` while hovering a valid hit point to frame the camera on that point.
-- The tool uses surface orientation data to build the local placement frame.
-- If the drag is too small, the preview object can be discarded instead of committed.
+- Press `F` while hovering a valid surface point to frame the camera on that point.
+- If you release the mouse without dragging, the object is discarded.
+- When Scale Transform Mode is **Fixed**, the object is always committed regardless of drag distance.
