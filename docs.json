@@ -155,7 +155,8 @@
               "megaworld/shared-settings/success",
               "megaworld/shared-settings/simple-transform-settings",
               "megaworld/shared-settings/physics-transform-settings",
-              "megaworld/shared-settings/simple-filter-settings"
+              "megaworld/shared-settings/simple-filter-settings",
+              "megaworld/overlap-check-settings/overview"
             ]
           },
           {
@@ -173,12 +174,6 @@
                   "megaworld/scatter-system/tiles"
                 ]
               }
-            ]
-          },
-          {
-            "group": "Placement And Overlap",
-            "pages": [
-              "megaworld/overlap-check-settings/overview"
             ]
           },
           {

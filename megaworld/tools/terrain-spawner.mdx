@@ -43,9 +43,9 @@ Enable **Enable Visualization** in the Stamper Tool Controller to preview mask f
 
 Terrain Spawner works with every MegaWorld resource kind in a single tool:
 
-- **Terrain Object** and **Unity/GameObject** — procedural object placement with the full shared stack
-- **Unity/Terrain Detail** — grass and mesh detail density passes
-- **Unity/Terrain Texture** — terrain texture painting via mask filters
+- [Terrain Object](/megaworld/resource-types/terrain-object) and **Unity/GameObject** — procedural object placement with the full shared stack
+- [Unity/Terrain Detail](/megaworld/resource-types/unity-terrain-detail) — grass and mesh detail density passes
+- [Unity/Terrain Texture](/megaworld/resource-types/unity-terrain-texture) — terrain texture painting via mask filters
 
 <img
   style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
@@ -119,9 +119,9 @@ MegaWorld can draw Overlap Check shapes directly in the scene view. To enable th
 
 Terrain Spawner supports:
 
-- **Terrain Object**
-- **Unity/GameObject**
-- **Unity/Terrain Detail**
+- [Terrain Object](/megaworld/resource-types/terrain-object)
+- [Unity/GameObject](/megaworld/resource-types/unity-gameobject)
+- [Unity/Terrain Detail](/megaworld/resource-types/unity-terrain-detail)
 
 ## Shared systems used by this tool
 
@@ -143,13 +143,7 @@ For **Unity/Terrain Detail** groups, Terrain Spawner uses:
 
 ### Area Settings
 
-Area Settings define the size and position of the stamper volume in the scene. Key controls:
-
-- **Fit To Terrain Size** — resizes the area to cover the entire Unity Terrain in one click.
-- **Use Spawn Cells** — splits the area into a grid of cells that are spawned independently. Recommended for very large terrains to avoid freezes or crashes.
-- **Handle Settings** — control how the area box is drawn in the scene view (color, line width, dotted lines, visibility when deselected).
-
-See the full [Area Settings](/megaworld/shared-settings/area-settings) reference for all options.
+See [Area Settings](/megaworld/shared-settings/area-settings) for position, size, spawn cells, and handle configuration.
 
 ### Stamper Tool Controller
 
