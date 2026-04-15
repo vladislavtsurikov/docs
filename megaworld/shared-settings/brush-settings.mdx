@@ -1,47 +1,60 @@
 ---
 title: "Brush Settings"
-description: "Control brush size, spacing, mask shape, and brush interaction behavior across brush-based MegaWorld tools"
+description: "Control brush size, spacing, mask shape, and stroke behavior across brush-based MegaWorld tools"
 ---
 
 Brush Settings define the shape and behavior of scene-view brush interaction in MegaWorld.
 
-Different tools use different brush variants, but they all build on the same core idea: brush size, brush spacing, and a mask that defines the affected area.
+Different tools use different brush variants, but they all build on the same core idea: brush size, spacing, and a mask that defines the affected area.
 
 ## Core settings
 
 The shared base layer includes:
 
-- **Brush Size**
-- **Spacing**
-- brush radius derived from brush size
-- brush mask output used by the current tool
+- **Brush Size** — the radius of the brush area in the scene view.
+- **Spacing** — the distance between consecutive brush marks while dragging. See also [Spacing](/megaworld/shared-settings/spacing).
 
-## Interaction shortcut
+Resize the brush with `Shift + Mouse Wheel`.
 
-You can resize the brush with:
+## Brush Spacing
 
-- `Shift + Mouse Wheel`
+Controls how frequently brush marks are applied as you drag the mouse.
 
-## Advanced brush variant
+- **Spacing Mode** — enables or disables Brush Drag. When disabled, the brush only fires on click, not while dragging.
+- **Brush Spacing Equals Type** — sets the unit that determines spacing distance, such as based on brush size or a fixed value.
+- **Spacing Range** — the minimum and maximum distance limits for spacing.
+- **Brush Spacing** — the actual distance between consecutive brush marks while dragging.
 
-Some tools, such as **Advanced Brush** and **Brush Erase**, use an extended brush settings block that adds:
+## Mask Types
 
-- brush jitter
-- custom masks
-- procedural masks
-- spacing modes such as brush-size-based spacing
-- brush rotation
+Determines the shape of the brush mask applied to the painted area.
+
+**Custom Brushes** — use a custom texture as the brush mask. Right-click in the mask picker to access brushes bundled with MegaWorld, or import your own textures.
+
+**Procedural Brush** — generate a mask from mathematical parameters instead of a texture:
+
+- **Shape** — the geometric form of the mask (circle, square, diamond, etc.).
+- **Brush Falloff (%)** — controls the gradient falloff from the center to the edge of the brush.
+- **Brush Strength (%)** — the maximum influence value at the center. Lower values produce softer marks.
+- **Fractal Noise** — adds procedurally generated noise to the mask for an organic, irregular edge.
+
+## Brush Jitter
+
+Controls scatter and randomness of the brush stroke itself.
+
+- **Brush Size** — selected prototypes only spawn within this range around the brush center.
+- **Brush Scatter** — randomizes the brush position by a random offset from the stroke path.
+- **Brush Rotation** — rotates the brush mask on each mark.
+- **Jitter** — the overall randomness of the brush stroke.
 
 ## Preferences
 
-The brush system also has preference-level settings such as:
+The brush system also has preference-level settings:
 
 - [Brush Preferences](/megaworld/preferences/brush-preferences)
 - [Brush Visualization Preferences](/megaworld/preferences/brush-visualization-preferences)
 
 ## Where Brush Settings are used
-
-Brush Settings are central to tools such as:
 
 - [Advanced Brush](/megaworld/tools/advanced-brush)
 - [Spray Brush](/megaworld/tools/spray-brush)

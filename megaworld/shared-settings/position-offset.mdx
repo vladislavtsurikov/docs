@@ -1,0 +1,22 @@
+---
+title: "Position Offset"
+description: "Shift the spawn position along an axis before placement or physics simulation begins"
+---
+
+Position Offset shifts where an object is spawned relative to the surface hit point.
+
+## Position Offset Y
+
+**Position Offset Y** moves the spawn point upward along the Y axis before the object is placed or handed off to the physics simulation.
+
+This is most useful in physics-based tools where objects need to start above the surface so they can fall and settle naturally. Setting a positive Y offset prevents objects from spawning inside the terrain or colliders.
+
+- A value of `0` spawns directly at the surface hit point.
+- Higher values spawn objects further above the surface before the simulation takes over.
+
+## Where it is used
+
+- [Brush Physics](/megaworld/tools/brush-physics)
+- [Precise Physics](/megaworld/tools/precise-physics)
+- [Explode Physics](/megaworld/tools/explode-physics)
+- [Precise Place](/megaworld/tools/precise-place) — as a per-prototype offset

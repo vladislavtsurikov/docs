@@ -163,7 +163,9 @@
                   "megaworld/shared-settings/simple-transform-settings",
                   "megaworld/shared-settings/physics-transform-settings",
                   "megaworld/shared-settings/physics-effects-settings",
-                  "megaworld/shared-settings/stamper-tool-controller"
+                  "megaworld/shared-settings/stamper-tool-controller",
+                  "megaworld/shared-settings/position-offset",
+                  "megaworld/shared-settings/spacing"
                 ]
               },
               {

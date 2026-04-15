@@ -24,13 +24,12 @@ Explode Physics uses **Explode Physics Tool Settings**.
 
 The current tool settings include:
 
-- **Force**
-- **Instances Max**
-- **Instances Min**
-- **Position Offset Y**
-- **Size**
-- **Spacing**
-- **Spawn From One Point**
+- **Force** — the strength of the explosion impulse applied to each spawned instance.
+- **Instances Min** / **Instances Max** — the range of how many instances are spawned per interaction. MegaWorld picks a random count within this range.
+- [Position Offset Y](/megaworld/shared-settings/position-offset) — shifts the spawn point above the surface before the explosion force is applied.
+- **Size** — the radius of the spawn area when **Spawn From One Point** is disabled.
+- [Spacing](/megaworld/shared-settings/spacing) — minimum distance between consecutive interactions.
+- **Spawn From One Point** — when enabled, all instances emit from a single point instead of being distributed across the spawn area.
 
 ## Core behavior
 
