@@ -3,9 +3,12 @@
   "theme": "mint",
   "name": "MegaWorld Documentation",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#18E299",
+    "light": "#18E299",
+    "dark": "#18E299",
+    "background": {
+      "dark": "#0B0F0D"
+    }
   },
   "favicon": "/favicon.svg",
   "navigation": {
