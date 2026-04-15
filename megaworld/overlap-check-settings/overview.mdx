@@ -12,9 +12,9 @@ MegaWorld evaluates overlap in two stages:
 
 If you set **Overlap Shape** to `None`, MegaWorld skips prototype-to-prototype overlap and only uses **Collision Check**.
 
-<Tip>
+<Note>
   Overlap Check Settings work especially well together with [Transform Components](/megaworld/transform-components/overview) and [Mask Filters](/megaworld/mask-filters/overview). First define where objects can spawn, then refine how they are transformed, and finally block bad placements.
-</Tip>
+</Note>
 
 ## Choose an overlap mode
 
@@ -68,9 +68,9 @@ Use **Bounds Check** when you need a precise box-shaped volume. MegaWorld uses a
 - **Bounds Size** sets the custom box dimensions.
 - **Multiply Bounds Size** scales the final box up or down after MegaWorld builds it.
 
-<Tip>
+<Note>
   Start with **Bounds Prefab**. Switch to **Custom** only when the prefab bounds are too loose or too tight for the result you want.
-</Tip>
+</Note>
 
 ## Sphere check
 
