@@ -155,19 +155,6 @@
             ]
           },
           {
-            "group": "Preferences",
-            "pages": [
-              "megaworld/preferences/overview",
-              "megaworld/preferences/brush-preferences",
-              "megaworld/preferences/brush-visualization-preferences",
-              "megaworld/preferences/simple-filter-visualization-preferences",
-              "megaworld/preferences/mask-filter-visualization-preferences",
-              "megaworld/preferences/overlap-check-preferences",
-              "megaworld/preferences/raycast-preferences",
-              "megaworld/preferences/scatter-preferences"
-            ]
-          },
-          {
             "group": "Scatter System",
             "pages": [
               "megaworld/scatter-system/overview",
@@ -256,10 +243,48 @@
             "group": "Resource Types",
             "pages": [
               "megaworld/resource-types/overview",
-              "megaworld/resource-types/unity-gameobject",
-              "megaworld/resource-types/terrain-object",
-              "megaworld/resource-types/unity-terrain-detail",
-              "megaworld/resource-types/unity-terrain-texture"
+              {
+                "group": "Unity",
+                "pages": [
+                  "megaworld/resource-types/unity-gameobject",
+                  "megaworld/resource-types/unity-terrain-detail",
+                  "megaworld/resource-types/unity-terrain-texture"
+                ]
+              },
+              {
+                "group": "MegaWorld",
+                "pages": [
+                  "megaworld/resource-types/terrain-object"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Preferences",
+            "pages": [
+              "megaworld/preferences/overview",
+              {
+                "group": "Brush",
+                "pages": [
+                  "megaworld/preferences/brush-preferences",
+                  "megaworld/preferences/brush-visualization-preferences"
+                ]
+              },
+              {
+                "group": "Filters",
+                "pages": [
+                  "megaworld/preferences/simple-filter-visualization-preferences",
+                  "megaworld/preferences/mask-filter-visualization-preferences"
+                ]
+              },
+              {
+                "group": "Placement",
+                "pages": [
+                  "megaworld/preferences/overlap-check-preferences",
+                  "megaworld/preferences/raycast-preferences",
+                  "megaworld/preferences/scatter-preferences"
+                ]
+              }
             ]
           },
           {
