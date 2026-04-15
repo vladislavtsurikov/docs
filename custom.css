@@ -1,0 +1,7 @@
+/* Logo size */
+a[class*="logo"] img,
+header img[alt],
+nav img {
+  height: 48px !important;
+  width: auto !important;
+}
