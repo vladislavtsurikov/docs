@@ -1,7 +1,6 @@
 /* Logo size */
-a[class*="logo"] img,
-header img[alt],
-nav img {
-  height: 48px !important;
+img[src*="logo"] {
+  height: 52px !important;
   width: auto !important;
+  max-width: none !important;
 }
