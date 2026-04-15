@@ -9,10 +9,8 @@ Different tools use different brush variants, but they all build on the same cor
 
 ## Core settings
 
-The shared base layer includes:
-
-- **Brush Size** — the radius of the brush area in the scene view.
-- **Spacing** — the distance between consecutive brush marks while dragging. See also [Spacing](/megaworld/shared-settings/spacing).
+- **Brush Size** — the diameter of the brush area in the scene view. Default is `100`.
+- **Spacing** — the distance between consecutive brush marks while dragging.
 
 Resize the brush with `Shift + Mouse Wheel`.
 
@@ -20,10 +18,11 @@ Resize the brush with `Shift + Mouse Wheel`.
 
 Controls how frequently brush marks are applied as you drag the mouse.
 
-- **Spacing Mode** — enables or disables Brush Drag. When disabled, the brush only fires on click, not while dragging.
-- **Brush Spacing Equals Type** — sets the unit that determines spacing distance, such as based on brush size or a fixed value.
-- **Spacing Range** — the minimum and maximum distance limits for spacing.
-- **Brush Spacing** — the actual distance between consecutive brush marks while dragging.
+- **Brush Spacing Equals Type** — determines how the spacing distance is calculated:
+  - **Half Brush Size** — spacing equals half the current brush size. This is the default.
+  - **Brush Size** — spacing equals the full brush size.
+  - **Custom** — uses the **Brush Spacing** value below.
+- **Brush Spacing** — the custom spacing distance used when **Brush Spacing Equals Type** is set to **Custom**. Default is `30`.
 
 ## Mask Types
 
@@ -40,12 +39,12 @@ Determines the shape of the brush mask applied to the painted area.
 
 ## Brush Jitter
 
-Controls scatter and randomness of the brush stroke itself.
+Controls scatter and randomness of the brush stroke itself. All values are clamped to 0–1.
 
-- **Brush Size** — selected prototypes only spawn within this range around the brush center.
-- **Brush Scatter** — randomizes the brush position by a random offset from the stroke path.
-- **Brush Rotation** — rotates the brush mask on each mark.
-- **Jitter** — the overall randomness of the brush stroke.
+- **Brush Size Jitter** — reduces the effective brush radius by a random amount each stroke. At `0` the radius is unchanged. At `1` the radius can be reduced by up to the full brush radius.
+- **Brush Scatter** — offsets the brush center position by a random direction. The offset distance is `BrushRadius × Brush Scatter`. At `0` there is no offset.
+- **Brush Scatter Jitter** — adds variability to the Brush Scatter amount. Reduces the scatter distance by a random fraction each stroke.
+- **Brush Rotation Jitter** — randomizes the rotation of the brush mask each stroke. At `0` the rotation is fixed. At `1` the rotation varies by the full brush rotation value.
 
 ## Preferences
 
@@ -63,5 +62,5 @@ The brush system also has preference-level settings:
 - [Brush Modify](/megaworld/tools/brush-modify)
 
 <Note>
-  If a brush tool feels too dense or too sparse, check **Brush Size** and **Spacing** before changing the deeper placement logic.
+  If a brush tool feels too dense or too sparse, check **Brush Size** and **Brush Spacing Equals Type** before changing the deeper placement logic.
 </Note>

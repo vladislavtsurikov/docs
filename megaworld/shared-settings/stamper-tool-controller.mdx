@@ -9,17 +9,27 @@ It controls visualization, auto respawn behavior, and the core spawn actions.
 
 ## Settings
 
-**Enable Visualization** — shows the Mask Filter output directly in the scene view. Lets you see exactly which areas pass your height, slope, and noise filters before spawning. Visualization appearance is configured in [Preferences](/megaworld/preferences/overview).
+**Visualisation** — shows the Mask Filter output directly in the scene view so you can see which areas pass your filters before spawning. Enabled by default. Visualization appearance is configured in [Preferences](/megaworld/preferences/overview).
 
-**Enable Auto Spawn** — automatically removes and re-spawns the current pass every time you change a setting. This gives you instant live feedback while tuning filters and scatter rules.
+**Auto Respawn** — when enabled, MegaWorld automatically removes and re-spawns the current pass every time you change a setting. Gives instant live feedback while tuning.
 
-- **Delay Auto Spawn** — how many seconds to wait after a setting change before triggering the automatic respawn. Increase this if your area is large and you don't want a respawn on every small adjustment.
+- **Delay Auto Spawn** — how many seconds to wait after a setting change before the automatic respawn triggers. Range is 0–3 seconds. Default is `0.1`.
 
-**Respawn** — removes all currently spawned instances from this stamper and runs a fresh spawn pass. Use this to regenerate the result after making manual changes.
+## Buttons
 
-**Spawn** — adds a new spawn pass on top of whatever is already in the scene. Each click of Spawn adds more instances without clearing the previous result.
+When **Auto Respawn** is on:
 
-**Unspawn Selected Prototypes** — removes only the instances that belong to the currently selected prototypes, leaving everything else untouched. Useful for clearing a specific resource type without redoing the whole stamper.
+- **Respawn** — removes all spawned instances for all groups and runs a fresh spawn pass.
+
+When **Auto Respawn** is off:
+
+- **Respawn** — removes all spawned instances for all groups and runs a fresh spawn pass.
+- **Spawn** — adds a new spawn pass on top of whatever is already in the scene without removing previous instances.
+- **Cancel** — cancels a spawn pass that is currently in progress.
+
+Always visible:
+
+- **Unspawn Selected Prototypes** — removes only the instances belonging to the currently selected prototypes. Shows a confirmation dialog before proceeding.
 
 ## Where it is used
 

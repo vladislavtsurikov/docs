@@ -24,15 +24,16 @@ Precise Place uses **Precise Place Tool Settings**.
 
 The confirmed settings include:
 
-- [Spacing](/megaworld/shared-settings/spacing) — minimum distance between consecutive placements.
-- **Random Select Prototype** — picks a random prototype from the active group on each placement instead of using the selected one.
-- **Use Transform Components** — applies the [Transform Components](/megaworld/transform-components/overview) stack to each placed object.
+- [Spacing](/megaworld/shared-settings/spacing) — minimum distance between consecutive placements. Default is `5`.
+- **Random Select Prototype** — picks a random prototype from the active group on each placement instead of using the selected one. Enabled by default.
+- **Remember Past Transform** — when enabled, the next placement reuses the transform (position, rotation, scale) from the previous one as a starting point.
+- **Use Transform Components** — applies the [Transform Components](/megaworld/transform-components/overview) stack to each placed object. Enabled by default.
 - **Overlap Check** — enables overlap rejection using [Overlap Check Settings](/megaworld/overlap-check-settings/overview).
 - **Visualize Overlap Check Settings** — draws the overlap shapes in the scene view.
 - **Enable Snap Move** — enables grid-snapping during drag repositioning.
-- **Snap Move** — the grid size used when Snap Move is enabled.
+- **Snap Move** — the grid step size for each axis (X, Y, Z) used when Snap Move is enabled. Default is `(2.5, 2.5, 2.5)`.
 - **Align** — aligns the placed object to the surface normal.
-- **Weight To Normal** — blends between world-up and surface normal for the alignment.
+- **Weight To Normal** — blends between world-up and surface normal for the alignment. At `1` the object fully aligns to the surface normal.
 - **Along Stroke** — rotates the object to face the direction of the stroke.
 
 ## Prototype-level controls
