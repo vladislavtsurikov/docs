@@ -32,107 +32,127 @@
             "group": "Tools",
             "pages": [
               {
-                "group": "Terrain Spawner",
+                "group": "Stamper Tools",
                 "pages": [
-                  "megaworld/tools/terrain-spawner-features",
-                  "megaworld/getting-started/terrain-spawner",
-                  "megaworld/tools/terrain-spawner"
+                  {
+                    "group": "Terrain Spawner",
+                    "pages": [
+                      "megaworld/tools/terrain-spawner-features",
+                      "megaworld/getting-started/terrain-spawner",
+                      "megaworld/tools/terrain-spawner"
+                    ]
+                  },
+                  {
+                    "group": "Texture Stamper",
+                    "pages": [
+                      "megaworld/getting-started/texture-stamper",
+                      "megaworld/tools/texture-stamper"
+                    ]
+                  },
+                  {
+                    "group": "Gravity Spawner",
+                    "pages": [
+                      "megaworld/getting-started/gravity-spawner",
+                      "megaworld/tools/gravity-spawner"
+                    ]
+                  }
                 ]
               },
               {
-                "group": "Texture Stamper",
+                "group": "Brush Tools",
                 "pages": [
-                  "megaworld/getting-started/texture-stamper",
-                  "megaworld/tools/texture-stamper"
+                  {
+                    "group": "Advanced Brush",
+                    "pages": [
+                      "megaworld/tools/advanced-brush-features",
+                      "megaworld/getting-started/advanced-brush",
+                      "megaworld/tools/advanced-brush",
+                      "megaworld/tools/advanced-brush-hotkeys"
+                    ]
+                  },
+                  {
+                    "group": "Spray Brush",
+                    "pages": [
+                      "megaworld/getting-started/spray-brush",
+                      "megaworld/tools/spray-brush"
+                    ]
+                  },
+                  {
+                    "group": "Brush Erase",
+                    "pages": [
+                      "megaworld/getting-started/brush-erase",
+                      "megaworld/tools/brush-erase"
+                    ]
+                  }
                 ]
               },
               {
-                "group": "Advanced Brush",
+                "group": "PhysX Painter",
                 "pages": [
-                  "megaworld/tools/advanced-brush-features",
-                  "megaworld/getting-started/advanced-brush",
-                  "megaworld/tools/advanced-brush",
-                  "megaworld/tools/advanced-brush-hotkeys"
+                  {
+                    "group": "Brush Physics",
+                    "pages": [
+                      "megaworld/getting-started/brush-physics",
+                      "megaworld/tools/brush-physics"
+                    ]
+                  },
+                  {
+                    "group": "Precise Physics",
+                    "pages": [
+                      "megaworld/getting-started/precise-physics",
+                      "megaworld/tools/precise-physics"
+                    ]
+                  },
+                  {
+                    "group": "Explode Physics",
+                    "pages": [
+                      "megaworld/getting-started/explode-physics",
+                      "megaworld/tools/explode-physics"
+                    ]
+                  },
+                  {
+                    "group": "Physics Effects",
+                    "pages": [
+                      "megaworld/getting-started/physics-effects",
+                      "megaworld/tools/physics-effects"
+                    ]
+                  }
                 ]
               },
               {
-                "group": "Spray Brush",
+                "group": "Happy Artist",
                 "pages": [
-                  "megaworld/getting-started/spray-brush",
-                  "megaworld/tools/spray-brush"
-                ]
-              },
-              {
-                "group": "Brush Erase",
-                "pages": [
-                  "megaworld/getting-started/brush-erase",
-                  "megaworld/tools/brush-erase"
-                ]
-              },
-              {
-                "group": "Gravity Spawner",
-                "pages": [
-                  "megaworld/getting-started/gravity-spawner",
-                  "megaworld/tools/gravity-spawner"
-                ]
-              },
-              {
-                "group": "Brush Physics",
-                "pages": [
-                  "megaworld/getting-started/brush-physics",
-                  "megaworld/tools/brush-physics"
-                ]
-              },
-              {
-                "group": "Precise Physics",
-                "pages": [
-                  "megaworld/getting-started/precise-physics",
-                  "megaworld/tools/precise-physics"
-                ]
-              },
-              {
-                "group": "Explode Physics",
-                "pages": [
-                  "megaworld/getting-started/explode-physics",
-                  "megaworld/tools/explode-physics"
-                ]
-              },
-              {
-                "group": "Physics Effects",
-                "pages": [
-                  "megaworld/getting-started/physics-effects",
-                  "megaworld/tools/physics-effects"
-                ]
-              },
-              {
-                "group": "Brush Modify",
-                "pages": [
-                  "megaworld/getting-started/brush-modify",
-                  "megaworld/tools/brush-modify",
-                  "megaworld/tools/brush-modify-hotkeys"
-                ]
-              },
-              {
-                "group": "Edit",
-                "pages": [
-                  "megaworld/getting-started/edit",
-                  "megaworld/tools/edit",
-                  "megaworld/tools/edit-hotkeys"
-                ]
-              },
-              {
-                "group": "Precise Place",
-                "pages": [
-                  "megaworld/getting-started/precise-place",
-                  "megaworld/tools/precise-place",
-                  "megaworld/tools/precise-place-hotkeys"
-                ]
-              },
-              {
-                "group": "Pin",
-                "pages": [
-                  "megaworld/getting-started/pin",
-                  "megaworld/tools/pin"
+                  {
+                    "group": "Brush Modify",
+                    "pages": [
+                      "megaworld/getting-started/brush-modify",
+                      "megaworld/tools/brush-modify",
+                      "megaworld/tools/brush-modify-hotkeys"
+                    ]
+                  },
+                  {
+                    "group": "Edit",
+                    "pages": [
+                      "megaworld/getting-started/edit",
+                      "megaworld/tools/edit",
+                      "megaworld/tools/edit-hotkeys"
+                    ]
+                  },
+                  {
+                    "group": "Precise Place",
+                    "pages": [
+                      "megaworld/getting-started/precise-place",
+                      "megaworld/tools/precise-place",
+                      "megaworld/tools/precise-place-hotkeys"
+                    ]
+                  },
+                  {
+                    "group": "Pin",
+                    "pages": [
+                      "megaworld/getting-started/pin",
+                      "megaworld/tools/pin"
+                    ]
+                  }
                 ]
               }
             ]
