@@ -34,6 +34,7 @@
               {
                 "group": "Terrain Spawner",
                 "pages": [
+                  "megaworld/tools/terrain-spawner-features",
                   "megaworld/getting-started/terrain-spawner",
                   "megaworld/tools/terrain-spawner"
                 ]
@@ -48,6 +49,7 @@
               {
                 "group": "Advanced Brush",
                 "pages": [
+                  "megaworld/tools/advanced-brush-features",
                   "megaworld/getting-started/advanced-brush",
                   "megaworld/tools/advanced-brush",
                   "megaworld/tools/advanced-brush-hotkeys"

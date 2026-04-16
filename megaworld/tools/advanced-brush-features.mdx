@@ -1,0 +1,98 @@
+---
+title: "Advanced Brush"
+sidebarTitle: "Features"
+description: "Overview of Advanced Brush features and capabilities"
+---
+
+Advanced Brush is the main interactive painting tool in MegaWorld. You paint directly in the scene view while the same shared systems — filters, transforms, scatter, and overlap checks — that power the procedural tools run on every stroke.
+
+## The most realistic spawn
+
+Advanced Brush combines manual painting with the full MegaWorld placement stack — filters, transforms, overlap checks, and scatter. Every stroke respects the same rules as procedural passes, so hand-painted areas blend naturally with stamper-generated results.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/tools/advanced-brush/realistic-spawn.gif"
+  alt="Advanced Brush painting objects with realistic filter-driven placement."
+/>
+
+## Spawn support for all resource types
+
+Advanced Brush works with all four MegaWorld resource kinds:
+
+- [Terrain Object](/megaworld/resource-types/terrain-object) and [Unity/GameObject](/megaworld/resource-types/unity-gameobject) — painting with filters, transforms, and overlap checks
+- [Unity/Terrain Detail](/megaworld/resource-types/unity-terrain-detail) — interactive grass and mesh detail painting
+- [Unity/Terrain Texture](/megaworld/resource-types/unity-terrain-texture) — direct terrain texture painting with mask filter support
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/tools/advanced-brush/resource-types.png"
+  alt="Advanced Brush resource type selection."
+/>
+
+## Shared settings with Terrain Spawner
+
+Types in MegaWorld are reusable presets. A Type configured in [Terrain Spawner](/megaworld/tools/terrain-spawner) can be used directly in Advanced Brush with no extra setup. Build your rules once in the stamper, then hand-paint with the same rules in the brush.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/tools/advanced-brush/types-preset-reuse.png"
+  alt="MegaWorld Type preset shared between Terrain Spawner and Advanced Brush."
+/>
+
+## Live visualization
+
+Advanced Brush draws a preview in the scene view while you hover:
+
+- With a **Mask Filter** active, the filter output is overlaid on the terrain inside the brush circle.
+- With **Simple Filter** selected, a handle-based preview of the placement area is shown.
+
+Visualization settings are configured globally in [Preferences](/megaworld/preferences/overview).
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/tools/advanced-brush/visualization-mask-filter.png"
+  alt="Advanced Brush mask filter visualization in the scene view."
+/>
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px', marginTop: '1rem' }}
+  src="/images/megaworld/tools/advanced-brush/visualization-simple-filter.png"
+  alt="Advanced Brush simple filter visualization in the scene view."
+/>
+
+## Spherical spawn support
+
+Enable **Spherical** mode to paint on non-terrain surfaces such as sphere geometry or curved meshes. In spherical mode, Mask Filters are replaced by Simple Filter, and only compatible scatter algorithms are available.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/tools/advanced-brush/spherical-spawn.gif"
+  alt="Advanced Brush spherical spawn mode painting on curved surfaces."
+/>
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px', marginTop: '1rem' }}
+  src="/images/megaworld/tools/advanced-brush/spherical-mode-settings.png"
+  alt="Advanced Brush spherical mode settings."
+/>
+
+## Cell support
+
+Placed objects are stored in spatial cells. This enables [Overlap Check Settings](/megaworld/overlap-check-settings/overview), and makes tools like [Brush Erase](/megaworld/tools/brush-erase) and [Edit](/megaworld/tools/edit) aware of exactly where each object was placed.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/tools/advanced-brush/cell-support.png"
+  alt="Advanced Brush cell support overview."
+/>
+
+## Overlap Check Settings visualization
+
+MegaWorld can draw Overlap Check shapes directly in the scene view. To enable the preview, turn on **Visualize Overlap Check Settings** inside [Precise Place](/megaworld/tools/precise-place).
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/tools/advanced-brush/overlap-check-visualization.gif"
+  alt="Overlap Check Settings visualization in Advanced Brush."
+/>
