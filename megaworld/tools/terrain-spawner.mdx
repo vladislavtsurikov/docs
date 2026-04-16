@@ -70,7 +70,7 @@ For terrain detail groups, the spawner iterates over every active Unity Terrain 
 
 ### Per-prototype settings (Unity/Terrain Detail)
 
-- **Spawn Detail Settings** — see below
+- [Spawn Detail Settings](/megaworld/general-settings/spawn-detail-settings) — controls detail density, opacity, and failure rate
 - [Mask Filters](/megaworld/mask-filters/overview)
 
 ### Tool-level components
@@ -78,16 +78,6 @@ For terrain detail groups, the spawner iterates over every active Unity Terrain 
 - [Area Settings](/megaworld/shared-settings/area-settings) — defines the stamper volume and bounds.
 - [Stamper Tool Controller](/megaworld/shared-settings/stamper-tool-controller) — controls visualization and auto respawn.
 - [Layer Settings](/megaworld/shared-settings/layer-settings) — specifies which physics layers are used for raycasts.
-
-## Spawn Detail Settings
-
-These fields exist on each Terrain Detail prototype and control how detail density is written to the terrain.
-
-| Setting | Description | Default |
-|---|---|---|
-| **Density** | Maximum number of detail objects per detail cell. Corresponds to Unity's detail layer density value. | `5` |
-| **Use Random Opacity** | When enabled, multiplies the filter fitness by a random value before mapping to density. This adds variation so not every cell at the same fitness gets the same count. | `true` |
-| **Failure Rate** | Percentage chance (0–100) that a cell is set to zero density regardless of fitness. Adds sparse gaps to the detail distribution. | `0` |
 
 ## Auto Respawn behavior
 
