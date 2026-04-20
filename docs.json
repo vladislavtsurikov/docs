@@ -362,9 +362,5 @@
       "vscode"
     ]
   },
-  "footer": {
-    "socials": {
-      "github": "https://github.com"
-    }
-  }
+  "footer": {}
 }
