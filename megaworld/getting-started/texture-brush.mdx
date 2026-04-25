@@ -1,0 +1,65 @@
+---
+sidebarTitle: "Getting Started"
+title: "Texture Brush — Getting Started"
+description: "Paint terrain textures interactively in the scene view using the Texture Brush."
+---
+
+<Info>
+  Before starting this tutorial, read:
+  - [Working with Data](/megaworld/getting-started/working-with-data) — Groups, Resource Types, and Prototypes
+  - [Working with MegaWorld Window](/megaworld/getting-started/megaworld-window) — how to navigate the window
+</Info>
+
+The **Texture Brush** lets you paint Unity Terrain texture layers directly in the scene view. It gives you manual control over exactly where textures appear, with optional mask filter support and per-stroke strength control.
+
+## Before you begin
+
+You need:
+
+- A Unity Terrain in your scene with at least one terrain layer already configured in the **Terrain Inspector**.
+
+---
+
+## Step 1 — Open the MegaWorld Window and select Texture Brush
+
+Press **Alt + Z** to open the MegaWorld Window. In the **Tools Panel**, click the **+** button and choose **Texture Brush**, or click an existing Texture Brush instance.
+
+---
+
+## Step 2 — Add a Group and prototypes
+
+In the **Selection Panel**, click **Add Type**. Inside the Group, click **Add Resource** and choose **Unity/Terrain Texture**.
+
+Assign a terrain texture that matches a layer already registered in the Unity Terrain Inspector.
+
+---
+
+## Step 3 — Set Target Strength
+
+In the **Settings Panel**, under **Texture Brush Tool Settings**, set **Target Strength**:
+
+- `1.0` — fully paints the texture in one stroke.
+- `0.1–0.5` — lets you build up the texture gradually over multiple strokes for a softer blend.
+
+---
+
+## Step 4 — Add Mask Filters (optional)
+
+Add [Mask Filters](/megaworld/mask-filters/overview) to restrict painting by height or slope. For example, a slope filter ensures a rock texture only appears where the terrain is steep.
+
+---
+
+## Step 5 — Paint in the scene view
+
+Move your cursor into the **Scene View**. A brush preview shows the area that will be affected.
+
+- **Click** to paint once.
+- **Click and drag** to paint continuously across the terrain.
+
+---
+
+## What's next
+
+- Use [Texture Stamper](/megaworld/getting-started/texture-stamper) to fill large areas procedurally with the same texture settings.
+- After painting your base textures, use [Grass Brush](/megaworld/getting-started/grass-brush) to add grass detail on top.
+- Read the full [Texture Brush](/megaworld/tools/texture-brush) reference documentation.

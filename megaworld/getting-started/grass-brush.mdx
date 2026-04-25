@@ -1,0 +1,66 @@
+---
+sidebarTitle: "Getting Started"
+title: "Grass Brush — Getting Started"
+description: "Paint grass and terrain detail layers interactively in the scene view using the Grass Brush."
+---
+
+<Info>
+  Before starting this tutorial, read:
+  - [Working with Data](/megaworld/getting-started/working-with-data) — Groups, Resource Types, and Prototypes
+  - [Working with MegaWorld Window](/megaworld/getting-started/megaworld-window) — how to navigate the window
+</Info>
+
+The **Grass Brush** lets you paint Unity Terrain detail layers — grass, flowers, and mesh details — directly in the scene view. It gives you manual control over exactly where detail appears, while using the same density and filter systems as the Grass Stamper.
+
+## Before you begin
+
+You need:
+
+- A Unity Terrain in your scene with at least one detail prototype configured in the **Terrain Inspector**.
+
+---
+
+## Step 1 — Open the MegaWorld Window and select Grass Brush
+
+Press **Alt + Z** to open the MegaWorld Window. In the **Tools Panel**, click the **+** button and choose **Grass Brush**, or click an existing Grass Brush instance.
+
+---
+
+## Step 2 — Add a Group and prototypes
+
+In the **Selection Panel**, click **Add Type**. Inside the Group, click **Add Resource** and choose **Unity/Terrain Detail**.
+
+Assign a detail prototype that matches one already registered in the Unity Terrain Inspector.
+
+---
+
+## Step 3 — Configure Spawn Detail Settings
+
+In the prototype settings, expand **Spawn Detail Settings**:
+
+- **Density** — maximum detail count per terrain cell.
+- **Use Random Opacity** — adds variation so painted cells get different counts, breaking up a uniform look.
+- **Failure Rate** — randomly skips some cells for a more organic, sparse result.
+
+---
+
+## Step 4 — Add Mask Filters (optional)
+
+Add [Mask Filters](/megaworld/mask-filters/overview) to restrict painting by height, slope, or terrain texture. Filters are evaluated per stroke, so moving the brush to a slope that fails the filter will produce no detail there.
+
+---
+
+## Step 5 — Paint in the scene view
+
+Move your cursor into the **Scene View**. A brush preview shows the area that will be affected.
+
+- **Click** to paint once.
+- **Click and drag** to paint continuously.
+
+---
+
+## What's next
+
+- Use [Grass Stamper](/megaworld/getting-started/grass-stamper) to fill large areas automatically with the same Group settings.
+- Use [Object Brush](/megaworld/getting-started/object-brush) to paint trees or rocks in the same session.
+- Read the full [Grass Brush](/megaworld/tools/grass-brush) reference documentation.

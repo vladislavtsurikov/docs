@@ -1,0 +1,78 @@
+---
+title: "Object Stamper"
+description: "Spawn GameObjects and Terrain Objects inside a bounded area using filters, scatter, and prototype settings"
+---
+
+Object Stamper is a MonoBehaviour stamper tool for procedural placement of objects inside a defined area. You position and scale the stamper in the scene, then MegaWorld evaluates each active Group and fills the area with prototypes that pass your filters.
+
+<Info>
+  New to Object Stamper? Follow the step-by-step [Object Stamper — Getting Started](/megaworld/getting-started/object-stamper) tutorial first.
+</Info>
+
+## Supported resource types
+
+Object Stamper supports:
+
+- [Terrain Object](/megaworld/resource-types/terrain-object)
+- [Unity/GameObject](/megaworld/resource-types/unity-gameobject)
+
+<Note>
+  For grass and mesh detail spawning, use [Grass Stamper](/megaworld/tools/grass-stamper). For terrain texture passes, use [Texture Stamper](/megaworld/tools/texture-stamper).
+</Note>
+
+## How it works
+
+When you click **Spawn**, Object Stamper processes each active Group in order:
+
+1. Casts a ray downward from the stamper's position to find the surface.
+2. Builds the box area from the result.
+3. Runs the full object spawn pipeline for that area.
+
+### Spawn pipeline for each group
+
+1. Generates a random seed if needed.
+2. Runs the scatter system over the box area to produce sample positions.
+3. For each sample, casts a ray downward to find the surface hit point.
+4. Selects a random prototype weighted by Success Settings.
+5. Evaluates filter fitness (Mask Filter or Simple Filter) at the hit point.
+6. Discards the sample with probability `1 − fitness`. Samples with `fitness = 0` are always skipped.
+7. Calls the shared spawn routine which applies [Transform Components](/megaworld/transform-components/overview) and [Overlap Check Settings](/megaworld/overlap-check-settings/overview).
+
+## Shared systems
+
+### Per-group settings
+
+- [Random Seed Settings](/megaworld/shared-settings/random-seed-settings)
+- [Scatter Settings](/megaworld/scatter-system/scatter-settings)
+- [Filter Settings](/megaworld/mask-filters/overview)
+
+### Per-prototype settings
+
+- Success Settings
+- [Overlap Check Settings](/megaworld/overlap-check-settings/overview)
+- [Transform Components](/megaworld/transform-components/overview)
+
+### Tool-level components
+
+- [Area Settings](/megaworld/shared-settings/area-settings) — defines the stamper volume and bounds.
+- [Stamper Tool Controller](/megaworld/shared-settings/stamper-tool-controller) — controls visualization and auto respawn.
+- [Layer Settings](/megaworld/shared-settings/layer-settings) — specifies which physics layers are used for raycasts.
+
+## Auto Respawn behavior
+
+When **Auto Respawn** is on in the Stamper Tool Controller, changing any Group or prototype setting triggers a full respawn of that Group after the configured delay.
+
+## When to use Object Stamper
+
+Object Stamper is best when you want:
+
+- a one-shot generation pass over a large area;
+- a forest, rock field, or prop layout based on filters and scatter rules;
+- a workflow where the result is tied to a scene object rather than painted manually.
+
+## Notes
+
+- Object Stamper does not support Unity/Terrain Detail. Use [Grass Stamper](/megaworld/tools/grass-stamper) for grass and detail density passes.
+- Object Stamper does not support Unity/Terrain Texture. Use [Texture Stamper](/megaworld/tools/texture-stamper) for terrain texture passes.
+- For the scatter system, a random seed is generated before each pass when **Random Seed** is set to auto-generate.
+- Types (Groups) configured in Object Stamper are reusable assets. The same Group can be added to Object Brush and used for manual painting with the same filter and scatter rules.

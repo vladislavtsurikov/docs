@@ -1,0 +1,85 @@
+---
+sidebarTitle: "Getting Started"
+title: "Grass Stamper — Getting Started"
+description: "Fill your terrain with grass and detail layers using the Grass Stamper in just a few steps."
+---
+
+<Info>
+  Before starting this tutorial, read [Working with Data](/megaworld/getting-started/working-with-data) to understand Groups, Resource Types, and Prototypes.
+</Info>
+
+This guide walks you through setting up a grass detail pass using the **Grass Stamper** tool and the **Unity/Terrain Detail** resource type. By the end you will have a working stamper that fills your terrain with grass driven by mask filters.
+
+## Before you begin
+
+You need:
+
+- A Unity project with MegaWorld installed.
+- A Unity Terrain in your scene with at least one detail prototype already configured in the **Terrain Inspector**.
+
+---
+
+## Step 1 — Create a Grass Stamper
+
+Go to `GameObject > Vladislav Tsurikov > Add Grass Stamper`.
+
+A new **Grass Stamper** object appears in your Hierarchy. Its Transform scale defaults to `(500, 500, 500)`. Scale it to cover the area you want to fill.
+
+---
+
+## Step 2 — Add a Group
+
+Select the Grass Stamper in the Hierarchy. In the **MegaWorld Window**, click **Add Type** to create a new Group.
+
+Rename the Group to something descriptive, for example **Grass** or **Undergrowth**.
+
+---
+
+## Step 3 — Add Terrain Detail prototypes
+
+Inside the Group, click **Add Resource** and choose **Unity/Terrain Detail**.
+
+Assign a detail prototype that matches one already registered in the Unity Terrain Inspector. Repeat to add multiple detail types to the same Group — each prototype will have its own density and filter settings.
+
+---
+
+## Step 4 — Configure Spawn Detail Settings
+
+In the prototype settings, expand **Spawn Detail Settings**:
+
+- **Density** — maximum detail count per terrain cell.
+- **Use Random Opacity** — adds variation so cells at the same filter fitness get different counts, breaking up a uniform look.
+- **Failure Rate** — randomly zeroes some cells to create natural sparse gaps.
+
+---
+
+## Step 5 — Add Mask Filters
+
+Each Terrain Detail prototype has its own **Mask Filters** block. This lets you give every grass type a completely independent placement rule.
+
+Common setups:
+
+- **Slope filter** — short grass on flat ground, bare dirt on steep slopes.
+- **Height filter** — wildflowers only in lowland areas.
+- **Noise filter** — organic cluster patterns.
+
+---
+
+## Step 6 — Spawn
+
+In the **Stamper Tool Controller** section, click **Spawn**. Grass Stamper evaluates each active prototype across all Unity Terrains that intersect the stamper bounds and writes the detail density data.
+
+---
+
+## Step 7 — Enable Auto Respawn for fast iteration (optional)
+
+Turn on **Auto Respawn** in the Stamper Tool Controller. Changing any prototype setting — including individual mask filter values — triggers an automatic respawn of just that prototype. You can tune a noise filter on one grass type and see it update immediately without touching the others.
+
+---
+
+## What's next
+
+- Add [Object Stamper](/megaworld/getting-started/object-stamper) to the same area to place trees and rocks on top of your grass pass.
+- Use [Grass Brush](/megaworld/getting-started/grass-brush) to hand-paint grass in specific spots using the same prototype settings.
+- Use [Texture Stamper](/megaworld/getting-started/texture-stamper) to paint the underlying terrain texture layer before running a grass pass.
+- Read the full [Grass Stamper](/megaworld/tools/grass-stamper) reference for all settings and behaviors.

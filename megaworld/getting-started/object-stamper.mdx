@@ -1,0 +1,100 @@
+---
+sidebarTitle: "Getting Started"
+title: "Object Stamper — Getting Started"
+description: "Spawn your first GameObjects across a terrain using the Object Stamper in just a few steps."
+---
+
+<Info>
+  Before starting this tutorial, read [Working with Data](/megaworld/getting-started/working-with-data) to understand Groups, Resource Types, and Prototypes.
+</Info>
+
+This guide walks you through setting up a basic object spawn using the **Object Stamper** tool and the **Unity/GameObject** resource type. By the end you will have a working stamper that places trees or rocks across your terrain with a single click.
+
+## Before you begin
+
+You need:
+
+- A Unity project with MegaWorld installed.
+- A terrain or mesh surface in your scene.
+
+---
+
+## Step 1 — Create an Object Stamper
+
+Go to `GameObject > Vladislav Tsurikov > Add Object Stamper`.
+
+A new **Object Stamper** object appears in your Hierarchy. Its Transform scale defaults to `(500, 500, 500)`, which sets the initial stamper area size. You can create several Object Stampers and switch between them — each one holds its own group stack and settings.
+
+---
+
+## Step 2 — Add a Group
+
+Select the Object Stamper in the Hierarchy. In the **MegaWorld Window**, click **Add Type** to create a new Group.
+
+A Group asset is created in your project. Rename it to something descriptive, for example **Trees** or **Rocks**.
+
+---
+
+## Step 3 — Add prototypes to the Group
+
+Inside the Group, click **Add Resource** and choose the resource type you want to spawn:
+
+- **Unity/GameObject** — standard Prefab instances placed in the scene.
+- **Terrain Object** — GPU-instanced objects managed by Renderer Stack.
+
+Drag your Prefabs into the prototype list.
+
+<Note>
+  You can add multiple Prefabs to the same Group. Object Stamper selects among them randomly during spawning, weighted by each prototype's Success Settings, which helps break up visual repetition.
+</Note>
+
+---
+
+## Step 4 — Configure Scatter Settings
+
+In the Group settings, expand **Scatter Settings** to control how sample positions are generated across the area. Increase density to spawn more objects per unit area, or switch the scatter mode to adjust the distribution pattern.
+
+---
+
+## Step 5 — Configure filters (optional)
+
+Expand the **Filter Settings** for the Group. Add [Mask Filters](/megaworld/mask-filters/overview) to restrict placement by height, slope, or terrain texture. Common setups:
+
+- **Slope filter** — trees on flat ground, rocks on steep slopes.
+- **Height filter** — spawn only within a specific elevation range.
+- **Noise filter** — organic cluster patterns.
+
+On non-Unity-Terrain surfaces (polygon meshes), switch to **Simple Filter**, which evaluates height, slope, and noise directly from raycasts without requiring terrain data.
+
+---
+
+## Step 6 — Configure Transform Components (optional)
+
+In the prototype settings, add [Transform Components](/megaworld/transform-components/overview) to randomize scale, rotation, or position offset for each placed object. At minimum, add a rotation randomizer so objects face different directions.
+
+---
+
+## Step 7 — Set the area and spawn
+
+The stamper area is controlled by the Transform scale of the Object Stamper GameObject. Scale it in the Scene View to cover the terrain region you want to fill.
+
+In the **Stamper Tool Controller** section, click **Spawn**. Object Stamper evaluates each active Group and places objects across the area according to your scatter, filter, and transform settings.
+
+---
+
+## Step 8 — Enable Auto Respawn for fast iteration (optional)
+
+Turn on **Auto Respawn** in the Stamper Tool Controller. With this on, Object Stamper automatically removes the current spawn result and re-runs the pass whenever you change a setting. Use **Delay Auto Spawn** to set a short wait in seconds before the respawn triggers.
+
+This is especially useful when tuning Mask Filters — you can adjust a slope or height filter and immediately see the result update in the scene without clicking Spawn manually.
+
+---
+
+## What's next
+
+- Add more Groups to mix object types in the same stamper.
+- Use [Grass Stamper](/megaworld/getting-started/grass-stamper) to fill terrain with grass in the same area.
+- Use [Texture Stamper](/megaworld/getting-started/texture-stamper) to paint terrain textures before running an object pass.
+- Switch to [Object Brush](/megaworld/getting-started/object-brush) to paint objects interactively using the same Group settings.
+- Use [Brush Modify](/megaworld/getting-started/brush-modify) to art-direct already spawned objects.
+- Read the full [Object Stamper](/megaworld/tools/object-stamper) reference for all settings and behaviors.

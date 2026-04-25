@@ -1,0 +1,71 @@
+---
+title: "Grass Stamper"
+description: "Fill terrain detail layers across a large area using mask filters, density settings, and per-prototype control"
+---
+
+Grass Stamper is a MonoBehaviour stamper tool dedicated to painting Unity Terrain detail layers — grass, flowers, and mesh details — across a defined area in a single pass.
+
+<Info>
+  New to Grass Stamper? Follow the step-by-step [Grass Stamper — Getting Started](/megaworld/getting-started/grass-stamper) tutorial first.
+</Info>
+
+## Supported resource types
+
+Grass Stamper supports:
+
+- [Unity/Terrain Detail](/megaworld/resource-types/unity-terrain-detail)
+
+<Note>
+  For spawning GameObjects and Terrain Objects, use [Object Stamper](/megaworld/tools/object-stamper). For painting terrain textures, use [Texture Stamper](/megaworld/tools/texture-stamper).
+</Note>
+
+## How it works
+
+When you click **Spawn**, Grass Stamper processes each active Group in order:
+
+1. Casts a ray downward from the stamper's position to find the surface.
+2. Builds the box area from the result.
+3. Iterates over all Unity Terrains that intersect the stamper bounds.
+4. For each terrain and each active detail prototype, runs the detail spawn routine.
+
+### Detail spawn routine per terrain
+
+For each Terrain Detail prototype on each intersecting terrain, the stamper:
+
+1. Converts the box area into detail-map coordinates.
+2. Reads the existing detail layer.
+3. For each detail cell in the area, evaluates the **Mask Filter** fitness for that prototype.
+4. Computes a target density:
+   - If **Use Random Opacity** is enabled: multiplies fitness by a random value before scaling to the density range.
+   - Otherwise: scales fitness directly to the density range.
+5. Applies a random failure check using **Failure Rate**.
+6. Writes the result back to the terrain detail layer.
+
+<Note>
+  Grass Stamper requires that the terrain's detail prototypes are already configured in Unity's Terrain Inspector. If no detail prototypes exist on the terrain, the stamper logs a warning and skips that terrain.
+</Note>
+
+## Shared systems
+
+### Per-prototype settings (Unity/Terrain Detail)
+
+- [Spawn Detail Settings](/megaworld/general-settings/spawn-detail-settings) — controls detail density, opacity, and failure rate.
+- [Mask Filters](/megaworld/mask-filters/overview) — each prototype has its own independent mask filter stack.
+
+### Tool-level components
+
+- [Area Settings](/megaworld/shared-settings/area-settings) — defines the stamper volume and bounds.
+- [Stamper Tool Controller](/megaworld/shared-settings/stamper-tool-controller) — controls visualization and auto respawn.
+- [Layer Settings](/megaworld/shared-settings/layer-settings) — specifies which physics layers are used for raycasts.
+
+## Auto Respawn behavior
+
+When **Auto Respawn** is on in the Stamper Tool Controller, changing a Terrain Detail prototype setting triggers a respawn of only that specific detail prototype on the terrain, not the entire Group. This makes real-time tuning of individual detail layers fast and non-destructive.
+
+## When to use Grass Stamper
+
+Grass Stamper is best when you want:
+
+- a one-shot density pass for grass, flowers, or mesh details across a large terrain;
+- per-prototype mask filter control so each grass type has independent placement rules;
+- a stamper workflow for detail that mirrors how Object Stamper handles objects.

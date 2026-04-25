@@ -1,0 +1,64 @@
+---
+title: "Grass Brush"
+description: "Paint terrain detail layers interactively in the scene view using mask filters and per-prototype density settings"
+---
+
+Grass Brush is an interactive painting tool dedicated to Unity Terrain detail layers — grass, flowers, and mesh details. You paint directly in the scene view with the same mask filter and density systems that power the Grass Stamper.
+
+<Info>
+  New to Grass Brush? Follow the step-by-step [Grass Brush — Getting Started](/megaworld/getting-started/grass-brush) tutorial first.
+</Info>
+
+## Supported resource types
+
+Grass Brush supports:
+
+- [Unity/Terrain Detail](/megaworld/resource-types/unity-terrain-detail)
+
+<Note>
+  For painting GameObjects and Terrain Objects, use [Object Brush](/megaworld/tools/object-brush). For painting terrain textures, use [Texture Brush](/megaworld/tools/texture-brush).
+</Note>
+
+## How it works
+
+1. Move the cursor over the scene view. The brush circle shows the area that will be affected.
+2. **Click** to paint once at the cursor position.
+3. **Click and drag** to paint continuously. Spawn points fire as the cursor moves, spaced according to **Spacing** in [Brush Settings](/megaworld/shared-settings/brush-settings).
+
+Each stroke evaluates the active Terrain Detail prototypes in the selected Group against the current brush area and writes density values to the terrain detail layer.
+
+## Features
+
+### Live visualization
+
+Grass Brush draws a preview in the scene view while you hover:
+
+- With a single prototype selected and a **Mask Filter** active, the filter output is overlaid on the terrain inside the brush circle.
+- Otherwise, a simple area preview is drawn.
+
+### Shared settings with Grass Stamper
+
+Groups and their detail settings are reusable. A Group configured for [Grass Stamper](/megaworld/tools/grass-stamper) can be used directly in Grass Brush without any extra setup.
+
+## Tool-level controls
+
+### Brush Settings
+
+See [Brush Settings](/megaworld/shared-settings/brush-settings) for brush size, spacing, jitter, and mask type settings.
+
+## Group-level controls
+
+All active Terrain Detail prototypes in the selected Group are painted on each stroke.
+
+## Prototype-level controls
+
+- [Spawn Detail Settings](/megaworld/general-settings/spawn-detail-settings) — controls detail density, opacity, and failure rate.
+- [Mask Filters](/megaworld/mask-filters/overview) — restricts painting by height, slope, or terrain texture.
+
+## When to use Grass Brush
+
+Grass Brush is best when you want:
+
+- direct scene-view painting of grass and detail layers;
+- manual art direction to add dense grass patches, clearings, or specific undergrowth placement;
+- a mixed workflow where hand-painted details complement a Grass Stamper pass.

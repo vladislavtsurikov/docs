@@ -1,0 +1,85 @@
+---
+title: "Object Brush"
+description: "Paint GameObjects and Terrain Objects directly in the scene with filters, scatter, transforms, and overlap checks"
+---
+
+Object Brush is the main interactive painting tool for objects in MegaWorld. You paint directly in the scene view while the same shared systems — filters, transforms, scatter, and overlap checks — that power the procedural tools run on every stroke.
+
+<Info>
+  New to Object Brush? Follow the step-by-step [Object Brush — Getting Started](/megaworld/getting-started/object-brush) tutorial first.
+</Info>
+
+## Supported resource types
+
+Object Brush supports:
+
+- [Terrain Object](/megaworld/resource-types/terrain-object)
+- [Unity/GameObject](/megaworld/resource-types/unity-gameobject)
+
+<Note>
+  For painting grass and mesh details, use [Grass Brush](/megaworld/tools/grass-brush). For painting terrain textures, use [Texture Brush](/megaworld/tools/texture-brush).
+</Note>
+
+## How it works
+
+1. Move the cursor over the scene view. The brush circle shows the area that will be affected.
+2. **Click** to paint once at the cursor position.
+3. **Click and drag** to paint continuously. New spawn points fire as the cursor moves, spaced according to **Spacing** in [Brush Settings](/megaworld/shared-settings/brush-settings).
+
+Each stroke fires the full spawn pipeline: scatter samples are generated inside the brush area, each sample is raycasted to the surface, the mask filter (if any) is evaluated, fitness is calculated, and each object passes through transforms and overlap checks before being placed.
+
+## Features
+
+### Shared settings with Object Stamper
+
+Groups and their settings are reusable. A Group configured for [Object Stamper](/megaworld/tools/object-stamper) can be used directly in Object Brush without any extra setup. Build placement rules once, then use them in both procedural and hand-painted workflows.
+
+### Live visualization
+
+Object Brush draws a preview in the scene view while you hover:
+
+- With a **Mask Filter** active, the filter output is overlaid on the terrain inside the brush circle.
+- With **Simple Filter** selected, a handle-based preview of the placement area is shown.
+
+Visualization settings are configured globally in [Preferences](/megaworld/preferences/overview).
+
+### Spherical spawn support
+
+Enable **Spherical** mode in [Brush Settings](/megaworld/shared-settings/brush-settings) to paint on non-terrain surfaces such as spheres or curved meshes. In spherical mode, Mask Filters are replaced by Simple Filter, and only compatible scatter algorithms are available.
+
+## Tool-level controls
+
+Object Brush has two tool-level settings blocks: **Object Brush Tool Settings** and **Brush Settings**.
+
+### Object Brush Tool Settings
+
+- **Enable Failure Rate On Mouse Drag** — when enabled, an extra failure rate is applied during drag strokes to prevent over-saturation.
+- **Failure Rate On Mouse Drag** — probability (0–100) that a spawn attempt during a drag stroke is discarded. Only visible when the option above is enabled.
+
+### Brush Settings
+
+See [Brush Settings](/megaworld/shared-settings/brush-settings) for brush size, spacing, jitter, mask type, and spherical mode settings.
+
+## Group-level controls
+
+- [Scatter Settings](/megaworld/scatter-system/scatter-settings) — controls how scatter samples are distributed inside the brush area.
+- [Mask Filters](/megaworld/mask-filters/overview) — restricts painting to specific height ranges, slopes, or terrain textures.
+
+## Prototype-level controls
+
+- [Success](/megaworld/shared-settings/success) — per-prototype spawn probability.
+- [Overlap Check Settings](/megaworld/overlap-check-settings/overview) — rejects placements that overlap existing objects.
+- [Transform Components](/megaworld/transform-components/overview) — applies rotation, scale, and position variation to each placed object.
+
+## When to use Object Brush
+
+Object Brush is best when you want:
+
+- direct scene-view painting with the same filter and transform logic as the procedural tools;
+- manual art direction over where objects appear, while keeping system-driven variation;
+- a mixed workflow where hand-painted areas need to blend with stamper-generated results.
+
+## Notes
+
+- During a drag stroke, enabling **Failure Rate On Mouse Drag** helps prevent areas from becoming over-saturated when painting slowly.
+- Object Brush does not support Unity/Terrain Detail or Unity/Terrain Texture. Use [Grass Brush](/megaworld/tools/grass-brush) or [Texture Brush](/megaworld/tools/texture-brush) for those resource types.

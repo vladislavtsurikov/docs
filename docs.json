@@ -35,11 +35,19 @@
                 "group": "Stamper Tools",
                 "pages": [
                   {
-                    "group": "Terrain Spawner",
+                    "group": "Object Stamper",
                     "pages": [
-                      "megaworld/tools/terrain-spawner-features",
-                      "megaworld/getting-started/terrain-spawner",
-                      "megaworld/tools/terrain-spawner"
+                      "megaworld/tools/object-stamper-features",
+                      "megaworld/getting-started/object-stamper",
+                      "megaworld/tools/object-stamper"
+                    ]
+                  },
+                  {
+                    "group": "Grass Stamper",
+                    "pages": [
+                      "megaworld/tools/grass-stamper-features",
+                      "megaworld/getting-started/grass-stamper",
+                      "megaworld/tools/grass-stamper"
                     ]
                   },
                   {
@@ -62,12 +70,26 @@
                 "group": "Brush Tools",
                 "pages": [
                   {
-                    "group": "Advanced Brush",
+                    "group": "Object Brush",
                     "pages": [
-                      "megaworld/tools/advanced-brush-features",
-                      "megaworld/getting-started/advanced-brush",
-                      "megaworld/tools/advanced-brush",
-                      "megaworld/tools/advanced-brush-hotkeys"
+                      "megaworld/tools/object-brush-features",
+                      "megaworld/getting-started/object-brush",
+                      "megaworld/tools/object-brush",
+                      "megaworld/tools/object-brush-hotkeys"
+                    ]
+                  },
+                  {
+                    "group": "Grass Brush",
+                    "pages": [
+                      "megaworld/getting-started/grass-brush",
+                      "megaworld/tools/grass-brush"
+                    ]
+                  },
+                  {
+                    "group": "Texture Brush",
+                    "pages": [
+                      "megaworld/getting-started/texture-brush",
+                      "megaworld/tools/texture-brush"
                     ]
                   },
                   {
