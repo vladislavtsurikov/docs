@@ -5,49 +5,11 @@ description: "Choose your first MegaWorld tutorial based on the tool you want to
 
 MegaWorld is a multi-tool ecosystem. The Getting Started series is structured in layers — start with the foundation pages, then jump to the tutorial for the specific tool you want to use.
 
-## Foundation (read first)
-
-<CardGroup cols={2}>
-  <Card title="Working with Data" icon="database" href="/megaworld/getting-started/working-with-data">
-    Learn how Groups, Resource Types, and Prototypes work.
-  </Card>
-  <Card title="Working with MegaWorld Window" icon="window" href="/megaworld/getting-started/megaworld-window">
-    Learn how to navigate the Tools Panel, Selection Panel, and Settings Panel.
-  </Card>
-</CardGroup>
-
-## How to open MegaWorld tools
-
-### MonoBehavior tools
-
-A **MonoBehavior tool** is a tool that gets attached to a **GameObject** in your scene. After you add it, you will see that tool on the selected object in the **Inspector**.
-
-Open them from Unity's top menu:
-
-- `GameObject > Vladislav Tsurikov > Add Object Stamper`
-- `GameObject > Vladislav Tsurikov > Add Grass Stamper`
-- `GameObject > Vladislav Tsurikov > Add Texture Stamper`
-- `GameObject > Vladislav Tsurikov > Add Gravity Spawner`
-
-Each one creates a GameObject in the scene with the selected MegaWorld component already attached.
-
-### Editor Window tools
-
-An **Editor Window tool** is not attached to a GameObject. Instead, it works inside a separate editor panel and usually interacts with the **Scene View** through clicks, brushes, or handles.
-
-Open the **MegaWorld Window** from:
-
-- `Window > Vladislav Tsurikov > Mega World > Window`
-
-You can also press `Alt + Z`.
-
-Then, in the **Tools Panel**, click the **+** button and choose the tool you want to use.
-
-Editor Window tools require the **MegaWorld Window** to stay open while you use them.
+MegaWorld tools are split into two types: **MonoBehavior tools**, which attach to GameObjects in your scene, and **Editor Window tools**, which run inside a dedicated editor panel and interact through the Scene View.
 
 ## MonoBehavior tools
 
-These tools are added to GameObjects in your scene. They only require the **Working with Data** foundation.
+A MonoBehavior tool is attached to a **GameObject** in your scene and appears in the **Inspector** when that object is selected. Open them from Unity's top menu under `GameObject > Vladislav Tsurikov` — each entry creates a GameObject with the component already attached: **Object Stamper**, **Grass Stamper**, **Texture Stamper**, and **Gravity Spawner**.
 
 <CardGroup cols={2}>
   <Card title="Object Stamper" icon="tree" href="/megaworld/getting-started/object-stamper">
@@ -66,7 +28,7 @@ These tools are added to GameObjects in your scene. They only require the **Work
 
 ## Editor Window tools
 
-These tools work inside the MegaWorld Window and interact through the Scene View. They require both foundation pages.
+An Editor Window tool works inside the **MegaWorld Window** and interacts with the scene through clicks, brushes, or handles. Open the window from `Window > Vladislav Tsurikov > Mega World > Window` or press `Alt + Z`, then click the **+** button in the Tools Panel to add the tool you need: **Advanced Brush**, **Spray Brush**, **Brush Erase**, **Brush Modify**, **Edit**, **Precise Place**, **Pin**, **Brush Physics**, **Precise Physics**, **Explode Physics**, and **Physics Effects**.
 
 <CardGroup cols={3}>
   <Card title="Object Brush" icon="brush" href="/megaworld/getting-started/object-brush">
@@ -107,5 +69,16 @@ These tools work inside the MegaWorld Window and interact through the Scene View
   </Card>
   <Card title="Physics Effects" icon="bolt" href="/megaworld/getting-started/physics-effects">
     Apply ongoing physics forces to objects in the scene.
+  </Card>
+</CardGroup>
+
+## Foundation (read first)
+
+<CardGroup cols={2}>
+  <Card title="Working with Data" icon="database" href="/megaworld/getting-started/working-with-data">
+    Learn how Groups, Resource Types, and Prototypes work.
+  </Card>
+  <Card title="Working with MegaWorld Window" icon="window" href="/megaworld/getting-started/megaworld-window">
+    Learn how to navigate the Tools Panel, Selection Panel, and Settings Panel.
   </Card>
 </CardGroup>
