@@ -1,34 +1,34 @@
 ---
-title: "Object Brush"
+title: "Advanced Object Brush"
 sidebarTitle: "Features"
-description: "Overview of Object Brush features and capabilities"
+description: "Overview of Advanced Object Brush features and capabilities"
 ---
 
-Object Brush is the primary interactive painting tool for GameObjects and Terrain Objects in MegaWorld. You paint directly in the scene view while the same shared systems — filters, transforms, scatter, and overlap checks — that power the procedural tools run on every stroke.
+Advanced Object Brush is the primary interactive painting tool for GameObjects and Terrain Objects in MegaWorld. You paint directly in the scene view while the same shared systems — filters, transforms, scatter, and overlap checks — that power the procedural tools run on every stroke.
 
 ## The most realistic spawn
 
-Object Brush combines manual painting with the full MegaWorld placement stack — filters, transforms, overlap checks, and scatter. Every stroke respects the same rules as procedural passes, so hand-painted areas blend naturally with stamper-generated results.
+Advanced Object Brush combines manual painting with the full MegaWorld placement stack — filters, transforms, overlap checks, and scatter. Every stroke respects the same rules as procedural passes, so hand-painted areas blend naturally with stamper-generated results.
 
 <img
   style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
   src="/images/megaworld/tools/advanced-brush/realistic-spawn.gif"
-  alt="Object Brush painting objects with realistic filter-driven placement."
+  alt="Advanced Object Brush painting objects with realistic filter-driven placement."
 />
 
-## Shared settings with Object Stamper
+## Shared settings with Advanced Object Stamper
 
-Types in MegaWorld are reusable presets. A Type configured in [Object Stamper](/megaworld/tools/object-stamper) can be used directly in Object Brush with no extra setup. Build your rules once in the stamper, then hand-paint with the same rules in the brush.
+Types in MegaWorld are reusable presets. A Type configured in [Advanced Object Stamper](/megaworld/tools/advanced-object-stamper) can be used directly in Advanced Object Brush with no extra setup. Build your rules once in the stamper, then hand-paint with the same rules in the brush.
 
 <img
   style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
   src="/images/megaworld/tools/advanced-brush/types-preset-reuse.png"
-  alt="MegaWorld Type preset shared between Object Stamper and Object Brush."
+  alt="MegaWorld Type preset shared between Advanced Object Stamper and Advanced Object Brush."
 />
 
 ## Live visualization
 
-Object Brush draws a preview in the scene view while you hover:
+Advanced Object Brush draws a preview in the scene view while you hover:
 
 - With a **Mask Filter** active, the filter output is overlaid on the terrain inside the brush circle.
 - With **Simple Filter** selected, a handle-based preview of the placement area is shown.
@@ -38,13 +38,13 @@ Visualization settings are configured globally in [Preferences](/megaworld/prefe
 <img
   style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
   src="/images/megaworld/tools/advanced-brush/visualization-mask-filter.png"
-  alt="Object Brush mask filter visualization in the scene view."
+  alt="Advanced Object Brush mask filter visualization in the scene view."
 />
 
 <img
   style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px', marginTop: '1rem' }}
   src="/images/megaworld/tools/advanced-brush/visualization-simple-filter.png"
-  alt="Object Brush simple filter visualization in the scene view."
+  alt="Advanced Object Brush simple filter visualization in the scene view."
 />
 
 ## Spherical spawn support
@@ -54,13 +54,13 @@ Enable **Spherical** mode to paint on non-terrain surfaces such as sphere geomet
 <img
   style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
   src="/images/megaworld/tools/advanced-brush/spherical-spawn.gif"
-  alt="Object Brush spherical spawn mode painting on curved surfaces."
+  alt="Advanced Object Brush spherical spawn mode painting on curved surfaces."
 />
 
 <img
   style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px', marginTop: '1rem' }}
   src="/images/megaworld/tools/advanced-brush/spherical-mode-settings.png"
-  alt="Object Brush spherical mode settings."
+  alt="Advanced Object Brush spherical mode settings."
 />
 
 ## Cell support
@@ -70,7 +70,7 @@ Placed objects are stored in spatial cells. This enables [Overlap Check Settings
 <img
   style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
   src="/images/megaworld/tools/advanced-brush/cell-support.png"
-  alt="Object Brush cell support overview."
+  alt="Advanced Object Brush cell support overview."
 />
 
 ## Overlap Check Settings visualization
@@ -80,5 +80,5 @@ MegaWorld can draw Overlap Check shapes directly in the scene view. To enable th
 <img
   style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
   src="/images/megaworld/tools/advanced-brush/overlap-check-visualization.gif"
-  alt="Overlap Check Settings visualization in Object Brush."
+  alt="Overlap Check Settings visualization in Advanced Object Brush."
 />

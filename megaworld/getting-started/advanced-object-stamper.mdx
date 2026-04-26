@@ -1,14 +1,14 @@
 ---
 sidebarTitle: "Getting Started"
-title: "Object Stamper — Getting Started"
-description: "Spawn your first GameObjects across a terrain using the Object Stamper in just a few steps."
+title: "Advanced Object Stamper — Getting Started"
+description: "Spawn your first GameObjects across a terrain using the Advanced Object Stamper in just a few steps."
 ---
 
 <Info>
   Before starting this tutorial, read [Working with Data](/megaworld/getting-started/working-with-data) to understand Groups, Resource Types, and Prototypes.
 </Info>
 
-This guide walks you through setting up a basic object spawn using the **Object Stamper** tool and the **Unity/GameObject** resource type. By the end you will have a working stamper that places trees or rocks across your terrain with a single click.
+This guide walks you through setting up a basic object spawn using the **Advanced Object Stamper** tool and the **Unity/GameObject** resource type. By the end you will have a working stamper that places trees or rocks across your terrain with a single click.
 
 ## Before you begin
 
@@ -19,17 +19,17 @@ You need:
 
 ---
 
-## Step 1 — Create an Object Stamper
+## Step 1 — Create an Advanced Object Stamper
 
-Go to `GameObject > Vladislav Tsurikov > Add Object Stamper`.
+Go to `GameObject > Vladislav Tsurikov > Add Advanced Object Stamper`.
 
-A new **Object Stamper** object appears in your Hierarchy. Its Transform scale defaults to `(500, 500, 500)`, which sets the initial stamper area size. You can create several Object Stampers and switch between them — each one holds its own group stack and settings.
+A new **Advanced Object Stamper** object appears in your Hierarchy. Its Transform scale defaults to `(500, 500, 500)`, which sets the initial stamper area size. You can create several Advanced Object Stampers and switch between them — each one holds its own group stack and settings.
 
 ---
 
 ## Step 2 — Add a Group
 
-Select the Object Stamper in the Hierarchy. In the **MegaWorld Window**, click **Add Type** to create a new Group.
+Select the Advanced Object Stamper in the Hierarchy. In the **MegaWorld Window**, click **Add Type** to create a new Group.
 
 A Group asset is created in your project. Rename it to something descriptive, for example **Trees** or **Rocks**.
 
@@ -45,7 +45,7 @@ Inside the Group, click **Add Resource** and choose the resource type you want t
 Drag your Prefabs into the prototype list.
 
 <Note>
-  You can add multiple Prefabs to the same Group. Object Stamper selects among them randomly during spawning, weighted by each prototype's Success Settings, which helps break up visual repetition.
+  You can add multiple Prefabs to the same Group. Advanced Object Stamper selects among them randomly during spawning, weighted by each prototype's Success Settings, which helps break up visual repetition.
 </Note>
 
 ---
@@ -76,15 +76,15 @@ In the prototype settings, add [Transform Components](/megaworld/transform-compo
 
 ## Step 7 — Set the area and spawn
 
-The stamper area is controlled by the Transform scale of the Object Stamper GameObject. Scale it in the Scene View to cover the terrain region you want to fill.
+The stamper area is controlled by the Transform scale of the Advanced Object Stamper GameObject. Scale it in the Scene View to cover the terrain region you want to fill.
 
-In the **Stamper Tool Controller** section, click **Spawn**. Object Stamper evaluates each active Group and places objects across the area according to your scatter, filter, and transform settings.
+In the **Stamper Tool Controller** section, click **Spawn**. Advanced Object Stamper evaluates each active Group and places objects across the area according to your scatter, filter, and transform settings.
 
 ---
 
 ## Step 8 — Enable Auto Respawn for fast iteration (optional)
 
-Turn on **Auto Respawn** in the Stamper Tool Controller. With this on, Object Stamper automatically removes the current spawn result and re-runs the pass whenever you change a setting. Use **Delay Auto Spawn** to set a short wait in seconds before the respawn triggers.
+Turn on **Auto Respawn** in the Stamper Tool Controller. With this on, Advanced Object Stamper automatically removes the current spawn result and re-runs the pass whenever you change a setting. Use **Delay Auto Spawn** to set a short wait in seconds before the respawn triggers.
 
 This is especially useful when tuning Mask Filters — you can adjust a slope or height filter and immediately see the result update in the scene without clicking Spawn manually.
 
@@ -95,6 +95,6 @@ This is especially useful when tuning Mask Filters — you can adjust a slope or
 - Add more Groups to mix object types in the same stamper.
 - Use [Grass Stamper](/megaworld/getting-started/grass-stamper) to fill terrain with grass in the same area.
 - Use [Texture Stamper](/megaworld/getting-started/texture-stamper) to paint terrain textures before running an object pass.
-- Switch to [Object Brush](/megaworld/getting-started/object-brush) to paint objects interactively using the same Group settings.
+- Switch to [Advanced Object Brush](/megaworld/getting-started/advanced-object-brush) to paint objects interactively using the same Group settings.
 - Use [Brush Modify](/megaworld/getting-started/brush-modify) to art-direct already spawned objects.
-- Read the full [Object Stamper](/megaworld/tools/object-stamper) reference for all settings and behaviors.
+- Read the full [Advanced Object Stamper](/megaworld/tools/advanced-object-stamper) reference for all settings and behaviors.

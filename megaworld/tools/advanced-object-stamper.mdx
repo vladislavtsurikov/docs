@@ -1,17 +1,17 @@
 ---
-title: "Object Stamper"
+title: "Advanced Object Stamper"
 description: "Spawn GameObjects and Terrain Objects inside a bounded area using filters, scatter, and prototype settings"
 ---
 
-Object Stamper is a MonoBehaviour stamper tool for procedural placement of objects inside a defined area. You position and scale the stamper in the scene, then MegaWorld evaluates each active Group and fills the area with prototypes that pass your filters.
+Advanced Object Stamper is a MonoBehaviour stamper tool for procedural placement of objects inside a defined area. You position and scale the stamper in the scene, then MegaWorld evaluates each active Group and fills the area with prototypes that pass your filters.
 
 <Info>
-  New to Object Stamper? Follow the step-by-step [Object Stamper — Getting Started](/megaworld/getting-started/object-stamper) tutorial first.
+  New to Advanced Object Stamper? Follow the step-by-step [Advanced Object Stamper — Getting Started](/megaworld/getting-started/advanced-object-stamper) tutorial first.
 </Info>
 
 ## Supported resource types
 
-Object Stamper supports:
+Advanced Object Stamper supports:
 
 - [Terrain Object](/megaworld/resource-types/terrain-object)
 - [Unity/GameObject](/megaworld/resource-types/unity-gameobject)
@@ -22,7 +22,7 @@ Object Stamper supports:
 
 ## How it works
 
-When you click **Spawn**, Object Stamper processes each active Group in order:
+When you click **Spawn**, Advanced Object Stamper processes each active Group in order:
 
 1. Casts a ray downward from the stamper's position to find the surface.
 2. Builds the box area from the result.
@@ -62,9 +62,9 @@ When you click **Spawn**, Object Stamper processes each active Group in order:
 
 When **Auto Respawn** is on in the Stamper Tool Controller, changing any Group or prototype setting triggers a full respawn of that Group after the configured delay.
 
-## When to use Object Stamper
+## When to use Advanced Object Stamper
 
-Object Stamper is best when you want:
+Advanced Object Stamper is best when you want:
 
 - a one-shot generation pass over a large area;
 - a forest, rock field, or prop layout based on filters and scatter rules;
@@ -72,7 +72,7 @@ Object Stamper is best when you want:
 
 ## Notes
 
-- Object Stamper does not support Unity/Terrain Detail. Use [Grass Stamper](/megaworld/tools/grass-stamper) for grass and detail density passes.
-- Object Stamper does not support Unity/Terrain Texture. Use [Texture Stamper](/megaworld/tools/texture-stamper) for terrain texture passes.
+- Advanced Object Stamper does not support Unity/Terrain Detail. Use [Grass Stamper](/megaworld/tools/grass-stamper) for grass and detail density passes.
+- Advanced Object Stamper does not support Unity/Terrain Texture. Use [Texture Stamper](/megaworld/tools/texture-stamper) for terrain texture passes.
 - For the scatter system, a random seed is generated before each pass when **Random Seed** is set to auto-generate.
-- Types (Groups) configured in Object Stamper are reusable assets. The same Group can be added to Object Brush and used for manual painting with the same filter and scatter rules.
+- Types (Groups) configured in Advanced Object Stamper are reusable assets. The same Group can be added to Advanced Object Brush and used for manual painting with the same filter and scatter rules.
