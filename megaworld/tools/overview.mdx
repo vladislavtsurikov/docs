@@ -1,65 +1,71 @@
 ---
 title: "Tools overview"
-description: "Understand the main MegaWorld tool families and choose the right tool for each workflow"
+description: "Understand the two MegaWorld tool types and browse all available tools"
 ---
 
-MegaWorld tools are organized by workflow rather than by asset type.
+MegaWorld tools are split into two types: **MonoBehavior tools**, which attach to GameObjects in your scene, and **Editor Window tools**, which run inside a dedicated editor panel and interact through the Scene View.
 
-That means the first question is usually not "what am I spawning?" but "how do I want to work in the scene?"
+## MonoBehavior tools
 
-## Main tool families
+A MonoBehavior tool is attached to a **GameObject** in your scene and appears in the **Inspector** when that object is selected. Open them from Unity's top menu under `GameObject > Vladislav Tsurikov` — each entry creates a GameObject with the component already attached.
 
-### Stamper tools
+<CardGroup cols={2}>
+  <Card title="Advanced Object Stamper" icon="tree" href="/megaworld/tools/advanced-object-stamper">
+    Spawn GameObjects and Terrain Objects across an area with a single click.
+  </Card>
+  <Card title="Grass Stamper" icon="seedling" href="/megaworld/tools/grass-stamper">
+    Fill terrain detail layers — grass, flowers, mesh details — across a large area.
+  </Card>
+  <Card title="Texture Stamper" icon="paintbrush" href="/megaworld/tools/texture-stamper">
+    Paint terrain textures driven by height, slope, and noise filters.
+  </Card>
+  <Card title="Gravity Spawner" icon="arrow-down" href="/megaworld/tools/gravity-spawner">
+    Spawn objects and let physics settle them naturally on the terrain.
+  </Card>
+</CardGroup>
 
-Use stamper tools when you want controlled placement over an area or a sampled set of points.
+## Editor Window tools
 
-- [Terrain Spawner](/megaworld/tools/terrain-spawner) for broad terrain-aware spawning workflows
-- [Texture Stamper](/megaworld/tools/texture-stamper) for painting terrain textures
-- [Gravity Spawner](/megaworld/tools/gravity-spawner) for dropping objects into place with physics-oriented logic
+An Editor Window tool works inside the **MegaWorld Window** and interacts with the scene through clicks, brushes, or handles. Open the window from `Window > Vladislav Tsurikov > Mega World > Window` or press `Alt + Z`, then click the **+** button in the Tools Panel to add the tool you need.
 
-### Brush tools
-
-Use brush tools when you want direct scene-view painting.
-
-- [Advanced Brush](/megaworld/tools/advanced-brush) for the most flexible paint workflow
-- [Spray Brush](/megaworld/tools/spray-brush) for lighter continuous scattering
-- [Brush Erase](/megaworld/tools/brush-erase) for removing placed content
-
-### PhysX Painter tools
-
-Use these when physical interaction is part of the workflow.
-
-- [Brush Physics](/megaworld/tools/brush-physics)
-- [Precise Physics](/megaworld/tools/precise-physics)
-- [Explode Physics](/megaworld/tools/explode-physics)
-- [Physics Effects](/megaworld/tools/physics-effects)
-
-### Happy Artist tools
-
-Use these when hand-editing and finishing matter more than mass placement.
-
-- [Brush Modify](/megaworld/tools/brush-modify)
-- [Edit](/megaworld/tools/edit)
-- [Precise Place](/megaworld/tools/precise-place)
-- [Pin](/megaworld/tools/pin)
-
-## Shared systems across tools
-
-Many tools reuse the same support systems:
-
-- [Mask Filters](/megaworld/mask-filters/overview)
-- [Transform Components](/megaworld/transform-components/overview)
-- [Overlap Check Settings](/megaworld/overlap-check-settings/overview)
-- [Scatter System](/megaworld/scatter-system/overview)
-- [General Settings](/megaworld/general-settings/overview)
-
-## How to choose quickly
-
-- Choose a **stamper** when you want area-based generation.
-- Choose a **brush** when you want direct painting.
-- Choose a **physics** tool when object interaction matters.
-- Choose a **Happy Artist** tool when you want manual polish and cleanup.
-
-<Note>
-  If you are unsure where to start, begin with [Terrain Spawner](/megaworld/tools/terrain-spawner) for broad placement or [Advanced Brush](/megaworld/tools/advanced-brush) for hands-on painting.
-</Note>
+<CardGroup cols={3}>
+  <Card title="Advanced Object Brush" icon="brush" href="/megaworld/tools/advanced-object-brush">
+    Paint GameObjects and Terrain Objects interactively in the scene view.
+  </Card>
+  <Card title="Grass Brush" icon="leaf" href="/megaworld/tools/grass-brush">
+    Paint grass and terrain detail layers interactively in the scene view.
+  </Card>
+  <Card title="Texture Brush" icon="palette" href="/megaworld/tools/texture-brush">
+    Paint terrain texture layers interactively with strength control.
+  </Card>
+  <Card title="Spray Brush" icon="spray-can" href="/megaworld/tools/spray-brush">
+    Rapidly spray objects across an area.
+  </Card>
+  <Card title="Brush Erase" icon="eraser" href="/megaworld/tools/brush-erase">
+    Remove spawned objects with a brush.
+  </Card>
+  <Card title="Brush Modify" icon="sliders" href="/megaworld/tools/brush-modify">
+    Nudge, rotate, and reshape existing placed objects.
+  </Card>
+  <Card title="Edit" icon="pencil" href="/megaworld/tools/edit">
+    Move, rotate, scale, or remove individual objects.
+  </Card>
+  <Card title="Precise Place" icon="crosshairs" href="/megaworld/tools/precise-place">
+    Place individual objects one at a time with exact control.
+  </Card>
+  <Card title="Pin" icon="thumbtack" href="/megaworld/tools/pin">
+    Lock objects to protect them from brush operations.
+  </Card>
+  <Card title="Brush Physics" icon="atom" href="/megaworld/tools/brush-physics">
+    Settle objects onto surfaces using a physics brush.
+  </Card>
+  <Card title="Precise Physics" icon="bullseye" href="/megaworld/tools/precise-physics">
+    Run targeted physics simulation on selected objects.
+  </Card>
+  <Card title="Explode Physics" icon="explosion" href="/megaworld/tools/explode-physics">
+    Scatter objects with a radial physics impulse.
+  </Card>
+  <Card title="Physics Effects" icon="bolt" href="/megaworld/tools/physics-effects">
+    Apply ongoing physics forces to objects in the scene.
+  </Card>
+</CardGroup>
