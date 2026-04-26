@@ -16,7 +16,15 @@ All MegaWorld tools share the same data system. Understanding it once makes ever
 
 A **Group** is a ScriptableObject asset stored in your project. It holds the configuration for what gets spawned and how. Groups are reusable — you can assign the same Group to multiple tools or areas without duplicating settings.
 
-Right-clicking a Group opens a context menu with three actions:
+To create a Group, right-click in the Groups panel and choose **Create Group**, then select the Resource Type you want to place:
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '500px' }}
+  src="/images/megaworld/get-started/create-group-menu.png"
+  alt="Create Group menu showing available Resource Types."
+/>
+
+Right-clicking an existing Group opens a context menu with three actions:
 
 <img
   style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '360px' }}
@@ -44,13 +52,7 @@ Right-clicking a Group opens a context menu with three actions:
 
 ### Resource Type
 
-Inside a Group you choose a **Resource Type** when creating it. This determines the kind of object MegaWorld will place:
-
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '500px' }}
-  src="/images/megaworld/get-started/create-group-menu.png"
-  alt="Create Group menu showing available Resource Types."
-/>
+The **Resource Type** chosen when creating a Group determines the kind of object MegaWorld will place:
 
 | Resource Type | What it places |
 |---|---|
@@ -104,15 +106,6 @@ Templates are particularly useful when starting a new setup or when you want to 
   src="/images/megaworld/get-started/prototype-copy-paste.png"
   alt="Prototype context menu showing Copy All Settings, Paste All Settings, and Paste Settings submenu."
 />
-
-| Action | Effect |
-|---|---|
-| **Copy All Settings** | Copies every setting from the selected Prototype |
-| **Paste All Settings** | Applies all copied settings to the target Prototype |
-| **Paste Settings → Success** | Pastes only the Success probability settings |
-| **Paste Settings → Overlap Check Settings** | Pastes only the overlap/collision rules |
-| **Paste Settings → Physics Transform Settings** | Pastes only the physics transform configuration |
-| **Paste Settings → Transform Settings** | Pastes only the position, rotation, and scale rules |
 
 This is useful when you have several Prototypes that share most settings but differ in a few details — copy from one, then selectively paste onto the others.
 
