@@ -1,0 +1,59 @@
+---
+title: "Texture Stamper"
+sidebarTitle: "Features"
+description: "Overview of Texture Stamper features and capabilities"
+---
+
+Texture Stamper is a stamper tool for painting terrain textures across a defined area. You position and scale the stamper in the scene, configure which textures to apply and under what conditions, then stamp the entire area in a single click.
+
+## Mask filter stack
+
+Every texture prototype has its own mask filter stack. Filters control exactly where each texture is painted — by slope, height, terrain texture already present, noise, or custom images. Filters are stacked and evaluated in order, so you can build complex rules such as "paint grass on flat areas, then multiply by noise to break up uniformity."
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/mask-filters/mask-filters.png"
+  alt="Mask Filter Settings stack with Area Mask, Mask Operations Remap, Slope, and Area Mask filters."
+/>
+
+The filter result is visualized directly in the scene view — green areas will receive the texture, red areas will not.
+
+## Flexible area
+
+The stamper area is not tied to any single terrain. You can freely move, rotate, and scale it in the scene to cover exactly the region you need — whether that is a small patch or multiple terrains at once.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/tools/texture-stamper/Area.png"
+  alt="Texture Stamper area positioned and scaled across a mountain terrain in the scene view."
+/>
+
+## Fit To Terrain Size
+
+Click **Fit To Terrain Size** to instantly expand the stamper area to cover all terrains in the scene. This is the fastest way to run a global texture pass across an entire landscape without manually adjusting the area bounds.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/tools/texture-stamper/GlobalArea.png"
+  alt="Texture Stamper area fitted to cover all terrains in the scene."
+/>
+
+## Simple UI
+
+The inspector is designed to stay out of the way. Groups, prototypes, and the most-used controls are immediately accessible, and settings that are only needed occasionally are tucked into collapsible foldouts.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '480px' }}
+  src="/images/megaworld/tools/texture-stamper/SimpleUI.png"
+  alt="Texture Stamper inspector showing Groups, Prototypes, and tool settings."
+/>
+
+## Mask support with filter operators
+
+Each prototype supports external masks — for example flow maps or custom weight maps — that can be fed directly into the filter stack as an **Area Mask**. On top of the raw mask you can chain filter operators such as **Remap** to compress, shift, or invert the mask range before it is combined with slope or height filters. This lets you drive texture distribution from authored data rather than purely procedural rules.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/megaworld/tools/texture-stamper/MaskSupport.png"
+  alt="Texture Stamper mask support with Area Mask and Remap operator in the filter stack."
+/>

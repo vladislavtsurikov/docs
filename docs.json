@@ -53,6 +53,7 @@
                   {
                     "group": "Texture Stamper",
                     "pages": [
+                      "megaworld/tools/texture-stamper-features",
                       "megaworld/getting-started/texture-stamper",
                       "megaworld/tools/texture-stamper"
                     ]
