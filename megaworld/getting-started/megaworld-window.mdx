@@ -109,24 +109,15 @@ Controls how the tool itself behaves — for example brush size, density, painti
 
 ### Group Settings
 
-Settings that apply to the currently selected Group. Only visible when exactly one Group is selected. Common group-level systems include the [Scatter System](/megaworld/scatter-system/overview), [Area Settings](/megaworld/shared-settings/area-settings), and [Layer Settings](/megaworld/shared-settings/layer-settings).
+Settings that apply to the currently selected Group. Only visible when exactly one Group is selected. Many of these settings are shared across multiple tools — the same Group carries its configuration regardless of which tool is currently active.
 
 ### Prototype Settings
 
-Settings that apply to the currently selected Prototype. Only visible when exactly one Prototype is selected. This is where most per-asset tuning happens:
-
-- [Transform Components](/megaworld/transform-components/overview) — position offset, rotation, scale, alignment, and advanced variants such as slope-aware scale or cliff alignment.
-- [Mask Filters](/megaworld/mask-filters/overview) — restrict placement by height, slope, terrain texture, noise, or custom images.
-- [Overlap Check Settings](/megaworld/overlap-check-settings/overview) — prevent objects from spawning too close together.
-- [Spawn Detail Settings](/megaworld/general-settings/spawn-detail-settings), [Terrain Detail Settings](/megaworld/general-settings/terrain-detail-settings), [Additional Spawn Settings](/megaworld/general-settings/additional-spawn-settings) — resource-type-specific placement options.
+Settings that apply to the currently selected Prototype. Only visible when exactly one Prototype is selected. Like Group Settings, these are not exclusive to a single tool — a Prototype's transform rules, filters, and overlap checks are shared and remain consistent whichever tool uses that Prototype.
 
 ### Common Settings
 
-Global settings shared across all tools, shown at the bottom of the panel. These do not change per tool or per selection.
-
-<Note>
-  When a tool feels complicated, work through the layers in order: Tool Settings first, then Group Settings, then one Prototype at a time.
-</Note>
+Settings that are not tied to any specific tool, Group, or Prototype. They sit at a level above all of them — changes here can affect the behaviour of multiple tools at once and persist independently of what is selected.
 
 ---
 
