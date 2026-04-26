@@ -16,13 +16,41 @@ All MegaWorld tools share the same data system. Understanding it once makes ever
 
 A **Group** is a ScriptableObject asset stored in your project. It holds the configuration for what gets spawned and how. Groups are reusable — you can assign the same Group to multiple tools or areas without duplicating settings.
 
-<Note>
-  You can drag a Group from the Project window onto another spawner's area field to reuse it instantly.
-</Note>
+Right-clicking a Group opens a context menu with three actions:
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '360px' }}
+  src="/images/megaworld/get-started/group-context-menu.png"
+  alt="Group context menu showing Reveal in Project, Delete, and Rename."
+/>
+
+- **Reveal in Project** — selects the Group ScriptableObject asset in the Project window so you can move, duplicate, or inspect it directly.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '800px' }}
+  src="/images/megaworld/get-started/reveal-in-project.jpg"
+  alt="Reveal in Project highlights the Group asset in the Project window."
+/>
+
+- **Rename** — opens an inline dialog to change the Group's display name without leaving the Inspector.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '640px' }}
+  src="/images/megaworld/get-started/rename-group-dialog.png"
+  alt="Rename dialog for a Group."
+/>
+
+- **Delete** — removes the Group from the tool.
 
 ### Resource Type
 
-Inside a Group you choose a **Resource Type**. This determines the kind of object MegaWorld will place:
+Inside a Group you choose a **Resource Type** when creating it. This determines the kind of object MegaWorld will place:
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '500px' }}
+  src="/images/megaworld/get-started/create-group-menu.png"
+  alt="Create Group menu showing available Resource Types."
+/>
 
 | Resource Type | What it places |
 |---|---|
@@ -33,7 +61,72 @@ Inside a Group you choose a **Resource Type**. This determines the kind of objec
 
 ### Prototype
 
-A **Prototype** is the actual asset assigned inside a Group — for example, a specific tree Prefab, a TerrainLayer asset, or a detail mesh. Each Group can hold multiple prototypes. During spawning, MegaWorld picks from them according to the configured weights and settings.
+A **Prototype** is the actual asset assigned inside a Group — for example, a specific tree Prefab, a TerrainLayer asset, or a detail mesh. Each Group can hold multiple Prototypes. During spawning, MegaWorld picks from them according to the configured weights and settings.
+
+---
+
+## Multiple Groups
+
+Each tool can hold multiple Groups at once. This lets you stamp, paint, or spawn several different asset collections from a single tool without switching setups — for example, a **BigFir** group and a **SmallFir** group active at the same time.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '520px' }}
+  src="/images/megaworld/get-started/multiple-groups.png"
+  alt="Two Groups (BigFir and SmallFir) active in the same tool, each with its own Prototype list."
+/>
+
+Selecting a Group in the panel shows its settings and Prototype list below.
+
+---
+
+## Prototype context menu
+
+Right-clicking any Prototype opens a context menu with several useful actions.
+
+### Apply Templates
+
+**Apply Templates** lets you instantly load a pre-configured set of spawn settings onto a Prototype. Instead of manually tuning scatter density, transform components, filters, and overlap checks from scratch, you pick a template — for example **Small Trees**, **Big Trees**, **Rocks**, or **Cliffs** — and all relevant settings are applied in one click.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '640px' }}
+  src="/images/megaworld/get-started/prototype-templates.png"
+  alt="Apply Templates submenu showing Trees, Rocks, and Cliffs template categories."
+/>
+
+Templates are particularly useful when starting a new setup or when you want to reset a Prototype back to sensible defaults quickly.
+
+### Copy and Paste Settings
+
+**Copy All Settings** captures the complete configuration of a Prototype to the clipboard. You can then use **Paste All Settings** on another Prototype to duplicate the full setup, or use **Paste Settings** to transfer only a specific category:
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '560px' }}
+  src="/images/megaworld/get-started/prototype-copy-paste.png"
+  alt="Prototype context menu showing Copy All Settings, Paste All Settings, and Paste Settings submenu."
+/>
+
+| Action | Effect |
+|---|---|
+| **Copy All Settings** | Copies every setting from the selected Prototype |
+| **Paste All Settings** | Applies all copied settings to the target Prototype |
+| **Paste Settings → Success** | Pastes only the Success probability settings |
+| **Paste Settings → Overlap Check Settings** | Pastes only the overlap/collision rules |
+| **Paste Settings → Physics Transform Settings** | Pastes only the physics transform configuration |
+| **Paste Settings → Transform Settings** | Pastes only the position, rotation, and scale rules |
+
+This is useful when you have several Prototypes that share most settings but differ in a few details — copy from one, then selectively paste onto the others.
+
+### Active / Inactive
+
+Each Prototype can be toggled **Active** or **Inactive** from the context menu. An inactive Prototype is excluded from spawning entirely — it is highlighted with a red border so it is immediately visible which ones are disabled.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '380px' }}
+  src="/images/megaworld/get-started/prototype-active.png"
+  alt="Prototype marked as inactive shown with a red border, with the Active toggle in the context menu."
+/>
+
+This is especially useful during testing and tweaking. For example, when painting terrain textures you can deactivate all but one Prototype to verify exactly how that single texture is being distributed — without the others interfering. Once you are satisfied, reactivate the rest.
 
 ---
 
