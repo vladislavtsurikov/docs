@@ -12,17 +12,14 @@ Before using any MegaWorld tool, it helps to understand how MegaWorld stores and
 
 All MegaWorld tools share the same data system. Understanding it once makes every tool easier to use.
 
+- A **Group** is a container that holds spawn settings and a list of assets to place. Each Group is tied to one Resource Type and stored as a ScriptableObject asset in your project.
+- A **Prototype** is a specific asset inside a Group — for example, a tree Prefab or a TerrainLayer. A Group can hold multiple Prototypes and MegaWorld picks from them during spawning.
+
 ### Group
 
-A **Group** is a ScriptableObject asset stored in your project. It holds the configuration for what gets spawned and how. Groups are reusable — you can assign the same Group to multiple tools or areas without duplicating settings.
+A Group is reusable — you can assign the same Group to multiple tools or areas without duplicating settings.
 
-To create a Group, right-click in the Groups panel and choose **Create Group**, then select the Resource Type you want to place:
-
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '500px' }}
-  src="/images/megaworld/get-started/create-group-menu.png"
-  alt="Create Group menu showing available Resource Types."
-/>
+To create a Group, right-click in the Groups panel and choose **Create Group**, then select the Resource Type you want to place. Each Group is tied to the Resource Type chosen at creation and cannot be changed afterwards.
 
 Right-clicking an existing Group opens a context menu with three actions:
 
@@ -52,7 +49,13 @@ Right-clicking an existing Group opens a context menu with three actions:
 
 ### Resource Type
 
-The **Resource Type** chosen when creating a Group determines the kind of object MegaWorld will place:
+The **Resource Type** determines the kind of object MegaWorld will place. It is selected when creating a Group:
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '500px' }}
+  src="/images/megaworld/get-started/create-group-menu.png"
+  alt="Create Group menu showing available Resource Types."
+/>
 
 | Resource Type | What it places |
 |---|---|
@@ -63,7 +66,7 @@ The **Resource Type** chosen when creating a Group determines the kind of object
 
 ### Prototype
 
-A **Prototype** is the actual asset assigned inside a Group — for example, a specific tree Prefab, a TerrainLayer asset, or a detail mesh. Each Group can hold multiple Prototypes. During spawning, MegaWorld picks from them according to the configured weights and settings.
+A **Prototype** is a specific asset assigned inside a Group — for example, a tree Prefab, a TerrainLayer, or a detail mesh. Each Group can hold multiple Prototypes and MegaWorld picks from them during spawning according to each prototype's weight and settings.
 
 ---
 
