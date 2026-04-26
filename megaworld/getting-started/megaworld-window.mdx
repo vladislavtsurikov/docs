@@ -54,15 +54,6 @@ The Tools Panel lets you choose which MegaWorld tool you want to work with.
   alt="MegaWorld Tools panel."
 />
 
-### Tool families
-
-MegaWorld tools are grouped by workflow:
-
-- **Stamper tools** — Terrain Spawner, Texture Stamper, Gravity Spawner.
-- **Brush tools** — Advanced Brush, Spray Brush, Brush Erase.
-- **PhysX Painter** — Brush Physics, Precise Physics, Explode Physics, Physics Effects.
-- **Happy Artist** — Brush Modify, Edit, Precise Place, Pin.
-
 ### Managing tools
 
 - Select a tool to make it active.
@@ -110,52 +101,31 @@ For a full explanation of Groups, Resource Types, and Prototypes — including h
 
 ## Settings Panel
 
-The Settings Panel is where MegaWorld becomes specific to the current workflow.
+The Settings Panel shows everything relevant to the currently active tool and selected data. It is divided into four foldout sections that appear depending on what the active tool supports.
 
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '402px' }}
-  src="/images/megaworld/window-workflow/settings-panel-quadro-item.png"
-  alt="Settings panel example in MegaWorld."
-/>
+### Tool Settings
 
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '522px', marginTop: '1rem' }}
-  src="/images/megaworld/window-workflow/settings-panel-terrain-detail.png"
-  alt="Settings panel for a Terrain Detail workflow in MegaWorld."
-/>
+Controls how the tool itself behaves — for example brush size, density, painting mode, or stamper area. These settings are global to the tool and apply regardless of which Group or Prototype is selected.
 
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '516px', marginTop: '1rem' }}
-  src="/images/megaworld/window-workflow/settings-panel-terrain-texture.png"
-  alt="Settings panel for a Terrain Texture workflow in MegaWorld."
-/>
+### Group Settings
 
-Every tool has its own settings, and many tools also expose different settings depending on the selected resource type.
+Settings that apply to the currently selected Group. Only visible when exactly one Group is selected. Common group-level systems include the [Scatter System](/megaworld/scatter-system/overview), [Area Settings](/megaworld/shared-settings/area-settings), and [Layer Settings](/megaworld/shared-settings/layer-settings).
 
-### How settings are organized
+### Prototype Settings
 
-MegaWorld combines two layers:
+Settings that apply to the currently selected Prototype. Only visible when exactly one Prototype is selected. This is where most per-asset tuning happens:
 
-- **Tool settings** — control how the tool behaves overall.
-- **Prototype settings** — control how each selected item behaves inside that tool.
+- [Transform Components](/megaworld/transform-components/overview) — position offset, rotation, scale, alignment, and advanced variants such as slope-aware scale or cliff alignment.
+- [Mask Filters](/megaworld/mask-filters/overview) — restrict placement by height, slope, terrain texture, noise, or custom images.
+- [Overlap Check Settings](/megaworld/overlap-check-settings/overview) — prevent objects from spawning too close together.
+- [Spawn Detail Settings](/megaworld/general-settings/spawn-detail-settings), [Terrain Detail Settings](/megaworld/general-settings/terrain-detail-settings), [Additional Spawn Settings](/megaworld/general-settings/additional-spawn-settings) — resource-type-specific placement options.
 
-### Shared systems you will see often
+### Common Settings
 
-Several systems appear across multiple tools:
-
-- [Mask Filters](/megaworld/mask-filters/overview)
-- [Transform Components](/megaworld/transform-components/overview)
-- [Overlap Check Settings](/megaworld/overlap-check-settings/overview)
-- [Spawn Detail Settings](/megaworld/general-settings/spawn-detail-settings)
-- [Terrain Detail Settings](/megaworld/general-settings/terrain-detail-settings)
-- [Additional Spawn Settings](/megaworld/general-settings/additional-spawn-settings)
-
-### Resource-type differences
-
-The same tool can expose different settings depending on whether you selected a GameObject, Terrain Detail, Terrain Texture, or another supported resource type. That is why some screenshots from one workflow do not match another workflow exactly, even inside the same tool.
+Global settings shared across all tools, shown at the bottom of the panel. These do not change per tool or per selection.
 
 <Note>
-  When a tool feels complicated, break the Settings panel into layers: first tune the tool-level controls, then tune one prototype at a time, and only after that add advanced systems such as filters or transform stacks.
+  When a tool feels complicated, work through the layers in order: Tool Settings first, then Group Settings, then one Prototype at a time.
 </Note>
 
 ---
