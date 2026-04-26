@@ -12,6 +12,8 @@ Before using any MegaWorld tool, it helps to understand how MegaWorld stores and
 
 A **Group** is a container that holds spawn settings and a list of assets to place. It is stored as a ScriptableObject asset in your project and is reusable — you can assign the same Group to multiple tools or areas without duplicating settings.
 
+### Resource Type
+
 Each Group is tied to a **Resource Type**, which determines the kind of object MegaWorld will place. The Resource Type is selected when creating a Group and cannot be changed afterwards:
 
 <img
@@ -30,20 +32,6 @@ Each Group is tied to a **Resource Type**, which determines the kind of object M
 ### Prototype
 
 A **Prototype** is a specific asset assigned inside a Group — for example, a tree Prefab, a TerrainLayer, or a detail mesh. Each Group can hold multiple Prototypes and MegaWorld picks from them during spawning according to each prototype's weight and settings.
-
----
-
-## Multiple Groups
-
-Each tool can hold multiple Groups at once. This lets you stamp, paint, or spawn several different asset collections from a single tool without switching setups — for example, a **BigFir** group and a **SmallFir** group active at the same time.
-
-<img
-  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '520px' }}
-  src="/images/megaworld/get-started/multiple-groups.png"
-  alt="Two Groups (BigFir and SmallFir) active in the same tool, each with its own Prototype list."
-/>
-
-Selecting a Group in the panel shows its settings and Prototype list below.
 
 ---
 
@@ -122,6 +110,20 @@ Each Prototype can be toggled **Active** or **Inactive** from the context menu. 
 />
 
 This is especially useful during testing and tweaking. For example, when painting terrain textures you can deactivate all but one Prototype to verify exactly how that single texture is being distributed — without the others interfering. Once you are satisfied, reactivate the rest.
+
+---
+
+## Multiple Groups
+
+Each tool can hold multiple Groups at once. This lets you stamp, paint, or spawn several different asset collections from a single tool without switching setups — for example, a **BigFir** group and a **SmallFir** group active at the same time.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '520px' }}
+  src="/images/megaworld/get-started/multiple-groups.png"
+  alt="Two Groups (BigFir and SmallFir) active in the same tool, each with its own Prototype list."
+/>
+
+Selecting a Group in the panel shows its settings and Prototype list below.
 
 ---
 
