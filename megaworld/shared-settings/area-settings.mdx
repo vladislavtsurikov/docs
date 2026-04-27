@@ -1,9 +1,9 @@
 ---
 title: "Area Settings"
-description: "Control the spawn bounds, spawn cells, and scene handle display for stamper tools."
+description: "Control the spawn bounds and scene handle display for stamper tools."
 ---
 
-Area Settings define the scene-space volume used by stamper tools — [Terrain Spawner](/megaworld/tools/terrain-spawner), [Texture Stamper](/megaworld/tools/texture-stamper), and [Gravity Spawner](/megaworld/tools/gravity-spawner). The area determines where spawning happens. You can move, resize, and configure it directly in the scene view.
+Area Settings define the scene-space volume used by stamper tools — [Advanced Object Stamper](/megaworld/tools/advanced-object-stamper), [Grass Stamper](/megaworld/tools/grass-stamper), and [Gravity Spawner](/megaworld/tools/gravity-spawner). The area determines where spawning happens. You can move, resize, and configure it directly in the scene view.
 
 <img
   style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
@@ -22,22 +22,6 @@ Area Settings define the scene-space volume used by stamper tools — [Terrain S
   src="/images/megaworld/shared-settings/area-settings/fit-to-terrain.png"
   alt="Fit To Terrain Size button and result."
 />
-
----
-
-## Spawn Cells
-
-**Use Spawn Cells** — divides the stamper area into a grid of cells, each spawned independently. This is the recommended approach for very large terrains because it prevents long freezes and avoids Unity crashes that can occur when trying to process a huge area in a single pass.
-
-<Warning>
-  When **Use Spawn Cells** is enabled, **Auto Spawn** is not available. Disable spawn cells if you need the live-feedback workflow.
-</Warning>
-
-When enabled, three additional options appear:
-
-- **Refresh Cells** — recreates the cell grid. Run this after resizing the area or changing Cell Size.
-- **Cell Size** — the side length of each cell in meters. Smaller cells use less memory per pass but increase the number of spawn operations.
-- **Show Cells** — draws the cell grid in the scene view so you can verify the coverage.
 
 ---
 
@@ -72,10 +56,6 @@ In the screenshot above, neither stamper is selected, but both area boxes and th
 ---
 
 ## Tips
-
-<Note>
-  Set **Fit To Terrain Size** first, then enable **Use Spawn Cells** with a reasonable Cell Size before running a large spawn. This gives you predictable, crash-free generation over the whole terrain.
-</Note>
 
 <Note>
   Use **Draw Handle If Not Selected** together with **Enable Visualization** on the Stamper Tool Controller to monitor filter coverage while adjusting settings in other components or windows.
