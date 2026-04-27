@@ -38,6 +38,16 @@ When you click **Spawn**, Advanced Object Stamper processes each active Group in
 6. Discards the sample with probability `1 − fitness`. Samples with `fitness = 0` are always skipped.
 7. Calls the shared spawn routine which applies [Transform Components](/megaworld/transform-components/overview) and [Overlap Check Settings](/megaworld/overlap-check-settings/overview).
 
+## Buttons
+
+| Button | When visible | Action |
+|---|---|---|
+| **Fit To Terrain Size** | Not spawning | Expands the stamper bounds to cover all active terrains in the scene. |
+| **Spawn** | Not spawning, Auto Respawn off | Runs the full spawn pass. |
+| **Respawn** | Always | Unspawns all current objects and runs a fresh spawn pass. |
+| **Unspawn Selected Prototypes** | Always | Removes all instances of the currently selected prototypes from the scene (shows a confirmation dialog). |
+| **Cancel** | Currently spawning, Auto Respawn off | Cancels the in-progress spawn. |
+
 ## Shared systems
 
 ### Per-group settings

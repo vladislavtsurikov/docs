@@ -21,7 +21,7 @@ You need:
 
 ## Step 1 — Create an Advanced Object Stamper
 
-Go to `GameObject > Vladislav Tsurikov > Add Advanced Object Stamper`.
+Go to `GameObject > Vladislav Tsurikov > Add Object Stamper`.
 
 A new **Advanced Object Stamper** object appears in your Hierarchy. Its Transform scale defaults to `(500, 500, 500)`, which sets the initial stamper area size. You can create several Advanced Object Stampers and switch between them — each one holds its own group stack and settings.
 
@@ -29,9 +29,9 @@ A new **Advanced Object Stamper** object appears in your Hierarchy. Its Transfor
 
 ## Step 2 — Add a Group
 
-Select the Advanced Object Stamper in the Hierarchy. In the **MegaWorld Window**, click **Add Type** to create a new Group.
+Select the Advanced Object Stamper in the Hierarchy. In the **MegaWorld Window**, right-click in the Groups panel and choose **Create Group**.
 
-A Group asset is created in your project. Rename it to something descriptive, for example **Trees** or **Rocks**.
+Rename the Group to something descriptive, for example **Trees** or **Rocks**.
 
 ---
 
@@ -84,7 +84,7 @@ In the **Stamper Tool Controller** section, click **Spawn**. Advanced Object Sta
 
 ## Step 8 — Enable Auto Respawn for fast iteration (optional)
 
-Turn on **Auto Respawn** in the Stamper Tool Controller. With this on, Advanced Object Stamper automatically removes the current spawn result and re-runs the pass whenever you change a setting. Use **Delay Auto Spawn** to set a short wait in seconds before the respawn triggers.
+Turn on **Auto Respawn** in the Stamper Tool Controller. With this on, Advanced Object Stamper automatically removes the current spawn result and re-runs the pass whenever you change a setting. Use **Delay Auto Respawn** to set a short wait in seconds before the respawn triggers.
 
 This is especially useful when tuning Mask Filters — you can adjust a slope or height filter and immediately see the result update in the scene without clicking Spawn manually.
 

@@ -45,6 +45,16 @@ For each Terrain Detail prototype on each intersecting terrain, the stamper:
   Grass Stamper requires that the terrain's detail prototypes are already configured in Unity's Terrain Inspector. If no detail prototypes exist on the terrain, the stamper logs a warning and skips that terrain.
 </Note>
 
+## Buttons
+
+| Button | When visible | Action |
+|---|---|---|
+| **Fit To Terrain Size** | Not spawning | Expands the stamper bounds to cover all active terrains in the scene. |
+| **Spawn** | Not spawning, Auto Respawn off | Runs the full detail spawn pass. |
+| **Respawn** | Always | Clears the current detail pass and runs a fresh spawn. |
+| **Unspawn Selected Prototypes** | Always | Removes the detail layer data for the currently selected prototypes (shows a confirmation dialog). |
+| **Cancel** | Currently spawning, Auto Respawn off | Cancels the in-progress spawn. |
+
 ## Shared systems
 
 ### Per-prototype settings (Unity/Terrain Detail)
