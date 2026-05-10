@@ -39,22 +39,6 @@ Each Unity/Terrain Detail prototype holds:
 - **Prefab** — the mesh GameObject (for Mesh type)
 - **Detail Texture** — the billboard texture (for Texture type)
 
-## Supported shared systems
-
-Unity/Terrain Detail prototypes use a subset of the MegaWorld stack:
-
-- [Mask Filters](/megaworld/mask-filters/overview) — control where details are painted based on height, slope, noise, and other rules
-- [Spawn Detail Settings](/megaworld/general-settings/spawn-detail-settings) — control density, opacity, and detail-specific painting behavior
-
-Transform components, scatter, and overlap checks are not available for this type. Density and distribution are handled through Unity's detail rendering system.
-
-## Tools that support this type
-
-- [Terrain Spawner](/megaworld/tools/terrain-spawner)
-- [Advanced Brush](/megaworld/tools/advanced-brush)
-- [Spray Brush](/megaworld/tools/spray-brush)
-- [Brush Erase](/megaworld/tools/brush-erase)
-
 <Note>
   A Unity Terrain must be present in the scene. The detail prototypes must be set up in the terrain asset before MegaWorld can use them.
 </Note>

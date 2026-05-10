@@ -35,22 +35,6 @@ Unity/Terrain Texture prototypes must match the terrain layers registered in the
 
 If a terrain layer is missing or the list does not match the terrain, MegaWorld shows a sync error on the affected prototype.
 
-## Supported shared systems
-
-Unity/Terrain Texture prototypes use:
-
-- [Mask Filters](/megaworld/mask-filters/overview) — control where the texture is painted based on height, slope, noise, and other rules
-- [Terrain Detail Settings](/megaworld/general-settings/terrain-detail-settings) — control opacity and texture-specific painting behavior
-
-Scatter, transform components, and overlap checks are not used for this type. Distribution is handled through the mask filter stack and the stamper or brush area.
-
-## Tools that support this type
-
-- [Texture Stamper](/megaworld/tools/texture-stamper)
-- [Advanced Brush](/megaworld/tools/advanced-brush)
-- [Spray Brush](/megaworld/tools/spray-brush)
-- [Brush Erase](/megaworld/tools/brush-erase)
-
 <Note>
   A Unity Terrain must be present in the scene. The TerrainLayer assets must be registered in the terrain before MegaWorld can use them.
 </Note>

@@ -7,6 +7,14 @@ Scatter System controls how MegaWorld generates candidate sample positions befor
 
 It is the stage that decides whether placement feels loose, gridded, sparse, evenly spaced, or intentionally broken up.
 
+## Scatter Settings
+
+Scatter Settings is the container for the scatter stack used by supported MegaWorld tools.
+
+It does not define one placement pattern by itself. Instead, it stores the **Scatter Stack** and the active scatter elements inside that stack.
+
+When the settings block is first created, MegaWorld adds **Random Grid** by default.
+
 ## How the stack works
 
 Scatter uses a stack of active elements. Each active element processes the sample list in order.
@@ -30,16 +38,30 @@ For example:
 - **Random Grid** gives you a structured base distribution
 - **Failure Rate** removes part of that distribution to make it feel less uniform
 
-## Default behavior
+## Recommended stack patterns
 
-The current code creates **Random Grid** by default when a new scatter settings block is created.
+Common useful setups include:
+
+- **Random Grid** only for clean controlled spacing
+- **Random Grid + Failure Rate** for structured placement with intentional gaps
+- **Poisson Disc** for more even natural spacing
+- **Random Point** for loose unstructured scattering
+
+## Preferences
+
+The scatter system also has a preference-level setting:
+
+- [Scatter Preferences](/megaworld/preferences/scatter-preferences)
+
+This preference affects systems such as **Random Point**, which can use a check-count limit from preferences.
+
+<Note>
+  Start with one generator first. Add a second scatter element only when you know what extra behavior you want to layer on top.
+</Note>
 
 ## Available elements
 
 <CardGroup cols={2}>
-  <Card title="Scatter Settings" href="/megaworld/scatter-system/scatter-settings">
-    Learn how the scatter stack is stored and configured.
-  </Card>
   <Card title="Random Point" href="/megaworld/scatter-system/random-point">
     Generate a random number of loose points inside the target area.
   </Card>
