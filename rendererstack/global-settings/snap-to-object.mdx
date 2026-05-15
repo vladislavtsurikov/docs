@@ -1,0 +1,24 @@
+---
+title: "Snap To Object"
+description: "Configure Snap To Object for resnapping Terrain Object Renderer instances to target surfaces."
+---
+
+**Snap To Object** is intended for resnapping renderer instances after the ground or target surfaces change.
+
+## Settings
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| **Layers** | Empty | Physics layers used by the snap raycast. |
+| **Raycast Position Offset** | `0` | Y offset applied to the final snapped position. |
+| **Advanced Settings > Max Ray Distance** | `6500` | Maximum distance the ray checks for collisions. |
+| **Advanced Settings > Spawn Check Offset** | `3000` | Height offset used to raise the ray above the current instance position before raycasting down. |
+| **Snap To Object** | Button | Runs the snap operation. |
+
+<Note>
+  The inspected package exposes the Snap To Object UI and settings, but the snap operation body is currently inactive in code. Verify this extension in Unity before relying on it in a production workflow.
+</Note>
+
+## When to use it
+
+Use this workflow after terrain height or mesh surfaces change and existing renderer instances need to be aligned to the new ground.

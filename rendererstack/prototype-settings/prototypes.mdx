@@ -1,0 +1,49 @@
+---
+title: "Prototypes"
+description: "Understand Terrain Object Renderer prototype groups, prototype actions, and per-prototype settings."
+---
+
+The **Prototypes** tab stores the list of objects rendered by Terrain Object Renderer.
+
+It is divided into **Groups** and **Prototypes**. A Group contains prototypes. You can create, delete, rename, and reorganize Groups.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '649px' }}
+  src="/images/rendererstack/terrain-object-renderer/prototype-groups.png"
+  alt="Terrain Object Renderer prototype groups."
+/>
+
+## Prototype context menu
+
+Right-click a prototype to open its context menu.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '648px' }}
+  src="/images/rendererstack/terrain-object-renderer/prototype-context-menu-settings.png"
+  alt="Terrain Object Renderer prototype context menu and settings submenu."
+/>
+
+The context menu includes:
+
+- **Reveal in Project** — shows the prefab location in the Project window.
+- **Delete** — removes the prototype from the current scene.
+- **Delete From All Scenes** — deletes the global prototype data from the Resources folder.
+- **Active** — controls whether the prototype is rendered.
+- **Copy All Settings** and **Paste All Settings** — copy or paste every prototype setting.
+- **Paste Settings** — paste selected setting groups.
+- **Group** — move selected prototypes to a Group.
+
+<Warning>
+  **Delete From All Scenes** removes global prototype data. Use it only when the prototype should be removed everywhere.
+</Warning>
+
+## Prototype settings
+
+Terrain Object Renderer creates these settings for each prototype:
+
+- [LOD Group](/rendererstack/prototype-settings/lod-group)
+- [Shadow](/rendererstack/prototype-settings/shadow)
+- [Distance Culling](/rendererstack/prototype-settings/distance-culling)
+- [Frustum Culling Settings](/rendererstack/prototype-settings/frustum-culling-settings)
+- [Colliders](/rendererstack/prototype-settings/colliders)
+- [Scripting](/rendererstack/prototype-settings/scripting)

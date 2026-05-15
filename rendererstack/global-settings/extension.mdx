@@ -1,0 +1,28 @@
+---
+title: "Extension"
+description: "Add optional Terrain Object Renderer extension tools such as converters and Snap To Object."
+---
+
+**Extension** is a Global Settings stack for optional Terrain Object Renderer tools.
+
+Each extension type can be added once. Use extensions when you need conversion utilities or extra maintenance actions for renderer instances.
+
+## Available extensions
+
+<CardGroup cols={2}>
+  <Card title="GameObject Converter" href="/rendererstack/global-settings/gameobject-converter">
+    Convert scene prefab instances to Terrain Object Renderer instances, or convert renderer instances back to GameObjects.
+  </Card>
+  <Card title="Unity Terrain Tree Converter" href="/rendererstack/global-settings/unity-terrain-tree-converter">
+    Convert Unity Terrain Tree data to Terrain Object Renderer data and back.
+  </Card>
+  <Card title="Snap To Object" href="/rendererstack/global-settings/snap-to-object">
+    Resnap renderer instances to objects or terrain surfaces.
+  </Card>
+</CardGroup>
+
+## Notes
+
+- Extension settings are global for Terrain Object Renderer.
+- Converter actions can change scene data immediately.
+- Read the converter page before running destructive actions.

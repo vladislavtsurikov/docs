@@ -1,0 +1,51 @@
+---
+title: "Settings overview"
+description: "Learn how Terrain Object Renderer settings are organized across global, scene, and prototype settings."
+---
+
+Terrain Object Renderer settings are split across three tabs in the renderer UI:
+
+- **Prototypes** — prototype list, Groups, and per-prototype render components.
+- **Scene Settings** — scene-specific data such as Cameras and Additional Data.
+- **Global Settings** — renderer-wide settings that persist across scenes.
+
+This structure matches how the renderer is registered in code. Terrain Object Renderer adds shared RendererStack settings such as **Quality**, renderer-specific extensions, scene settings, and prototype components.
+
+## Global Settings
+
+Global Settings are stored per renderer type and remain available when you switch active scenes.
+
+- [Quality](/rendererstack/global-settings/quality)
+- [Extension](/rendererstack/global-settings/extension)
+- [GameObject Converter](/rendererstack/global-settings/gameobject-converter)
+- [Unity Terrain Tree Converter](/rendererstack/global-settings/unity-terrain-tree-converter)
+- [Snap To Object](/rendererstack/global-settings/snap-to-object)
+
+## Scene Settings
+
+Scene Settings are stored in the current scene.
+
+- [Cameras](/rendererstack/scene-settings/cameras)
+- [Additional Data](/rendererstack/scene-settings/additional-data)
+
+## Prototype Settings
+
+Prototype settings apply to the selected prototype.
+
+- [Prototypes](/rendererstack/prototype-settings/prototypes)
+- [LOD Group](/rendererstack/prototype-settings/lod-group)
+- [Shadow](/rendererstack/prototype-settings/shadow)
+- [Distance Culling](/rendererstack/prototype-settings/distance-culling)
+- [Frustum Culling Settings](/rendererstack/prototype-settings/frustum-culling-settings)
+- [Colliders](/rendererstack/prototype-settings/colliders)
+- [Scripting](/rendererstack/prototype-settings/scripting)
+
+## Preferences
+
+RendererStack also has shared preferences under **Preferences > Renderer Stack**.
+
+- [RendererStack Preferences](/rendererstack/preferences/rendererstack-preferences)
+
+<Note>
+  The setting names in these pages match the current Unity inspector labels in the Terrain Object Renderer code.
+</Note>

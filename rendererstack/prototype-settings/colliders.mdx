@@ -1,0 +1,25 @@
+---
+title: "Colliders"
+description: "Configure generated colliders for Terrain Object Renderer prototypes."
+---
+
+**Colliders** enables generated colliders for a prototype.
+
+Terrain Object Renderer can use collider data from the prefab and create colliders only near active collider sources, such as cameras or configured objects.
+
+## Settings
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| **Max Distance** | `50` | Distance where colliders can appear from the active collider source. Values below `1` are clamped to `1`. |
+
+## Behavior
+
+Terrain Object Renderer rebuilds the scripting and collider system when you create, delete, enable, or disable this component.
+
+If a prototype also has [Scripting](/rendererstack/prototype-settings/scripting), scripting distance is controlled by **Colliders > Max Distance**.
+
+## Related features
+
+- [Collider support](/rendererstack/tools/terrain-object-renderer-features#collider-support)
+- [Cameras](/rendererstack/scene-settings/cameras)

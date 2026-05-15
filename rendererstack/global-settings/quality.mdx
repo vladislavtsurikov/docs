@@ -1,0 +1,26 @@
+---
+title: "Quality"
+description: "Control Terrain Object Renderer global render distance, shadows, and LOD bias."
+---
+
+**Quality** controls renderer-wide distance, shadows, and LOD behavior.
+
+These settings are stored in **Global Settings** and apply to Terrain Object Renderer as a renderer type.
+
+## Settings
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| **Max Render Distance** | `8000` | Maximum distance from the camera where prototypes can render. The effective render distance is clamped by the camera `farClipPlane` and adjusted by field of view. |
+| **Is Shadow Casting** | `true` | Enables or disables shadow casting for Terrain Object Renderer objects. Disable it when you need maximum performance and can accept no shadows from these objects. |
+| **LOD Bias** | `1` | Global LOD distance multiplier. Values below `1` favor lower-detail LODs sooner. Values above `1` keep higher-detail LODs for longer. |
+
+<Note>
+  If **Is Shadow Casting** is disabled, prototype [Shadow](/rendererstack/prototype-settings/shadow) settings show a warning and do not expose per-prototype shadow controls.
+</Note>
+
+## Related settings
+
+- [Distance Culling](/rendererstack/prototype-settings/distance-culling) adds a per-prototype distance limit.
+- [Cameras](/rendererstack/scene-settings/cameras) can reduce the effective render distance through camera `farClipPlane` and field of view.
+- [LOD Group](/rendererstack/prototype-settings/lod-group) adds per-prototype LOD bias.

@@ -1,0 +1,28 @@
+---
+title: "Additional Data"
+description: "Configure floating origin and directional light data used by Terrain Object Renderer."
+---
+
+**Additional Data** provides scene data used by floating origin and shadow culling.
+
+These settings are stored in **Scene Settings**.
+
+## Settings
+
+| Setting | Description |
+| --- | --- |
+| **Transform of Floating Origin** | Optional transform that defines the root of the world for floating origin. If empty, the renderer uses the `SceneDataManager` transform. |
+| **Find Directional Light** | Searches the scene for the strongest directional light and assigns it. |
+| **Directional Light** | Directional light used by additional shadow culling. |
+
+## Floating origin
+
+Terrain Object Renderer stores the floating origin start position during setup.
+
+In Play Mode, it updates an offset from **Transform of Floating Origin** and applies that offset during rendering.
+
+If **Transform of Floating Origin** is empty, the renderer uses the `SceneDataManager` transform as the anchor.
+
+## Directional Light
+
+The assigned directional light is used by [Frustum Culling Settings](/rendererstack/prototype-settings/frustum-culling-settings) when **Get Additional Shadow** is set to `DirectionLightShadowVisible`.

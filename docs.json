@@ -364,10 +364,50 @@
                 "group": "Terrain Object Renderer",
                 "pages": [
                   "rendererstack/tools/terrain-object-renderer-features",
-                  "rendererstack/tools/terrain-object-renderer",
-                  "rendererstack/settings/terrain-object-renderer-settings"
+                  "rendererstack/tools/terrain-object-renderer"
                 ]
               }
+            ]
+          },
+          {
+            "group": "Settings",
+            "pages": [
+              "rendererstack/settings/overview",
+              {
+                "group": "Global Settings",
+                "pages": [
+                  "rendererstack/global-settings/quality",
+                  "rendererstack/global-settings/extension",
+                  "rendererstack/global-settings/gameobject-converter",
+                  "rendererstack/global-settings/unity-terrain-tree-converter",
+                  "rendererstack/global-settings/snap-to-object"
+                ]
+              },
+              {
+                "group": "Scene Settings",
+                "pages": [
+                  "rendererstack/scene-settings/cameras",
+                  "rendererstack/scene-settings/additional-data"
+                ]
+              },
+              {
+                "group": "Prototype Settings",
+                "pages": [
+                  "rendererstack/prototype-settings/prototypes",
+                  "rendererstack/prototype-settings/lod-group",
+                  "rendererstack/prototype-settings/shadow",
+                  "rendererstack/prototype-settings/distance-culling",
+                  "rendererstack/prototype-settings/frustum-culling-settings",
+                  "rendererstack/prototype-settings/colliders",
+                  "rendererstack/prototype-settings/scripting"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Preferences",
+            "pages": [
+              "rendererstack/preferences/rendererstack-preferences"
             ]
           }
         ]

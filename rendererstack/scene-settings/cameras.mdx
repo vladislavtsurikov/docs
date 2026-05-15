@@ -1,0 +1,42 @@
+---
+title: "Cameras"
+description: "Control which cameras render Terrain Object Renderer data and how each camera handles culling and LOD bias."
+---
+
+**Cameras** controls which Unity cameras render Terrain Object Renderer data.
+
+The camera list is stored in **Scene Settings**, so it is specific to the current scene.
+
+## Camera list actions
+
+- **Add Camera** adds an empty camera slot.
+- **Find Main Camera** adds `Camera.main`, or a camera whose name contains `Main Camera` or `MainCamera`.
+- **Find All Cameras** adds every camera found in the scene.
+- **Reset** resets settings for the selected camera entry.
+- **Remove** removes a normal camera entry.
+
+In Edit Mode, the Scene View camera is added automatically and is used for Scene View rendering.
+
+## Camera entry settings
+
+Each camera entry has an active toggle. Disabled entries are marked as ignored and do not render Terrain Object Renderer data.
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| **Camera** | Selected camera | Unity camera assigned to this entry. Assigned camera fields are read-only in the inspector. Empty camera slots let you assign a camera. |
+| **LOD Bias** | `1` | Per-camera LOD distance multiplier. The inspector slider uses `0.1` to `1`. Lower values favor lower-detail LODs sooner for this camera. |
+| **Camera Culling Mode** | `FrustumCulling` | Controls how this camera culls objects. |
+| **Enable Colliders** | `true` | Controls collider generation for this camera when multiple cameras are active. This setting appears only in multi-camera setups. |
+
+## Camera Culling Mode
+
+| Mode | Description |
+| --- | --- |
+| `FrustumCulling` | Adds only cells that pass camera-frustum checks. This is the normal optimized mode. |
+| `Complete360` | Adds all cells within the camera render area instead of filtering cells by the camera frustum. Use it when a camera needs objects available outside the current view direction. |
+
+## Edit Mode and Play Mode behavior
+
+Normal cameras render in Edit Mode only when Play Mode simulation is enabled.
+
+The Scene View camera can render in Play Mode only when [RendererStack Preferences](/rendererstack/preferences/rendererstack-preferences) allow it.

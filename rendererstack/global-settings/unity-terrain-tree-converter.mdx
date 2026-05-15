@@ -1,0 +1,34 @@
+---
+title: "Unity Terrain Tree Converter"
+description: "Convert Unity Terrain Tree data to Terrain Object Renderer data and back."
+---
+
+**Unity Terrain Tree Converter** moves data between Unity Terrain Trees and Terrain Object Renderer.
+
+Use it when a terrain already uses Unity's built-in tree system and you want Terrain Object Renderer to handle rendering instead.
+
+## Actions
+
+| Action | Description |
+| --- | --- |
+| **Remove All Unity Terrain Prototypes From Terrains** | Removes all Unity Terrain Tree prototypes from active terrains. |
+| **Unspawn Unity Terrain Tree** | Removes all Unity Terrain Tree instances from active terrains. |
+| **Convert All Unity Terrain Tree To Terrain Object Renderer** | Converts all Unity Terrain Tree instances to Terrain Object Renderer instances and disables Unity terrain tree rendering. |
+| **Convert Unity Terrain Tree To Terrain Object Renderer** | Converts only tree instances whose prefabs are already added to the Terrain Object Renderer prototype list. |
+| **Convert Terrain Object Renderer To Unity Terrain Tree** | Adds renderer prototypes to terrain tree prototypes when needed, converts Terrain Object Renderer instances back to Unity Terrain Tree instances, and enables Unity terrain tree rendering. |
+
+<Warning>
+  **Remove All Unity Terrain Prototypes From Terrains** and **Unspawn Unity Terrain Tree** are destructive. Use them only when you are ready to remove Unity Terrain Tree data from active terrains.
+</Warning>
+
+## Conversion behavior
+
+When converting Unity Terrain Trees to Terrain Object Renderer, the converter reads each tree instance from every active terrain and creates renderer instances from the tree prefab, normalized terrain position, scale, and rotation.
+
+When converting Terrain Object Renderer data back to Unity Terrain Trees, the converter adds missing tree prototypes to terrains, removes matching renderer-spawned terrain tree data, and creates Unity `TreeInstance` entries.
+
+## Notes
+
+- `Convert All Unity Terrain Tree To Terrain Object Renderer` can create renderer prototypes from terrain tree prefabs.
+- `Convert Unity Terrain Tree To Terrain Object Renderer` only converts prefabs already added to the renderer.
+- The converter disables `drawTreesAndFoliage` on terrains after converting trees to Terrain Object Renderer.

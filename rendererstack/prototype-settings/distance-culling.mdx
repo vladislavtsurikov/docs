@@ -1,0 +1,26 @@
+---
+title: "Distance Culling"
+description: "Limit prototype render distance and randomize culling distance per instance."
+---
+
+**Distance Culling** limits how far a prototype can render from the camera.
+
+## Settings
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| **Max Distance** | `8000` | Maximum camera distance where this prototype can render. Values below `0` are clamped to `0`. |
+| **Distance Random Offset** | `0` | Randomly decreases **Max Distance** per instance. Use it to soften visible culling rings. Values below `0` are clamped to `0`. |
+
+## Effective render distance
+
+The final render distance also depends on:
+
+- [Quality](/rendererstack/global-settings/quality) **Max Render Distance**
+- camera `farClipPlane`
+- camera field of view
+- [Cameras](/rendererstack/scene-settings/cameras) settings
+
+<Tip>
+  Use **Distance Random Offset** when a hard culling circle is too visible.
+</Tip>

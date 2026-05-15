@@ -1,0 +1,30 @@
+---
+title: "LOD Group"
+description: "Configure per-prototype LOD fade, LOD distance randomization, and LOD bias."
+---
+
+**LOD Group** controls how a prototype switches between LOD levels.
+
+The component appears for every prototype, but its controls require the prefab render model to have at least two LODs.
+
+If the prefab has fewer than two LODs, the inspector shows **Missing LOD Group in prefab**.
+
+## Settings
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| **LOD Fade** | `false` | Enables fade-style blending between LOD levels. During fading, both LOD levels render, so there is a small performance cost. |
+| **LOD Fade For Last LOD** | `true` | When **LOD Fade** is enabled, also fades the last LOD. |
+| **LOD Fade Transition Distance** | `10` | Distance over which LOD Fade finishes. The inspector slider uses `0` to `20`. |
+| **Number of LODs** | From prefab | Read-only count of LOD levels detected in the prototype render model. |
+| **LOD Distance Random Offset** | `0` | Randomizes LOD switching distance. Values below `0` are clamped to `0`. |
+| **LOD Bias** | `1` | Per-prototype LOD distance multiplier. The inspector slider uses `0.1` to `5`. |
+
+<Warning>
+  **LOD Fade** requires shader support. The shader must include the `LOD_FADE_CROSSFADE` keyword, the LOD Fade algorithm, and the `unity_LODFade` variable.
+</Warning>
+
+## Related settings
+
+- [Quality](/rendererstack/global-settings/quality) defines global **LOD Bias**.
+- [Cameras](/rendererstack/scene-settings/cameras) can define per-camera **LOD Bias**.

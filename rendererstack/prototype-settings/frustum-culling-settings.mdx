@@ -1,0 +1,34 @@
+---
+title: "Frustum Culling Settings"
+description: "Configure prototype bounds used by GPU frustum culling and additional shadow visibility."
+---
+
+**Frustum Culling Settings** controls bounds used by GPU frustum culling and optional shadow visibility outside the camera frustum.
+
+## Settings
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| **Increase Bounding Sphere** | `7` | Expands the prototype bounding sphere used for frustum culling. Increase it when scale changes or shader deformation makes objects disappear too early. Values below `0` are clamped to `0`. |
+| **Get Additional Shadow** | `DirectionLightShadowVisible` | Controls how shadows remain visible when the object is outside the camera frustum. Appears only when the prototype has [Shadow](/rendererstack/prototype-settings/shadow) and global **Is Shadow Casting** is enabled. |
+
+## Get Additional Shadow modes
+
+| Mode | Extra setting | Description |
+| --- | --- | --- |
+| `None` | None | Does not add extra shadow visibility outside the camera frustum. |
+| `MinCullingDistance` | **Min Culling Distance** | Disables culling below the configured camera distance so nearby shadow casters stay available. Default is `50`. |
+| `IncreaseBoundingSphere` | **Increase Shadows Bounding** | Expands shadow bounds separately from render bounds. Default is `0`. |
+| `DirectionLightShadowVisible` | **Directional Light** | Uses the scene directional light to decide which off-frustum shadows should stay visible. This is the default mode. |
+
+When `DirectionLightShadowVisible` is selected, the inspector uses the scene [Additional Data](/rendererstack/scene-settings/additional-data) directional light provider.
+
+If no light is assigned, the inspector shows **Find Directional Light** and a **Directional Light** field.
+
+## When to adjust it
+
+Increase the bounding sphere when objects disappear too early because:
+
+- the object is scaled larger than its prefab bounds;
+- the shader bends or offsets vertices;
+- shadows need to remain visible outside the camera frustum.

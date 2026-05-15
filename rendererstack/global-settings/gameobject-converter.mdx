@@ -1,0 +1,33 @@
+---
+title: "GameObject Converter"
+description: "Convert prefab GameObjects to Terrain Object Renderer instances and convert renderer instances back to GameObjects."
+---
+
+**GameObject Converter** is an extension for moving data between scene prefab instances and Terrain Object Renderer instances.
+
+Use it when a scene already contains prefab GameObjects that should be rendered by Terrain Object Renderer.
+
+## Actions
+
+| Action | Description |
+| --- | --- |
+| **Convert GameObject To Terrain Object Renderer** | Converts scene prefab instances whose prefabs are already added as Terrain Object Renderer prototypes. |
+| **Convert Terrain Object Renderer To GameObject** | Instantiates GameObjects from Terrain Object Renderer instances and parents them under a `GameObject Converter` object. |
+
+<Info>
+  The converter only converts GameObjects whose prefab is already present in the renderer prototype list.
+</Info>
+
+## When to use it
+
+Use **GameObject Converter** when you want to:
+
+- move an existing prefab-based scene into Terrain Object Renderer;
+- test renderer performance against an existing GameObject setup;
+- export renderer instances back to regular prefab instances.
+
+## Notes
+
+- The converter looks for prefab roots in the scene.
+- Non-prefab GameObjects are skipped.
+- Converted Terrain Object Renderer instances keep the source object's position, local scale, and rotation.

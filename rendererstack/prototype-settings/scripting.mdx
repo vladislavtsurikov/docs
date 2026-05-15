@@ -1,0 +1,32 @@
+---
+title: "Scripting"
+description: "Attach custom per-instance scripts to Terrain Object Renderer prototypes."
+---
+
+**Scripting** enables per-instance scripts for a prototype.
+
+Use it when rendered instances need custom behavior, such as tree chopping, collision reactions, or gameplay interactions.
+
+## Settings
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| **Max Distance** | `50` | Distance where scripts are active when the prototype does not have a valid [Colliders](/rendererstack/prototype-settings/colliders) component. Values below `1` are clamped to `1`. |
+| **Script Stack** | Empty | Stack of custom `Script` nodes added to each active rendered instance. The stack is disabled in Play Mode in the inspector. |
+
+If the prototype has a valid **Colliders** component, scripting distance comes from **Colliders > Max Distance** and the **Scripting > Max Distance** field is hidden.
+
+## Custom scripts
+
+Custom scripts inherit from Terrain Object Renderer `Script` and can implement:
+
+- `OnEnable()`
+- `Update()`
+- `OnCollisionEnter(Collision collision)`
+
+Terrain Object Renderer rebuilds the scripting system when you create, delete, enable, or disable this component.
+
+## Related features
+
+- [Scripting support](/rendererstack/tools/terrain-object-renderer-features#scripting-support)
+- [Custom raycast](/rendererstack/tools/terrain-object-renderer-features#custom-raycast)

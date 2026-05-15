@@ -1,0 +1,24 @@
+---
+title: "Shadow"
+description: "Configure prototype shadow distance and LOD shadow mapping."
+---
+
+**Shadow** controls prototype-level shadow distance and LOD shadow mapping.
+
+## Settings
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| **Shadow Distance** | `4000` | Maximum distance where this prototype casts shadows. |
+| **LOD Shadow Settings** | Uses matching LODs | Appears when the prototype has more than one LOD. Lets you choose which LOD mesh casts shadows for each rendered LOD, or choose **None**. |
+
+Use lower-detail LODs for shadows when the visual result is acceptable. This reduces shadow rendering cost.
+
+<Note>
+  If [Quality](/rendererstack/global-settings/quality) has **Is Shadow Casting** disabled, this component shows **Shadows disabled in Global Settings** instead of per-prototype shadow controls.
+</Note>
+
+## Related settings
+
+- [Frustum Culling Settings](/rendererstack/prototype-settings/frustum-culling-settings) controls additional shadow visibility outside the camera frustum.
+- [Additional Data](/rendererstack/scene-settings/additional-data) provides the directional light used by directional-light shadow visibility.

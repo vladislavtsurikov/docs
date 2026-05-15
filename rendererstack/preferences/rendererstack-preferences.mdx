@@ -1,0 +1,25 @@
+---
+title: "RendererStack Preferences"
+description: "Configure shared RendererStack preferences used by Terrain Object Renderer."
+---
+
+RendererStack preferences are available under **Preferences > Renderer Stack**.
+
+These settings are shared RendererStack preferences, not per-scene settings.
+
+## Settings
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| **Auto Shader Conversion** | `true` | Automatically converts supported shaders for GPU Instanced Indirect. Disable it if you want to manage generated shaders and materials manually. |
+| **Show Render Model Data** | `false` | Shows debug render model data in prototype settings, including detected LOD meshes and materials. |
+| **Render Direct To Camera** | `false` | Allows rendering directly to cameras depending on camera type and Play Mode state. |
+| **Render Scene Camera in PlayMode** | `false` | Allows the Scene View camera to render in Play Mode. |
+| **Render Imposter** | `true` | Shared RendererStack preference for imposter rendering. |
+| **Force Update Renderer Data** | `true` | Forces renderer data updates. Use it while debugging stale render data. |
+
+## Related pages
+
+- [Quality](/rendererstack/global-settings/quality)
+- [Cameras](/rendererstack/scene-settings/cameras)
+- [Prototypes](/rendererstack/prototype-settings/prototypes)
