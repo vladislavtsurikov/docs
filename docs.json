@@ -364,7 +364,8 @@
                 "group": "Terrain Object Renderer",
                 "pages": [
                   "rendererstack/tools/terrain-object-renderer-features",
-                  "rendererstack/tools/terrain-object-renderer"
+                  "rendererstack/tools/terrain-object-renderer",
+                  "rendererstack/settings/terrain-object-renderer-settings"
                 ]
               }
             ]
