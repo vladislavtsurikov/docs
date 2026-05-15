@@ -1,0 +1,171 @@
+---
+title: "Terrain Object Renderer"
+sidebarTitle: "Features"
+description: "Overview of Terrain Object Renderer features and capabilities."
+---
+
+Terrain Object Renderer renders large terrain objects with GPU Instanced Indirect and terrain-focused culling. It is built for scenes with thousands of objects where GameObject-based rendering would cost too much CPU time.
+
+## Tens of thousands of objects in one draw call
+
+Terrain Object Renderer can render large forests and object fields with a very small number of draw calls. This is useful for procedural scenes where many objects share the same prototype.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/rendererstack/terrain-object-renderer/single-draw-call-forest.png"
+  alt="A large forest rendered with Terrain Object Renderer in one optimized draw call."
+/>
+
+## GPU frustum culling
+
+GPU frustum culling skips objects that are outside the camera view. This reduces rendering work while keeping dense scenes responsive.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/rendererstack/terrain-object-renderer/gpu-frustum-culling.png"
+  alt="Terrain Object Renderer GPU frustum culling in a large forest scene."
+/>
+
+## Terrain Cells Occlusion Culling
+
+Terrain Cells Occlusion Culling uses Jobs and Burst Compiler to check cell visibility. It is most effective when your scene uses terrains because the renderer can cull hidden terrain cells quickly.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/rendererstack/terrain-object-renderer/terrain-cells-occlusion-culling.png"
+  alt="Terrain cells occlusion culling visualization over a forested terrain."
+/>
+
+## Scripting support
+
+Terrain Object Renderer supports per-object scripting for rendered instances. You can build interactions such as chopping trees, shooting trees with raycasts, forest fires, or physics-driven effects.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/rendererstack/terrain-object-renderer/scripting-support-tornado.png"
+  alt="A scripted physics effect lifting rendered objects in a scene."
+/>
+
+Scripting follows the same idea as GameObject components, but scripts are attached to Terrain Object Renderer objects. Add the **Scripting** component to a prototype to enable this workflow.
+
+You can watch the tree chopping demo in [Devlog: Instant Renderer - Tree Chopping](https://youtu.be/rqaciAXb8pI).
+
+## Custom raycast
+
+You can raycast Terrain Object Renderer instances directly. The ray hits the rendered mesh, which lets you get the specific instance, delete it, change its transform, or disable it from rendering.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '914px' }}
+  src="/images/rendererstack/terrain-object-renderer/custom-raycast-tree.png"
+  alt="A custom raycast hitting a rendered tree instance."
+/>
+
+You can watch the raycast demo in [Devlog: Raycast support for Instant Renderer (Part 1)](https://www.youtube.com/watch?v=I8LRBEb2C4I).
+
+## Collider support
+
+Terrain Object Renderer can create colliders from the original prefab. If the prefab has multiple colliders, the renderer can use them. If a prefab has no collider, it can still appear in the renderer without collider data.
+
+Colliders appear within a configured distance from the camera or from selected objects.
+
+### Colliders around the camera
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '923px' }}
+  src="/images/rendererstack/terrain-object-renderer/colliders-around-camera.png"
+  alt="Collider visualization around the active camera."
+/>
+
+If you have multiple active cameras, choose which camera controls collider visibility.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '644px', marginTop: '1rem' }}
+  src="/images/rendererstack/terrain-object-renderer/collider-camera-settings.png"
+  alt="Camera collider settings for Terrain Object Renderer."
+/>
+
+### Colliders around objects
+
+Object-based collider placement is useful when the gameplay camera is high above a character, but the character still needs nearby collision.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '916px' }}
+  src="/images/rendererstack/terrain-object-renderer/colliders-around-objects.png"
+  alt="Collider visualization around gameplay objects."
+/>
+
+Add a **Large Object Renderer Colliders** component and set the collider render distance.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '650px', marginTop: '1rem' }}
+  src="/images/rendererstack/terrain-object-renderer/renderer-colliders-component.png"
+  alt="Large Object Renderer Colliders component with max distance setting."
+/>
+
+## Automatic shader generation
+
+When you add a prefab, Terrain Object Renderer can generate a GPU Instanced Indirect shader for it. This works for custom `.shader` files inside your project.
+
+<Warning>
+  Automatic shader generation does not support every shader type. Shader Graph assets must be converted to `.shader` files before the renderer can process them.
+</Warning>
+
+## Optimized Edit Mode rendering
+
+In Edit Mode, Terrain Object Renderer uses occlusion culling without baking and fast frustum culling with Jobs and Burst Compiler. This keeps large terrain scenes responsive while you tune rendering distance, prototypes, and placement data.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/rendererstack/terrain-object-renderer/edit-mode-optimization.png"
+  alt="Terrain Object Renderer running in Edit Mode with a large forest scene."
+/>
+
+## No-GameObject workflow
+
+Terrain Object Renderer does not instantiate a GameObject for each rendered object. Unity has less object-management work to do, which reduces CPU cost in large scenes.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/rendererstack/terrain-object-renderer/no-gameobject-workflow.png"
+  alt="Terrain Object Renderer scene without thousands of individual GameObjects in the hierarchy."
+/>
+
+## LOD Groups
+
+Terrain Object Renderer supports LOD Groups. If a prefab has an LOD Group, the renderer detects it and instances each LOD level separately. LOD distance calculations run on the GPU.
+
+Shadows are supported for LOD Groups. You can choose which LOD level casts shadows for each instance LOD, use lower-detail LODs for shadows, or disable shadows for lower LOD levels.
+
+## Additional shadows
+
+When the sun is not pointing straight down, shadows can remain visible even when the object casting them is outside the camera frustum. Additional shadows are part of Frustum Culling and add visible shadows to a separate shadow buffer.
+
+You can also set a custom shadow distance per prototype to reduce shadow cost where distant shadows do not affect the scene.
+
+## Multiple cameras
+
+Each camera renders only the objects visible to that camera. This prevents one camera from reusing another camera's selection and accidentally rendering vegetation twice.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/rendererstack/terrain-object-renderer/multiple-cameras-support.png"
+  alt="A large forest scene rendered with multiple camera support."
+/>
+
+For each camera, you can disable shadows, adjust LOD bias, or render only the last LOD for prototypes. This is useful for secondary cameras, such as rear-view cameras in racing games.
+
+## Unity Terrain and terrain mesh support
+
+Terrain Object Renderer works with Unity Terrain and terrain mesh workflows such as Polaris.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '960px' }}
+  src="/images/rendererstack/terrain-object-renderer/polaris-terrain-mesh.png"
+  alt="Terrain Object Renderer rendering objects on a Polaris terrain mesh."
+/>
+
+Terrain Object Renderer integrates with Polaris through MegaWorld. Spawn objects on a Polaris terrain through MegaWorld and render them with Terrain Object Renderer.
+
+## Convert GameObjects and Unity Terrain Trees
+
+If your scene already uses GameObjects or Unity Terrain Trees, you can convert them to Terrain Object Renderer data. After conversion, you can remove the old GameObjects or Terrain Trees to reduce runtime cost.

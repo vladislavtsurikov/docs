@@ -340,6 +340,36 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "RendererStack",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "rendererstack/overview",
+              "rendererstack/tools/overview",
+              {
+                "group": "Get Started",
+                "pages": [
+                  "rendererstack/getting-started/terrain-object-renderer"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Tools",
+            "pages": [
+              {
+                "group": "Terrain Object Renderer",
+                "pages": [
+                  "rendererstack/tools/terrain-object-renderer-features",
+                  "rendererstack/tools/terrain-object-renderer"
+                ]
+              }
+            ]
+          }
+        ]
       }
     ],
     "global": {}

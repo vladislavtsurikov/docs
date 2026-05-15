@@ -1,0 +1,71 @@
+---
+title: "Terrain Object Renderer"
+description: "Understand Terrain Object Renderer compatibility, limitations, rendering model, and when to use it."
+---
+
+Terrain Object Renderer is an optimized renderer for large terrain objects such as trees, bushes, rocks, and similar environment assets. It is designed for procedural generation workflows and manual editing tools that need more control than Unity Terrain Trees provide.
+
+The renderer uses **GPU Instanced Indirect** for high-performance rendering. It also supports object movement, spawning, deletion, raycasts, colliders, scripting, and terrain-cell data used by placement tools.
+
+<Info>
+  Some older screenshots and UI labels may use names such as **Instant Renderer** or **Large Object Renderer**. This documentation refers to the current tool as **Terrain Object Renderer**.
+</Info>
+
+<CardGroup cols={2}>
+  <Card title="Features" icon="sparkles" href="/rendererstack/tools/terrain-object-renderer-features">
+    See the main rendering, culling, collider, scripting, and terrain support features.
+  </Card>
+  <Card title="Get started" icon="play" href="/rendererstack/getting-started/terrain-object-renderer">
+    Learn the MegaWorld workflow, settings layout, prototypes, and scene settings.
+  </Card>
+</CardGroup>
+
+## Compatibility
+
+Terrain Object Renderer supports most shaders and works with the High Definition Render Pipeline and Lightweight Render Pipeline.
+
+It automatically generates shaders with GPU Instanced Indirect support when possible. This lets you use optimized indirect rendering without writing the shader support by hand.
+
+## Limitations
+
+GPU Instanced Indirect cannot support every shader automatically.
+
+Terrain Object Renderer cannot automatically add support for:
+
+- Built-in Unity engine shaders. Terrain Object Renderer includes a standard shader with GPU Instanced Indirect support that can replace them.
+- Shader files that are not `.shader` files, such as Shader Graph assets. Convert Shader Graph output to a `.shader` file before using automatic shader generation.
+- Multiple renderers inside one LOD level.
+
+<img
+  style={{ borderRadius: '0.5rem', width: '100%', maxWidth: '538px' }}
+  src="/images/rendererstack/terrain-object-renderer/lod-group-multiple-renderers.png"
+  alt="LOD Group with multiple renderers in one LOD level."
+/>
+
+Terrain Object Renderer expects one mesh per LOD level. Multiple meshes in one LOD increase the amount of renderer work and reduce performance. Support for baking several meshes into one is planned.
+
+## How it compares to Unity Terrain Trees
+
+Unity Terrain Trees are convenient, but they are limited when a procedural placement tool needs direct object control. Terrain Object Renderer is built for workflows where you need to:
+
+- Move, spawn, and delete individual rendered objects.
+- Use multi-threaded spawning.
+- Query cells for overlap and placement checks.
+- Raycast rendered instances and access the hit object.
+- Keep Edit Mode responsive on large terrains.
+
+Terrain Object Renderer also uses occlusion culling without baking and GPU frustum culling. This gives stronger Edit Mode performance on large terrain scenes.
+
+## FAQ
+
+### Will there be LOD Fade support for HDRP and LWRP?
+
+LOD Fade support for HDRP and LWRP is planned to be revisited.
+
+### Material changes on a prefab do not appear in the renderer. How do I fix this?
+
+Terrain Object Renderer generates new shaders and creates materials for those generated shaders. If you want to use the original prefab materials, disable **Auto Shader Conversion** in **Preferences**, then click **Update All Prefabs** in Terrain Object Renderer.
+
+### Can I convert an existing GameObject or Unity Terrain Tree scene?
+
+Yes. Add the appropriate converter extension and choose what you want to convert. See [Get started with Terrain Object Renderer](/rendererstack/getting-started/terrain-object-renderer#global-settings).
