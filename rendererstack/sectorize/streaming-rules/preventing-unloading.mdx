@@ -1,0 +1,28 @@
+---
+title: "Preventing Unloading"
+description: "Keep loaded Sectorize scenes alive near active cameras."
+---
+
+**Preventing Unloading** keeps loaded sectors from unloading while they are still near the camera.
+
+Use it to avoid sectors unloading immediately after they leave the loading area.
+
+## Settings
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| **Max Distance** | `4400` | Distance from the camera where loaded sectors are prevented from unloading. This value cannot be lower than the current maximum loading distance. |
+
+## How it works
+
+Sectorize creates a sphere around each active camera using **Max Distance**.
+
+Loaded sectors outside the loading area are checked against this sphere. If the sphere intersects a sector bounds, the sector stays loaded.
+
+If a loaded sector is outside both the loading area and the preventing-unload area, Sectorize either caches it or unloads it.
+
+## Tuning
+
+Set this distance slightly larger than the asynchronous loading distance.
+
+This creates a buffer where sectors stay loaded even after the camera moves away from them.

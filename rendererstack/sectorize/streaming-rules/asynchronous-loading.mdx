@@ -1,0 +1,29 @@
+---
+title: "Asynchronous Loading"
+description: "Load Sectorize scenes over time with pauses between scene-load attempts."
+---
+
+**Asynchronous Loading** loads farther sectors with a pause between scene-load attempts.
+
+Use it to make terrain streaming less noticeable while the camera approaches new sectors.
+
+## Settings
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| **Max Distance** | `4000` | Distance from the camera where sectors can be considered for asynchronous loading. This value cannot be lower than **Immediately Loading > Max Distance**. |
+| **Max Loading Scene Pause** | `1` | Maximum pause in seconds before the next scene load attempt. Values below `0` are clamped to `0`. |
+
+## How pause is calculated
+
+Sectorize calculates a pause based on how far the sector is from the camera.
+
+Sectors closer to **Immediately Loading** distance load sooner. Sectors closer to the outer asynchronous loading distance can wait longer, up to **Max Loading Scene Pause**.
+
+If the sector is cached and [Caching](/rendererstack/sectorize/streaming-rules/caching) is active, Sectorize uses **Max Loading Cached Scene Pause** instead.
+
+## Tuning
+
+Increase **Max Distance** to start loading sectors earlier.
+
+Increase **Max Loading Scene Pause** when loading spikes are visible and sectors can safely load more gradually.

@@ -1,0 +1,28 @@
+---
+title: "Immediately Loading"
+description: "Load nearby Sectorize scenes immediately in one frame."
+---
+
+**Immediately Loading** loads close sectors immediately.
+
+This rule is persistent. It is always present in the Streaming Rules stack and does not show an active toggle.
+
+## Settings
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| **Max Distance** | `2000` | Distance from the camera where scenes load immediately in one frame. |
+
+## How it works
+
+For each active camera, Sectorize creates a sphere using **Max Distance**.
+
+If that sphere intersects a sector bounds, the sector scene loads immediately.
+
+## Tuning
+
+Keep **Max Distance** large enough to cover the area the player needs right now, but not so large that many scenes load in a single frame.
+
+<Tip>
+  Use [Asynchronous Loading](/rendererstack/sectorize/streaming-rules/asynchronous-loading) for the wider loading area outside the immediate radius.
+</Tip>

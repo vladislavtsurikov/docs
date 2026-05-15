@@ -1,0 +1,91 @@
+---
+title: "Get started with Sectorize"
+sidebarTitle: "Sectorize"
+description: "Create sectors from terrain tiles and use Sectorize to stream terrain scenes around cameras."
+---
+
+Sectorize works with terrain tiles and additive scenes. The active scene becomes the parent scene, and terrain sectors are stored as subscenes.
+
+## Prerequisites
+
+- A scene with terrain tiles.
+- At least one camera in [Cameras](/rendererstack/scene-settings/cameras).
+- Sectorize added to RendererStack.
+
+The current Sectorize package includes support for Unity `Terrain` objects.
+
+## Create sectors
+
+Open Sectorize in RendererStack.
+
+If no sectors exist, Sectorize shows **No Sectors found**. When Unity Terrains are found in the scene, click **Create Sectors**.
+
+Sectorize then:
+
+1. Marks the active scene as a parent scene.
+2. Registers already opened additive terrain scenes as sectors.
+3. Creates new additive scenes for terrain tiles in the active scene.
+4. Moves each terrain tile into its generated scene.
+5. Creates Scene Data Managers for the generated scenes.
+6. Marks generated sector scenes as subscenes.
+7. Prepares the Scene Manager integration.
+
+<Warning>
+  Sector creation edits scenes. Make sure the scene is saved and source-controlled before creating or deleting sectors.
+</Warning>
+
+## Work with the Sectors tab
+
+After sectors exist, Sectorize shows three tabs:
+
+- **Sectors**
+- **Scene Settings**
+- **Global Settings**
+
+Use **Sectors** to review generated sector scenes. Use **Delete Sectors** only when you want to delete generated additive scenes and bring terrains back into the active scene.
+
+## Configure cameras
+
+Sectorize uses the shared [Cameras](/rendererstack/scene-settings/cameras) scene setting.
+
+Every active non-ignored camera can load sectors. During each render update, Sectorize checks sectors around the camera position and applies the active [Streaming Rules](/rendererstack/sectorize/settings/streaming-rules).
+
+## Configure Streaming Rules
+
+Open **Global Settings > Streaming Rules**.
+
+Start with these defaults:
+
+- [Immediately Loading](/rendererstack/sectorize/streaming-rules/immediately-loading) loads close sectors right away.
+- [Asynchronous Loading](/rendererstack/sectorize/streaming-rules/asynchronous-loading) loads farther sectors with pauses.
+- [Preventing Unloading](/rendererstack/sectorize/streaming-rules/preventing-unloading) keeps sectors loaded near the camera.
+- [Caching](/rendererstack/sectorize/streaming-rules/caching) keeps recently unloaded scenes inactive for a limited time.
+
+<Tip>
+  Keep **Immediately Loading** smaller than the asynchronous loading distance. A large immediate radius can force too many scenes to load in one frame.
+</Tip>
+
+## Manual scene control
+
+Right-click Sectorize and enable **Enable Manual Scene Control**.
+
+When manual scene control is enabled in Edit Mode, Sectorize stops automatic streaming. The **Sectors** tab shows:
+
+- **Load All Scenes**
+- **Unload All Scenes**
+
+Use this when you need to inspect or edit generated sector scenes manually.
+
+## Debug visualization
+
+Right-click Sectorize and enable:
+
+- **Debug > All Cells** — draws all sector bounds in blue.
+- **Debug > Visible Cells** — draws loading ranges and visible sector bounds.
+
+In visible-cell debug:
+
+- red circle shows **Immediately Loading** distance;
+- blue circle shows **Asynchronous Loading** distance;
+- yellow circle shows **Preventing Unloading** distance;
+- green boxes show sectors found around the camera.

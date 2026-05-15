@@ -1,0 +1,57 @@
+---
+title: "Streaming Rules"
+description: "Configure how Sectorize loads, unloads, and caches terrain sectors around cameras."
+---
+
+**Streaming Rules** are Sectorize Global Settings.
+
+They control how sectors are loaded, delayed, kept alive, and cached while cameras move through the world.
+
+## Rule stack
+
+Sectorize creates all streaming rule components in the stack.
+
+The active rules are:
+
+- [Immediately Loading](/rendererstack/sectorize/streaming-rules/immediately-loading)
+- [Asynchronous Loading](/rendererstack/sectorize/streaming-rules/asynchronous-loading)
+- [Preventing Unloading](/rendererstack/sectorize/streaming-rules/preventing-unloading)
+- [Caching](/rendererstack/sectorize/streaming-rules/caching)
+
+**Immediately Loading** is persistent and does not show an active toggle.
+
+## Loading distance
+
+Sectorize uses the larger value between:
+
+- **Immediately Loading > Max Distance**
+- **Asynchronous Loading > Max Distance**, when Asynchronous Loading is active
+
+This maximum loading distance defines which sectors are considered around each active camera.
+
+## Runtime order
+
+For each active camera, Sectorize:
+
+1. Finds sectors inside the maximum loading distance.
+2. Cancels pending unload operations for sectors that are now needed.
+3. Loads sectors inside **Immediately Loading** distance right away.
+4. Loads farther sectors with a pause when asynchronous loading is available.
+5. Finds loaded sectors that are no longer needed.
+6. Keeps sectors inside **Preventing Unloading** distance loaded.
+7. Caches or unloads the remaining sectors.
+
+## Debug colors
+
+When **Debug > Visible Cells** is enabled:
+
+- red circle is **Immediately Loading** distance;
+- blue circle is **Asynchronous Loading** distance;
+- yellow circle is **Preventing Unloading** distance;
+- green boxes are sectors found around the camera.
+
+## Recommended setup
+
+Use a small immediate distance and a larger asynchronous distance.
+
+This keeps nearby sectors ready while giving farther sectors time to load without forcing too many scenes to load in one frame.

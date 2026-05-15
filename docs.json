@@ -352,7 +352,8 @@
               {
                 "group": "Get Started",
                 "pages": [
-                  "rendererstack/getting-started/terrain-object-renderer"
+                  "rendererstack/getting-started/terrain-object-renderer",
+                  "rendererstack/getting-started/sectorize"
                 ]
               }
             ]
@@ -365,6 +366,26 @@
                 "pages": [
                   "rendererstack/tools/terrain-object-renderer-features",
                   "rendererstack/tools/terrain-object-renderer"
+                ]
+              },
+              {
+                "group": "Sectorize",
+                "pages": [
+                  "rendererstack/tools/sectorize",
+                  "rendererstack/getting-started/sectorize",
+                  "rendererstack/sectorize/settings/overview",
+                  "rendererstack/sectorize/settings/sectors",
+                  "rendererstack/sectorize/scene-manager-integration",
+                  {
+                    "group": "Streaming Rules",
+                    "pages": [
+                      "rendererstack/sectorize/settings/streaming-rules",
+                      "rendererstack/sectorize/streaming-rules/immediately-loading",
+                      "rendererstack/sectorize/streaming-rules/asynchronous-loading",
+                      "rendererstack/sectorize/streaming-rules/preventing-unloading",
+                      "rendererstack/sectorize/streaming-rules/caching"
+                    ]
+                  }
                 ]
               }
             ]
