@@ -1,0 +1,46 @@
+---
+title: "Caching"
+description: "Cache Sectorize scenes before unloading them fully."
+---
+
+**Caching** keeps recently unloaded sectors inactive for a limited time before unloading the scene fully.
+
+Use it when the camera may move back into a recently visited area and you want that sector to reactivate faster.
+
+## Settings
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| **Max Loading Cached Scene Pause** | `0.2` | Maximum pause in seconds before loading a cached scene again. Values below `0` are clamped to `0`. |
+| **Keep Scenes** | `300` | Time in seconds to keep a scene cached before unloading it fully. Values below `0` are clamped to `0`. |
+| **Cache Memory Threshold** | `_4GB` | RAM threshold where scenes stop being cached and unload instead. |
+| **Threshold In Megabyte** | `4000` | Custom cache threshold used when **Cache Memory Threshold** is `Custom`. |
+
+## How caching works
+
+When a loaded sector is no longer needed, Sectorize calls cache instead of unload if **Caching** is active.
+
+Caching deactivates the root GameObjects in the scene and marks the scene as cached. If the sector becomes needed again, Sectorize reactivates the scene instead of loading it from scratch.
+
+If **Keep Scenes** is `0`, or reserved memory is higher than **Cache Memory Threshold**, the sector unloads instead of caching.
+
+## Cache Memory Threshold values
+
+Available values are:
+
+- `Off`
+- `_1GB`
+- `_2GB`
+- `_3GB`
+- `_4GB`
+- `_5GB`
+- `_6GB`
+- `_7GB`
+- `_8GB`
+- `Custom`
+
+## Tuning
+
+Lower **Keep Scenes** when memory pressure matters more than quick return loading.
+
+Lower **Max Loading Cached Scene Pause** when cached scenes should reactivate quickly.

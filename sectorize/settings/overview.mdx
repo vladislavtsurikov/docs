@@ -1,0 +1,36 @@
+---
+title: "Sectorize settings overview"
+description: "Learn how Sectorize settings are organized across sectors, scene settings, and streaming rules."
+---
+
+Sectorize settings are split across three tabs:
+
+- **Sectors** — generated sector scenes and scene-control actions.
+- **Scene Settings** — shared scene components, including Cameras.
+- **Global Settings** — Sectorize Streaming Rules.
+
+## Included settings
+
+- [Sectors](/sectorize/settings/sectors)
+- [Streaming Rules](/sectorize/settings/streaming-rules)
+- [Cameras](/sectorize/scene-settings/cameras)
+- [Scene Manager integration](/sectorize/scene-manager-integration)
+
+## Streaming Rules
+
+Streaming Rules control when sectors load, unload, or stay cached.
+
+<CardGroup cols={2}>
+  <Card title="Immediately Loading" href="/sectorize/streaming-rules/immediately-loading">
+    Load close sectors immediately in one frame.
+  </Card>
+  <Card title="Asynchronous Loading" href="/sectorize/streaming-rules/asynchronous-loading">
+    Load farther sectors with pauses between scene loads.
+  </Card>
+  <Card title="Preventing Unloading" href="/sectorize/streaming-rules/preventing-unloading">
+    Keep loaded sectors alive near the camera.
+  </Card>
+  <Card title="Caching" href="/sectorize/streaming-rules/caching">
+    Cache scenes before unloading them fully.
+  </Card>
+</CardGroup>

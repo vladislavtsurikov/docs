@@ -347,6 +347,42 @@
         ]
       },
       {
+        "tab": "Sectorize",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "sectorize/overview",
+              "sectorize/getting-started"
+            ]
+          },
+          {
+            "group": "Settings",
+            "pages": [
+              "sectorize/settings/overview",
+              "sectorize/settings/sectors",
+              "sectorize/scene-settings/cameras",
+              {
+                "group": "Streaming Rules",
+                "pages": [
+                  "sectorize/settings/streaming-rules",
+                  "sectorize/streaming-rules/immediately-loading",
+                  "sectorize/streaming-rules/asynchronous-loading",
+                  "sectorize/streaming-rules/preventing-unloading",
+                  "sectorize/streaming-rules/caching"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              "sectorize/scene-manager-integration"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "RendererStack",
         "groups": [
           {

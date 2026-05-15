@@ -1,0 +1,38 @@
+---
+title: "Scene Manager integration"
+description: "Understand how Sectorize registers generated sector scenes with the Scene Manager."
+---
+
+Sectorize integrates with the Scene Manager after sectors are created.
+
+The integration creates or updates a Scene Manager scene collection for the active parent scene and adds Sectorize subscenes to it.
+
+## What Sectorize prepares
+
+When sectors exist, Sectorize prepares the Scene Manager by:
+
+1. Enabling Scene Manager after confirmation if it is disabled.
+2. Creating a profile if no Scene Manager profile exists.
+3. Creating or selecting a default build scene collection.
+4. Creating or finding a scene collection for the active parent scene.
+5. Assigning the active parent scene through **Active Scene** settings.
+6. Adding a **Sectorize** scene type component.
+7. Adding every sector scene reference as a subscene.
+
+<Warning>
+  When Scene Manager is enabled through this flow, it can replace scenes added manually in Unity Build Settings with scenes managed by the Scene Manager.
+</Warning>
+
+## Sectorize scene type
+
+The **Sectorize** scene type stores a list of subscene references.
+
+At load time, it finds sectors around active cameras using the Sectorize maximum loading distance and loads those sector scenes.
+
+At unload time, it unloads all scenes in the `Terrain` sector layer.
+
+## Loading progress
+
+The Scene Manager integration reports loading progress as the average loading progress of startup sectors.
+
+If no startup sectors are found, progress reports as complete.

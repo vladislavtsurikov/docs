@@ -1,0 +1,57 @@
+---
+title: "Sectors"
+description: "Create, review, delete, load, and unload Sectorize terrain sectors."
+---
+
+The **Sectors** tab shows generated terrain sector scenes.
+
+A sector is an additive scene with bounds. Sectorize stores terrain sectors in the `Terrain` sector layer and streams them around active cameras.
+
+## No sectors found
+
+When no sectors exist, Sectorize shows **No Sectors found**.
+
+If Unity Terrains are found in the scene, Sectorize also shows:
+
+- **Terrains found in scene: N**
+- **Create Sectors**
+
+Click **Create Sectors** to generate sector scenes from terrain tiles.
+
+## Create Sectors
+
+**Create Sectors** does two things:
+
+- registers already opened additive scenes with terrain as sectors;
+- creates new additive scenes for terrain objects in the active scene.
+
+The active scene is marked as a parent scene. Generated terrain scenes are marked as subscenes.
+
+## Delete Sectors
+
+**Delete Sectors** deletes generated additive scenes and brings terrains back into the active scene.
+
+<Warning>
+  **Delete Sectors** is destructive. Sectorize shows a confirmation dialog because this deletes scenes and moves terrain objects back into the active scene.
+</Warning>
+
+## Manual scene control
+
+Manual scene control is available from the Sectorize context menu:
+
+```
+Enable Manual Scene Control
+```
+
+When enabled in Edit Mode, automatic streaming stops. The **Sectors** tab shows:
+
+- **Load All Scenes**
+- **Unload All Scenes**
+
+Use manual scene control when you want to inspect, edit, or debug sector scenes without Sectorize loading and unloading them automatically.
+
+## Sector list
+
+The bottom of the **Sectors** tab lists sector scene names.
+
+Use this list to verify that terrain tiles were converted into the expected additive scenes.

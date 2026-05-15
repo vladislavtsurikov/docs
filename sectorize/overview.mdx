@@ -1,0 +1,49 @@
+---
+title: "Sectorize"
+description: "Stream terrain scenes around active cameras using sector-based additive scene loading."
+---
+
+Sectorize is a terrain streaming tool for large Unity scenes. It turns terrain tiles into **Sectors**, stores those sectors in a terrain sector layer, and loads or unloads their additive scenes around active cameras.
+
+Sectorize is useful when a large world is split into terrain tiles and only nearby terrain scenes should stay loaded.
+
+<CardGroup cols={2}>
+  <Card title="Get started" icon="play" href="/sectorize/getting-started">
+    Create sectors from terrain tiles and understand the Sectorize workflow.
+  </Card>
+  <Card title="Settings overview" icon="sliders" href="/sectorize/settings/overview">
+    Browse Sectors, Scene Settings, and Streaming Rules.
+  </Card>
+</CardGroup>
+
+## How it works
+
+Sectorize uses the sector layer tag `Terrain`.
+
+During rendering, Sectorize checks every active camera from [Cameras](/sectorize/scene-settings/cameras). For each camera, it finds sectors that overlap the loading distance and decides what to do:
+
+1. Sectors inside **Immediately Loading** distance load right away.
+2. Sectors inside **Asynchronous Loading** distance can load with a pause between scene loads.
+3. Loaded sectors outside the loading area unload, unless **Preventing Unloading** keeps them alive.
+4. If **Caching** is active, sectors can be cached before they unload.
+
+## Supported terrain sources
+
+The current package includes a Unity Terrain virtual terrain helper. It reads Unity `Terrain` bounds and creates sectors from those terrain tiles.
+
+The terrain helper system is extensible. Other terrain systems can be supported by adding a `VirtualTerrain` implementation with a `TerrainHelper` attribute.
+
+## Main workflows
+
+- Create additive sector scenes from terrain tiles in the active scene.
+- Register existing additive terrain scenes as sectors.
+- Stream sectors around cameras during Play Mode or Editor Play Mode simulation.
+- Use manual scene control in Edit Mode to load or unload every sector scene.
+- Connect generated sectors to the Scene Manager integration.
+
+## Related pages
+
+- [Get started with Sectorize](/sectorize/getting-started)
+- [Sectors](/sectorize/settings/sectors)
+- [Streaming Rules](/sectorize/settings/streaming-rules)
+- [Scene Manager integration](/sectorize/scene-manager-integration)
