@@ -26,6 +26,17 @@ Unity `TreeInstance` entries on a Unity Terrain. Each prototype corresponds to a
 - The tree prefab must be available as a Unity Terrain tree prototype.
 - For overlap checks against terrain trees, the project uses the Unity Terrain Tree Collider support package.
 
+## Resources Controller
+
+Unity/Terrain Tree types show terrain sync actions and a cell refresh action:
+
+- **Get/Update Resources From Terrain** — reads tree prototypes from the active terrain and updates the MegaWorld Type.
+- **Add Missing Resources** — adds missing MegaWorld tree prototypes to the active terrains.
+- **Remove All Resources** — removes terrain tree resources for this resource type from the active terrains after confirmation.
+- **Refresh Cells** — rebuilds Unity Terrain Tree Collider spatial cells.
+
+Use **Refresh Cells** after changing Unity Terrain Trees manually outside MegaWorld. Without refreshing, tools such as [Brush Erase](/megaworld/tools/brush-erase) and overlap checks may use outdated tree positions.
+
 <Tip>
   Use the resource sync controls in the prototype inspector after changing tree prototypes on your Unity Terrain.
 </Tip>

@@ -19,6 +19,12 @@ To add a Unity/GameObject prototype:
 2. Drag your prefab into the prototype list.
 3. MegaWorld registers the prototype and assigns it a unique ID.
 
+## Resources Controller
+
+Unity/GameObject types show a **Refresh Cells** action.
+
+Use **Refresh Cells** after moving, rotating, or otherwise changing placed GameObjects manually in the scene instead of using MegaWorld tools. MegaWorld stores placed objects in spatial cells so tools such as [Brush Erase](/megaworld/tools/brush-erase), [Edit](/megaworld/tools/edit), and overlap checks can find them quickly. Refreshing cells rebuilds that lookup data.
+
 ## Notes
 
 - Objects placed as Unity/GameObject are regular scene GameObjects. They are visible in the hierarchy and saved with the scene.

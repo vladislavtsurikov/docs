@@ -58,3 +58,19 @@ You bring a Type into the tool's selection, and MegaWorld uses all active Protot
 | Unity/Terrain Texture | Terrain layer / texture | Unity Terrain in scene |
 
 See the individual pages for details on each resource kind.
+
+## Resources Controller actions
+
+The prototype inspector shows a **Resources Controller** section for resource types that need scene data, terrain data, or renderer data to stay in sync.
+
+| Resource kind | Controller actions | When to use them |
+|---|---|---|
+| Unity/GameObject | Refresh Cells | After moving placed GameObjects manually outside MegaWorld |
+| Terrain Object | Get Resources | To copy renderer prototypes from Terrain Object Renderer into the MegaWorld Type |
+| Unity/Terrain Tree | Get/Update Resources From Terrain, Add Missing Resources, Remove All Resources, Refresh Cells | To sync tree prototypes with Unity Terrain and refresh tree spatial cells |
+| Unity/Terrain Detail | Get/Update Resources From Terrain, Add Missing Resources, Remove All Resources | To sync detail prototypes with Unity Terrain detail prototypes |
+| Unity/Terrain Texture | Get/Update Resources From Terrain, Add Missing Resources, Remove All Resources | To sync texture prototypes with Unity Terrain layers |
+
+<Note>
+  Terrain-backed resource types depend on the active Unity Terrain. If no active terrain exists, MegaWorld shows a warning instead of the terrain sync actions.
+</Note>

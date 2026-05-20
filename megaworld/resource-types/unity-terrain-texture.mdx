@@ -25,13 +25,13 @@ Each Unity/Terrain Texture prototype holds a single **Terrain Layer** reference 
 
 These properties are part of the Unity TerrainLayer asset and can be edited through MegaWorld's prototype inspector.
 
-## Syncing with terrain
+## Resources Controller
 
-Unity/Terrain Texture prototypes must match the terrain layers registered in the Unity Terrain asset. MegaWorld provides sync buttons:
+Unity/Terrain Texture prototypes must match the terrain layers registered in the Unity Terrain asset. MegaWorld provides **Resources Controller** actions in the prototype inspector:
 
-- **Get/Update Resources From Terrain** — reads all terrain layers from the terrain and updates the MegaWorld list
-- **Add Missing Resources** — adds only layers that are not yet in the list
-- **Remove All Resources** — clears all texture prototypes from the list (with warning)
+- **Get/Update Resources From Terrain** — reads terrain layers from the active terrain and updates the MegaWorld Type.
+- **Add Missing Resources** — adds missing MegaWorld texture prototypes to the active terrains.
+- **Remove All Resources** — removes terrain texture resources for this resource type from the active terrains after confirmation.
 
 If a terrain layer is missing or the list does not match the terrain, MegaWorld shows a sync error on the affected prototype.
 
