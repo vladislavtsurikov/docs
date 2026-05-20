@@ -1,0 +1,30 @@
+---
+title: "Unity/Terrain Tree"
+description: "Place Unity Terrain tree instances through MegaWorld object tools"
+---
+
+**Unity/Terrain Tree** is MegaWorld's resource kind for Unity Terrain tree prototypes. It writes placed objects into Unity Terrain tree data instead of creating separate scene GameObjects or Terrain Object Renderer instances.
+
+Use it when you want MegaWorld's brush or stamper workflow while keeping the result in Unity's terrain tree system.
+
+## What it places
+
+Unity `TreeInstance` entries on a Unity Terrain. Each prototype corresponds to a tree prefab registered in the terrain's tree prototype list.
+
+## Supported tools
+
+<CardGroup cols={2}>
+  <Card title="Advanced Object Stamper" href="/megaworld/tools/advanced-object-stamper" />
+  <Card title="Advanced Object Brush" href="/megaworld/tools/advanced-object-brush" />
+  <Card title="Spray Brush" href="/megaworld/tools/spray-brush" />
+</CardGroup>
+
+## Requirements
+
+- A Unity Terrain must be present in the scene.
+- The tree prefab must be available as a Unity Terrain tree prototype.
+- For overlap checks against terrain trees, the project uses the Unity Terrain Tree Collider support package.
+
+<Tip>
+  Use the resource sync controls in the prototype inspector after changing tree prototypes on your Unity Terrain.
+</Tip>

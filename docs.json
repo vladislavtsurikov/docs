@@ -298,6 +298,7 @@
                 "group": "Unity",
                 "pages": [
                   "megaworld/resource-types/unity-gameobject",
+                  "megaworld/resource-types/unity-terrain-tree",
                   "megaworld/resource-types/unity-terrain-detail",
                   "megaworld/resource-types/unity-terrain-texture"
                 ]
