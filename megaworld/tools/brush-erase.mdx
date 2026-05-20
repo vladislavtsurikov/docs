@@ -1,9 +1,9 @@
 ---
 title: "Brush Erase"
-description: "Remove placed objects and terrain details with a brush, using filter-based and per-prototype erase probability"
+description: "Remove placed objects, Unity Terrain Trees, and terrain details with a brush, using filter-based and per-prototype erase probability"
 ---
 
-Brush Erase removes placed objects and terrain details directly in the scene view. You click or drag to define an erase area, and the tool removes objects within that area based on brush mask strength, filter fitness, Erase Strength, and each prototype's per-prototype erase probability.
+Brush Erase removes placed objects, Unity Terrain Trees, and terrain details directly in the scene view. You click or drag to define an erase area, and the tool removes resources within that area based on brush mask strength, filter fitness, Erase Strength, and each prototype's per-prototype erase probability.
 
 The tool does not delete everything it touches. Each candidate object passes through a probability check before it is removed, which lets you erase softly or selectively.
 
@@ -16,6 +16,7 @@ The tool does not delete everything it touches. Each candidate object passes thr
 <CardGroup cols={2}>
   <Card title="Terrain Object" href="/megaworld/resource-types/terrain-object" />
   <Card title="Unity/GameObject" href="/megaworld/resource-types/unity-gameobject" />
+  <Card title="Unity/Terrain Tree" href="/megaworld/resource-types/unity-terrain-tree" />
   <Card title="Unity/Terrain Detail" href="/megaworld/resource-types/unity-terrain-detail" />
 </CardGroup>
 
@@ -36,7 +37,7 @@ Controls the brush used to define the erase area.
 
 ## Group-level settings
 
-### For Terrain Object and Unity/GameObject groups
+### For Terrain Object, Unity/GameObject, and Unity/Terrain Tree groups
 
 - [Filter Settings](/megaworld/mask-filters/overview) — controls which objects pass the filter. Supports both Simple Filter and Mask Filter modes.
 
@@ -61,6 +62,8 @@ fitness × brush_mask_alpha × Erase Strength
 ```
 
 A random value from `0` to `1` is compared against this combined value. If the random value is less than the combined value, the object moves to the second check — the per-prototype **Success of Erase (%)** — which applies another random probability. Only objects that pass both checks are removed.
+
+For **Unity/Terrain Tree**, matching terrain tree instances are removed from Unity Terrain tree data.
 
 For **Terrain Detail**, the same logic applies per detail cell, but erasure reduces the detail density value rather than deleting a discrete object.
 
