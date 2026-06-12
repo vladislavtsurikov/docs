@@ -1,0 +1,429 @@
+---
+title: SelectionView Improvements
+description: Rethinking the SelectionView in MegaWorld 2 as a flexible library and browser system.
+---
+
+## What Exists Today
+
+SelectionView is currently built around an older pair of concepts:
+
+- **Groups** — collections of prototypes of one type
+- **Prototypes** — objects inside the selected group
+
+This works, but the group has become an overloaded entity. It simultaneously represents a visual section, a prototype container, a prototype type, group settings, and a data source for the active tool.
+
+As a result, the UI scales poorly. When you want to add user-defined subsets, temporary working sets, per-tool filtering, or a freer hierarchy, everything starts turning into separate modes instead of one coherent library.
+
+---
+
+## What We Want
+
+### Two Connected Windows — Like GSpawner
+
+SelectionView should be split into two independent parts:
+
+- **Selection Library** — a tree window where the user organizes library nodes
+- **Prototype Browser** — a grid window displaying prototypes from the selected node or nodes
+
+This is closer to the GSpawner approach: a library/hierarchy on the left, a browser with asset cards on the right.
+
+```
+Selection Library
+
+[ Search... ]
+
+MegaWorld
+  Environment
+    Forest
+      BigFir
+      SmallFir
+      Bushes
+    Rocks
+      Cliffs
+      Small Rocks
+
+  Terrain
+    Textures
+    Details
+
+  Worksets
+    Forest Dressing
+    Village Props
+```
+
+```
+Prototype Browser
+
+Selected node: BigFir
+
+[ Fir_01 ] [ Fir_02 ] [ Fir_03 ] [ Fir_04 ]
+[ Fir_05 ] [ Fir_06 ] [ Fir_07 ] [ Fir_08 ]
+```
+
+The key point: the tree and the grid no longer need to be one monolithic `SelectionView`. They are two connected panels that can live side by side, separately, or inside another working window.
+
+---
+
+### Selection Library
+
+Selection Library is responsible only for organizing the library.
+
+It should support:
+- search across nodes
+- expand and collapse the tree
+- creating folders and working subsets
+- drag-and-drop of prototypes and nodes
+- context menu for renaming, moving, and deleting
+- item count badges next to nodes
+- filtering by the active tool
+
+Selection Library should not become a separate system section with artificial entries. If a user needs a full overview, that is better solved through search, filters, and selecting a root node — not through a separate system branch.
+
+---
+
+### Prototype Browser
+
+Prototype Browser is responsible only for displaying and selecting prototypes.
+
+It should support:
+- a grid with previews
+- search by prototype name
+- filter by prototype type
+- thumbnail size slider
+- multi-select of prototypes
+- drag-and-drop into Selection Library nodes
+- context menu on prototypes
+- showing only compatible items for the active tool
+
+Prototype Browser should not know whether the selected node is an old MegaWorld group, a user workset, or a plain folder. It receives a `SelectionScope` and shows compatible items.
+
+---
+
+### One Universal Node, but Typed Content
+
+A universal node is a good direction, but prototype types cannot be fully removed.
+
+In the current code, the prototype type drives behavior:
+- which objects can be drag-and-dropped in
+- which settings the prototype has
+- which settings the old group has
+- which tools support this prototype
+- how to sync data with Unity Terrain or a renderer system
+- how to draw previews
+- how to create runtime data
+
+So the node in the tree should be universal, but the prototype itself remains typed.
+
+```
+SelectionNode
+  Name
+  Children
+  Items
+  AcceptedPrototypeTypes
+```
+
+Prototypes keep their real types:
+
+| Prototype Type | What It Holds |
+|---|---|
+| `PrototypeGameObject` | regular prefab / GameObject |
+| `PrototypeTerrainObject` | prefab for Terrain Object Renderer |
+| `PrototypeTerrainDetail` | Unity Terrain detail: mesh or texture |
+| `PrototypeTerrainTexture` | Unity Terrain texture / TerrainLayer |
+
+A node can be a folder, an old MegaWorld group, or a user workset. For the UI they are all one `SelectionNode`, but inside they hold typed items.
+
+---
+
+### AcceptedPrototypeTypes Instead of a Fixed Group Type
+
+Currently a group has one `PrototypeType`. In the new model, a node has a list of accepted types:
+
+```
+SelectionNode
+  Name: BigFir
+  AcceptedPrototypeTypes:
+    PrototypeGameObject
+  Items:
+    Fir_01
+    Fir_02
+
+SelectionNode
+  Name: Terrain Textures
+  AcceptedPrototypeTypes:
+    PrototypeTerrainTexture
+  Items:
+    Grass
+    Rock
+    Snow
+
+SelectionNode
+  Name: Forest Dressing
+  AcceptedPrototypeTypes:
+    PrototypeGameObject
+    PrototypeTerrainObject
+  Items:
+    Fir_02
+    Rock_01
+    Bush_03
+```
+
+If `AcceptedPrototypeTypes` is empty or `Any`, the node is simply an organizational folder.
+
+This preserves type safety while removing the UI dependency on the old group concept.
+
+---
+
+### Old Groups as Tree Nodes
+
+An old MegaWorld group migrates cleanly to a node:
+
+```
+Old Group
+  name: BigFir
+  PrototypeType: PrototypeGameObject
+  PrototypeList: Fir_01, Fir_02, Fir_03
+
+New SelectionNode
+  Name: BigFir
+  AcceptedPrototypeTypes: PrototypeGameObject
+  Items: Fir_01, Fir_02, Fir_03
+```
+
+Users continue seeing familiar sets, but they become part of a general library:
+
+```
+MegaWorld
+  Environment
+    Forest
+      BigFir
+      SmallFir
+    Rocks
+
+  Terrain
+    Textures
+    Details
+```
+
+MegaWorld 2 does not have to break the old group semantics immediately. It can embed them into the new hierarchy.
+
+---
+
+### Worksets Instead of a Separate Palette Mode
+
+A separate `Palette Mode` is not needed.
+
+A palette is just a user-created node in the tree:
+
+```
+Worksets
+  Forest Dressing
+    Fir_02
+    Rock_01
+    Bush_03
+
+  Village Props
+    Barrel_01
+    Crate_02
+    Lantern_01
+```
+
+User-defined collections become part of the shared library rather than a separate UI mode.
+
+This is simpler:
+- no mode switching
+- no need to explain the difference between a group and a palette
+- no duplicated grid
+- everything managed through one tree
+
+---
+
+### Multi-Select Nodes
+
+When multiple nodes are selected in Selection Library, Prototype Browser shows the combined set of prototypes.
+
+```
+Selected nodes:
+  BigFir
+  Rocks
+  Bushes
+
+Prototype Browser:
+  Fir_01  Fir_02  Rock_01  Bush_03
+```
+
+This gives a temporary working context without a separate mode. For a permanent set, the user creates a workset and places the desired items inside.
+
+---
+
+### Selection Scope Instead of One Selected Group
+
+Many current locations expect "one group is selected."
+
+In the new model, the better concept is a **Selection Scope**.
+
+Selection Scope is the result of selecting nodes and prototypes:
+
+```
+SelectionScope
+  PrototypeGameObject:
+    House_01
+    Rock_02
+
+  PrototypeTerrainObject:
+    Fir_01
+
+  PrototypeTerrainTexture:
+    Grass
+```
+
+A tool takes from the scope only the types it supports.
+
+This enables:
+- selecting multiple nodes
+- working with mixed user-defined sets
+- preserving type safety
+- not breaking tools that require a specific prototype type
+
+---
+
+### Filtering by Active Tool
+
+Tools already declare which prototype types they support.
+
+Selection Library and Prototype Browser should use this:
+- if Texture Brush is active — show only `PrototypeTerrainTexture`
+- if Grass Brush is active — show `PrototypeTerrainDetail`
+- if Precise Place is active — show `PrototypeGameObject` and `PrototypeTerrainObject`
+- if a node contains mixed types — only compatible items appear in the grid
+
+```
+Active Tool: Precise Place
+Supported:
+  PrototypeGameObject
+  PrototypeTerrainObject
+
+Forest Dressing:
+  Fir_02                 shown
+  Rock_01                shown
+  Grass Terrain Layer    filtered out
+```
+
+The user no longer selects items that the active tool cannot work with.
+
+---
+
+## Windows, Overlays, and Embedding
+
+### Selection UI as a Module, Not a Fixed Window
+
+Like Tool System, Selection UI should be designed not as one mandatory `EditorWindow` but as a set of UI modules.
+
+The same module should be able to live in different hosts:
+- as a regular `EditorWindow`
+- as a `Scene View Overlay`
+- as a tab next to other Unity windows
+- as an embedded block inside `Tool Settings`
+- as a side or bottom panel next to the active tool's settings
+
+This lets users build their own workspace layout.
+
+---
+
+### Selection Browser as Overlay and Back
+
+Selection Library and Prototype Browser should have a three-dot menu:
+
+```
+...
+Open as Window
+Convert to Overlay
+Attach to Tool Settings
+Detach from Tool Settings
+Reset Layout
+```
+
+For example:
+- the user is working with a separate `Prototype Browser` window
+- they press `Convert to Overlay`
+- the browser becomes an overlay over the Scene View
+- later they return it to a window via the menu
+
+This is especially useful for manual tools like Precise Place, Pin, and Edit, where the user works heavily in the Scene View.
+
+---
+
+### Embedding in Tool Settings
+
+Selection Browser should be able to embed inside `Tool Settings`.
+
+For example, Grass Brush is active. `Tool Settings` shows the tool settings at the top, and a compact Selection Browser can be attached below:
+
+```
+Tool Settings
+
+Grass Brush Settings
+  Brush Size
+  Density
+  Slope Limit
+  Layer Mask
+
+Attached Selection Browser
+  Node: BigFir
+  [ Fir_01 ] [ Fir_02 ] [ Fir_03 ]
+```
+
+Important: `Tool Settings` should not turn into a heavy library. This is just a convenient host where the browser can be temporarily attached for a compact workspace window.
+
+Via the menu it can be detached again:
+
+```
+Tool Settings / ...
+  Detach Selection Browser to Window
+  Convert Selection Browser to Overlay
+```
+
+---
+
+### Role Separation
+
+| Part | Responsibility |
+|---|---|
+| `Selection Library` | node tree, library organization |
+| `Prototype Browser` | prototype grid from selected scope |
+| `Tool Settings` | active tool parameters |
+| `Scene View Overlay` | compact access directly over the scene |
+
+These parts are connected by selection state but do not need to be one window.
+
+---
+
+## Visual Concepts
+
+### Two Connected Windows
+
+![Selection Library and Prototype Browser as two connected windows](/images/megaworld/future-plans/selection-view-two-windows.png)
+
+### Selection Browser Inside Tool Settings
+
+![Selection Browser attached to Tool Settings](/images/megaworld/future-plans/selection-view-attached-tool-settings.png)
+
+### Selection Browser as Scene View Overlay
+
+![Selection Browser as Scene View Overlay](/images/megaworld/future-plans/selection-view-overlay-workflow.png)
+
+---
+
+## Core Idea
+
+SelectionView in MegaWorld 2 should become not a collection of modes but a flexible selection system:
+
+- Selection Library holds the node hierarchy
+- Prototype Browser shows prototypes from the selected scope
+- old MegaWorld Groups become ordinary tree nodes
+- user-defined palettes become worksets
+- prototypes remain typed
+- the active tool filters available items
+- Selection Browser can be opened as a window, converted to an Overlay, or embedded in Tool Settings
+
+This gives MegaWorld a freer selection library without losing the important typed prototype model that tools, settings, and runtime logic already depend on.

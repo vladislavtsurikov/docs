@@ -1,0 +1,780 @@
+---
+title: Templates System Improvements
+description: Rethinking the TemplatesSystem in MegaWorld 2 as a hybrid preset system with both C# templates and user-saveable JSON presets.
+---
+
+## What Exists Today
+
+`TemplatesSystem` currently lives at:
+
+```
+Assets/VladislavTsurikov/MegaWorld.Core/Editor/Core/SelectionDatas/Group/TemplatesSystem
+```
+
+The system works as a set of C# templates found through reflection:
+
+- `TemplateAttribute` describes the template name, supported tools, and prototype types
+- `AllTemplateTypes` collects all classes that inherit from `Template`
+- `TemplateStackEditor` adds entries to the prototype context menu
+- `Template.Apply(...)` applies settings to the selected group and selected prototypes
+
+Built-in templates live at:
+
+```
+Assets/VladislavTsurikov/MegaWorld.Core/Editor/Common/Templates
+```
+
+Examples:
+- `BigTrees`
+- `SmallTrees`
+- `Rocks`
+- `BigCliffs`
+- `SmallCliffs`
+
+These are useful presets for a quick start. The user selects prototypes, opens the context menu, and applies a template like `Trees/Big Trees`. The template code then changes the group and prototype settings.
+
+---
+
+## The Core Problem
+
+The template idea is solid, but right now a user can only create a template through code.
+
+A template currently:
+- clears `ScatterStack`
+- creates `RandomGrid`
+- sets `GridStep`, `FailureRate`, `Vastness`
+- clears `MaskFilterStack`
+- adds `HeightFilter`, `SlopeFilter`, `NoiseFilter`, `MaskOperationsFilter`
+- clears `TransformComponentStack`
+- adds `Rotation`, `Align`, `Scale`, `ScaleFitness`, `ScaleClamp`
+- changes `OverlapCheckSettings`
+
+This is fine for developer-authored templates — if settings change, C# compile errors surface the problem immediately. A renamed field, a changed type, a deleted class — the template breaks visibly and can be fixed in the IDE.
+
+But for user presets this is problematic:
+- templates cannot be created from the Editor UI
+- a user template cannot be edited without recompilation
+- every new template requires a new C# class
+- no easy export/import or sharing between projects
+- user presets cannot be stored separately from source code
+- generating C# files from the UI triggers Unity recompilation
+- applying a template is often destructive, because it clears entire stacks with `Clear()`
+
+The problem is not that C# templates are bad. The problem is that C# templates are the only path.
+
+---
+
+## What We Want
+
+TemplatesSystem should be rethought as a **Hybrid Template Preset System**.
+
+The system should support two main template types:
+
+```
+Template System
+  Code Templates
+    Built-in templates
+    Advanced templates
+    Procedural templates
+
+  JSON Templates
+    User presets
+    Saved from UI
+    Import/export/share
+```
+
+C# templates remain where compile-time safety and complex logic matter. For user presets, a JSON format is added — saveable from the UI without generating `.cs` files and without recompilation.
+
+---
+
+## Why C# Templates Should Stay
+
+C# templates offer important advantages:
+- errors are visible at compile time
+- easy to refactor in an IDE
+- can contain complex procedural logic
+- can use any code during application
+- convenient for maintaining built-in MegaWorld templates
+- if the settings structure changes, broken code is immediately visible
+
+The existing `BigTrees`, `SmallTrees`, `Rocks`, `BigCliffs`, `SmallCliffs` templates do not need to be moved to JSON immediately. They can remain as developer-authored templates.
+
+---
+
+## Why Code Generation Should Not Be the Primary Path
+
+`Save as Template` could generate a C# class. For example, after configuring a group the user presses save, and the system creates:
+
+```csharp
+public class BigTreesUserTemplate : Template
+{
+    public override void Apply(TemplateContext context)
+    {
+        // generated settings apply code
+    }
+}
+```
+
+The advantage: compile-time safety.
+
+But the downsides are too large for a normal user workflow:
+- every save creates or modifies a `.cs` file
+- Unity triggers script recompilation
+- the user preset becomes code, not data
+- class name conflicts need to be resolved
+- generated code style needs to be maintained
+- deleting, renaming, and moving generated templates is complex
+- importing presets without affecting the compilation pipeline is complex
+- frequent template saves will frustrate users
+
+Code generation can exist as a separate developer command:
+
+```
+Export Template as C#...
+```
+
+But the primary `Save as Template` should save a JSON template.
+
+---
+
+## Shared Model: ITemplateProvider
+
+The UI should not know whether a template came from a C# class or a JSON file.
+
+A shared provider layer achieves this:
+
+```csharp
+public interface ITemplateProvider
+{
+    string Name { get; }
+    string Category { get; }
+
+    bool IsCompatible(TemplateContext context);
+    TemplatePreview BuildPreview(TemplateContext context);
+    void Apply(TemplateContext context);
+}
+```
+
+The system can then aggregate templates from multiple sources:
+
+```
+TemplateDatabase
+  CodeTemplateProvider
+  JsonTemplateProvider
+```
+
+A C# template becomes one implementation:
+
+```csharp
+public abstract class CodeTemplate : ITemplateProvider
+{
+    public abstract bool IsCompatible(TemplateContext context);
+    public abstract TemplatePreview BuildPreview(TemplateContext context);
+    public abstract void Apply(TemplateContext context);
+}
+```
+
+A JSON template becomes another:
+
+```csharp
+public class JsonTemplateProvider : ITemplateProvider
+{
+    private TemplatePresetData _data;
+
+    public TemplatePreview BuildPreview(TemplateContext context)
+    {
+        TemplateApplyPlan plan = TemplateApplyPlanBuilder.Build(_data, context);
+        return TemplatePreview.FromPlan(plan);
+    }
+
+    public void Apply(TemplateContext context)
+    {
+        TemplateApplyPlan plan = TemplateApplyPlanBuilder.Build(_data, context);
+        TemplateApplier.Apply(plan);
+    }
+}
+```
+
+Both variants look identical to the context menu, Template Browser, and Tool System.
+
+---
+
+## JSON Template Format
+
+A user template is stored as a JSON file, for example:
+
+```
+Big Trees.megaworld-template.json
+```
+
+Approximate structure:
+
+```json
+{
+  "name": "Trees / Big Trees",
+  "category": "Trees",
+  "supportedPrototypeTypes": [
+    "PrototypeGameObject",
+    "PrototypeTerrainObject"
+  ],
+  "supportedToolCapabilities": [
+    "ScatterObjects",
+    "StampObjects"
+  ],
+  "blocks": [
+    {
+      "blockId": "group.scatter",
+      "applyMode": "Replace",
+      "elements": [
+        {
+          "typeId": "scatter.random-grid",
+          "data": {
+            "gridStep": 10,
+            "failureRate": 30,
+            "vastness": 0.8
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+The format should be simple and human-readable. No complex versioning or automatic migration on the first pass:
+- `name`
+- `category`
+- supported prototype types
+- supported tool capabilities
+- `blocks`
+- `blockId`
+- `typeId`
+- `applyMode`
+- `data`
+
+Stable IDs should be used rather than C# namespaces or class names:
+
+```
+scatter.random-grid
+filter.height
+filter.slope
+transform.scale
+prototype.overlap
+```
+
+If settings change, old JSON templates can be corrected manually, via AI-assisted edits, or with simple one-off fix scripts. A full automatic migration system is not needed at this stage.
+
+---
+
+## Template Blocks
+
+A JSON template should store settings as a set of blocks, not one large blob:
+
+```
+TemplatePresetData
+  Blocks:
+    group.scatter
+    group.mask-filters
+    prototype.transform
+    prototype.overlap
+```
+
+This allows the user to choose what to apply:
+- apply only scatter
+- apply only mask filters
+- apply only transform stack
+- apply only overlap
+- apply everything at once
+
+This is especially important for existing templates. `BigTrees` changes both the group and the prototypes. Sometimes only the transform preset for trees is needed, not the height/slope filters.
+
+---
+
+## Apply Mode Instead of Hard Clear
+
+Many current templates call `Clear()` on a stack and then recreate components. This is fast but dangerous — the user may have manually configured part of the stack, and the template will overwrite it completely.
+
+In the new system, each JSON block should have an apply mode:
+
+| Mode | Meaning |
+|---|---|
+| `Replace` | replace the block entirely |
+| `Merge` | add missing elements and update matching ones |
+| `Add Missing` | add only what is not already present |
+| `Override Values` | keep the stack composition, update values of existing elements |
+
+The default should be a cautious mode; destructive apply should be shown explicitly.
+
+For C# templates, a gradual move to an apply plan / preview model is desirable, but that can happen later. On the first pass, C# templates can continue working as they do today.
+
+---
+
+## Validation for JSON Templates
+
+The main risk of JSON templates is that MegaWorld settings can change over time.
+
+In C# templates, this is usually caught through compile errors. JSON has no compile-time safety. Instead of a complex migration system, a simple and useful validation system is a better first step.
+
+A JSON template goes through this pipeline:
+
+```
+Load JSON
+  ↓
+Deserialize TemplatePresetData
+  ↓
+Validate against current registered block/type ids and fields
+  ↓
+Build Apply Plan
+  ↓
+Preview
+  ↓
+Apply
+```
+
+This requires a registry system:
+
+```
+TemplateTypeRegistry
+  group.scatter
+  group.mask-filters
+  prototype.transform
+  prototype.overlap
+
+TemplateElementRegistry
+  scatter.random-grid
+  filter.height
+  filter.slope
+  transform.scale
+  prototype.overlap
+```
+
+Validation should check:
+- the JSON file is valid
+- `blockId` is known to the system
+- `typeId` is known to the system
+- the block applies to the selected target
+- prototype type is supported
+- tool capability is supported
+- `applyMode` is valid
+- `data` does not contain clearly unknown or outdated fields
+- required fields are present
+
+If settings changed, validation should not try to auto-fix the file. It should show a clear error so the JSON can be corrected manually.
+
+Example messages:
+
+```
+Template: Trees / Big Trees
+
+Error:
+  Unknown field "gridStep" in scatter.random-grid.
+  Current field may be "cellSize".
+
+Error:
+  Missing required field "density" in scatter.random-grid.
+
+Warning:
+  Field "vastness" is not used anymore and will be ignored.
+```
+
+---
+
+## Validation After Script Recompilation
+
+JSON templates should be validated after recompilation/domain reload:
+
+```csharp
+[InitializeOnLoad]
+public static class TemplateValidationOnReload
+{
+    static TemplateValidationOnReload()
+    {
+        EditorApplication.delayCall += ValidateTemplates;
+    }
+
+    private static void ValidateTemplates()
+    {
+        TemplateDatabase.Reload();
+        TemplateValidationReport report = TemplateValidator.ValidateAll();
+
+        if (report.HasErrors)
+        {
+            TemplateValidationWindow.Show(report);
+        }
+    }
+}
+```
+
+Validation can also trigger on JSON file import:
+
+```csharp
+class TemplateAssetPostprocessor : AssetPostprocessor
+{
+    static void OnPostprocessAllAssets(
+        string[] importedAssets,
+        string[] deletedAssets,
+        string[] movedAssets,
+        string[] movedFromAssetPaths)
+    {
+        if (importedAssets.Any(path => path.EndsWith(".megaworld-template.json")))
+        {
+            TemplateDatabase.Reload();
+            TemplateValidator.ValidateAll();
+        }
+    }
+}
+```
+
+The validation report should show clear messages, not just exceptions:
+
+```
+Template: Trees / Big Trees
+
+Error:
+  Unknown scatter element type: scatter.random-grid-old
+
+Error:
+  Unknown field "gridStep" in scatter.random-grid.
+
+Warning:
+  Field "vastness" is obsolete and will be ignored.
+
+Unsupported:
+  Prototype type "PrototypeTerrainObject" is no longer supported by block "prototype.overlap".
+```
+
+---
+
+## What to Do When Settings Change
+
+Automatically migrating all old templates is not a realistic first goal.
+
+A practical workflow:
+
+```
+C# settings changed
+  ↓
+C# templates break at compile time if they use old fields
+  ↓
+JSON templates are checked after reload
+  ↓
+Template Validation Window shows errors
+  ↓
+Developer manually fixes JSON templates or asks AI to fix them
+  ↓
+Validation runs again
+```
+
+This is simpler than maintaining a full migration system, and still gives full visibility over the problem.
+
+For built-in JSON templates, a simple button can be added:
+
+```
+Validate All Templates
+```
+
+And, when needed, one-off scripts for bulk JSON fixes:
+
+```
+Tools/MegaWorld/Templates/Fix Old RandomGrid Fields
+```
+
+Such scripts should be written only for specific problems, not built as a general migration framework in advance.
+
+---
+
+## Save Template From Selection
+
+Users should have a `Save as Template` command.
+
+It saves a JSON template — not a C# file.
+
+The command can appear in multiple places:
+- group context menu
+- prototype context menu
+- Selection Browser
+- Tool Settings
+- Template Browser
+
+A typical flow:
+
+1. The user configured the `BigFir` group and several prototypes.
+2. They pressed `Save as Template`.
+3. They chose which blocks to save:
+   - Group Scatter
+   - Group Filters
+   - Prototype Transform
+   - Prototype Overlap
+4. They named the template `Trees / Big Trees`.
+5. The system saved `Trees_BigTrees.megaworld-template.json`.
+6. TemplateDatabase reloaded JSON templates.
+7. TemplateValidator checked the new template.
+8. The template appeared in Template Browser and in the applicable templates menu.
+
+An advanced command can also be added:
+
+```
+Export as C# Template...
+```
+
+This generates a C# template for the developer, but it is not the primary user workflow.
+
+---
+
+## Preview Before Applying
+
+Before applying a template, it is useful to show what will be changed.
+
+For JSON templates, the preview is built through `TemplateApplyPlan`:
+
+```
+Apply Template: Forest / Big Trees
+
+Source:
+  JSON Template
+
+Group:
+  Scatter Stack: Replace
+  Mask Filters: Replace
+
+Prototype:
+  Transform Stack: Merge
+  Overlap Settings: Override Values
+
+Targets:
+  BigFir group
+  12 selected prototypes
+
+Warnings:
+  2 incompatible prototypes will be skipped
+```
+
+The user understands what the template will touch before applying. This is especially important when a template affects both the group and selected prototypes.
+
+For C# templates, preview can be limited on the first pass. In the future, C# templates should also move to a `BuildApplyPlan` model so the UI can show changes consistently for both types.
+
+---
+
+## Template Browser
+
+Templates should be visible, not hidden only in a context menu.
+
+A simple Template Browser:
+
+```
+Template Browser
+
+[ Search templates... ]
+
+Trees
+  Big Trees        JSON
+  Small Trees      C#
+
+Rocks
+  Rocks            C#
+
+Cliffs
+  Big Rocks        JSON
+  Small Rocks      JSON
+```
+
+When a template is selected, a panel on the right or below can show:
+- source: C# or JSON
+- supported prototype types
+- supported tools/capabilities
+- contained blocks
+- validation status
+- what will be affected when applied
+
+This window can be connected to the new Tool System:
+- open as a separate `EditorWindow`
+- attach to `Tool Settings`
+- show as a `Scene View Overlay`
+- invoke from `Selection Browser`
+
+---
+
+## Support for SelectionNode and SelectionScope
+
+After SelectionView is redesigned, templates should no longer be tied only to the old `Group`.
+
+The new model should be able to apply to:
+- a selected old group
+- a selected `SelectionNode`
+- selected prototypes
+- the current `SelectionScope`
+- the active tool
+
+For example, the user selected the `Forest Dressing` node containing `PrototypeGameObject` and `PrototypeTerrainObject`. Template System should:
+- determine which prototype types the template supports
+- apply group/node blocks only where it makes sense
+- apply prototype blocks only to compatible prototypes
+- skip incompatible items and show this in the preview
+
+This works well with the SelectionView plan: the tree can be universal, but the content remains typed.
+
+---
+
+## Tool System Support
+
+Templates are currently filtered by tool name:
+
+```
+new[] { "Object Brush", "Advanced Object Stamper" }
+```
+
+This is fragile. If a tool name changes, the template may stop appearing.
+
+In MegaWorld 2, templates should be linked to Tool System:
+- by stable tool id
+- by tool type
+- by capability
+- by supported prototype types
+
+For example:
+
+```
+Supported tool capabilities:
+  ScatterObjects
+  StampObjects
+
+Supported prototype types:
+  PrototypeGameObject
+  PrototypeTerrainObject
+```
+
+This way a template describes the working behavior it is suited for, not a specific UI button.
+
+This model works for both C# and JSON templates.
+
+---
+
+## Undo Safety
+
+Applying a template should be undoable.
+
+Before apply, the system should understand the targets:
+- which group changes
+- which prototypes change
+- which blocks will be replaced
+- which blocks will be merged
+- which elements will be skipped
+- whether there are validation warnings
+
+For the user this should look like one operation:
+
+```
+Undo Apply Template: Trees / Big Trees
+```
+
+Modified assets should also be marked dirty, and settings must not be lost if a template is applied to multiple prototypes at once.
+
+---
+
+## How It Could Look in the UI
+
+The prototype context menu can remain, but become leaner:
+
+```
+Apply Template
+  Trees / Big Trees
+  Trees / Small Trees
+  Rocks / Rocks
+  More Templates...
+
+Save as Template...
+Export as C# Template...
+```
+
+`More Templates...` opens Template Browser.
+
+In Template Browser, the user can select a template, see the preview, choose blocks, and press:
+
+```
+Apply to Selected Prototypes
+Apply to Selected Node
+Apply to Selection Scope
+```
+
+For JSON templates, additional options can be added:
+
+```
+Open JSON File
+Validate Template
+Duplicate Template
+```
+
+---
+
+## What to Keep from the Old System
+
+The existing TemplatesSystem is not bad in concept. It has useful features:
+- templates auto-filter by tool
+- templates auto-filter by prototype type
+- a template can change both group and prototype settings
+- apply is available directly from the context menu
+- C# templates give compile-time safety
+- complex templates can be written in code
+
+These should all be preserved.
+
+The addition is a second path: user JSON templates created from the UI and applied through a shared validation / preview / apply plan mechanism.
+
+---
+
+## Recommended Implementation Plan
+
+Replacing the old system entirely at once is not practical. A staged approach:
+
+1. Leave existing C# templates working.
+2. Introduce the common `ITemplateProvider` interface.
+3. Wrap old C# templates in `CodeTemplateProvider`.
+4. Add `JsonTemplateProvider`.
+5. Add a simple `.megaworld-template.json` format.
+6. Add `TemplateTypeRegistry` with stable ids for blocks/elements.
+7. Add `TemplateValidator`.
+8. Add validation after domain reload and after JSON import.
+9. Add `Save as Template`, which saves JSON.
+10. Add preview through `TemplateApplyPlan` for JSON templates.
+11. Later add `Export as C# Template` as an advanced developer feature.
+12. When settings change, fix JSON templates manually, via AI, or through one-off fix scripts.
+13. Gradually move simple built-in templates to JSON only if it is genuinely more convenient.
+
+---
+
+## Core Idea
+
+TemplatesSystem in MegaWorld 2 should be a hybrid system. There is no need to choose strictly between C# and JSON:
+
+```
+Built-in templates:
+  C# or JSON, depending on complexity.
+
+User templates:
+  JSON.
+
+Advanced templates:
+  C#.
+
+Save as Template:
+  JSON.
+
+Export as C#:
+  optional developer feature.
+```
+
+C# templates keep compile-time safety and developer convenience for complex templates.
+
+JSON templates enable a proper user workflow: save settings from the UI, reuse them, import, export, and share between projects without recompilation.
+
+To prevent JSON templates from being completely blind, they need a simple set of safeguards:
+- human-readable JSON format
+- stable ids for blocks/elements
+- validation after recompilation/domain reload
+- validation after import
+- clear error reports
+- preview before apply
+- undo-safe apply
+
+When MegaWorld settings change, JSON templates can be fixed manually, through AI-assisted edits, or with one-off fix scripts for specific problems.
+
+Templates will then become not just a hidden code mechanism but a proper part of the MegaWorld workflow — while the strengths of the existing C# templates are not lost.

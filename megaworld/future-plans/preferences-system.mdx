@@ -1,0 +1,77 @@
+---
+title: Preferences System
+description: Plans for a unified, searchable MegaWorld preferences window in MegaWorld 2.
+---
+
+## What Exists Today
+
+Each MegaWorld module currently creates its own separate section in Unity Preferences:
+- `Preferences / Mega World` — core settings
+- `Preferences / CustomInspector` — inspector settings
+- `Preferences / Renderer Stack` — renderer settings
+
+This is fragmented. When an artist or developer wants to find a specific setting, they don't know which section to look in. They have to open each one in turn.
+
+---
+
+## What We Want
+
+### A Single `Preferences / MegaWorld` Section
+
+All settings from all modules are gathered in one place. One section, one window. No guessing where a particular parameter lives.
+
+The settings list is built **automatically through reflection** — any module that has a settings class inheriting from `PreferenceSettings` automatically appears in the shared window. No manual registration of each new module.
+
+Add a new module with settings — they appear in Preferences automatically. Remove it — they disappear. No manual work.
+
+---
+
+### Search Across Settings
+
+A search bar at the top of the window. The artist types `Undo` and sees only Undo settings. Types `Brush` and sees only brush settings.
+
+Search works on both section names and individual field names. This turns Preferences into a useful tool rather than an archive where everything is buried.
+
+```
+[ Search: Undo_______________ ]
+
+─── Undo ──────────────────────
+  Maximum History:  [ 30 ]
+```
+
+---
+
+### What Goes Into the Unified Preferences
+
+All existing settings are combined into one window organized by section:
+
+| Section | Contents |
+|---|---|
+| **Undo** | Maximum number of operations in history |
+| **Brush** | Maximum brush size |
+| **Raycast** | Maximum distance, offset, raycast type |
+| **Scatter** | Maximum number of scatter checks |
+| **Overlap** | Overlap search size multiplier |
+| **Visualisation** | Colors, transparency, handle resolution |
+| **Renderer Stack** | Renderer settings |
+| **Custom Inspector** | Inspector settings |
+
+Each section can be collapsed or expanded. By default — all expanded (or only those matching the search).
+
+---
+
+### Undo Setting — Concrete Example
+
+The first thing that appears in the Undo section:
+
+**Maximum History** — a number from 10 to 200. Default: 30.
+
+An artist working on a complex scene will set it to 100. One who prioritizes speed will leave it at 20.
+
+---
+
+## Core Idea
+
+Preferences should work like search, not like menu navigation. Users should not have to remember which of three sections holds a particular parameter. They type what they are looking for — and see the result.
+
+Reflection solves the maintenance problem: the system grows with MegaWorld automatically, without manually registering every new module.

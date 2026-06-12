@@ -1,0 +1,695 @@
+---
+title: Tool System & Modular Tools
+description: Rethinking how MegaWorld tools are registered, displayed, and organized through a unified Tool System.
+---
+
+## What Exists Today
+
+MegaWorld currently displays tools as a flat set of buttons inside its own window:
+
+- Texture Brush
+- Spray Brush
+- Precise Place
+- Precise Physics
+- Pin
+- Grass Brush
+- Explode Physics
+- Edit
+- Brush Physics
+- Brush Modify
+- Brush Erase
+- Advanced Object Brush
+
+This works as a quick entry point into MegaWorld, but the tool model is tightly coupled to one package. Every tool is created as part of MegaWorld, lives inside the MegaWorld UI, and is treated as an internal button in a specific window.
+
+When a new tool appears that doesn't belong purely to MegaWorld, it still needs to find its own place: a separate window, a separate menu, a separate registration, separate visibility logic. Editor tools start spreading across Unity even though they conceptually belong to one system — a collection of modular editor tools.
+
+In parallel, Tool System already exists as a window that centrally manages editor tools, dependencies, and package.json. Right now it looks like a technical control panel, but it can evolve into a full platform for all tools.
+
+---
+
+## What We Want
+
+### Tool System as a Single Entry Point
+
+Tool System should become not just a place for dependencies, but a common hub for all editor tools.
+
+Any tool can be registered in Tool System:
+
+- MegaWorld tools
+- Asset pipeline tools
+- Scene tools
+- Project-specific utilities
+- Experimental or temporary tools
+
+The user opens one window and sees everything available. No need to remember whether a function lives in MegaWorld, Preferences, the Tools menu, or a separate tab.
+
+```
+Tool System
+
+[ Tools ] [ Hidden ] [ Dependencies ] [ PackageJson ] [ Settings ]
+
+  MegaWorld
+    Placement
+      [ Texture Brush ] [ Spray Brush ] [ Precise Place ] [ Pin ]
+
+    Physics
+      [ Precise Physics ] [ Brush Physics ] [ Explode Physics ]
+
+  Scene
+    [ Bounds Debugger ] [ Pivot Tools ] [ Snap Tools ]
+```
+
+---
+
+### Tool System as a Scene View Overlay
+
+Rather than a large separate `ToolSystemWindow`, a more natural fit for the Unity Editor is a toolbar panel near the Scene View — similar to how level design tools work: a vertical icon panel on the left, with a browser or tool window opening alongside it.
+
+In Unity terms, this area is called a **Scene View Overlay**. If the panel contains buttons arranged vertically or horizontally, the more specific term is **Toolbar Overlay**.
+
+The Unity API for this is:
+
+- `UnityEditor.Overlays.Overlay` — base overlay panel system in Scene View
+- `UnityEditor.Overlays.ToolbarOverlay` — overlay for vertical or horizontal toolbars
+- `UnityEditor.Toolbars.EditorToolbarElement` — individual toolbar elements
+- `EditorToolbarButton`, `EditorToolbarToggle`, `EditorToolbarDropdown`, `EditorToolbarDropdownToggle` — ready-made button and toggle types
+
+The tool hierarchy can be thought of not as a `ToolSystemWindow` but as a custom **Scene View Toolbar Overlay** for selecting nodes and tools.
+
+That said, the standard `EditorWindow` host should be supported too. Tool System should ideally be able to live in multiple hosts:
+
+- as a regular `ToolSystemWindow`
+- as a `Scene View Overlay`
+- as a compact `Toolbar Overlay`
+- as a browser panel opened from an overlay
+
+These should not be four separate implementations. The right model is: one Tool System UI/Presenter, with different hosts wrapping it.
+
+A three-dot menu can expose switching commands:
+
+```
+Tool System
+
+⋮
+  Convert to Overlay
+  Open as Window
+  Dock to Scene View
+```
+
+The node hierarchy can be displayed like this:
+
+```
+Scene View
+
+| Tool Bar |
+|--------- |
+| Grass    |  -> opens MegaWorld / Grass
+| Objects  |  -> opens MegaWorld / Objects
+| Physics  |  -> opens MegaWorld / Objects / Physics
+| Editing  |  -> opens MegaWorld / Objects / Editing
+| Hidden   |  -> shows hidden tools
+```
+
+When a node is selected, a compact panel or browser opens rather than a separate full window:
+
+```
+MegaWorld / Grass
+
+[ Search tools... ]
+
+Grass Brush
+Grass Erase
+Grass Modify
+Grass Debug
+```
+
+So Tool System can be not one window but a way of presenting tools:
+
+- vertical toolbar panel for quick access
+- expandable node hierarchy
+- browser for the selected node
+- separate window for the active tool
+- separate `Tool Settings` window
+
+This approach feels closer to an artist's workflow: tools are always near the scene, not buried in a separate large window.
+
+---
+
+### GraphView-Style Workspace
+
+There is another Unity pattern: a large main window with floating sub-panels inside. This is visible in Shader Graph, VFX Graph, and other graph-based tools.
+
+In Unity API terms, this is closest to **GraphView**:
+
+- `GraphView` — the main graph canvas area
+- `Blackboard` — inner panel with variables, parameters, or resources
+- `MiniMap` — mini-map of the workspace
+- `Graph Inspector` — inspector for the selected node or element
+- `Placemat` — visual grouping area for nodes
+- `Sticky Note` — notes inside the graph workspace
+
+These are not necessarily real separate `EditorWindow` instances. More often they are UI Toolkit `VisualElement` / `GraphElement` objects that look like floating panels — moveable, dockable, collapsible, but all part of one editor window.
+
+For Tool System, this idea is useful if the goal is not just a tool list but a full workspace:
+
+```
+Tool Workspace
+
+[ Blackboard / Tool Tree ]      [ Tool Settings / Inspector ]
+
+        work area
+        with open tools,
+        groups, notes
+        and workspace nodes
+
+                              [ MiniMap ]
+```
+
+In this model:
+- the tool hierarchy is analogous to `Blackboard`
+- selected tool settings are analogous to `Graph Inspector`
+- user tool groups can appear as `Placemat`
+- notes and workflow comments can be `Sticky Note` entries
+- the mini-map is useful once the workspace grows large
+
+For MegaWorld 2, this is an optional advanced mode. For everyday tool selection, `Scene View Toolbar Overlay` + a separate `Tool Settings` is simpler and more native-feeling.
+
+The graph workspace idea is still worth pursuing, but as a **Tool Workspace** — an advanced mode, not a replacement:
+
+```
+Basic workflow:
+Scene View Toolbar Overlay -> select tool -> Tool Settings shows settings
+
+Advanced workflow:
+Tool Workspace
+
+Blackboard / Tool Tree:
+  MegaWorld
+    Grass
+    Objects
+    Physics
+
+Workspace:
+  [ Grass Painting Workflow ]
+    Grass Brush -> Grass Modify -> Grass Debug
+
+Inspector:
+  settings for the selected tool or workspace node
+```
+
+Useful for complex pipelines, technical artists building custom sets, debug scenarios, preset workflows like `Forest Painting` or `Terrain Cleanup`, and in-editor visual documentation.
+
+---
+
+### MegaWorld as a Group of Tools, Not a Closed System
+
+MegaWorld 2 can be thought of as a set of tools registered in Tool System.
+
+The tools themselves remain MegaWorld tools, but the way they are created and displayed becomes shared:
+
+- a tool declares its name, icon, category, and tags
+- a tool declares in which context it is available
+- a tool can have its own settings
+- a tool can have dependencies
+- a tool can be hidden, disabled, or placed in any node in the hierarchy
+
+MegaWorld no longer needs to manually assemble its button panel as a separate UI construct. It provides tools; Tool System decides how to display, group, and launch them.
+
+The key shift: MegaWorld stops being the owner of the entire tool interface. It becomes a supplier of modules for a shared system.
+
+---
+
+### Custom Tool Hierarchy
+
+Right now MegaWorld tools sit as a flat list of buttons. But artists typically think in terms of tasks, not package names:
+
+- I want to scatter objects quickly
+- I want to paint with a brush
+- I want to edit what was already placed
+- I want to work with physics
+- I want to erase or modify the result
+
+Instead of a flat button group, Tool System should support a tool hierarchy — like Unity Hierarchy, but for editor tools.
+
+You can create a `Grass` node and place all grass-related tools inside it:
+
+```
+MegaWorld
+  Grass
+    [ Grass Brush ]
+    [ Grass Erase ]
+    [ Grass Modify ]
+    [ Grass Debug ]
+
+  Objects
+    Placement
+      [ Spray Brush ]
+      [ Precise Place ]
+      [ Pin ]
+
+    Physics
+      [ Precise Physics ]
+      [ Brush Physics ]
+      [ Explode Physics ]
+
+    Editing
+      [ Edit ]
+      [ Brush Modify ]
+      [ Brush Erase ]
+```
+
+The hierarchy should not be hardcoded into a window. Each tool declares its path:
+
+```
+MegaWorld / Grass / Painting
+MegaWorld / Objects / Physics
+Scene / Debug
+Pipeline / Packages
+```
+
+Tool System builds the tree from those paths automatically.
+
+---
+
+### Temporary Tool Hiding
+
+In a large Tool System, not all tools are needed at all times. Sometimes you want to clear the clutter without permanently removing a tool.
+
+Every node and every tool should be hideable from the main tree:
+
+```
+MegaWorld
+  Grass
+    [ Grass Brush ]
+    [ Grass Erase ]
+
+Hidden
+  [ Advanced Object Brush ]
+  [ PackageJson Debug ]
+  [ Experimental Scatter Tool ]
+```
+
+This works like a soft workspace cleanup. The tool is not deleted, not disabled permanently, and not lost. It simply isn't cluttering the main tree.
+
+You can hide:
+- individual tools
+- entire nodes
+- experimental tools
+- technical tools that are rarely needed
+- tools not available in the current project
+
+Search can have an `Include Hidden` toggle so hidden tools are still findable when needed.
+
+---
+
+### Search Instead of Memorization
+
+Tool System should have fast search across all tools.
+
+An artist types `physics` and sees all physics-related tools. Types `erase` and sees Brush Erase. Types `place` and sees Precise Place and similar tools.
+
+Search should work across:
+- name
+- group
+- tags
+- description
+- dependencies
+- package name
+
+This becomes especially important if Tool System grows beyond MegaWorld. The more tools exist, the less a tab-navigation approach scales.
+
+---
+
+### Detaching a Tool to Its Own Window
+
+Tool System should not force every tool to live inside one large window.
+
+A useful scenario: the user picks a tool from the Tool System panel, browser, or hierarchy and drags it out. A dedicated `Editor Window` is created for just that tool.
+
+For example:
+- Spray Brush can live as a separate window next to Scene View
+- Precise Place can be moved to a second monitor
+- UPM Support can be opened separately during package setup
+- A debug tool can float above the current workflow
+
+```
+Tool System
+
+  MegaWorld / Placement
+  [ Spray Brush ]  -> drag out ->  separate "Spray Brush" window
+```
+
+This is especially useful for large tools with a lot of working UI. In the Tool System tree they appear as hierarchy items, but in daily use the user can promote a needed tool to a full standalone window.
+
+Two concepts should be clearly separated:
+- the tool window — contains the working UI of the tool
+- the tool settings window — shows only the parameters of the selected tool
+
+For example, `Precise Place` can be a standalone work window, while its settings remain in a shared `Tool Settings` window.
+
+---
+
+### Separate Tool Settings Window
+
+Settings don't have to live inside Tool System. A better approach is a dedicated `Tool Settings` window that tracks whichever tool is currently selected in Tool System.
+
+The user selects `Grass Brush` in the hierarchy — the settings window shows Grass Brush settings. They select `Precise Place` — the same window rebuilds and shows Precise Place settings.
+
+```
+Tool System                 Tool Settings
+
+MegaWorld                   Precise Place Settings
+  Objects                     Placement Mode: [ Surface ]
+    Placement                 Align To Normal: [x]
+      > Precise Place         Rotation Random: [ 0..360 ]
+      Pin                     Scale: [ 0.8 .. 1.2 ]
+```
+
+Tool System stays focused on navigation and organization; Tool Settings becomes the workspace for parameters.
+
+This mirrors Unity's Inspector pattern: Hierarchy selects the object, Inspector shows its properties. Here, Tool System selects the tool, Tool Settings shows its parameters.
+
+`Tool Settings` should not show reference info like description, tags, dependencies, package, path, or context status. That is noise. Only the settings needed to work with the selected tool should appear.
+
+If no tool is selected:
+
+```
+No Tool Selected
+```
+
+`Tool Settings` should also support multiple hosts, switchable from the three-dot menu:
+
+```
+Tool Settings
+
+⋮
+  Open as Window
+  Convert to Overlay
+  Attach to Tool System
+```
+
+The attached variant looks like:
+
+```
+Tool System
+
+[ Search tools... ]
+
+MegaWorld
+  Grass
+    > Grass Brush
+    Grass Erase
+    Grass Modify
+
+----------------------------
+Grass Brush Settings
+
+Brush Size:      [ ------o--- ]
+Density:         [ ----o----- ]
+Slope Limit:     [ 45       ]
+Layer Mask:      [ Grass v  ]
+```
+
+Settings can also be detached back out:
+
+```
+Tool Settings
+
+⋮
+  Detach to Window
+  Convert to Overlay
+```
+
+This gives artists full control over their layout:
+- tree as overlay, settings as a window
+- tree as window, settings embedded at the bottom
+- both as overlays
+- both as normal dockable windows
+
+---
+
+### Returning a Tool to Tool System
+
+If a tool can be detached, returning it should be equally easy.
+
+In the detached tool window, a simple command:
+
+```
+Spray Brush
+
+[ Return to Tool System ] [ Pin ] [ Add to Workspace ]
+```
+
+Pressing `Return to Tool System` closes the separate window and the tool reappears as a normal item in the Tool System hierarchy.
+
+A more natural option is a drop zone inside Tool System:
+
+```
+Tool System
+
+Drop tool here to merge back
+```
+
+The user drags the detached window's header or an internal drag handle back into Tool System, which accepts it as a module again.
+
+---
+
+### Combining Multiple Tools into One Window
+
+Beyond returning to the main Tool System host, it is useful to have an intermediate option: grouping several tools into a separate working set.
+
+For example, the artist detaches `Precise Place`, then drags `Pin` and `Edit` into the same window. The result:
+
+```
+Level Design Workspace
+
+[ Precise Place ] [ Pin ] [ Edit ]
+```
+
+This doesn't need to rely on Unity's native docking system. It is enough for Tool System to support creating a `Tool Workspace Window` — an `EditorWindow` with tabs or panels for multiple tools.
+
+This gives flexibility without depending on Unity's internal layout APIs:
+- one tool in a separate window
+- multiple tools in one workspace window
+- returning a tool to the main Tool System
+- persisting user workspaces across sessions
+
+---
+
+### Contextual Availability
+
+Tools should be able to declare when they are available.
+
+For example:
+- a MegaWorld tool is available only if the project has the required MegaWorld data
+- a selection tool is available only if something is selected in the scene
+- UPM Support is available only if the project uses asmdef and package.json
+
+Instead of simply hiding an unavailable tool, Tool System can show it in a disabled state with an explanation:
+
+```
+[ Grass Brush ]  Unavailable: no active group with grass prototypes
+[ UPM Support ]  Available
+[ PackageJson ]  Unavailable: package.json not found
+```
+
+This is valuable for onboarding — the user sees that the tool exists and understands what is missing to use it.
+
+---
+
+### One Standard Way to Register New Tools
+
+A new tool should be added to the system through a short declaration, not by manually extending a specific window.
+
+Conceptually, a tool declares:
+- its name
+- which node in the hierarchy it belongs to
+- what command it runs
+- what tool window it opens
+- what settings UI it provides to `Tool Settings`
+- when it is available
+
+After that, Tool System adds it to the tree, search, the right node, and the list of available tools automatically.
+
+This lowers the cost of creating new tools. The developer thinks about the tool's behavior, not about which panel to manually wire it into.
+
+For example, `PrecisePlaceTool` should not manually add its button to the MegaWorld window. It declares itself a tool and specifies where it belongs:
+
+```
+PrecisePlaceTool
+Path: MegaWorld / Objects / Placement
+Settings: PrecisePlaceToolSettingsView
+Window: PrecisePlaceToolWindow
+```
+
+Tool System connects `PrecisePlaceTool` to the hierarchy automatically. If a user later wants to move it to a different node, that is user organization — not a code change.
+
+---
+
+## Tool System UI Improvements
+
+### Tools as the Primary Mode
+
+Currently Tool System looks like a technical operations window: Dependencies, PackageJson, UPM Support.
+
+In MegaWorld 2, `Tools` should be the primary mode, with technical sections as secondary:
+
+```
+[ Tools ] [ Dependencies ] [ PackageJson ] [ Settings ]
+```
+
+Tool System is then perceived not as a service utility but as a tool management hub.
+
+---
+
+### Multiple Tree View Modes
+
+The tool tree should support several display modes:
+
+- **hierarchy** — best for daily work
+- **flat list** — best for search
+- **hidden tools** — best for cleaning up the UI
+- **by package** — best for developers
+- **by status** — best for diagnostics
+
+The same tool set viewed differently. Better than picking one ideal structure forever.
+
+---
+
+### Minimal Action Bar for Selected Tool
+
+Inside Tool System itself, only minimal actions are needed for the selected tool:
+
+```
+Precise Place
+
+[ Open ] [ Detach ] [ Move to Node ] [ Hide ]
+```
+
+No large panel with descriptions, tags, and dependencies. Tool System should feel like Unity Hierarchy: select, move, hide, open. Settings for the selected tool live in the separate Tool Settings window.
+
+---
+
+### User-Created Nodes
+
+Beyond nodes defined by the developer, users should be able to create their own:
+
+- Environment Dressing
+- Rocks Workflow
+- Forest Painting
+- Debug Tools
+- Release Preparation
+
+This is personal workspace organization, not a change to package structure. A tool can physically belong to MegaWorld but live under `Forest Painting` in the user's tree if that's more convenient.
+
+---
+
+### Preferences Integration
+
+Tool System and unified Preferences should be connected.
+
+From `Tool Settings` you can navigate to advanced settings in Preferences. In Preferences, next to a tool's section, you can see where that tool lives in the Tool System hierarchy.
+
+This means users stop getting lost between "where do I launch this tool" and "where do I configure it."
+
+---
+
+### Dependencies Integration
+
+Since Tool System already handles dependencies, linking tools to their requirements directly makes sense.
+
+If a tool needs a specific package, asmdef, or define symbol, this should appear in a dedicated diagnostics section — not in the normal tool settings window.
+
+```
+Grass Brush
+
+Status: Missing dependency
+Missing:
+- Unity Terrain package
+- MegaWorld Grass module
+
+[ Install / Fix Dependencies ]
+```
+
+Dependencies should not appear in `Tool Settings`. They belong in a separate `Dependencies` or `PackageJson` section of Tool System.
+
+---
+
+### Commands as Well as Windows
+
+Not every tool needs to be a window. Some tools are commands:
+
+- remove unused dependencies
+- create package.json
+- rebuild indices
+- update data
+- clear cache
+
+Tool System should handle both windows and commands equally well. In the tree they look like tools but launch differently.
+
+This makes it possible to bring small utilities into the same system as large MegaWorld UI tools.
+
+---
+
+## Visual Concepts
+
+These are early concept mockups showing how Tool System might live in different hosts. Not final design — just a way to quickly see the idea in different contexts.
+
+### Tool System as a Window, Tool Settings Embedded
+
+In this variant, Tool System is open as a normal `EditorWindow`. The tool hierarchy sits at the top, and the selected tool's settings are embedded at the bottom.
+
+This is a compact mode for situations where two separate windows are not desired.
+
+![Tool System window with attached settings](/images/megaworld/future-plans/tool-system-window-attached-settings.png)
+
+---
+
+### Tool System as a Scene View Overlay
+
+In this variant, Tool System works as a `Scene View Toolbar Overlay`: a compact tool panel lives on the left side of the Scene View, and the selected node expands as a browser.
+
+`Tool Settings` lives separately and shows only the settings for the selected tool.
+
+![Tool System Scene View Overlay](/images/megaworld/future-plans/tool-system-scene-view-overlay.png)
+
+---
+
+### Tool Settings as a Separate Window
+
+In this variant, Tool System stays as a narrow hierarchy, and `Tool Settings` is in a separate window.
+
+This is convenient when the user wants to keep the tool tree small and the settings next to the Inspector or on a second monitor.
+
+![Tool Settings detached window](/images/megaworld/future-plans/tool-system-detached-settings-window.png)
+
+---
+
+## What This Brings to MegaWorld 2
+
+### Less Manual UI Assembly
+
+MegaWorld no longer needs to manually maintain a flat button list. It describes tools; Tool System builds the interface around them.
+
+### Easier to Add New Tools
+
+A new tool is added as a module. It automatically appears in the tree, search, and the right node.
+
+### A More Organized Editor
+
+All tools, even those not directly related to MegaWorld, can live in one place. This reduces fragmentation and turns a collection of utilities into a system.
+
+### Better Scaling
+
+As MegaWorld 2 grows into a large set of modules, Tool System handles that better than one large button panel. There is room for search, tags, statuses, dependencies, settings, custom hierarchies, and hidden tools.
+
+---
+
+## Core Idea
+
+MegaWorld tools should not be just buttons in the MegaWorld window. They should be modules in a shared editor system.
+
+Tool System can become the layer that knows about every tool in the project: what they're called, where they live, when they are available, what they need to run, and how to organize them in a hierarchy.
+
+MegaWorld 2 then gets not only a new way to create tools, but a more mature editor model: tools that are extensible, searchable, groupable, and understandable to the user.

@@ -324,6 +324,18 @@
             "pages": [
               "megaworld/polaris-integration"
             ]
+          },
+          {
+            "group": "Future Plans",
+            "pages": [
+              "megaworld/future-plans/overview",
+              "megaworld/future-plans/tool-system",
+              "megaworld/future-plans/selection-view",
+              "megaworld/future-plans/templates-system",
+              "megaworld/future-plans/undo-improvements",
+              "megaworld/future-plans/preferences-system",
+              "megaworld/future-plans/ux-improvements"
+            ]
           }
         ]
       },

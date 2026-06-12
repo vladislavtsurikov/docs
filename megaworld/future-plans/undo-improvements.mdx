@@ -1,0 +1,64 @@
+---
+title: Undo Improvements
+description: Plans for a more transparent and useful undo history in MegaWorld 2.
+---
+
+## What Exists Today
+
+Undo in MegaWorld is a simple stack of 30 operations. Users see three buttons: _Undo (X/30)_, _Undo All_, and a clear history button. That's it. No description of what will be undone. No sense of the scale of changes. And even these three buttons only appear under very specific conditions — when exactly one group is selected with the right prototype type.
+
+It works, but it doesn't help.
+
+---
+
+## What We Want
+
+### 1. History with Named Operations
+
+Right now the button says "Undo (12/30)" — which tells you nothing. The artist has no idea whether they are about to undo a forest of 500 trees or one accidentally placed branch.
+
+The history should show a list of operations with human-readable names:
+
+```
+• Placed 247 objects — Pine Tree Large  [PaintObjects]
+• Removed 12 objects — Rock Cluster     [Erase]
+• Placed 3 objects — Dead Bush          [SpawnObjects]
+• Moved 8 objects                       [MoveObjects]
+```
+
+The artist immediately sees what happened and how much. This transforms undo from an anxious lottery into a deliberate tool.
+
+---
+
+### 2. Jump to Any Point
+
+Currently you can only step back one operation at a time. To go back 15 steps, you press 15 times.
+
+There should be a way to click any entry in the history and immediately return to that state of the scene — like the History panel in Photoshop. Click a row, the scene returns to that point.
+
+This is especially important when an artist is experimenting: they tried several approaches and want to return to the one they liked best.
+
+---
+
+### 3. Operation Scale Is Immediately Visible
+
+Each entry in the history should show the number of affected objects. This lets the artist make a decision before pressing anything:
+
+- "Placed 3 objects" — a small change, safe to undo
+- "Placed 1,247 objects" — a significant operation, worth a second thought
+
+The difference in scale changes how working feels. The artist sees the impact of their actions in the history itself.
+
+---
+
+### 4. Configurable Depth
+
+30 entries is a hardcoded number. For some users it is too many (unnecessary memory use); for others it is far too few — especially if operations are small and many accumulate over an hour of work.
+
+There should be a simple setting: how many operations to store. Let each artist choose for themselves.
+
+---
+
+## Core Idea
+
+Undo is not a technical feature. It is an artist's confidence that they can experiment without fear. The more transparent and reliable the history, the more freely a person works. MegaWorld 2 should deliver exactly that feeling.
