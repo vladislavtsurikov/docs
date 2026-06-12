@@ -1,6 +1,6 @@
 ---
 title: SelectionView Improvements
-description: Rethinking the SelectionView in MegaWorld 2 as a flexible library and browser system.
+description: Rethinking the SelectionView as a flexible library and browser system.
 ---
 
 ## What Exists Today
@@ -18,14 +18,14 @@ As a result, the UI scales poorly. When you want to add user-defined subsets, te
 
 ## What We Want
 
-### Two Connected Windows — Like GSpawner
+### Two Connected Windows
 
 SelectionView should be split into two independent parts:
 
 - **Selection Library** — a tree window where the user organizes library nodes
 - **Prototype Browser** — a grid window displaying prototypes from the selected node or nodes
 
-This is closer to the GSpawner approach: a library/hierarchy on the left, a browser with asset cards on the right.
+The idea is a library/hierarchy on the left, a browser with asset cards on the right.
 
 ```
 Selection Library
@@ -205,7 +205,7 @@ MegaWorld
     Details
 ```
 
-MegaWorld 2 does not have to break the old group semantics immediately. It can embed them into the new hierarchy.
+The old group semantics do not have to break immediately. They can be embedded into the new hierarchy.
 
 ---
 
@@ -416,7 +416,7 @@ These parts are connected by selection state but do not need to be one window.
 
 ## Core Idea
 
-SelectionView in MegaWorld 2 should become not a collection of modes but a flexible selection system:
+SelectionView should become not a collection of modes but a flexible selection system:
 
 - Selection Library holds the node hierarchy
 - Prototype Browser shows prototypes from the selected scope

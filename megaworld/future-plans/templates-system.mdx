@@ -1,6 +1,6 @@
 ---
 title: Templates System Improvements
-description: Rethinking the TemplatesSystem in MegaWorld 2 as a hybrid preset system with both C# templates and user-saveable JSON presets.
+description: Rethinking the TemplatesSystem as a hybrid preset system with both C# templates and user-saveable JSON presets.
 ---
 
 ## What Exists Today
@@ -624,7 +624,7 @@ new[] { "Object Brush", "Advanced Object Stamper" }
 
 This is fragile. If a tool name changes, the template may stop appearing.
 
-In MegaWorld 2, templates should be linked to Tool System:
+Templates should be linked to Tool System:
 - by stable tool id
 - by tool type
 - by capability
@@ -743,7 +743,7 @@ Replacing the old system entirely at once is not practical. A staged approach:
 
 ## Core Idea
 
-TemplatesSystem in MegaWorld 2 should be a hybrid system. There is no need to choose strictly between C# and JSON:
+TemplatesSystem should be a hybrid system. There is no need to choose strictly between C# and JSON:
 
 ```
 Built-in templates:

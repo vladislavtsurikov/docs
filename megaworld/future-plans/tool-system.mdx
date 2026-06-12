@@ -173,7 +173,7 @@ In this model:
 - notes and workflow comments can be `Sticky Note` entries
 - the mini-map is useful once the workspace grows large
 
-For MegaWorld 2, this is an optional advanced mode. For everyday tool selection, `Scene View Toolbar Overlay` + a separate `Tool Settings` is simpler and more native-feeling.
+This is an optional advanced mode. For everyday tool selection, `Scene View Toolbar Overlay` + a separate `Tool Settings` is simpler and more native-feeling.
 
 The graph workspace idea is still worth pursuing, but as a **Tool Workspace** — an advanced mode, not a replacement:
 
@@ -204,7 +204,7 @@ Useful for complex pipelines, technical artists building custom sets, debug scen
 
 ### MegaWorld as a Group of Tools, Not a Closed System
 
-MegaWorld 2 can be thought of as a set of tools registered in Tool System.
+MegaWorld can be thought of as a set of tools registered in Tool System.
 
 The tools themselves remain MegaWorld tools, but the way they are created and displayed becomes shared:
 
@@ -533,7 +533,7 @@ Tool System connects `PrecisePlaceTool` to the hierarchy automatically. If a use
 
 Currently Tool System looks like a technical operations window: Dependencies, PackageJson, UPM Support.
 
-In MegaWorld 2, `Tools` should be the primary mode, with technical sections as secondary:
+In the new version, `Tools` should be the primary mode, with technical sections as secondary:
 
 ```
 [ Tools ] [ Dependencies ] [ PackageJson ] [ Settings ]
@@ -666,7 +666,7 @@ This is convenient when the user wants to keep the tool tree small and the setti
 
 ---
 
-## What This Brings to MegaWorld 2
+## What This Brings
 
 ### Less Manual UI Assembly
 
@@ -682,7 +682,7 @@ All tools, even those not directly related to MegaWorld, can live in one place. 
 
 ### Better Scaling
 
-As MegaWorld 2 grows into a large set of modules, Tool System handles that better than one large button panel. There is room for search, tags, statuses, dependencies, settings, custom hierarchies, and hidden tools.
+As MegaWorld grows into a large set of modules, Tool System handles that better than one large button panel. There is room for search, tags, statuses, dependencies, settings, custom hierarchies, and hidden tools.
 
 ---
 
@@ -692,4 +692,4 @@ MegaWorld tools should not be just buttons in the MegaWorld window. They should 
 
 Tool System can become the layer that knows about every tool in the project: what they're called, where they live, when they are available, what they need to run, and how to organize them in a hierarchy.
 
-MegaWorld 2 then gets not only a new way to create tools, but a more mature editor model: tools that are extensible, searchable, groupable, and understandable to the user.
+MegaWorld then gets not only a new way to create tools, but a more mature editor model: tools that are extensible, searchable, groupable, and understandable to the user.
